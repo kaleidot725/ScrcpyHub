@@ -28,7 +28,7 @@ fun DeviceListView(deviceRepository: DeviceRepository) {
         expanded = showMenu,
         onDismissRequest = { showMenu = false },
         toggleModifier = Modifier.fillMaxWidth().background(Color.Transparent),
-        dropdownModifier = Modifier.fillMaxWidth().background(Color.Red)
+        dropdownModifier = Modifier.fillMaxWidth().background(Color.White),
     ) {
         devices.forEachIndexed { index, device ->
             DropdownMenuItem(

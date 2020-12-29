@@ -28,7 +28,7 @@ fun ResolutionListView(resolutionRepository: ResolutionRepository) {
         expanded = showMenu,
         onDismissRequest = { showMenu = false },
         toggleModifier = Modifier.fillMaxWidth().background(Color.Transparent),
-        dropdownModifier = Modifier.fillMaxWidth().background(Color.Red)
+        dropdownModifier = Modifier.fillMaxWidth().background(Color.White),
     ) {
         resoutions.forEachIndexed { index, resolution ->
             DropdownMenuItem(
