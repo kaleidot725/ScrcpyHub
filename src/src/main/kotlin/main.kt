@@ -18,8 +18,8 @@ fun main() = Window(
 
     MaterialTheme {
         Column(modifier = Modifier.padding(vertical = 8.dp, horizontal = 8.dp)) {
-            ResolutionListView(resolutionRepository)
             DeviceListView(deviceRepository)
+            ResolutionListView(resolutionRepository)
         }
     }
 }
