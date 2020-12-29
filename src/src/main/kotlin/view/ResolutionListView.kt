@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.Resolution
 import model.repository.ResolutionRepository
+import resource.Strings
 
 @Composable
 fun ResolutionListView(resolutionRepository: ResolutionRepository) {
@@ -20,7 +21,7 @@ fun ResolutionListView(resolutionRepository: ResolutionRepository) {
     var showMenu by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(0) }
 
-    Text(text = "Resolution", modifier = Modifier.padding(vertical = 8.dp))
+    Text(text = Strings.RESOLUTION_TITLE, modifier = Modifier.padding(vertical = 8.dp))
 
     DropdownMenu(
         toggle = {

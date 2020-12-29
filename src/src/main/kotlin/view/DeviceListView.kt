@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.Device
 import model.repository.DeviceRepository
+import resource.Strings
 
 @Composable
 fun DeviceListView(deviceRepository: DeviceRepository) {
@@ -20,7 +21,7 @@ fun DeviceListView(deviceRepository: DeviceRepository) {
     var showMenu by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(0) }
 
-    Text(text = "Device", modifier = Modifier.padding(vertical = 8.dp))
+    Text(text = Strings.DEVICE_TITLE, modifier = Modifier.padding(vertical = 8.dp))
 
     DropdownMenu(
         toggle = {
