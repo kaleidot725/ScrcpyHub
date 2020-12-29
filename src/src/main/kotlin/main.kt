@@ -9,17 +9,19 @@ import model.repository.DeviceRepository
 import model.repository.ResolutionRepository
 import view.DeviceListView
 import view.ResolutionListView
+import view.RunAndStopButton
 
 fun main() = Window(
-    size = IntSize(250, 600)
+    size = IntSize(250, 300)
 ) {
     val resolutionRepository = ResolutionRepository()
     val deviceRepository = DeviceRepository()
 
     MaterialTheme {
-        Column(modifier = Modifier.padding(vertical = 8.dp, horizontal = 8.dp)) {
+        Column(modifier = Modifier.padding(8.dp)) {
             DeviceListView(deviceRepository)
             ResolutionListView(resolutionRepository)
+            RunAndStopButton()
         }
     }
 }
