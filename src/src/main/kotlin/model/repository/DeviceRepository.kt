@@ -1,14 +1,10 @@
 package model.repository
 
+import command.AdbCommand
 import model.Device
 
-class DeviceRepository {
-    fun getAll(): List<Device> = DEVICE_LIST
-
-    companion object {
-        val DEVICE_LIST = listOf(
-            Device("one", "device-one"),
-            Device("two", "device-two"),
-        )
+class DeviceRepository(private val adbCommand: AdbCommand) {
+    fun getAll(): List<Device> {
+        return adbCommand.getDevices()
     }
 }

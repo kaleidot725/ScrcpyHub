@@ -1,9 +1,10 @@
 package resource
 
 object Strings {
-    val APP_NAME = "ScrcpyHub"
-    val RESOLUTION_TITLE = "Resolution"
-    val DEVICE_TITLE = "Device"
-    val RUN = "Run"
-    val STOP = "Stop"
+    const val APP_NAME = "ScrcpyHub"
+    const val RESOLUTION_TITLE = "Resolution"
+    const val DEVICE_TITLE = "Device"
+    const val RUN = "Run"
+    const val STOP = "Stop"
+    const val NONE = "None"
 }
