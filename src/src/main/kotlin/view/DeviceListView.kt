@@ -18,6 +18,8 @@ import resource.Strings
 @Composable
 fun DeviceListView(deviceRepository: DeviceRepository) {
     val devices = deviceRepository.getAll()
+    val foundDevice = devices.isNotEmpty()
+
     var showMenu by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(0) }
 
@@ -26,7 +28,7 @@ fun DeviceListView(deviceRepository: DeviceRepository) {
     DropdownMenu(
         toggle = {
             Text(
-                devices[selectedIndex].getDeviceLabel(),
+                devices.getOrNull(selectedIndex)?.getDeviceLabel() ?: Strings.NONE,
                 modifier = Modifier.fillMaxWidth().clickable(onClick = { showMenu = true })
             )
         },
@@ -35,15 +37,26 @@ fun DeviceListView(deviceRepository: DeviceRepository) {
         toggleModifier = Modifier.fillMaxWidth().background(Color.Transparent).padding(bottom = 8.dp),
         dropdownModifier = Modifier.fillMaxWidth().background(Color.White),
     ) {
-        devices.forEachIndexed { index, device ->
+        if (foundDevice) {
+            devices.forEachIndexed { index, device ->
+                DropdownMenuItem(
+                    enabled = true,
+                    onClick = {
+                        selectedIndex = index
+                        showMenu = false
+                    }
+                ) {
+                    Text(text = device.getDeviceLabel())
+                }
+            }
+        } else {
             DropdownMenuItem(
                 enabled = true,
                 onClick = {
-                    selectedIndex = index
                     showMenu = false
                 }
             ) {
-                Text(text = device.getDeviceLabel())
+                Text(text = Strings.NONE)
             }
         }
     }

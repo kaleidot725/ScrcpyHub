@@ -5,6 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import command.AdbCommand
 import model.repository.DeviceRepository
 import model.repository.ResolutionRepository
 import resource.Strings
@@ -16,8 +17,9 @@ fun main() = Window(
     size = IntSize(250, 300),
     title = Strings.APP_NAME
 ) {
+    val adbCommand = AdbCommand()
     val resolutionRepository = ResolutionRepository()
-    val deviceRepository = DeviceRepository()
+    val deviceRepository = DeviceRepository(adbCommand)
 
     MaterialTheme {
         Column(modifier = Modifier.padding(8.dp)) {
