@@ -7,12 +7,14 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import model.repository.DeviceRepository
 import model.repository.ResolutionRepository
+import resource.Strings
 import view.DeviceListView
 import view.ResolutionListView
 import view.RunAndStopButton
 
 fun main() = Window(
-    size = IntSize(250, 300)
+    size = IntSize(250, 300),
+    title = Strings.APP_NAME
 ) {
     val resolutionRepository = ResolutionRepository()
     val deviceRepository = DeviceRepository()
