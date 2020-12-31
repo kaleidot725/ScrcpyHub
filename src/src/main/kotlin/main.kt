@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import command.AdbCommand
+import command.ScrcpyCommand
 import model.repository.DeviceRepository
 import model.repository.ResolutionRepository
 import resource.Strings
@@ -18,14 +19,15 @@ fun main() = Window(
     title = Strings.APP_NAME
 ) {
     val adbCommand = AdbCommand()
+    val scrcpyCommand = ScrcpyCommand()
     val resolutionRepository = ResolutionRepository()
-    val deviceRepository = DeviceRepository(adbCommand)
+    val deviceRepository = DeviceRepository(adbCommand, scrcpyCommand)
 
     MaterialTheme {
         Column(modifier = Modifier.padding(8.dp)) {
             DeviceListView(deviceRepository)
             ResolutionListView(resolutionRepository)
-            RunAndStopButton()
+            RunAndStopButton(deviceRepository)
         }
     }
 }
