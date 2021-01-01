@@ -2,6 +2,10 @@ package model.repository
 
 import command.AdbCommand
 import command.ScrcpyCommand
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import model.Device
 
 class DeviceRepository(
@@ -19,7 +23,7 @@ class DeviceRepository(
         selected = device
     }
 
-    fun run(): Boolean {
+    fun run(onDestroy: suspend () -> Unit): Boolean {
         if (selected == null) {
             return false
         }
@@ -27,6 +31,7 @@ class DeviceRepository(
         try {
             process?.destroy()
             process = scrcpyCommand.run(selected!!)
+            waitFor(process!!, onDestroy)
             return true
         } catch (e: Exception) {
             process = null
@@ -34,9 +39,20 @@ class DeviceRepository(
         }
     }
 
-    fun stop(): Boolean {
+    fun stop() {
         process?.destroy()
         process = null
-        return true
+    }
+
+    private fun waitFor(process: Process, onDestroy: suspend () -> Unit) {
+        MainScope().launch {
+            while (this.isActive) {
+                delay(1000)
+                if (!process.isAlive) {
+                    onDestroy.invoke()
+                    break
+                }
+            }
+        }
     }
 }

@@ -19,10 +19,9 @@ fun RunAndStopButton(
     Button(
         onClick = {
             if (running) {
-                val success = deviceRepository.stop()
-                if (success) running = false
+                deviceRepository.stop()
             } else {
-                val success = deviceRepository.run()
+                val success = deviceRepository.run() { running = false }
                 if (success) running = true
             }
         },
