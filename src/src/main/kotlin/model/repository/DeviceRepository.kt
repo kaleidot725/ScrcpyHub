@@ -2,9 +2,9 @@ package model.repository
 
 import command.AdbCommand
 import command.ScrcpyCommand
+import extension.monitor
+import extension.waitForRunning
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import model.Device
 
@@ -28,31 +28,22 @@ class DeviceRepository(
             return false
         }
 
-        try {
+        return try {
             process?.destroy()
             process = scrcpyCommand.run(selected!!)
-            waitFor(process!!, onDestroy)
-            return true
+            MainScope().launch {
+                process?.waitForRunning(1000)
+                process?.monitor(1000) { onDestroy.invoke() }
+            }
+            true
         } catch (e: Exception) {
             process = null
-            return false
+            false
         }
     }
 
     fun stop() {
         process?.destroy()
         process = null
-    }
-
-    private fun waitFor(process: Process, onDestroy: suspend () -> Unit) {
-        MainScope().launch {
-            while (this.isActive) {
-                delay(1000)
-                if (!process.isAlive) {
-                    onDestroy.invoke()
-                    break
-                }
-            }
-        }
     }
 }
