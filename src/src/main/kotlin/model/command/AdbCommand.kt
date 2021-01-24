@@ -1,7 +1,7 @@
-package command
+package model.command
 
 import com.lordcodes.turtle.shellRun
-import model.Device
+import model.entity.Device
 
 class AdbCommand {
     fun getDevices(): List<Device> {

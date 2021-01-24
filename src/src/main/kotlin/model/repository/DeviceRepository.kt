@@ -1,13 +1,13 @@
 package model.repository
 
-import command.AdbCommand
-import command.ScrcpyCommand
-import extension.monitor
-import extension.waitForRunning
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import model.Device
-import model.Resolution
+import model.command.AdbCommand
+import model.command.ScrcpyCommand
+import model.entity.Device
+import model.entity.Resolution
+import model.extension.monitor
+import model.extension.waitForRunning
 
 class DeviceRepository(
     private val adbCommand: AdbCommand,

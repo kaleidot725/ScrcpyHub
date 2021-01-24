@@ -1,7 +1,7 @@
-package command
+package model.command
 
-import model.Device
-import model.Resolution
+import model.entity.Device
+import model.entity.Resolution
 
 class ScrcpyCommand {
     fun run(device: Device? = null, resolution: Resolution? = null): Process {
