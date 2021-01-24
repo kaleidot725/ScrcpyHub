@@ -27,7 +27,7 @@ fun main() = Window(
         Column(modifier = Modifier.padding(8.dp)) {
             DeviceListView(deviceRepository)
             ResolutionListView(resolutionRepository)
-            RunAndStopButton(deviceRepository)
+            RunAndStopButton(deviceRepository, resolutionRepository)
         }
     }
 }
