@@ -1,6 +1,6 @@
 package model.repository
 
-import model.Resolution
+import model.entity.Resolution
 
 class ResolutionRepository {
     var selected: Resolution? = null

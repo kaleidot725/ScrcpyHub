@@ -5,8 +5,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import command.AdbCommand
-import command.ScrcpyCommand
+import model.command.AdbCommand
+import model.command.ScrcpyCommand
 import model.repository.DeviceRepository
 import model.repository.ResolutionRepository
 import resource.Strings

@@ -1,4 +1,4 @@
-package extension
+package model.extension
 
 import kotlinx.coroutines.delay
 
