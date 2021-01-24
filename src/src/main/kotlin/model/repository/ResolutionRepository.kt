@@ -3,6 +3,8 @@ package model.repository
 import model.Resolution
 
 class ResolutionRepository {
+    var selected: Resolution? = null
+
     fun getAll(): List<Resolution> = RESOLUTION_LIST
 
     companion object {
