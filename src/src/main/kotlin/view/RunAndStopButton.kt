@@ -8,11 +8,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.repository.DeviceRepository
+import model.repository.ResolutionRepository
 import resource.Strings
 
 @Composable
 fun RunAndStopButton(
-    deviceRepository: DeviceRepository
+    deviceRepository: DeviceRepository,
+    resolutionRepository: ResolutionRepository
 ) {
     var running by remember { mutableStateOf(false) }
 
@@ -21,7 +23,9 @@ fun RunAndStopButton(
             if (running) {
                 deviceRepository.stop()
             } else {
-                val success = deviceRepository.run() { running = false }
+                val success = deviceRepository.run(deviceRepository.selected, resolutionRepository.selected) {
+                    running = false
+                }
                 if (success) running = true
             }
         },

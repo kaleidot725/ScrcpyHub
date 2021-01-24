@@ -43,8 +43,8 @@ fun DeviceListView(deviceRepository: DeviceRepository) {
                     enabled = true,
                     onClick = {
                         selectedIndex = index
-                        deviceRepository.select(device)
                         showMenu = false
+                        deviceRepository.selected = device
                     }
                 ) {
                     Text(text = device.getDeviceLabel())

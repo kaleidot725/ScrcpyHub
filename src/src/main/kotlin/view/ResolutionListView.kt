@@ -41,6 +41,7 @@ fun ResolutionListView(resolutionRepository: ResolutionRepository) {
                 onClick = {
                     selectedIndex = index
                     showMenu = false
+                    resolutionRepository.selected = resolution
                 }
             ) {
                 Text(text = resolution.getResolutionLabel())
