@@ -12,9 +12,10 @@ class ScrcpyCommand {
         }
 
         if (resolution != null) {
-            command = command.plus("-m ${resolution.width}")
+            command = command.plus(" -m ${resolution.width}")
         }
 
+        println(command)
         return Runtime.getRuntime().exec(command)
     }
 }
