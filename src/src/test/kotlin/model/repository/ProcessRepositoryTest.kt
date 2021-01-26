@@ -1,4 +1,4 @@
 package model.repository
 
-class ProcessRepository {
+class ProcessRepositoryTest {
 }
