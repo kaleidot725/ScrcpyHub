@@ -3,32 +3,29 @@ package model.repository
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import model.command.ScrcpyCommand
 
 class ProcessRepository {
-    private var process: Process? = null
+    private val processList: MutableMap<String, Process> = mutableMapOf()
 
-    fun run(
-        command: ScrcpyCommand,
-        onDestroy: (suspend () -> Unit)? = null
-    ): Boolean {
-        return try {
-            process?.destroy()
-            process = command.run()
-            MainScope().launch {
-                process?.waitForRunning(1000)
-                process?.monitor(1000) { onDestroy?.invoke() }
-            }
-            true
-        } catch (e: Exception) {
-            process = null
-            false
+    fun insert(key: String, process: Process, onDestroy: (suspend () -> Unit)? = null) {
+        processList[key]?.destroy()
+        processList[key] = process
+
+        // FIXME impl ProcessRepository coroutines scope
+        MainScope().launch {
+            process.waitForRunning(1000)
+            process.monitor(1000) { onDestroy?.invoke() }
         }
     }
 
-    fun stop() {
-        process?.destroy()
-        process = null
+    fun delete(key: String) {
+        processList[key]?.destroy()
+        processList.remove(key)
+    }
+
+    fun deleteAll() {
+        processList.values.forEach { it.destroy() }
+        processList.clear()
     }
 
     private suspend fun Process.waitForRunning(interval: Long) {
