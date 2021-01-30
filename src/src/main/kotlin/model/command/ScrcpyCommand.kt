@@ -3,11 +3,8 @@ package model.command
 import model.entity.Device
 import model.entity.Resolution
 
-class ScrcpyCommand(
-    private val device: Device? = null,
-    private val resolution: Resolution? = null
-) {
-    fun run(): Process? {
+class ScrcpyCommand() {
+    fun run(device: Device? = null, resolution: Resolution? = null): Process? {
         var command = "scrcpy"
 
         if (device != null) {
