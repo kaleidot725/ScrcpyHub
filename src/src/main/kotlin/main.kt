@@ -6,9 +6,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import model.command.AdbCommand
+import model.command.ScrcpyCommand
 import model.repository.DeviceRepository
 import model.repository.ProcessRepository
 import model.repository.ResolutionRepository
+import model.usecase.StartScrcpyUseCase
+import model.usecase.StopScrcpyUseCase
 import resource.Strings
 import view.DeviceListView
 import view.ResolutionListView
@@ -19,15 +22,18 @@ fun main() = Window(
     title = Strings.APP_NAME
 ) {
     val adbCommand = AdbCommand()
+    val scrcpyCommand = ScrcpyCommand()
     val resolutionRepository = ResolutionRepository()
     val deviceRepository = DeviceRepository(adbCommand)
     val processRepository = ProcessRepository()
+    val startScrcpyUseCase = StartScrcpyUseCase(scrcpyCommand, processRepository)
+    val stopScrcpyUseCase = StopScrcpyUseCase(processRepository)
 
     MaterialTheme {
         Column(modifier = Modifier.padding(8.dp)) {
             DeviceListView(deviceRepository)
             ResolutionListView(resolutionRepository)
-            RunAndStopButton(deviceRepository, resolutionRepository, processRepository)
+            RunAndStopButton(deviceRepository, resolutionRepository, startScrcpyUseCase, stopScrcpyUseCase)
         }
     }
 }
