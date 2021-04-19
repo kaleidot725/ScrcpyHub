@@ -5,17 +5,21 @@ import model.entity.Device
 
 class AdbCommand {
     fun getDevices(): List<Device> {
-        // get device list
-        val output = shellRun("adb", listOf("devices"))
-        val devices = output.split("\n").toMutableList()
+        try {
+            // get device list
+            val output = shellRun("adb", listOf("devices"))
+            val devices = output.split("\n").toMutableList()
 
-        // remove device list header
-        devices.removeAt(0)
+            // remove device list header
+            devices.removeAt(0)
 
-        // convert string to device
-        return devices.map { str ->
-            val splits = str.split("\t")
-            Device(splits[0], splits[1])
+            // convert string to device
+            return devices.map { str ->
+                val splits = str.split("\t")
+                Device(splits[0], splits[1])
+            }
+        } catch (e: Exception) {
+            return emptyList()
         }
     }
 }
