@@ -3,7 +3,7 @@ package model.repository
 import model.entity.Resolution
 
 class ResolutionRepository {
-    var selected: Resolution? = null
+    var selected: Resolution? = getAll().firstOrNull()
 
     fun getAll(): List<Resolution> = RESOLUTION_LIST
 
