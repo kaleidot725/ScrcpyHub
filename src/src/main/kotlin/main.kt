@@ -10,8 +10,7 @@ import model.command.ScrcpyCommand
 import model.repository.DeviceRepository
 import model.repository.ProcessRepository
 import model.repository.ResolutionRepository
-import model.usecase.StartScrcpyUseCase
-import model.usecase.StopScrcpyUseCase
+import model.usecase.*
 import resource.Strings
 import view.DeviceListView
 import view.ResolutionListView
@@ -26,13 +25,18 @@ fun main() = Window(
     val resolutionRepository = ResolutionRepository()
     val deviceRepository = DeviceRepository(adbCommand)
     val processRepository = ProcessRepository()
+
     val startScrcpyUseCase = StartScrcpyUseCase(scrcpyCommand, processRepository)
     val stopScrcpyUseCase = StopScrcpyUseCase(processRepository)
+    val selectDeviceUseCase = SelectDeviceUseCase(deviceRepository)
+    val selectResolutionRepository = SelectResolutionUseCase(resolutionRepository)
+    val fetchDeviceUseCase = FetchDevicesUseCase(deviceRepository)
+    val fetchResolutionsUseCase = FetchResolutionsUseCase(resolutionRepository)
 
     MaterialTheme {
         Column(modifier = Modifier.padding(8.dp)) {
-            DeviceListView(deviceRepository)
-            ResolutionListView(resolutionRepository)
+            DeviceListView(fetchDeviceUseCase, selectDeviceUseCase)
+            ResolutionListView(fetchResolutionsUseCase, selectResolutionRepository)
             RunAndStopButton(deviceRepository, resolutionRepository, startScrcpyUseCase, stopScrcpyUseCase)
         }
     }
