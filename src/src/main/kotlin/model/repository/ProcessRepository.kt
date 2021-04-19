@@ -18,6 +18,10 @@ class ProcessRepository {
         }
     }
 
+    fun any(key: String): Boolean {
+        return processList[key] != null
+    }
+
     fun delete(key: String) {
         processList[key]?.destroy()
         processList.remove(key)

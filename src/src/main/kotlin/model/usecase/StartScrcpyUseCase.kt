@@ -9,10 +9,14 @@ class StartScrcpyUseCase(
     private val scrcpyCommand: ScrcpyCommand,
     private val processRepository: ProcessRepository
 ) {
-    fun execute(device: Device? = null, resolution: Resolution? = null): Boolean {
-        val process = scrcpyCommand.run(device, resolution)
-        
-
-        return (process != null)
+    fun execute(device: Device, resolution: Resolution, onDestroy: suspend () -> Unit): Boolean {
+        val exists = processRepository.any(device.id)
+        if (exists) {
+            return false
+        } else {
+            val process = scrcpyCommand.run(device, resolution) ?: return false
+            processRepository.insert(device.id, process, onDestroy)
+            return true
+        }
     }
 }

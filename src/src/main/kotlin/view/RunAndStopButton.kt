@@ -7,17 +7,18 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import model.command.ScrcpyCommand
 import model.repository.DeviceRepository
-import model.repository.ProcessRepository
 import model.repository.ResolutionRepository
+import model.usecase.StartScrcpyUseCase
+import model.usecase.StopScrcpyUseCase
 import resource.Strings
 
 @Composable
 fun RunAndStopButton(
     deviceRepository: DeviceRepository,
     resolutionRepository: ResolutionRepository,
-    processRepository: ProcessRepository
+    startScrcpyUseCase: StartScrcpyUseCase,
+    stopScrcpyUseCase: StopScrcpyUseCase
 ) {
     var running by remember { mutableStateOf(false) }
 
@@ -27,14 +28,11 @@ fun RunAndStopButton(
             val targetResolution = resolutionRepository.selected ?: return@Button
 
             if (running) {
-                processRepository.delete(targetDevice.id)
+                stopScrcpyUseCase.execute(targetDevice)
                 running = false
             } else {
-                val process = ScrcpyCommand().run(targetDevice, targetResolution)
-                if (process != null) {
-                    processRepository.insert(targetDevice.id, process) { running = false }
-                    running = true
-                }
+                startScrcpyUseCase.execute(targetDevice, targetResolution) { running = false }
+                running = true
             }
         },
         modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth()
