@@ -4,22 +4,34 @@ import com.lordcodes.turtle.shellRun
 import model.entity.Device
 
 class AdbCommand {
-    fun getDevices(): List<Device> {
-        try {
-            // get device list
-            val output = shellRun("adb", listOf("devices"))
-            val devices = output.split("\n").toMutableList()
-
-            // remove device list header
-            devices.removeAt(0)
-
-            // convert string to device
-            return devices.map { str ->
-                val splits = str.split("\t")
-                Device(splits[0], splits[1])
-            }
+    fun fetchDevices(): List<Device> {
+        return try {
+            runCommand().toDeviceList()
         } catch (e: Exception) {
-            return emptyList()
+            emptyList()
         }
+    }
+
+    private fun runCommand(): String {
+        return shellRun(COMMAND_NAME, listOf(DEVICES_OPTION))
+    }
+
+    private fun String.toDeviceList(): List<Device> {
+        // get device list
+        val devices = this.split("\n").toMutableList()
+
+        // remove device list header
+        devices.removeAt(0)
+
+        // convert string to device
+        return devices.map { str ->
+            val splits = str.split("\t")
+            Device(splits[0], splits[1])
+        }
+    }
+
+    companion object {
+        private const val COMMAND_NAME = "adb"
+        private const val DEVICES_OPTION = "devices"
     }
 }

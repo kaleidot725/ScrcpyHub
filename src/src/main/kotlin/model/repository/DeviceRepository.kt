@@ -9,6 +9,6 @@ class DeviceRepository(
     var selected: Device? = null
 
     fun getAll(): List<Device> {
-        return adbCommand.getDevices()
+        return adbCommand.fetchDevices()
     }
 }
