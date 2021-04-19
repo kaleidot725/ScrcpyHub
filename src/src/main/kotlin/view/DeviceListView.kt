@@ -12,14 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.entity.Device
-import model.repository.DeviceRepository
+import model.usecase.FetchDevicesUseCase
+import model.usecase.SelectDeviceUseCase
 import resource.Strings
 
 @Composable
-fun DeviceListView(deviceRepository: DeviceRepository) {
-    val devices = deviceRepository.getAll()
+fun DeviceListView(
+    fetchDevicesUseCase: FetchDevicesUseCase,
+    selectDevicesUseCase: SelectDeviceUseCase
+) {
+    val devices = fetchDevicesUseCase.execute()
     val foundDevice = devices.isNotEmpty()
-
     var showMenu by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(0) }
 
@@ -44,7 +47,7 @@ fun DeviceListView(deviceRepository: DeviceRepository) {
                     onClick = {
                         selectedIndex = index
                         showMenu = false
-                        deviceRepository.selected = device
+                        selectDevicesUseCase.execute(device)
                     }
                 ) {
                     Text(text = device.getDeviceLabel())

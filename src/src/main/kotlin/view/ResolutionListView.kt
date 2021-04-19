@@ -12,12 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.entity.Resolution
-import model.repository.ResolutionRepository
+import model.usecase.FetchResolutionsUseCase
+import model.usecase.SelectResolutionUseCase
 import resource.Strings
 
 @Composable
-fun ResolutionListView(resolutionRepository: ResolutionRepository) {
-    val resoutions = resolutionRepository.getAll()
+fun ResolutionListView(
+    fetchResolutionsUseCase: FetchResolutionsUseCase,
+    selectResolutionUseCase: SelectResolutionUseCase
+) {
+    val resolutions = fetchResolutionsUseCase.execute()
     var showMenu by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(0) }
 
@@ -26,7 +30,7 @@ fun ResolutionListView(resolutionRepository: ResolutionRepository) {
     DropdownMenu(
         toggle = {
             Text(
-                resoutions[selectedIndex].getResolutionLabel(),
+                resolutions[selectedIndex].getResolutionLabel(),
                 modifier = Modifier.fillMaxWidth().clickable(onClick = { showMenu = true })
             )
         },
@@ -35,13 +39,13 @@ fun ResolutionListView(resolutionRepository: ResolutionRepository) {
         toggleModifier = Modifier.fillMaxWidth().background(Color.Transparent).padding(bottom = 8.dp),
         dropdownModifier = Modifier.fillMaxWidth().background(Color.White),
     ) {
-        resoutions.forEachIndexed { index, resolution ->
+        resolutions.forEachIndexed { index, resolution ->
             DropdownMenuItem(
                 enabled = true,
                 onClick = {
                     selectedIndex = index
                     showMenu = false
-                    resolutionRepository.selected = resolution
+                    selectResolutionUseCase.execute(resolution)
                 }
             ) {
                 Text(text = resolution.getResolutionLabel())
