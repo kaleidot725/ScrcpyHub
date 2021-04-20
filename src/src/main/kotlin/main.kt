@@ -19,9 +19,8 @@ import model.repository.ResolutionRepository
 import model.usecase.*
 import resource.Navigation
 import resource.Strings
-import view.DeviceListView
-import view.ResolutionListView
-import view.RunAndStopButton
+import view.ConnectPage
+import view.page.SettingPage
 
 fun main() = Window(
     size = IntSize(825, 580),
@@ -36,16 +35,12 @@ fun main() = Window(
     val startScrcpyUseCase = StartScrcpyUseCase(scrcpyCommand, processRepository)
     val stopScrcpyUseCase = StopScrcpyUseCase(processRepository)
     val selectDeviceUseCase = SelectDeviceUseCase(deviceRepository)
-    val selectResolutionRepository = SelectResolutionUseCase(resolutionRepository)
-    val fetchDeviceUseCase = FetchDevicesUseCase(deviceRepository)
+    val selectResolutionUseCase = SelectResolutionUseCase(resolutionRepository)
+    val fetchDevicesUseCase = FetchDevicesUseCase(deviceRepository)
     val fetchResolutionsUseCase = FetchResolutionsUseCase(resolutionRepository)
 
     MaterialTheme {
         var selectedPageName by remember { mutableStateOf(Navigation.CONNECT_PAGE) }
-
-        fun getTextColor(current: String, selected: String): Color {
-            return if (selected == current) Color.Blue else Color.Black
-        }
 
         Row {
             Column(modifier = Modifier.width(150.dp).padding(4.dp)) {
@@ -53,7 +48,7 @@ fun main() = Window(
                     Text(
                         pageName,
                         Modifier.fillMaxWidth().padding(4.dp).clickable(true) { selectedPageName = pageName },
-                        color = getTextColor(pageName, selectedPageName)
+                        color = if (selectedPageName == pageName) Color.Blue else Color.Black
                     )
                 }
             }
@@ -61,12 +56,19 @@ fun main() = Window(
             Column(modifier = Modifier.padding(4.dp)) {
                 when (selectedPageName) {
                     Navigation.CONNECT_PAGE -> {
-                        DeviceListView(fetchDeviceUseCase, selectDeviceUseCase)
-                        ResolutionListView(fetchResolutionsUseCase, selectResolutionRepository)
-                        RunAndStopButton(deviceRepository, resolutionRepository, startScrcpyUseCase, stopScrcpyUseCase)
+                        ConnectPage(
+                            fetchDevicesUseCase,
+                            selectDeviceUseCase,
+                            fetchResolutionsUseCase,
+                            selectResolutionUseCase,
+                            deviceRepository,
+                            resolutionRepository,
+                            startScrcpyUseCase,
+                            stopScrcpyUseCase
+                        )
                     }
                     Navigation.SETTING_PAGE -> {
-                        Text("SETTING PAGE")
+                        SettingPage()
                     }
                 }
             }
