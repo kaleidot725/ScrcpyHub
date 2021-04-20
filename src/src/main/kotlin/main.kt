@@ -1,3 +1,5 @@
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.desktop.Window
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -54,21 +56,23 @@ fun main() = Window(
             }
 
             Column(modifier = Modifier.padding(4.dp)) {
-                when (selectedPageName) {
-                    Navigation.CONNECT_PAGE -> {
-                        ConnectPage(
-                            fetchDevicesUseCase,
-                            selectDeviceUseCase,
-                            fetchResolutionsUseCase,
-                            selectResolutionUseCase,
-                            deviceRepository,
-                            resolutionRepository,
-                            startScrcpyUseCase,
-                            stopScrcpyUseCase
-                        )
-                    }
-                    Navigation.SETTING_PAGE -> {
-                        SettingPage()
+                Crossfade(selectedPageName, animation = tween(100)) { selectedPageName ->
+                    when (selectedPageName) {
+                        Navigation.CONNECT_PAGE -> {
+                            ConnectPage(
+                                fetchDevicesUseCase,
+                                selectDeviceUseCase,
+                                fetchResolutionsUseCase,
+                                selectResolutionUseCase,
+                                deviceRepository,
+                                resolutionRepository,
+                                startScrcpyUseCase,
+                                stopScrcpyUseCase
+                            )
+                        }
+                        Navigation.SETTING_PAGE -> {
+                            SettingPage()
+                        }
                     }
                 }
             }
