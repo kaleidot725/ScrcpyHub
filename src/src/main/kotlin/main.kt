@@ -41,32 +41,25 @@ fun main() = Window(
     val fetchResolutionsUseCase = FetchResolutionsUseCase(resolutionRepository)
 
     MaterialTheme {
-        var selected by remember { mutableStateOf(Navigation.CONNECT_PAGE) }
+        var selectedPageName by remember { mutableStateOf(Navigation.CONNECT_PAGE) }
 
         fun getTextColor(current: String, selected: String): Color {
-            return if (selected == current) Color.Magenta else Color.Black
+            return if (selected == current) Color.Blue else Color.Black
         }
 
         Row {
             Column(modifier = Modifier.width(150.dp).padding(4.dp)) {
-                Text(
-                    Navigation.CONNECT_PAGE,
-                    Modifier.fillMaxWidth().padding(4.dp).clickable(true) {
-                        selected = Navigation.CONNECT_PAGE
-                    },
-                    color = getTextColor(Navigation.CONNECT_PAGE, selected)
-                )
-                Text(
-                    Navigation.SETTING_PAGE,
-                    Modifier.fillMaxWidth().padding(4.dp).clickable(true) {
-                        selected = Navigation.SETTING_PAGE
-                    },
-                    color = getTextColor(Navigation.SETTING_PAGE, selected)
-                )
+                Navigation.PAGE_NAMES.forEach { pageName ->
+                    Text(
+                        pageName,
+                        Modifier.fillMaxWidth().padding(4.dp).clickable(true) { selectedPageName = pageName },
+                        color = getTextColor(pageName, selectedPageName)
+                    )
+                }
             }
 
             Column(modifier = Modifier.padding(4.dp)) {
-                when (selected) {
+                when (selectedPageName) {
                     Navigation.CONNECT_PAGE -> {
                         DeviceListView(fetchDeviceUseCase, selectDeviceUseCase)
                         ResolutionListView(fetchResolutionsUseCase, selectResolutionRepository)
