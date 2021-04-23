@@ -27,18 +27,14 @@ fun DeviceListView(
     var selectedIndex by remember { mutableStateOf(0) }
 
     Text(text = Strings.DEVICE_TITLE, modifier = Modifier.padding(vertical = 8.dp))
-
+    Text(
+        devices.getOrNull(selectedIndex)?.getDeviceLabel() ?: Strings.NONE,
+        modifier = Modifier.fillMaxWidth().clickable(onClick = { showMenu = true })
+    )
     DropdownMenu(
-        toggle = {
-            Text(
-                devices.getOrNull(selectedIndex)?.getDeviceLabel() ?: Strings.NONE,
-                modifier = Modifier.fillMaxWidth().clickable(onClick = { showMenu = true })
-            )
-        },
         expanded = showMenu,
         onDismissRequest = { showMenu = false },
-        toggleModifier = Modifier.fillMaxWidth().background(Color.Transparent).padding(bottom = 8.dp),
-        dropdownModifier = Modifier.fillMaxWidth().background(Color.White),
+        modifier = Modifier.fillMaxWidth().background(Color.White),
     ) {
         if (foundDevice) {
             devices.forEachIndexed { index, device ->

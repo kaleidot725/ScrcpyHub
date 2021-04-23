@@ -26,18 +26,14 @@ fun ResolutionListView(
     var selectedIndex by remember { mutableStateOf(0) }
 
     Text(text = Strings.RESOLUTION_TITLE, modifier = Modifier.padding(vertical = 8.dp))
-
+    Text(
+        resolutions[selectedIndex].getResolutionLabel(),
+        modifier = Modifier.fillMaxWidth().clickable(onClick = { showMenu = true })
+    )
     DropdownMenu(
-        toggle = {
-            Text(
-                resolutions[selectedIndex].getResolutionLabel(),
-                modifier = Modifier.fillMaxWidth().clickable(onClick = { showMenu = true })
-            )
-        },
         expanded = showMenu,
         onDismissRequest = { showMenu = false },
-        toggleModifier = Modifier.fillMaxWidth().background(Color.Transparent).padding(bottom = 8.dp),
-        dropdownModifier = Modifier.fillMaxWidth().background(Color.White),
+        modifier = Modifier.fillMaxWidth().background(Color.White),
     ) {
         resolutions.forEachIndexed { index, resolution ->
             DropdownMenuItem(

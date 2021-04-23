@@ -47,7 +47,7 @@ fun main() = Window(
                 onSelected = { selectedPageName = it }
             )
 
-            Crossfade(selectedPageName, animation = tween(100)) { selectedPageName ->
+            Crossfade(selectedPageName, animationSpec = tween(100)) { selectedPageName ->
                 when (selectedPageName) {
                     Navigation.CONNECT_PAGE -> {
                         ConnectPage(

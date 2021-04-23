@@ -26,9 +26,9 @@ fun ConnectPage(
     devices.forEach { device ->
         Column {
             Text(device.name, style = TextStyle(color = Color.Black, fontSize = 24.sp))
-//            DeviceListView(fetchDevicesUseCase, selectDeviceUseCase)
-//            ResolutionListView(fetchResolutionsUseCase, selectResolutionUseCase)
-//            RunAndStopButton(deviceRepository, resolutionRepository, startScrcpyUseCase, stopScrcpyUseCase)
+            DeviceListView(fetchDevicesUseCase, selectDeviceUseCase)
+            ResolutionListView(fetchResolutionsUseCase, selectResolutionUseCase)
+            RunAndStopButton(deviceRepository, resolutionRepository, startScrcpyUseCase, stopScrcpyUseCase)
         }
     }
 
