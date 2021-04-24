@@ -18,10 +18,16 @@ class ScrcpyCommand() {
     }
 
     private fun createCommand(device: Device?, resolution: Resolution?): String {
-        return COMMAND_NAME.apply {
-            if (device != null) this.plus(" $DEVICE_OPTION_NAME ${device.id}")
-            if (resolution != null) this.plus(" $RESOLUTION_OPTION_NAME ${resolution.width}")
+        var command = COMMAND_NAME
+
+        if (device != null) {
+            command = command.plus(" $DEVICE_OPTION_NAME ${device.id}")
         }
+        if (resolution != null) {
+            command = command.plus(" $RESOLUTION_OPTION_NAME ${resolution.width}")
+        }
+
+        return command
     }
 
     companion object {
