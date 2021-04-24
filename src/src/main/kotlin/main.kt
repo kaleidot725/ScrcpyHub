@@ -58,11 +58,7 @@ fun main() = Window(
                 Crossfade(selectedPageName, animationSpec = tween(100)) { selectedPageName ->
                     when (selectedPageName) {
                         Navigation.DEVICES_PAGE -> {
-                            ConnectPage(
-                                fetchDevicesUseCase, selectDeviceUseCase, fetchResolutionsUseCase,
-                                selectResolutionUseCase, deviceRepository, resolutionRepository,
-                                startScrcpyUseCase, stopScrcpyUseCase
-                            )
+                            ConnectPage(fetchDevicesUseCase, startScrcpyUseCase, stopScrcpyUseCase)
                         }
                         Navigation.SETTING_PAGE -> {
                             SettingPage()
