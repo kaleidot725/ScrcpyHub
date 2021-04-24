@@ -1,18 +1,19 @@
 package model.repository
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ProcessRepository {
     private val processList: MutableMap<String, Process> = mutableMapOf()
+    private val scope: CoroutineScope = MainScope()
 
     fun insert(key: String, process: Process, onDestroy: (suspend () -> Unit)? = null) {
         processList[key]?.destroy()
         processList[key] = process
 
-        // FIXME impl ProcessRepository coroutines scope
-        MainScope().launch {
+        scope.launch {
             process.waitForRunning(1000)
             process.monitor(1000) { onDestroy?.invoke() }
         }
