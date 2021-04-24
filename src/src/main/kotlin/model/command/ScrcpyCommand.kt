@@ -4,9 +4,9 @@ import model.entity.Device
 import model.entity.Resolution
 
 class ScrcpyCommand() {
-    fun run(device: Device? = null, resolution: Resolution? = null): Process? {
+    fun run(device: Device? = null, resolution: Resolution? = null, port: Int? = null): Process? {
         return try {
-            val command = createCommand(device, resolution)
+            val command = createCommand(device, resolution, port)
             Runtime.getRuntime().exec(command)
         } catch (e: SecurityException) {
             null
@@ -17,7 +17,7 @@ class ScrcpyCommand() {
         }
     }
 
-    private fun createCommand(device: Device?, resolution: Resolution?): String {
+    private fun createCommand(device: Device?, resolution: Resolution?, port: Int?): String {
         var command = COMMAND_NAME
 
         if (device != null) {
@@ -26,7 +26,9 @@ class ScrcpyCommand() {
         if (resolution != null) {
             command = command.plus(" $RESOLUTION_OPTION_NAME ${resolution.width}")
         }
-
+        if (port != null) {
+            command = command.plus((" $PORT_OPTION_NAME $port"))
+        }
         return command
     }
 
@@ -34,5 +36,6 @@ class ScrcpyCommand() {
         private const val COMMAND_NAME = "scrcpy"
         private const val DEVICE_OPTION_NAME = "-s"
         private const val RESOLUTION_OPTION_NAME = "-m"
+        private const val PORT_OPTION_NAME = "-p"
     }
 }

@@ -1,13 +1,11 @@
 package model.repository
 
-import model.entity.Device
-
 class PortRepository {
     private val portList: MutableMap<String, Int> = mutableMapOf()
 
-    fun allocate(device: Device): Int? {
-        if (portList.any { it.key == device.id }) {
-            return portList[device.id]
+    fun allocate(key: String): Int? {
+        if (portList.any { it.key == key }) {
+            return portList[key]
         }
 
         val emptyPorts = PORTS - portList.values
@@ -16,12 +14,12 @@ class PortRepository {
         }
 
         val allocatePort = emptyPorts.first()
-        portList[device.id] = allocatePort
+        portList[key] = allocatePort
         return allocatePort
     }
 
-    fun release(device: Device) {
-        portList.remove(device.id)
+    fun release(key: String) {
+        portList.remove(key)
     }
 
     fun dispose() {

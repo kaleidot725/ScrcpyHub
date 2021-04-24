@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import model.command.AdbCommand
 import model.command.ScrcpyCommand
 import model.repository.DeviceRepository
+import model.repository.PortRepository
 import model.repository.ProcessRepository
 import model.usecase.FetchDevicesUseCase
 import model.usecase.IsRunningScrcpyUseCase
@@ -35,9 +36,10 @@ fun main() = Window(
     val scrcpyCommand = ScrcpyCommand()
     val deviceRepository = DeviceRepository(adbCommand)
     val processRepository = ProcessRepository()
+    val portRepository = PortRepository()
 
-    val startScrcpyUseCase = StartScrcpyUseCase(scrcpyCommand, processRepository)
-    val stopScrcpyUseCase = StopScrcpyUseCase(processRepository)
+    val startScrcpyUseCase = StartScrcpyUseCase(scrcpyCommand, processRepository, portRepository)
+    val stopScrcpyUseCase = StopScrcpyUseCase(processRepository, portRepository)
     val isRunningScrcpyUseCase = IsRunningScrcpyUseCase(processRepository)
     val fetchDevicesUseCase = FetchDevicesUseCase(deviceRepository)
 
