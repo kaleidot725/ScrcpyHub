@@ -11,7 +11,7 @@ class StartScrcpyUseCase(
     private val processRepository: ProcessRepository,
     private val portRepository: PortRepository
 ) {
-    fun execute(device: Device, resolution: Resolution?, onDestroy: suspend () -> Unit): Boolean {
+    suspend fun execute(device: Device, resolution: Resolution?, onDestroy: suspend () -> Unit): Boolean {
         val exists = processRepository.any(device.id)
         if (exists) {
             return false

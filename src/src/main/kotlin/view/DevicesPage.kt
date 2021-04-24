@@ -1,5 +1,6 @@
 package view
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,14 +12,21 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.imageFromResource
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import model.entity.Device
 import model.usecase.FetchDevicesUseCase
 import model.usecase.IsRunningScrcpyUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyUseCase
+import resource.Images
 import resource.Strings
 
 @Composable
@@ -55,10 +63,14 @@ fun ConnectPage(
 
         FloatingActionButton(
             onClick = { devices = fetchDevicesUseCase.execute() },
-            modifier = Modifier.align(Alignment.BottomEnd).width(100.dp)
+            modifier = Modifier.align(Alignment.BottomEnd).width(50.dp).height(50.dp)
         ) {
-            val image: Painter
-            Text("UPDATE", color = Color.White)
+            Image(
+                imageFromResource(Images.RESTART_BLACK),
+                Images.RESTART_BLACK,
+                contentScale = ContentScale.FillHeight,
+                modifier = Modifier.padding(8.dp)
+            )
         }
     }
 }
@@ -70,7 +82,14 @@ fun DeviceCard(
     stopScrcpyUseCase: StopScrcpyUseCase,
     isRunningScrcpyUseCase: IsRunningScrcpyUseCase
 ) {
+    val coroutineScope: CoroutineScope = MainScope() // FIXME
     var running by remember { mutableStateOf(isRunningScrcpyUseCase.execute(device)) }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            coroutineScope.cancel("") // FIXME
+        }
+    }
 
     Card(modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(start = 8.dp, end = 8.dp, bottom = 8.dp)) {
         Box(modifier = Modifier.padding(8.dp)) {
@@ -78,10 +97,14 @@ fun DeviceCard(
                 onClick = {
                     if (running) {
                         running = false
-                        stopScrcpyUseCase.execute(device)
+                        coroutineScope.launch {
+                            stopScrcpyUseCase.execute(device)
+                        }
                     } else {
                         running = true
-                        startScrcpyUseCase.execute(device, null, onDestroy = { running = false })
+                        coroutineScope.launch {
+                            startScrcpyUseCase.execute(device, null, onDestroy = { running = false })
+                        }
                     }
                 },
                 modifier = Modifier.wrapContentSize().align(Alignment.BottomEnd)
