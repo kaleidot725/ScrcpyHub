@@ -22,9 +22,8 @@ fun ConnectPage(
 
     Column {
         val devices = fetchDevicesUseCase.execute()
-        val resolutions = fetchResolutionsUseCase.execute()
         devices.forEach { device ->
-            DeviceCard(device, resolutions)
+            DeviceCard(device, startScrcpyUseCase, stopScrcpyUseCase)
         }
     }
 }
