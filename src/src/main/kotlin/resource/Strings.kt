@@ -7,4 +7,5 @@ object Strings {
     const val RUN = "Run"
     const val STOP = "Stop"
     const val NONE = "None"
+    const val NOT_FOUND_ANDROID_DEVICES = "Not found android devices."
 }
