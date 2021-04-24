@@ -44,14 +44,10 @@ fun DeviceCard(
             }
 
             Text(
-                device.getDeviceLabel(),
+                device.id,
                 style = TextStyle(color = Color.Black, fontSize = 20.sp),
                 modifier = Modifier.wrapContentSize().align(Alignment.CenterStart)
             )
         }
     }
-}
-
-private fun Device.getDeviceLabel(): String {
-    return "$name ($id)"
 }
