@@ -8,7 +8,7 @@ class StopScrcpyUseCase(
     private val processRepository: ProcessRepository,
     private val portRepository: PortRepository
 ) {
-    fun execute(device: Device): Boolean {
+    suspend fun execute(device: Device): Boolean {
         portRepository.release(device.id)
         processRepository.delete(device.id)
         return true
