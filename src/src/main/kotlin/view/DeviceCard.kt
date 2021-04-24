@@ -20,7 +20,7 @@ import resource.Strings
 fun DeviceCard(device: Device, startScrcpyUseCase: StartScrcpyUseCase, stopScrcpyUseCase: StopScrcpyUseCase) {
     var running by remember { mutableStateOf(false) }
 
-    Card(modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(8.dp)) {
+    Card(modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(start = 8.dp, end = 8.dp, bottom = 8.dp)) {
         Box(modifier = Modifier.padding(8.dp)) {
             Button(
                 onClick = {
@@ -40,6 +40,7 @@ fun DeviceCard(device: Device, startScrcpyUseCase: StartScrcpyUseCase, stopScrcp
             Text(
                 device.getDeviceLabel(),
                 style = TextStyle(color = Color.Black, fontSize = 20.sp),
+                modifier = Modifier.wrapContentSize().align(Alignment.CenterStart)
             )
         }
     }
