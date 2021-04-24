@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.Card
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -27,31 +28,39 @@ fun ConnectPage(
     stopScrcpyUseCase: StopScrcpyUseCase,
     isRunningScrcpyUseCase: IsRunningScrcpyUseCase
 ) {
-    val devices = fetchDevicesUseCase.execute()
-    if (devices.isEmpty()) {
-        Box(modifier = Modifier.fillMaxSize().padding(8.dp)) {
+    var devices by remember { mutableStateOf(fetchDevicesUseCase.execute()) }
+
+    Box(modifier = Modifier.fillMaxSize().padding(8.dp)) {
+        if (devices.isEmpty()) {
             Text(
                 Strings.NOT_FOUND_ANDROID_DEVICES,
                 style = TextStyle(color = Color.Black, fontSize = 20.sp),
                 modifier = Modifier.align(Alignment.Center)
             )
+        } else {
+            LazyColumn {
+                items(
+                    devices,
+                    itemContent = { device ->
+                        DeviceCard(
+                            device,
+                            startScrcpyUseCase,
+                            stopScrcpyUseCase,
+                            isRunningScrcpyUseCase
+                        )
+                    }
+                )
+            }
         }
-    } else {
-        LazyColumn {
-            items(
-                devices,
-                itemContent = { device ->
-                    DeviceCard(
-                        device,
-                        startScrcpyUseCase,
-                        stopScrcpyUseCase,
-                        isRunningScrcpyUseCase
-                    )
-                }
-            )
+
+        FloatingActionButton(
+            onClick = { devices = fetchDevicesUseCase.execute() },
+            modifier = Modifier.align(Alignment.BottomEnd).width(100.dp)
+        ) {
+            val image: Painter
+            Text("UPDATE", color = Color.White)
         }
     }
-
 }
 
 @Composable
