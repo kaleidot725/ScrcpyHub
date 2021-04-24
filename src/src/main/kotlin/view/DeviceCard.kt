@@ -39,7 +39,7 @@ fun DeviceCard(device: Device, startScrcpyUseCase: StartScrcpyUseCase, stopScrcp
 
             Text(
                 device.getDeviceLabel(),
-                style = TextStyle(color = Color.Black, fontSize = 24.sp),
+                style = TextStyle(color = Color.Black, fontSize = 20.sp),
             )
         }
     }
