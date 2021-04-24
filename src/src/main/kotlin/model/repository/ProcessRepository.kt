@@ -14,8 +14,8 @@ class ProcessRepository {
         processList[key] = process
 
         scope.launch {
-            process.waitForRunning(1000)
-            process.monitor(1000) { onDestroy?.invoke() }
+            process.waitForRunning(MONITORING_DELAY)
+            process.monitor(MONITORING_INTERVAL) { onDestroy?.invoke() }
         }
     }
 
@@ -45,5 +45,10 @@ class ProcessRepository {
         }
 
         onDestroy.invoke()
+    }
+
+    companion object {
+        private const val MONITORING_DELAY = 1000L
+        private const val MONITORING_INTERVAL = 1000L
     }
 }
