@@ -12,13 +12,19 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.entity.Device
+import model.usecase.IsRunningScrcpyUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyUseCase
 import resource.Strings
 
 @Composable
-fun DeviceCard(device: Device, startScrcpyUseCase: StartScrcpyUseCase, stopScrcpyUseCase: StopScrcpyUseCase) {
-    var running by remember { mutableStateOf(false) }
+fun DeviceCard(
+    device: Device,
+    startScrcpyUseCase: StartScrcpyUseCase,
+    stopScrcpyUseCase: StopScrcpyUseCase,
+    isRunningScrcpyUseCase: IsRunningScrcpyUseCase
+) {
+    var running by remember { mutableStateOf(isRunningScrcpyUseCase.execute(device)) }
 
     Card(modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(start = 8.dp, end = 8.dp, bottom = 8.dp)) {
         Box(modifier = Modifier.padding(8.dp)) {
