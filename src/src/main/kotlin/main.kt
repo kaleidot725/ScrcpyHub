@@ -16,7 +16,9 @@ import model.command.ScrcpyCommand
 import model.repository.DeviceRepository
 import model.repository.ProcessRepository
 import model.repository.ResolutionRepository
-import model.usecase.*
+import model.usecase.FetchDevicesUseCase
+import model.usecase.StartScrcpyUseCase
+import model.usecase.StopScrcpyUseCase
 import resource.Colors
 import resource.Navigation
 import resource.Strings
@@ -37,10 +39,7 @@ fun main() = Window(
 
     val startScrcpyUseCase = StartScrcpyUseCase(scrcpyCommand, processRepository)
     val stopScrcpyUseCase = StopScrcpyUseCase(processRepository)
-    val selectDeviceUseCase = SelectDeviceUseCase(deviceRepository)
-    val selectResolutionUseCase = SelectResolutionUseCase(resolutionRepository)
     val fetchDevicesUseCase = FetchDevicesUseCase(deviceRepository)
-    val fetchResolutionsUseCase = FetchResolutionsUseCase(resolutionRepository)
 
     MaterialTheme {
         var selectedPageName by remember { mutableStateOf(Navigation.DEFAULT_PAGE) }
