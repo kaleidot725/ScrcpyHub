@@ -1,11 +1,7 @@
 package view
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.sp
+import androidx.compose.runtime.*
 import model.repository.DeviceRepository
 import model.repository.ResolutionRepository
 import model.usecase.*
@@ -21,15 +17,15 @@ fun ConnectPage(
     startScrcpyUseCase: StartScrcpyUseCase,
     stopScrcpyUseCase: StopScrcpyUseCase
 ) {
-    val devices = fetchDevicesUseCase.execute()
+    var showMenu by remember { mutableStateOf(false) }
+    var selectedIndex by remember { mutableStateOf(0) }
 
-    devices.forEach { device ->
-        Column {
-            Text(device.name, style = TextStyle(color = Color.Black, fontSize = 24.sp))
-            DeviceListView(fetchDevicesUseCase, selectDeviceUseCase)
-            ResolutionListView(fetchResolutionsUseCase, selectResolutionUseCase)
-            RunAndStopButton(deviceRepository, resolutionRepository, startScrcpyUseCase, stopScrcpyUseCase)
+    Column {
+        val devices = fetchDevicesUseCase.execute()
+        val resolutions = fetchResolutionsUseCase.execute()
+        devices.forEach { device ->
+            DeviceCard(device, resolutions)
         }
     }
-
 }
+
