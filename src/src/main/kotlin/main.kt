@@ -15,8 +15,8 @@ import model.command.AdbCommand
 import model.command.ScrcpyCommand
 import model.repository.DeviceRepository
 import model.repository.ProcessRepository
-import model.repository.ResolutionRepository
 import model.usecase.FetchDevicesUseCase
+import model.usecase.IsRunningScrcpyUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyUseCase
 import resource.Colors
@@ -33,12 +33,12 @@ fun main() = Window(
 ) {
     val adbCommand = AdbCommand()
     val scrcpyCommand = ScrcpyCommand()
-    val resolutionRepository = ResolutionRepository()
     val deviceRepository = DeviceRepository(adbCommand)
     val processRepository = ProcessRepository()
 
     val startScrcpyUseCase = StartScrcpyUseCase(scrcpyCommand, processRepository)
     val stopScrcpyUseCase = StopScrcpyUseCase(processRepository)
+    val isRunningScrcpyUseCase = IsRunningScrcpyUseCase(processRepository)
     val fetchDevicesUseCase = FetchDevicesUseCase(deviceRepository)
 
     MaterialTheme {
@@ -57,7 +57,12 @@ fun main() = Window(
                 Crossfade(selectedPageName, animationSpec = tween(100)) { selectedPageName ->
                     when (selectedPageName) {
                         Navigation.DEVICES_PAGE -> {
-                            ConnectPage(fetchDevicesUseCase, startScrcpyUseCase, stopScrcpyUseCase)
+                            ConnectPage(
+                                fetchDevicesUseCase,
+                                startScrcpyUseCase,
+                                stopScrcpyUseCase,
+                                isRunningScrcpyUseCase
+                            )
                         }
                         Navigation.SETTING_PAGE -> {
                             SettingPage()
