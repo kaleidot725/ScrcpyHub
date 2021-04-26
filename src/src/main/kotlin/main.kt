@@ -11,15 +11,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import model.command.AdbCommand
-import model.command.ScrcpyCommand
-import model.repository.DeviceRepository
-import model.repository.PortRepository
-import model.repository.ProcessRepository
-import model.usecase.FetchDevicesUseCase
-import model.usecase.IsRunningScrcpyUseCase
-import model.usecase.StartScrcpyUseCase
-import model.usecase.StopScrcpyUseCase
+import model.di.appModule
+import org.koin.core.context.GlobalContext.startKoin
 import resource.Colors
 import resource.Navigation
 import resource.Strings
@@ -32,16 +25,10 @@ fun main() = Window(
     size = IntSize(400, 580),
     title = Strings.APP_NAME
 ) {
-    val adbCommand = AdbCommand()
-    val scrcpyCommand = ScrcpyCommand()
-    val deviceRepository = DeviceRepository(adbCommand)
-    val processRepository = ProcessRepository()
-    val portRepository = PortRepository()
-
-    val startScrcpyUseCase = StartScrcpyUseCase(scrcpyCommand, processRepository, portRepository)
-    val stopScrcpyUseCase = StopScrcpyUseCase(processRepository, portRepository)
-    val isRunningScrcpyUseCase = IsRunningScrcpyUseCase(processRepository)
-    val fetchDevicesUseCase = FetchDevicesUseCase(deviceRepository)
+    startKoin {
+        printLogger()
+        modules(appModule)
+    }
 
     MaterialTheme {
         var selectedPageName by remember { mutableStateOf(Navigation.DEFAULT_PAGE) }
@@ -58,17 +45,8 @@ fun main() = Window(
 
                 Crossfade(selectedPageName, animationSpec = tween(100)) { selectedPageName ->
                     when (selectedPageName) {
-                        Navigation.DEVICES_PAGE -> {
-                            ConnectPage(
-                                fetchDevicesUseCase,
-                                startScrcpyUseCase,
-                                stopScrcpyUseCase,
-                                isRunningScrcpyUseCase
-                            )
-                        }
-                        Navigation.SETTING_PAGE -> {
-                            SettingPage()
-                        }
+                        Navigation.DEVICES_PAGE -> ConnectPage()
+                        Navigation.SETTING_PAGE -> SettingPage()
                     }
                 }
             }
