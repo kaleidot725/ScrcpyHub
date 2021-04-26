@@ -26,17 +26,21 @@ import model.usecase.FetchDevicesUseCase
 import model.usecase.IsRunningScrcpyUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyUseCase
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import resource.Images
 import resource.Strings
 
+class ConnectComponent() : KoinComponent {
+    val fetchDevicesUseCase: FetchDevicesUseCase by inject()
+    val startScrcpyUseCase: StartScrcpyUseCase by inject()
+    val stopScrcpyUseCase: StopScrcpyUseCase by inject()
+    val isRunningScrcpyUseCase: IsRunningScrcpyUseCase by inject()
+}
+
 @Composable
-fun ConnectPage(
-    fetchDevicesUseCase: FetchDevicesUseCase,
-    startScrcpyUseCase: StartScrcpyUseCase,
-    stopScrcpyUseCase: StopScrcpyUseCase,
-    isRunningScrcpyUseCase: IsRunningScrcpyUseCase
-) {
-    var devices by remember { mutableStateOf(fetchDevicesUseCase.execute()) }
+fun ConnectPage(component: ConnectComponent = ConnectComponent()) {
+    var devices by remember { mutableStateOf(component.fetchDevicesUseCase.execute()) }
 
     Box(modifier = Modifier.fillMaxSize().padding(8.dp)) {
         if (devices.isEmpty()) {
@@ -49,20 +53,13 @@ fun ConnectPage(
             LazyColumn {
                 items(
                     devices,
-                    itemContent = { device ->
-                        DeviceCard(
-                            device,
-                            startScrcpyUseCase,
-                            stopScrcpyUseCase,
-                            isRunningScrcpyUseCase
-                        )
-                    }
+                    itemContent = { device -> DeviceCard(device, component) }
                 )
             }
         }
 
         FloatingActionButton(
-            onClick = { devices = fetchDevicesUseCase.execute() },
+            onClick = { devices = component.fetchDevicesUseCase.execute() },
             modifier = Modifier.align(Alignment.BottomEnd).width(50.dp).height(50.dp)
         ) {
             Image(
@@ -78,12 +75,10 @@ fun ConnectPage(
 @Composable
 fun DeviceCard(
     device: Device,
-    startScrcpyUseCase: StartScrcpyUseCase,
-    stopScrcpyUseCase: StopScrcpyUseCase,
-    isRunningScrcpyUseCase: IsRunningScrcpyUseCase
+    component: ConnectComponent
 ) {
     val coroutineScope: CoroutineScope = MainScope() // FIXME
-    var running by remember { mutableStateOf(isRunningScrcpyUseCase.execute(device)) }
+    var running by remember { mutableStateOf(component.isRunningScrcpyUseCase.execute(device)) }
 
     DisposableEffect(Unit) {
         onDispose {
@@ -98,12 +93,12 @@ fun DeviceCard(
                     if (running) {
                         running = false
                         coroutineScope.launch {
-                            stopScrcpyUseCase.execute(device)
+                            component.stopScrcpyUseCase.execute(device)
                         }
                     } else {
                         running = true
                         coroutineScope.launch {
-                            startScrcpyUseCase.execute(device, null, onDestroy = { running = false })
+                            component.startScrcpyUseCase.execute(device, null, onDestroy = { running = false })
                         }
                     }
                 },

@@ -19,6 +19,7 @@ repositories {
 dependencies {
     implementation(compose.desktop.currentOs)
     implementation("com.lordcodes.turtle:turtle:0.2.0")
+    implementation("io.insert-koin:koin-core-ext:3.0.1")
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("io.mockk:mockk:1.10.5")
