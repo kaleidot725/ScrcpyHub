@@ -27,10 +27,10 @@ import view.extention.onDestroyed
 import viewmodel.DevicesPageViewModel
 
 @Composable
-fun DevicesPage(viewModel: DevicesPageViewModel = DevicesPageViewModel()) {
-    onCreated(viewModel)
-    onDrawPage(viewModel)
-    onDestroyed(viewModel)
+fun DevicesPage(devicesPageViewModel: DevicesPageViewModel = DevicesPageViewModel()) {
+    onCreated(devicesPageViewModel)
+    onDrawPage(devicesPageViewModel)
+    onDestroyed(devicesPageViewModel)
 }
 
 @Composable
