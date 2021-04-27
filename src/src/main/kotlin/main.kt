@@ -16,7 +16,7 @@ import org.koin.core.context.GlobalContext.startKoin
 import resource.Colors
 import resource.Navigation
 import resource.Strings
-import view.ConnectPage
+import view.DevicesPage
 import view.page.MenuPage
 import view.page.SettingPage
 
@@ -45,7 +45,7 @@ fun main() = Window(
 
                 Crossfade(selectedPageName, animationSpec = tween(100)) { selectedPageName ->
                     when (selectedPageName) {
-                        Navigation.DEVICES_PAGE -> ConnectPage()
+                        Navigation.DEVICES_PAGE -> DevicesPage()
                         Navigation.SETTING_PAGE -> SettingPage()
                     }
                 }

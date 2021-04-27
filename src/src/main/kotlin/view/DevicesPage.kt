@@ -8,7 +8,9 @@ import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,30 +19,26 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import model.entity.Device
 import resource.Images
 import resource.Strings
 import view.extention.onCreated
 import view.extention.onDestroyed
-import viewmodel.ConnectPageViewModel
+import viewmodel.DevicesPageViewModel
 
 @Composable
-fun ConnectPage(viewModel: ConnectPageViewModel = ConnectPageViewModel()) {
+fun DevicesPage(viewModel: DevicesPageViewModel = DevicesPageViewModel()) {
     onCreated(viewModel)
     onDrawPage(viewModel)
     onDestroyed(viewModel)
 }
 
 @Composable
-private fun onDrawPage(viewModel: ConnectPageViewModel) {
-    var devices by remember { mutableStateOf(viewModel.fetchDevicesUseCase.execute()) }
+private fun onDrawPage(viewModel: DevicesPageViewModel) {
+    val states: List<Pair<Device, Boolean>> by viewModel.states.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize().padding(8.dp)) {
-        if (devices.isEmpty()) {
+        if (states.isEmpty()) {
             Text(
                 Strings.NOT_FOUND_ANDROID_DEVICES,
                 style = TextStyle(color = Color.Black, fontSize = 20.sp),
@@ -48,15 +46,12 @@ private fun onDrawPage(viewModel: ConnectPageViewModel) {
             )
         } else {
             LazyColumn {
-                items(
-                    devices,
-                    itemContent = { device -> DeviceCard(device, viewModel) }
-                )
+                items(states, itemContent = { device -> DeviceCard(device.first, device.second, viewModel) })
             }
         }
 
         FloatingActionButton(
-            onClick = { devices = viewModel.fetchDevicesUseCase.execute() },
+            onClick = { viewModel.refresh() },
             modifier = Modifier.align(Alignment.BottomEnd).width(50.dp).height(50.dp)
         ) {
             Image(
@@ -72,36 +67,16 @@ private fun onDrawPage(viewModel: ConnectPageViewModel) {
 @Composable
 private fun DeviceCard(
     device: Device,
-    viewModel: ConnectPageViewModel
+    isRunning: Boolean,
+    viewModel: DevicesPageViewModel
 ) {
-    val coroutineScope: CoroutineScope = MainScope() // FIXME
-    var running by remember { mutableStateOf(viewModel.isRunningScrcpyUseCase.execute(device)) }
-
-    DisposableEffect(Unit) {
-        onDispose {
-            coroutineScope.cancel("") // FIXME
-        }
-    }
-
     Card(modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(start = 8.dp, end = 8.dp, bottom = 8.dp)) {
         Box(modifier = Modifier.padding(8.dp)) {
             Button(
-                onClick = {
-                    if (running) {
-                        running = false
-                        coroutineScope.launch {
-                            viewModel.stopScrcpyUseCase.execute(device)
-                        }
-                    } else {
-                        running = true
-                        coroutineScope.launch {
-                            viewModel.startScrcpyUseCase.execute(device, null, onDestroy = { running = false })
-                        }
-                    }
-                },
+                onClick = { if (!isRunning) viewModel.startScrcpy(device) else viewModel.stopScrcpy(device) },
                 modifier = Modifier.wrapContentSize().align(Alignment.BottomEnd)
             ) {
-                Text(if (running) Strings.STOP else Strings.RUN)
+                Text(if (!isRunning) Strings.RUN else Strings.STOP)
             }
 
             Text(
