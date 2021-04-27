@@ -16,9 +16,6 @@ class DevicesPageViewModel : ViewModel() {
     private val stopScrcpyUseCase: StopScrcpyUseCase by inject()
     private val isRunningScrcpyUseCase: IsRunningScrcpyUseCase by inject()
 
-    private val _devices: MutableStateFlow<List<Device>> = MutableStateFlow(emptyList())
-    val devices: StateFlow<List<Device>> = _devices
-
     private val _states: MutableStateFlow<List<Pair<Device, Boolean>>> = MutableStateFlow(emptyList())
     val states: StateFlow<List<Pair<Device, Boolean>>> = _states
 
@@ -28,7 +25,6 @@ class DevicesPageViewModel : ViewModel() {
 
     fun refresh() {
         coroutineScope.launch {
-            fetchDevices()
             fetchStates()
         }
     }
@@ -47,13 +43,9 @@ class DevicesPageViewModel : ViewModel() {
         }
     }
 
-    private fun fetchDevices() {
-        val devices = fetchDevicesUseCase.execute()
-        _devices.value = devices
-    }
-
     private fun fetchStates() {
-        val states = _devices.value.map { device -> device to isRunningScrcpyUseCase.execute(device) }
+        val devices = fetchDevicesUseCase.execute()
+        val states = devices.map { device -> device to isRunningScrcpyUseCase.execute(device) }
         _states.value = states
     }
 }
