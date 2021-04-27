@@ -13,11 +13,6 @@ fun onCreated(viewModel: ViewModel) {
 }
 
 @Composable
-fun onDraw(viewModel: ViewModel, block: @Composable (ViewModel) -> Unit) {
-    block.invoke(viewModel)
-}
-
-@Composable
 fun onDestroyed(viewModel: ViewModel) {
     DisposableEffect(Unit) {
         onDispose {
