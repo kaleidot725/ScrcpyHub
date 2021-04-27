@@ -22,25 +22,22 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import model.entity.Device
-import model.usecase.FetchDevicesUseCase
-import model.usecase.IsRunningScrcpyUseCase
-import model.usecase.StartScrcpyUseCase
-import model.usecase.StopScrcpyUseCase
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import resource.Images
 import resource.Strings
+import view.extention.onCreated
+import view.extention.onDestroyed
+import viewmodel.ConnectPageViewModel
 
-class ConnectComponent() : KoinComponent {
-    val fetchDevicesUseCase: FetchDevicesUseCase by inject()
-    val startScrcpyUseCase: StartScrcpyUseCase by inject()
-    val stopScrcpyUseCase: StopScrcpyUseCase by inject()
-    val isRunningScrcpyUseCase: IsRunningScrcpyUseCase by inject()
+@Composable
+fun ConnectPage(viewModel: ConnectPageViewModel = ConnectPageViewModel()) {
+    onCreated(viewModel)
+    onDrawPage(viewModel)
+    onDestroyed(viewModel)
 }
 
 @Composable
-fun ConnectPage(component: ConnectComponent = ConnectComponent()) {
-    var devices by remember { mutableStateOf(component.fetchDevicesUseCase.execute()) }
+private fun onDrawPage(viewModel: ConnectPageViewModel) {
+    var devices by remember { mutableStateOf(viewModel.fetchDevicesUseCase.execute()) }
 
     Box(modifier = Modifier.fillMaxSize().padding(8.dp)) {
         if (devices.isEmpty()) {
@@ -53,13 +50,13 @@ fun ConnectPage(component: ConnectComponent = ConnectComponent()) {
             LazyColumn {
                 items(
                     devices,
-                    itemContent = { device -> DeviceCard(device, component) }
+                    itemContent = { device -> DeviceCard(device, viewModel) }
                 )
             }
         }
 
         FloatingActionButton(
-            onClick = { devices = component.fetchDevicesUseCase.execute() },
+            onClick = { devices = viewModel.fetchDevicesUseCase.execute() },
             modifier = Modifier.align(Alignment.BottomEnd).width(50.dp).height(50.dp)
         ) {
             Image(
@@ -73,12 +70,12 @@ fun ConnectPage(component: ConnectComponent = ConnectComponent()) {
 }
 
 @Composable
-fun DeviceCard(
+private fun DeviceCard(
     device: Device,
-    component: ConnectComponent
+    viewModel: ConnectPageViewModel
 ) {
     val coroutineScope: CoroutineScope = MainScope() // FIXME
-    var running by remember { mutableStateOf(component.isRunningScrcpyUseCase.execute(device)) }
+    var running by remember { mutableStateOf(viewModel.isRunningScrcpyUseCase.execute(device)) }
 
     DisposableEffect(Unit) {
         onDispose {
@@ -93,12 +90,12 @@ fun DeviceCard(
                     if (running) {
                         running = false
                         coroutineScope.launch {
-                            component.stopScrcpyUseCase.execute(device)
+                            viewModel.stopScrcpyUseCase.execute(device)
                         }
                     } else {
                         running = true
                         coroutineScope.launch {
-                            component.startScrcpyUseCase.execute(device, null, onDestroy = { running = false })
+                            viewModel.startScrcpyUseCase.execute(device, null, onDestroy = { running = false })
                         }
                     }
                 },
