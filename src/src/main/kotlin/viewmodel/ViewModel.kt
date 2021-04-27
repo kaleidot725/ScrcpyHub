@@ -8,9 +8,9 @@ import org.koin.core.component.KoinComponent
 open abstract class ViewModel: KoinComponent {
     val coroutineScope: CoroutineScope = MainScope()
 
-    fun init() {}
+    open fun onStarted() {}
 
-    fun onCleared() {
+    open fun onCleared() {
         coroutineScope.cancel("coroutine Canceled")
     }
 }

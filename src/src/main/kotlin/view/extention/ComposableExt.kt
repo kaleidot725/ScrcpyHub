@@ -8,7 +8,7 @@ import viewmodel.ViewModel
 @Composable
 fun onCreated(viewModel: ViewModel) {
     SideEffect() {
-        viewModel.init()
+        viewModel.onStarted()
     }
 }
 
