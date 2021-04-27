@@ -12,9 +12,19 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import resource.Strings
+import view.extention.onCreated
+import view.extention.onDestroyed
+import viewmodel.SettingPageViewModel
 
 @Composable
-fun SettingPage() {
+fun SettingPage(settingPageViewModel: SettingPageViewModel = SettingPageViewModel()) {
+    onCreated(settingPageViewModel)
+    onDrawPage(settingPageViewModel)
+    onDestroyed(settingPageViewModel)
+}
+
+@Composable
+private fun onDrawPage(viewModel: SettingPageViewModel) {
     Box(modifier = Modifier.fillMaxSize().padding(8.dp)) {
         Text(
             Strings.NOT_FOUND_SETTING,
