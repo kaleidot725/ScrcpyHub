@@ -1,21 +1,16 @@
 package model.repository
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class ProcessRepository {
     private val processList: MutableMap<String, Process> = mutableMapOf()
     private val scope: CoroutineScope = MainScope()
 
     fun insert(key: String, process: Process, onDestroy: (suspend () -> Unit)? = null) {
-        processList[key]?.destroy()
         processList[key] = process
-
         scope.launch {
             process.waitForRunning(MONITORING_DELAY)
-            process.monitor(MONITORING_INTERVAL) { onDestroy?.invoke() }
+            process.monitor(key, MONITORING_INTERVAL) { onDestroy?.invoke() }
         }
     }
 
@@ -34,20 +29,24 @@ class ProcessRepository {
     }
 
     private suspend fun Process.waitForRunning(interval: Long) {
-        while (!this.isAlive) {
-            delay(interval)
+        withTimeout(TIMEOUT) {
+            while (!this@waitForRunning.isAlive) {
+                delay(interval)
+            }
         }
     }
 
-    private suspend fun Process.monitor(interval: Long, onDestroy: suspend () -> Unit) {
+    private suspend fun Process.monitor(key: String, interval: Long, onDestroy: suspend () -> Unit) {
         while (this.isAlive) {
             delay(interval)
         }
 
+        delete(key)
         onDestroy.invoke()
     }
 
     companion object {
+        private const val TIMEOUT = 10000L
         private const val MONITORING_DELAY = 1000L
         private const val MONITORING_INTERVAL = 1000L
     }
