@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import resource.Navigation
 
-class WindowViewModel : ViewModel() {
+class MainContentViewModel : ViewModel() {
     val pages: StateFlow<List<String>> = MutableStateFlow(Navigation.PAGE_NAMES)
 
     private val _selectedPages: MutableStateFlow<String> = MutableStateFlow(Navigation.DEVICES_PAGE)
