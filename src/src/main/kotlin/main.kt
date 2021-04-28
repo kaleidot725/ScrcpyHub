@@ -5,7 +5,7 @@ import org.koin.core.context.GlobalContext.startKoin
 import resource.Strings
 import view.MainContent
 
-fun main() = Window(resizable = false, size = IntSize(400, 580), title = Strings.APP_NAME) {
+fun main() = Window(resizable = false, size = IntSize(350, 550), title = Strings.APP_NAME) {
     setupModule()
     MainContent()
 }
