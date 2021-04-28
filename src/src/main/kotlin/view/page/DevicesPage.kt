@@ -37,7 +37,7 @@ fun DevicesPage(devicesPageViewModel: DevicesPageViewModel = DevicesPageViewMode
 private fun onDrawPage(viewModel: DevicesPageViewModel) {
     val states: List<Pair<Device, Boolean>> by viewModel.states.collectAsState()
 
-    Box(modifier = Modifier.fillMaxSize().padding(8.dp)) {
+    Box(modifier = Modifier.fillMaxSize()) {
         if (states.isEmpty()) {
             Text(
                 Strings.NOT_FOUND_ANDROID_DEVICES,
@@ -52,7 +52,11 @@ private fun onDrawPage(viewModel: DevicesPageViewModel) {
 
         FloatingActionButton(
             onClick = { viewModel.refresh() },
-            modifier = Modifier.align(Alignment.BottomEnd).width(50.dp).height(50.dp)
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .width(64.dp)
+                .height(64.dp)
+                .padding(bottom = 16.dp, end = 16.dp)
         ) {
             Image(
                 imageFromResource(Images.RESTART_BLACK),

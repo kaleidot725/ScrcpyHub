@@ -4,7 +4,6 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -30,9 +29,9 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
     val pages: List<String> by viewModel.pages.collectAsState()
     val selectedPages: String by viewModel.selectedPages.collectAsState()
 
-    MaterialTheme {
+    MainTheme {
         Box(modifier = Modifier.fillMaxSize().background(Colors.SMOKE_WHITE)) {
-            Column(modifier = Modifier.padding(8.dp)) {
+            Column {
                 PageTab(pages, selectedPages, onSelect = { viewModel.selectPage(it) })
 
                 Spacer(modifier = Modifier.height(8.dp))

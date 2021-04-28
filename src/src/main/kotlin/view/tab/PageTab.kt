@@ -12,16 +12,18 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun PageTab(pages: List<String>, selectedPage: String, onSelect: (String) -> Unit) {
-    Row(modifier = Modifier.width(300.dp).wrapContentHeight().padding(4.dp)) {
-        pages.forEach { page ->
-            Text(
-                page,
-                Modifier.wrapContentSize().clickable(true) { onSelect(page) },
-                color = if (selectedPage == page) Color.Blue else Color.Black,
-                fontWeight = if (selectedPage == page) FontWeight.Bold else FontWeight.Normal,
-                fontSize = 20.sp
-            )
-            Spacer(modifier = Modifier.width(16.dp))
+    Box {
+        Row(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
+            pages.forEach { page ->
+                Text(
+                    page,
+                    Modifier.wrapContentSize().padding(8.dp).clickable(true) { onSelect(page) },
+                    color = if (selectedPage == page) resource.Colors.NAVY else Color.Black,
+                    fontWeight = if (selectedPage == page) FontWeight.Bold else FontWeight.Normal,
+                    fontSize = 20.sp
+                )
+            }
         }
     }
+
 }
