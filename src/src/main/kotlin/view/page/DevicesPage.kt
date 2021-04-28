@@ -1,5 +1,6 @@
 package view
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -74,18 +75,24 @@ private fun DeviceCard(
     isRunning: Boolean,
     viewModel: DevicesPageViewModel
 ) {
-    Card(modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(start = 8.dp, end = 8.dp, bottom = 8.dp)) {
+    Card(
+        modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+        border = BorderStroke(1.dp, Color.LightGray)
+    ) {
         Box(modifier = Modifier.padding(8.dp)) {
             Button(
                 onClick = { if (!isRunning) viewModel.startScrcpy(device) else viewModel.stopScrcpy(device) },
-                modifier = Modifier.wrapContentSize().align(Alignment.BottomEnd)
+                modifier = Modifier.wrapContentSize().align(Alignment.BottomEnd).width(80.dp)
             ) {
-                Text(if (!isRunning) Strings.RUN else Strings.STOP)
+                Text(
+                    if (!isRunning) Strings.RUN else Strings.STOP,
+                    style = TextStyle(color = Color.White, fontSize = 16.sp),
+                )
             }
 
             Text(
                 device.id,
-                style = TextStyle(color = Color.Black, fontSize = 20.sp),
+                style = TextStyle(color = Color.Black, fontSize = 16.sp),
                 modifier = Modifier.wrapContentSize().align(Alignment.CenterStart)
             )
         }

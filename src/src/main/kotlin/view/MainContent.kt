@@ -34,7 +34,7 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
             Column {
                 PageTab(pages, selectedPages, onSelect = { viewModel.selectPage(it) })
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Crossfade(selectedPages, animationSpec = tween(100)) { selectedPageName ->
                     when (selectedPageName) {
