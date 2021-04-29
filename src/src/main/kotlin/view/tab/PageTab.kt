@@ -15,10 +15,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import resource.Root
+import resource.Navigation
 
 @Composable
-fun PageTab(pages: List<Root>, selectedPage: Root, onSelect: (Root) -> Unit) {
+fun PageTab(pages: List<Navigation.Root>, selectedPage: Navigation.Root, onSelect: (Navigation.Root) -> Unit) {
     Box(modifier = Modifier.fillMaxWidth().wrapContentWidth()) {
         Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
             pages.forEach { page ->

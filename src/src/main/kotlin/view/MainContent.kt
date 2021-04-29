@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import resource.Colors
 import resource.Navigation
-import resource.Root
 import view.extention.onCreated
 import view.extention.onDestroyed
 import view.page.SettingPage
@@ -27,8 +26,8 @@ fun MainContent(mainContentViewModel: MainContentViewModel = MainContentViewMode
 
 @Composable
 private fun onDrawWindow(viewModel: MainContentViewModel) {
-    val pages: List<Root> by viewModel.pages.collectAsState()
-    val selectedPages: Root by viewModel.selectedPages.collectAsState()
+    val pages: List<Navigation.Root> by viewModel.pages.collectAsState()
+    val selectedPages: Navigation.Root by viewModel.selectedPages.collectAsState()
 
     MainTheme {
         Box(modifier = Modifier.fillMaxSize().background(Colors.SMOKE_WHITE)) {
