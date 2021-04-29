@@ -1,11 +1,16 @@
 package resource
 
 object Navigation {
-    const val DEVICES_PAGE: String = "Devices"
-    const val SETTING_PAGE: String = "Setting"
-    const val DEFAULT_PAGE: String = DEVICES_PAGE
-    
-    val PAGE_NAMES: List<String> = listOf(
+    val DEVICES_PAGE: Root = Root("Device", Images.DEVICE_BLACK)
+    val SETTING_PAGE: Root = Root("Setting", Images.SETTING_BLACK)
+    val DEFAULT_PAGE: Root = DEVICES_PAGE
+   
+    val PAGE_NAMES: List<Root> = listOf(
         DEVICES_PAGE, SETTING_PAGE
     )
 }
+
+data class Root(
+    val name: String,
+    val iconRes: String
+)
