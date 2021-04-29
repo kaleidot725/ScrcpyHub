@@ -60,8 +60,8 @@ private fun onDrawPage(viewModel: DevicesPageViewModel) {
                 .padding(bottom = 16.dp, end = 16.dp)
         ) {
             Image(
-                imageFromResource(Images.RESTART_BLACK),
-                Images.RESTART_BLACK,
+                imageFromResource(Images.RESTART_WHITE),
+                Images.RESTART_WHITE,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier.padding(8.dp)
             )
