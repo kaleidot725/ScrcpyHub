@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.entity.Device
@@ -81,13 +82,13 @@ private fun DeviceCard(
             ) {
                 Text(
                     if (!isRunning) Strings.RUN else Strings.STOP,
-                    style = TextStyle(color = Color.White, fontSize = 16.sp),
+                    style = TextStyle(color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.SemiBold),
                 )
             }
 
             Text(
                 device.id,
-                style = TextStyle(color = Color.Black, fontSize = 16.sp),
+                style = TextStyle(color = Color.Black, fontSize = 16.sp, fontWeight = FontWeight.SemiBold),
                 modifier = Modifier.wrapContentSize().align(Alignment.CenterStart)
             )
         }

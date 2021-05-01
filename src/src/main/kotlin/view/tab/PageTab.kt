@@ -41,7 +41,7 @@ fun PageTab(pages: List<Navigation.Root>, selectedPage: Navigation.Root, onSelec
                         Text(
                             page.name,
                             color = Color.Black,
-                            fontWeight = FontWeight.Bold,
+                            fontWeight = FontWeight.SemiBold,
                             fontSize = 16.sp,
                         )
                     }
