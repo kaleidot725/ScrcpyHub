@@ -36,7 +36,7 @@ private fun onDrawPage(viewModel: DevicesPageViewModel) {
     Box(modifier = Modifier.fillMaxSize()) {
         if (states.isEmpty()) {
             Text(
-                Strings.NOT_FOUND_ANDROID_DEVICES,
+                Strings.NO_ANDROID_DEVICE,
                 style = TextStyle(color = Color.Black, fontSize = 20.sp),
                 modifier = Modifier.align(Alignment.Center)
             )

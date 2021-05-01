@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import resource.Colors
 import resource.Navigation
+import resource.Strings.SETUP
 import view.extention.onCreated
 import view.extention.onDestroyed
 import view.page.SettingPage
@@ -59,7 +60,7 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
                                 Text(errorMessage ?: "", fontSize = 16.sp)
                                 Spacer(modifier = Modifier.width(16.dp))
                                 Text(
-                                    "Setup",
+                                    SETUP,
                                     fontSize = 16.sp,
                                     color = resource.Colors.NAVY,
                                     modifier = Modifier.clickable { viewModel.selectPage(Navigation.SETTING_PAGE) }
