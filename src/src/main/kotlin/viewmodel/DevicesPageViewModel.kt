@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import model.entity.Device
 import model.usecase.FetchDevicesUseCase
-import model.usecase.IsRunningScrcpyUseCase
+import model.usecase.IsScrcpyRunningUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyUseCase
 import org.koin.core.component.inject
@@ -14,7 +14,7 @@ class DevicesPageViewModel : ViewModel() {
     private val fetchDevicesUseCase: FetchDevicesUseCase by inject()
     private val startScrcpyUseCase: StartScrcpyUseCase by inject()
     private val stopScrcpyUseCase: StopScrcpyUseCase by inject()
-    private val isRunningScrcpyUseCase: IsRunningScrcpyUseCase by inject()
+    private val isRunningScrcpyUseCase: IsScrcpyRunningUseCase by inject()
 
     private val _states: MutableStateFlow<List<Pair<Device, Boolean>>> = MutableStateFlow(emptyList())
     val states: StateFlow<List<Pair<Device, Boolean>>> = _states
@@ -42,7 +42,7 @@ class DevicesPageViewModel : ViewModel() {
             fetchStates()
         }
     }
-
+    
     private fun fetchStates() {
         val devices = fetchDevicesUseCase.execute()
         val states = devices.map { device -> device to isRunningScrcpyUseCase.execute(device) }

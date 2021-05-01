@@ -3,7 +3,7 @@ package model.usecase
 import model.entity.Device
 import model.repository.ProcessRepository
 
-class IsRunningScrcpyUseCase(
+class IsScrcpyRunningUseCase(
     private val processRepository: ProcessRepository
 ) {
     fun execute(device: Device): Boolean {

@@ -43,7 +43,7 @@ val appModule = module {
     }
 
     single {
-        IsRunningScrcpyUseCase(get())
+        IsScrcpyRunningUseCase(get())
     }
 
     single {
@@ -52,5 +52,9 @@ val appModule = module {
 
     single {
         StopScrcpyUseCase(get(), get())
+    }
+
+    single {
+        IsSetupCompletedUseCase(get(), get())
     }
 }
