@@ -5,6 +5,8 @@ import kotlinx.coroutines.flow.StateFlow
 import model.usecase.IsSetupCompletedUseCase
 import org.koin.core.component.inject
 import resource.Navigation
+import resource.Strings.NOT_FOUND_ADB_COMMAND
+import resource.Strings.NOT_FOUND_SCRCPY_COMMAND
 
 class MainContentViewModel : ViewModel() {
     private val isSetupCompletedUseCase: IsSetupCompletedUseCase by inject()
@@ -26,14 +28,15 @@ class MainContentViewModel : ViewModel() {
 
     fun selectPage(page: Navigation.Root) {
         _selectedPages.value = page
+        checkError()
     }
 
     private fun checkError() {
         val result = isSetupCompletedUseCase.execute()
         _hasError.value = (result != IsSetupCompletedUseCase.Result.OK)
         _errorMessage.value = when (result) {
-            IsSetupCompletedUseCase.Result.NOT_FOUND_SCRCPY_COMMAND -> "Not found scrcpy command."
-            IsSetupCompletedUseCase.Result.NOT_FOUND_ADB_COMMAND -> "Not found adb command."
+            IsSetupCompletedUseCase.Result.NOT_FOUND_SCRCPY_COMMAND -> NOT_FOUND_ADB_COMMAND
+            IsSetupCompletedUseCase.Result.NOT_FOUND_ADB_COMMAND -> NOT_FOUND_SCRCPY_COMMAND
             else -> null
         }
     }
