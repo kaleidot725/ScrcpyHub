@@ -17,6 +17,15 @@ class ScrcpyCommand() {
         }
     }
 
+    fun isInstalled(): Boolean {
+        return try {
+            Runtime.getRuntime().exec(createHelpCommand())
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     private fun createCommand(device: Device?, resolution: Resolution?, port: Int?): String {
         var command = COMMAND_NAME
 
@@ -32,10 +41,15 @@ class ScrcpyCommand() {
         return command
     }
 
+    private fun createHelpCommand(): String {
+        return "$COMMAND_NAME -h"
+    }
+
     companion object {
         private const val COMMAND_NAME = "scrcpy"
         private const val DEVICE_OPTION_NAME = "-s"
         private const val RESOLUTION_OPTION_NAME = "-m"
         private const val PORT_OPTION_NAME = "-p"
+        private const val HELP_OPTION_NAME = "-h"
     }
 }

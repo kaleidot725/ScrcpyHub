@@ -12,6 +12,15 @@ class AdbCommand {
         }
     }
 
+    fun isInstalled(): Boolean {
+        return try {
+            Runtime.getRuntime().exec(COMMAND_NAME)
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     private fun runCommand(): String {
         return shellRun(COMMAND_NAME, listOf(DEVICES_OPTION))
     }

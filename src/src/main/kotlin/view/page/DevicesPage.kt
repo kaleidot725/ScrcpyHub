@@ -1,13 +1,11 @@
 package view
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.Card
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -15,13 +13,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.imageFromResource
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.entity.Device
-import resource.Images
 import resource.Strings
 import view.extention.onCreated
 import view.extention.onDestroyed
@@ -51,21 +46,21 @@ private fun onDrawPage(viewModel: DevicesPageViewModel) {
             }
         }
 
-        FloatingActionButton(
-            onClick = { viewModel.refresh() },
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .width(64.dp)
-                .height(64.dp)
-                .padding(bottom = 16.dp, end = 16.dp)
-        ) {
-            Image(
-                imageFromResource(Images.RESTART_WHITE),
-                Images.RESTART_WHITE,
-                contentScale = ContentScale.FillHeight,
-                modifier = Modifier.padding(8.dp)
-            )
-        }
+//        FloatingActionButton(
+//            onClick = { viewModel.refresh() },
+//            modifier = Modifier
+//                .align(Alignment.BottomEnd)
+//                .width(64.dp)
+//                .height(64.dp)
+//                .padding(bottom = 16.dp, end = 16.dp)
+//        ) {
+//            Image(
+//                imageFromResource(Images.RESTART_WHITE),
+//                Images.RESTART_WHITE,
+//                contentScale = ContentScale.FillHeight,
+//                modifier = Modifier.padding(8.dp)
+//            )
+//        }
     }
 }
 
