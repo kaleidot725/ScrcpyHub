@@ -1,10 +1,9 @@
 package view
 
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.entity.Device
+import resource.Colors
 import resource.Strings
 import view.extention.onCreated
 import view.extention.onDestroyed
@@ -46,22 +46,6 @@ private fun onDrawPage(viewModel: DevicesPageViewModel) {
                 items(states, itemContent = { device -> DeviceCard(device.first, device.second, viewModel) })
             }
         }
-
-//        FloatingActionButton(
-//            onClick = { viewModel.refresh() },
-//            modifier = Modifier
-//                .align(Alignment.BottomEnd)
-//                .width(64.dp)
-//                .height(64.dp)
-//                .padding(bottom = 16.dp, end = 16.dp)
-//        ) {
-//            Image(
-//                imageFromResource(Images.RESTART_WHITE),
-//                Images.RESTART_WHITE,
-//                contentScale = ContentScale.FillHeight,
-//                modifier = Modifier.padding(8.dp)
-//            )
-//        }
     }
 }
 
@@ -73,18 +57,16 @@ private fun DeviceCard(
 ) {
     Card(
         modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
-        border = BorderStroke(1.dp, Color.LightGray)
+        elevation = 8.dp
     ) {
-        Box(modifier = Modifier.padding(8.dp)) {
-            Button(
-                onClick = { if (!isRunning) viewModel.startScrcpy(device) else viewModel.stopScrcpy(device) },
-                modifier = Modifier.wrapContentSize().align(Alignment.BottomEnd).width(80.dp)
-            ) {
-                Text(
-                    if (!isRunning) Strings.RUN else Strings.STOP,
-                    style = TextStyle(color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.SemiBold),
-                )
-            }
+        Box(modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)) {
+            Text(
+                if (!isRunning) Strings.RUN else Strings.STOP,
+                style = TextStyle(color = Colors.NAVY, fontSize = 16.sp, fontWeight = FontWeight.Bold),
+                modifier = Modifier.wrapContentSize().align(Alignment.BottomEnd).padding(8.dp).clickable {
+                    if (!isRunning) viewModel.startScrcpy(device) else viewModel.stopScrcpy(device)
+                }
+            )
 
             Text(
                 device.id,
