@@ -2,12 +2,12 @@ package model.command
 
 import model.entity.Device
 import model.entity.Resolution
+import java.io.File
 
-class ScrcpyCommand() {
+class ScrcpyCommand(private var path: String? = null) {
     fun run(device: Device? = null, resolution: Resolution? = null, port: Int? = null): Process? {
         return try {
-            val command = createCommand(device, resolution, port)
-            Runtime.getRuntime().exec(command)
+            runRuntimeCommand()
         } catch (e: SecurityException) {
             null
         } catch (e: NullPointerException) {
@@ -17,12 +17,32 @@ class ScrcpyCommand() {
         }
     }
 
+    private fun runRuntimeCommand(device: Device? = null, resolution: Resolution? = null, port: Int? = null): Process {
+        return if (path != null && path!!.isNotEmpty()) {
+            Runtime.getRuntime().exec(createCommand(device, resolution, port), null, File(path))
+        } else {
+            Runtime.getRuntime().exec(COMMAND_NAME)
+        }
+    }
+
     fun isInstalled(): Boolean {
         return try {
-            Runtime.getRuntime().exec(createHelpCommand())
+            runRuntimeHelpCommand()
             true
         } catch (e: Exception) {
             false
+        }
+    }
+
+    fun updatePath(path: String? = null) {
+        this.path = path
+    }
+
+    private fun runRuntimeHelpCommand(): Process {
+        return if (path != null && path!!.isNotEmpty()) {
+            Runtime.getRuntime().exec(createHelpCommand(), null, File(path))
+        } else {
+            Runtime.getRuntime().exec(createHelpCommand())
         }
     }
 
@@ -38,6 +58,7 @@ class ScrcpyCommand() {
         if (port != null) {
             command = command.plus((" $PORT_OPTION_NAME $port"))
         }
+
         return command
     }
 

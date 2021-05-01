@@ -40,14 +40,22 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
     MainTheme {
         Box(modifier = Modifier.fillMaxSize().background(Colors.SMOKE_WHITE)) {
             Column {
-                PageTab(pages, selectedPages, onSelect = { viewModel.selectPage(it) })
+                PageTab(
+                    pages,
+                    selectedPages,
+                    onSelect = {
+                        viewModel.selectPage(it)
+                        viewModel.refresh()
+                    }
+                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Crossfade(selectedPages, animationSpec = tween(100)) { selectedPageName ->
                     when (selectedPageName) {
                         Navigation.DEVICES_PAGE -> DevicesPage()
-                        Navigation.SETTING_PAGE -> SettingPage()
+                        Navigation.SETTING_PAGE -> SettingPage(onSaved = { viewModel.refresh() }
+                        )
                     }
                 }
             }

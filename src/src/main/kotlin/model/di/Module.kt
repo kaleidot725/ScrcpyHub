@@ -8,15 +8,15 @@ import org.koin.dsl.module
 
 val appModule = module {
     single {
-        AdbCommand()
+        val settingRepository = SettingRepository()
+        val setting = settingRepository.get()
+        AdbCommand(path = setting.adbLocation)
     }
 
     single {
-        ScrcpyCommand()
-    }
-
-    single {
-        DeviceRepository(get())
+        val settingRepository = SettingRepository()
+        val setting = settingRepository.get()
+        ScrcpyCommand(path = setting.scrcpyLocation)
     }
 
     single {
@@ -28,13 +28,17 @@ val appModule = module {
     }
 
     single {
+        DeviceRepository(get())
+    }
+
+    single {
         ResolutionRepository()
     }
 
     single {
         SettingRepository()
     }
-    
+
     single {
         FetchDevicesUseCase(get())
     }
@@ -64,6 +68,6 @@ val appModule = module {
     }
 
     single {
-        UpdateSettingUseCase(get())
+        UpdateSettingUseCase(get(), get(), get())
     }
 }

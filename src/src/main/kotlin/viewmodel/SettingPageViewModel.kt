@@ -32,9 +32,10 @@ class SettingPageViewModel : ViewModel() {
         _scrcpyLocation.value = location
     }
 
-    fun save() {
+    fun save(onSaved: () -> Unit) {
         coroutineScope.launch {
             updateSettingUseCase.execute(Setting(_adbLocation.value, _scrcpyLocation.value))
+            onSaved.invoke()
         }
     }
 }
