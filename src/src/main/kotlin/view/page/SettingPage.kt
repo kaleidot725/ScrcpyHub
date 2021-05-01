@@ -21,14 +21,14 @@ import view.extention.onDestroyed
 import viewmodel.SettingPageViewModel
 
 @Composable
-fun SettingPage(settingPageViewModel: SettingPageViewModel = SettingPageViewModel()) {
+fun SettingPage(settingPageViewModel: SettingPageViewModel = SettingPageViewModel(), onSaved: (() -> Unit)? = null) {
     onCreated(settingPageViewModel)
-    onDrawPage(settingPageViewModel)
+    onDrawPage(settingPageViewModel, onSaved)
     onDestroyed(settingPageViewModel)
 }
 
 @Composable
-private fun onDrawPage(viewModel: SettingPageViewModel) {
+private fun onDrawPage(viewModel: SettingPageViewModel, onSaved: (() -> Unit)? = null) {
     val adbLocation: String by viewModel.adbLocation.collectAsState()
     val scrcpyLocation: String by viewModel.scrcpyLocation.collectAsState()
 
@@ -61,7 +61,7 @@ private fun onDrawPage(viewModel: SettingPageViewModel) {
 
         Button(
             modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            onClick = { viewModel.save() }
+            onClick = { viewModel.save() { onSaved?.invoke() } }
         ) {
             Text(SAVE)
         }

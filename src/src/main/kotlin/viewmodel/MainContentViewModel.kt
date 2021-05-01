@@ -23,20 +23,23 @@ class MainContentViewModel : ViewModel() {
     val errorMessage: StateFlow<String?> = _errorMessage
 
     override fun onStarted() {
+        refresh()
+    }
+
+    fun refresh() {
         checkError()
     }
 
     fun selectPage(page: Navigation.Root) {
         _selectedPages.value = page
-        checkError()
     }
 
     private fun checkError() {
         val result = isSetupCompletedUseCase.execute()
         _hasError.value = (result != IsSetupCompletedUseCase.Result.OK)
         _errorMessage.value = when (result) {
-            IsSetupCompletedUseCase.Result.NOT_FOUND_SCRCPY_COMMAND -> NOT_FOUND_ADB_COMMAND
-            IsSetupCompletedUseCase.Result.NOT_FOUND_ADB_COMMAND -> NOT_FOUND_SCRCPY_COMMAND
+            IsSetupCompletedUseCase.Result.NOT_FOUND_SCRCPY_COMMAND -> NOT_FOUND_SCRCPY_COMMAND
+            IsSetupCompletedUseCase.Result.NOT_FOUND_ADB_COMMAND -> NOT_FOUND_ADB_COMMAND
             else -> null
         }
     }
