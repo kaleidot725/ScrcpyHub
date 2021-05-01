@@ -2,10 +2,7 @@ package model.di
 
 import model.command.AdbCommand
 import model.command.ScrcpyCommand
-import model.repository.DeviceRepository
-import model.repository.PortRepository
-import model.repository.ProcessRepository
-import model.repository.ResolutionRepository
+import model.repository.*
 import model.usecase.*
 import org.koin.dsl.module
 
@@ -35,11 +32,19 @@ val appModule = module {
     }
 
     single {
+        SettingRepository()
+    }
+    
+    single {
         FetchDevicesUseCase(get())
     }
 
     single {
         FetchResolutionsUseCase(get())
+    }
+
+    single {
+        FetchSettingUseCase(get())
     }
 
     single {
@@ -56,5 +61,9 @@ val appModule = module {
 
     single {
         IsSetupCompletedUseCase(get(), get())
+    }
+
+    single {
+        UpdateSettingUseCase(get())
     }
 }

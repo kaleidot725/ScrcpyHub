@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.4.31"
     id("org.jetbrains.compose") version "0.3.2"
+    kotlin("plugin.serialization") version "1.4.31"
 }
 
 group = "me.kaleidot725"
@@ -20,6 +21,7 @@ dependencies {
     implementation(compose.desktop.currentOs)
     implementation("com.lordcodes.turtle:turtle:0.2.0")
     implementation("io.insert-koin:koin-core-ext:3.0.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("io.mockk:mockk:1.10.5")
