@@ -43,6 +43,7 @@ fun PageTab(pages: List<Navigation.Root>, selectedPage: Navigation.Root, onSelec
                             color = Color.Black,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 16.sp,
+                            modifier = Modifier.align(Alignment.CenterVertically)
                         )
                     }
 
