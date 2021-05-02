@@ -4,17 +4,25 @@ import model.command.AdbCommand
 import model.command.ScrcpyCommand
 import model.repository.*
 import model.usecase.*
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val appModule = module {
+    single(named("setting_directory")) {
+        when (System.getProperty("os.name")) {
+            "Mac OS X" -> "/Library/Application Support/ScrcpyHub/"
+            else -> ""
+        }
+    }
+
     single {
-        val settingRepository = SettingRepository()
+        val settingRepository = get<SettingRepository>()
         val setting = settingRepository.get()
         AdbCommand(path = setting.adbLocation)
     }
 
     single {
-        val settingRepository = SettingRepository()
+        val settingRepository = get<SettingRepository>()
         val setting = settingRepository.get()
         ScrcpyCommand(path = setting.scrcpyLocation)
     }
@@ -36,7 +44,8 @@ val appModule = module {
     }
 
     single {
-        SettingRepository()
+        val directory = get<String>(named("setting_directory"))
+        SettingRepository(directory)
     }
 
     single {
