@@ -11,7 +11,7 @@ val appModule = module {
     single(named("setting_directory")) {
         when (System.getProperty("os.name")) {
             "Mac OS X" -> "/Library/Application Support/ScrcpyHub/"
-            else -> ""
+            else -> "./"
         }
     }
 
