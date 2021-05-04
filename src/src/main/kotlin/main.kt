@@ -1,3 +1,4 @@
+import androidx.compose.desktop.AppManager
 import androidx.compose.desktop.Window
 import androidx.compose.ui.unit.IntSize
 import model.di.appModule
@@ -16,6 +17,7 @@ fun main() = Window(
 ) {
     setupModule()
     MainContent()
+    setupIcon()
 }
 
 private fun setupModule() {
@@ -25,17 +27,17 @@ private fun setupModule() {
     }
 }
 
-private fun getWindowIcon(): BufferedImage {
-    var image: BufferedImage? = null
-    try {
-        image = ImageIO.read(File("icon.png"))
+private fun setupIcon() {
+    val image = getWindowIcon()
+    if (image != null) {
+        AppManager.focusedWindow?.setIcon(image)
+    }
+}
+
+private fun getWindowIcon(): BufferedImage? {
+    return try {
+        ImageIO.read(File("icon.png"))
     } catch (e: Exception) {
-        // image file does not exist
+        null
     }
-
-    if (image == null) {
-        image = BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB)
-    }
-
-    return image
 }
