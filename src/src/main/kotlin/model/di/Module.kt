@@ -18,13 +18,13 @@ val appModule = module {
     single {
         val settingRepository = get<SettingRepository>()
         val setting = settingRepository.get()
-        AdbCommand(path = setting.adbLocation)
+        AdbCommand(adbPath = setting.adbLocation)
     }
 
     single {
         val settingRepository = get<SettingRepository>()
         val setting = settingRepository.get()
-        ScrcpyCommand(path = setting.scrcpyLocation)
+        ScrcpyCommand(adbPath = setting.adbLocation, scrcpyPath = setting.scrcpyLocation)
     }
 
     single {

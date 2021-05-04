@@ -1,10 +1,10 @@
 package model.command
 
-import com.lordcodes.turtle.shellRun
 import model.entity.Device
-import java.io.File
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
-class AdbCommand(private var path: String? = null) {
+class AdbCommand(private var adbPath: String? = null) {
     fun fetchDevices(): List<Device> {
         return try {
             runCommand().toDeviceList()
@@ -22,29 +22,64 @@ class AdbCommand(private var path: String? = null) {
         }
     }
 
-    fun updatePath(path: String? = null) {
-        this.path = path
+    fun updatePath(adbPath: String? = null) {
+        this.adbPath = adbPath
     }
 
-    private fun runCommand(): String {
-        return if (path != null && path!!.isNotEmpty()) {
-            shellRun(COMMAND_NAME, listOf(DEVICES_OPTION), File(path ?: ""))
+    private fun runCommand(): List<String> {
+        return if (adbPath != null && adbPath!!.isNotEmpty()) {
+            val process = ProcessBuilder()
+                .command("$adbPath$COMMAND_NAME", DEVICES_OPTION)
+                .start()
+            val reader = BufferedReader(InputStreamReader(process.inputStream))
+            reader.readAllLine().apply {
+                reader.close()
+                process.destroy()
+            }
         } else {
-            shellRun(COMMAND_NAME, listOf(DEVICES_OPTION))
+            val process = ProcessBuilder()
+                .command(COMMAND_NAME, DEVICES_OPTION)
+                .start()
+            val reader = BufferedReader(InputStreamReader(process.inputStream))
+            reader.readAllLine().apply {
+                reader.close()
+                process.destroy()
+            }
         }
     }
 
     private fun runRuntimeCommand() {
-        if (path != null && path!!.isNotEmpty()) {
-            Runtime.getRuntime().exec(COMMAND_NAME, null, File(path))
+        if (adbPath != null && adbPath!!.isNotEmpty()) {
+            ProcessBuilder()
+                .command("$adbPath$COMMAND_NAME", DEVICES_OPTION)
+                .start()
+                .destroy()
         } else {
-            Runtime.getRuntime().exec(COMMAND_NAME)
+            ProcessBuilder()
+                .command(COMMAND_NAME)
+                .start()
+                .destroy()
         }
     }
 
-    private fun String.toDeviceList(): List<Device> {
+    private fun BufferedReader.readAllLine(): List<String> {
+        val output = mutableListOf<String>()
+        var line: String? = null
+        while (true) {
+            line = this.readLine()
+            if (line == null) {
+                break
+            }
+
+            output.add(line)
+        }
+
+        return output
+    }
+
+    private fun List<String>.toDeviceList(): List<Device> {
         // get device list
-        val devices = this.split("\n").toMutableList()
+        val devices = this.filter { it.isNotBlank() && it.isNotEmpty() }.toMutableList()
 
         // remove device list header
         devices.removeAt(0)
