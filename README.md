@@ -4,13 +4,13 @@
 ScrcpyHub is a GUI application to use [scrcpy](https://github.com/Genymobile/scrcpy).    
 [scrcpy](https://github.com/Genymobile/scrcpy) is a tool to mirror the android screen.
 
-| ![demo1](demo1.PNG) | ![demo2](demo2.PNG) | 
-| --- | ---- |
-
 - Created with [Compose for Desktop](https://github.com/JetBrains/compose-jb)
 - Support mirroring conrol. (Start / Stop)
 - Support multi android device mirroring.
 - Support Windows10 or Ubuntu or Mac OS
+
+| ![demo1](demo1.PNG) | ![demo2](demo2.PNG) | 
+| --- | ---- |
 
 # Install
 
