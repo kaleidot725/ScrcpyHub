@@ -8,7 +8,7 @@ class ProcessRepository {
 
     fun insert(key: String, process: Process, onDestroy: (suspend () -> Unit)? = null) {
         processList[key] = process
-        scope.launch {
+        scope.launch(Dispatchers.IO) {
             process.waitForRunning(MONITORING_DELAY)
             process.monitor(key, MONITORING_INTERVAL) { onDestroy?.invoke() }
         }
