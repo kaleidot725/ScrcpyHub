@@ -4,10 +4,10 @@ import model.entity.Device
 import model.entity.Resolution
 import java.io.File
 
-class ScrcpyCommand(private var path: String? = null) {
+class ScrcpyCommand(private var adbPath: String? = null, private var scrcpyPath: String? = null) {
     fun run(device: Device? = null, resolution: Resolution? = null, port: Int? = null): Process? {
         return try {
-            runRuntimeCommand()
+            runCommand()
         } catch (e: SecurityException) {
             null
         } catch (e: NullPointerException) {
@@ -17,53 +17,80 @@ class ScrcpyCommand(private var path: String? = null) {
         }
     }
 
-    private fun runRuntimeCommand(device: Device? = null, resolution: Resolution? = null, port: Int? = null): Process {
-        return if (path != null && path!!.isNotEmpty()) {
-            Runtime.getRuntime().exec(createCommand(device, resolution, port), null, File(path))
-        } else {
-            Runtime.getRuntime().exec(COMMAND_NAME)
-        }
-    }
-
     fun isInstalled(): Boolean {
         return try {
-            runRuntimeHelpCommand()
+            runHelpCommand()
             true
         } catch (e: Exception) {
             false
         }
     }
 
-    fun updatePath(path: String? = null) {
-        this.path = path
+    fun updatePath(adbPath: String? = null, scrcpyPath: String? = null) {
+        this.adbPath = adbPath
+        this.scrcpyPath = scrcpyPath
     }
 
-    private fun runRuntimeHelpCommand(): Process {
-        return if (path != null && path!!.isNotEmpty()) {
-            Runtime.getRuntime().exec(createHelpCommand(), null, File(path))
+    private fun runCommand(device: Device? = null, resolution: Resolution? = null, port: Int? = null): Process {
+        return if (scrcpyPath != null && scrcpyPath!!.isNotEmpty()) {
+            ProcessBuilder().apply {
+                environment()["PATH"] = adbPath + File.pathSeparator + System.getenv("PATH")
+            }.command(createCommand(scrcpyPath, device, resolution, port)).start()
         } else {
-            Runtime.getRuntime().exec(createHelpCommand())
+            ProcessBuilder().apply {
+                environment()["PATH"] = adbPath + File.pathSeparator + System.getenv("PATH")
+            }.command(createCommand(null, device, resolution, port))
+                .start()
         }
     }
 
-    private fun createCommand(device: Device?, resolution: Resolution?, port: Int?): String {
-        var command = COMMAND_NAME
+    private fun runHelpCommand() {
+        return if (scrcpyPath != null && scrcpyPath!!.isNotEmpty()) {
+            ProcessBuilder()
+                .command(createHelpCommand(scrcpyPath))
+                .start()
+                .destroy()
+        } else {
+            ProcessBuilder()
+                .command(createHelpCommand(null))
+                .start()
+                .destroy()
+        }
+    }
+
+    private fun createCommand(path: String?, device: Device?, resolution: Resolution?, port: Int?): List<String> {
+        val command = mutableListOf<String>()
+
+        if (path != null) {
+            command.add("$path$COMMAND_NAME")
+        } else {
+            command.add(COMMAND_NAME)
+        }
 
         if (device != null) {
-            command = command.plus(" $DEVICE_OPTION_NAME ${device.id}")
+            command.add(" $DEVICE_OPTION_NAME ${device.id}")
         }
         if (resolution != null) {
-            command = command.plus(" $RESOLUTION_OPTION_NAME ${resolution.width}")
+            command.add(" $RESOLUTION_OPTION_NAME ${resolution.width}")
         }
         if (port != null) {
-            command = command.plus((" $PORT_OPTION_NAME $port"))
+            command.add((" $PORT_OPTION_NAME $port"))
         }
 
         return command
     }
 
-    private fun createHelpCommand(): String {
-        return "$COMMAND_NAME -h"
+    private fun createHelpCommand(path: String?): List<String> {
+        val command = mutableListOf<String>()
+
+        if (path != null) {
+            command.add("$path$COMMAND_NAME")
+        } else {
+            command.add(COMMAND_NAME)
+        }
+
+        command.add(HELP_OPTION_NAME)
+        return command
     }
 
     companion object {

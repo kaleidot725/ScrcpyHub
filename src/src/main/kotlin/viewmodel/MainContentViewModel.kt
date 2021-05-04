@@ -2,6 +2,7 @@ package viewmodel
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import model.command.ScrcpyCommand
 import model.usecase.IsSetupCompletedUseCase
 import org.koin.core.component.inject
 import resource.Navigation
@@ -10,7 +11,8 @@ import resource.Strings.NOT_FOUND_SCRCPY_COMMAND
 
 class MainContentViewModel : ViewModel() {
     private val isSetupCompletedUseCase: IsSetupCompletedUseCase by inject()
-
+    val scrcpyCommand: ScrcpyCommand by inject()
+    
     val pages: StateFlow<List<Navigation.Root>> = MutableStateFlow(Navigation.PAGE_NAMES)
 
     private val _selectedPages: MutableStateFlow<Navigation.Root> = MutableStateFlow(Navigation.DEVICES_PAGE)
