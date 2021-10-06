@@ -16,15 +16,13 @@ import resource.Strings.IF_ADB_LOCATION_IS_EMPTY
 import resource.Strings.IF_SCRCPY_LOCATION_IS_EMPTY
 import resource.Strings.SAVE
 import resource.Strings.SCRCPY_LOCATION
-import view.extention.onCreated
-import view.extention.onDestroyed
+import view.extention.onInitialize
 import viewmodel.SettingPageViewModel
 
 @Composable
 fun SettingPage(settingPageViewModel: SettingPageViewModel = SettingPageViewModel(), onSaved: (() -> Unit)? = null) {
-    onCreated(settingPageViewModel)
+    onInitialize(settingPageViewModel)
     onDrawPage(settingPageViewModel, onSaved)
-    onDestroyed(settingPageViewModel)
 }
 
 @Composable

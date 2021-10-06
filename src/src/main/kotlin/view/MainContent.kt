@@ -17,17 +17,15 @@ import androidx.compose.ui.unit.sp
 import resource.Colors
 import resource.Navigation
 import resource.Strings.SETUP
-import view.extention.onCreated
-import view.extention.onDestroyed
+import view.extention.onInitialize
 import view.page.SettingPage
 import view.tab.PageTab
 import viewmodel.MainContentViewModel
 
 @Composable
 fun MainContent(mainContentViewModel: MainContentViewModel = MainContentViewModel()) {
-    onCreated(mainContentViewModel)
+    onInitialize(mainContentViewModel)
     onDrawWindow(mainContentViewModel)
-    onDestroyed(mainContentViewModel)
 }
 
 @Composable
