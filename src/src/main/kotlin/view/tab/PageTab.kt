@@ -10,8 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.imageFromResource
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,8 +32,8 @@ fun PageTab(pages: List<Navigation.Root>, selectedPage: Navigation.Root, onSelec
                         modifier = Modifier.padding(8.dp).align(Alignment.Center),
                     ) {
                         Image(
-                            imageFromResource(page.iconRes),
-                            page.iconRes,
+                            painter = painterResource(page.iconRes),
+                            contentDescription = page.iconRes,
                             contentScale = ContentScale.FillHeight,
                             modifier = Modifier.wrapContentWidth().height(24.dp).padding(end = 8.dp)
                         )

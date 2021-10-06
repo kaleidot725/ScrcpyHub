@@ -19,15 +19,13 @@ import androidx.compose.ui.unit.sp
 import model.entity.Device
 import resource.Colors
 import resource.Strings
-import view.extention.onCreated
-import view.extention.onDestroyed
+import view.extention.onInitialize
 import viewmodel.DevicesPageViewModel
 
 @Composable
 fun DevicesPage(devicesPageViewModel: DevicesPageViewModel = DevicesPageViewModel()) {
-    onCreated(devicesPageViewModel)
+    onInitialize(devicesPageViewModel)
     onDrawPage(devicesPageViewModel)
-    onDestroyed(devicesPageViewModel)
 }
 
 @Composable

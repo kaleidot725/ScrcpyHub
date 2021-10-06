@@ -2,19 +2,12 @@ package view.extention
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.SideEffect
 import viewmodel.ViewModel
 
 @Composable
-fun onCreated(viewModel: ViewModel) {
-    SideEffect() {
-        viewModel.onStarted()
-    }
-}
-
-@Composable
-fun onDestroyed(viewModel: ViewModel) {
+fun onInitialize(viewModel: ViewModel) {
     DisposableEffect(Unit) {
+        viewModel.onStarted()
         onDispose {
             viewModel.onCleared()
         }
