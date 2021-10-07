@@ -20,10 +20,6 @@ class DevicesPageViewModel : ViewModel() {
     val states: StateFlow<List<Pair<Device, Boolean>>> = _states
 
     override fun onStarted() {
-        refresh()
-    }
-
-    fun refresh() {
         coroutineScope.launch {
             fetchStates()
         }

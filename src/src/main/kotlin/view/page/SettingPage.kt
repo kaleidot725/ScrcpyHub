@@ -20,48 +20,64 @@ import view.extention.onInitialize
 import viewmodel.SettingPageViewModel
 
 @Composable
-fun SettingPage(settingPageViewModel: SettingPageViewModel = SettingPageViewModel(), onSaved: (() -> Unit)? = null) {
+fun SettingPage(
+    settingPageViewModel: SettingPageViewModel = SettingPageViewModel(),
+    onNavigateDevice: (() -> Unit)? = null,
+    onSaved: (() -> Unit)? = null
+) {
     onInitialize(settingPageViewModel)
-    onDrawPage(settingPageViewModel, onSaved)
+    onDrawPage(settingPageViewModel, onNavigateDevice, onSaved)
 }
 
 @Composable
-private fun onDrawPage(viewModel: SettingPageViewModel, onSaved: (() -> Unit)? = null) {
+private fun onDrawPage(
+    viewModel: SettingPageViewModel,
+    onNavigateDevice: (() -> Unit)? = null,
+    onSaved: (() -> Unit)? = null
+) {
     val adbLocation: String by viewModel.adbLocation.collectAsState()
     val scrcpyLocation: String by viewModel.scrcpyLocation.collectAsState()
 
-    Column(modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
-        Text(ADB_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
-        Text(IF_ADB_LOCATION_IS_EMPTY, fontSize = 14.sp)
-        Spacer(modifier = Modifier.height(8.dp))
-        TextField(
-            value = adbLocation,
-            modifier = Modifier.fillMaxWidth(),
-            onValueChange = {
-                viewModel.updateAdbLocation(it)
-            }
-        )
+    Column(modifier = Modifier.fillMaxSize()) {
+        SettingHeader(onNavigateDevices = { onNavigateDevice?.invoke() })
+
+        Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+            Text(ADB_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            Text(IF_ADB_LOCATION_IS_EMPTY, fontSize = 14.sp)
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = adbLocation,
+                modifier = Modifier.fillMaxWidth(),
+                onValueChange = {
+                    viewModel.updateAdbLocation(it)
+                }
+            )
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text(SCRCPY_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
-        Text(IF_SCRCPY_LOCATION_IS_EMPTY, fontSize = 14.sp)
-        Spacer(modifier = Modifier.height(8.dp))
-        TextField(
-            value = scrcpyLocation,
-            modifier = Modifier.fillMaxWidth(),
-            onValueChange = {
-                viewModel.updateScrcpyLocation(it)
-            }
-        )
+        Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+            Text(SCRCPY_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            Text(IF_SCRCPY_LOCATION_IS_EMPTY, fontSize = 14.sp)
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = scrcpyLocation,
+                modifier = Modifier.fillMaxWidth(),
+                onValueChange = {
+                    viewModel.updateScrcpyLocation(it)
+                }
+            )
+        }
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Button(
-            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            onClick = { viewModel.save() { onSaved?.invoke() } }
-        ) {
-            Text(SAVE)
+        Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+            Button(
+                modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+                onClick = { viewModel.save() { onSaved?.invoke() } }
+            ) {
+                Text(SAVE)
+            }
         }
     }
 }

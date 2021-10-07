@@ -11,8 +11,6 @@ import resource.Strings.NOT_FOUND_SCRCPY_COMMAND
 class MainContentViewModel : ViewModel() {
     private val isSetupCompletedUseCase: IsSetupCompletedUseCase by inject()
 
-    val pages: StateFlow<List<Navigation.Root>> = MutableStateFlow(Navigation.PAGE_NAMES)
-
     private val _selectedPages: MutableStateFlow<Navigation.Root> = MutableStateFlow(Navigation.DEVICES_PAGE)
     val selectedPages: StateFlow<Navigation.Root> = _selectedPages
 

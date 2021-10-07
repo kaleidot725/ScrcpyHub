@@ -20,27 +20,37 @@ import model.entity.Device
 import resource.Colors
 import resource.Strings
 import view.extention.onInitialize
+import view.tab.DevicesHeader
 import viewmodel.DevicesPageViewModel
 
 @Composable
-fun DevicesPage(devicesPageViewModel: DevicesPageViewModel = DevicesPageViewModel()) {
+fun DevicesPage(
+    devicesPageViewModel: DevicesPageViewModel = DevicesPageViewModel(),
+    onNavigateSetting: (() -> Unit)? = null
+) {
     onInitialize(devicesPageViewModel)
-    onDrawPage(devicesPageViewModel)
+    onDrawPage(devicesPageViewModel, onNavigateSetting)
 }
 
 @Composable
-private fun onDrawPage(viewModel: DevicesPageViewModel) {
+private fun onDrawPage(viewModel: DevicesPageViewModel, onNavigateSetting: (() -> Unit)? = null) {
     val states: List<Pair<Device, Boolean>> by viewModel.states.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         if (states.isEmpty()) {
-            Text(
-                Strings.NO_ANDROID_DEVICE,
-                style = TextStyle(color = Color.Black, fontSize = 20.sp),
-                modifier = Modifier.align(Alignment.Center)
-            )
+            Column(modifier = Modifier.fillMaxSize()) {
+                DevicesHeader(onNavigateSetting = { onNavigateSetting?.invoke() })
+                Box(modifier = Modifier.fillMaxSize()) {
+                    Text(
+                        Strings.NO_ANDROID_DEVICE,
+                        style = TextStyle(color = Color.Black, fontSize = 20.sp),
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+            }
         } else {
-            LazyColumn {
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
+                item { DevicesHeader(onNavigateSetting = { onNavigateSetting?.invoke() }) }
                 items(states, itemContent = { device -> DeviceCard(device.first, device.second, viewModel) })
             }
         }
