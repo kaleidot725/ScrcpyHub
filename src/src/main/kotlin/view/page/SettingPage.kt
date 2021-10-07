@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,7 +46,7 @@ private fun onDrawPage(
         Card(modifier = Modifier.padding(horizontal = 8.dp)) {
             Column(modifier = Modifier.padding(8.dp)) {
                 Text(ADB_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
-                Text(IF_ADB_LOCATION_IS_EMPTY, fontSize = 14.sp)
+                Text(IF_ADB_LOCATION_IS_EMPTY, fontSize = 12.sp, color = Color.Gray, fontWeight = FontWeight.SemiBold)
                 Spacer(modifier = Modifier.height(8.dp))
                 TextField(
                     value = adbLocation,
@@ -62,7 +63,12 @@ private fun onDrawPage(
         Card(modifier = Modifier.padding(horizontal = 8.dp)) {
             Column(modifier = Modifier.padding(8.dp)) {
                 Text(SCRCPY_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
-                Text(IF_SCRCPY_LOCATION_IS_EMPTY, fontSize = 14.sp)
+                Text(
+                    IF_SCRCPY_LOCATION_IS_EMPTY,
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    fontWeight = FontWeight.SemiBold
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextField(
                     value = scrcpyLocation,
