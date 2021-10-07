@@ -64,7 +64,7 @@ private fun DeviceCard(
     viewModel: DevicesPageViewModel
 ) {
     Card(
-        modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+        modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(start = 8.dp, end = 8.dp, bottom = 8.dp),
         elevation = 8.dp
     ) {
         Box(modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)) {

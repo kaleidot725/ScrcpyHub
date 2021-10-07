@@ -15,7 +15,7 @@ import resource.Images
 
 @Composable
 fun DevicesHeader(onNavigateSetting: () -> Unit) {
-    Row(modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp)) {
+    Row(modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp).padding(bottom = 4.dp)) {
         Text(text = "Devices", fontSize = 24.sp, modifier = Modifier.wrapContentHeight().fillMaxWidth(fraction = 0.9f))
         Image(
             painter = painterResource(Images.SETTING_BLACK),
