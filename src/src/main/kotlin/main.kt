@@ -9,7 +9,7 @@ import view.MainContent
 fun main() = singleWindowApplication(
     title = Strings.APP_NAME,
     resizable = false,
-    state = WindowState(width = 350.dp, height = 550.dp)
+    state = WindowState(width = 350.dp, height = 550.dp),
 ) {
     startKoin {
         printLogger()
