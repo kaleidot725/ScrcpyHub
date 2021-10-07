@@ -16,15 +16,14 @@ import resource.Images
 @Composable
 fun DevicesHeader(onNavigateSetting: () -> Unit) {
     Row(modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp).padding(bottom = 4.dp)) {
-        Text(text = "Devices", fontSize = 24.sp, modifier = Modifier.wrapContentHeight().fillMaxWidth(fraction = 0.9f))
+        Text(text = "Devices", fontSize = 18.sp, modifier = Modifier.wrapContentHeight().fillMaxWidth(fraction = 0.95f))
         Image(
             painter = painterResource(Images.SETTING_BLACK),
             contentDescription = Images.SETTING_BLACK,
             contentScale = ContentScale.FillHeight,
             modifier = Modifier
                 .wrapContentWidth()
-                .height(24.dp)
-                .padding(end = 8.dp)
+                .height(18.dp)
                 .align(Alignment.CenterVertically)
                 .clickable { onNavigateSetting() }
         )
