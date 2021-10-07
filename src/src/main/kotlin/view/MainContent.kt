@@ -19,7 +19,6 @@ import resource.Navigation
 import resource.Strings.SETUP
 import view.extention.onInitialize
 import view.page.SettingPage
-import view.tab.PageTab
 import viewmodel.MainContentViewModel
 
 @Composable
@@ -30,31 +29,20 @@ fun MainContent(mainContentViewModel: MainContentViewModel = MainContentViewMode
 
 @Composable
 private fun onDrawWindow(viewModel: MainContentViewModel) {
-    val pages: List<Navigation.Root> by viewModel.pages.collectAsState()
     val selectedPages: Navigation.Root by viewModel.selectedPages.collectAsState()
     val hasError: Boolean by viewModel.hasError.collectAsState()
     val errorMessage: String? by viewModel.errorMessage.collectAsState()
 
     MainTheme {
         Box(modifier = Modifier.fillMaxSize().background(Colors.SMOKE_WHITE)) {
-            Column {
-                PageTab(
-                    pages,
-                    selectedPages,
-                    onSelect = {
-                        viewModel.selectPage(it)
-                        viewModel.refresh()
-                    }
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Crossfade(selectedPages, animationSpec = tween(100)) { selectedPageName ->
-                    when (selectedPageName) {
-                        Navigation.DEVICES_PAGE -> DevicesPage()
-                        Navigation.SETTING_PAGE -> SettingPage(onSaved = { viewModel.refresh() }
-                        )
-                    }
+            Crossfade(selectedPages, animationSpec = tween(100)) { selectedPageName ->
+                when (selectedPageName) {
+                    Navigation.DEVICES_PAGE -> DevicesPage(
+                        onNavigateSetting = { viewModel.selectPage(Navigation.SETTING_PAGE) }
+                    )
+                    Navigation.SETTING_PAGE -> SettingPage(
+                        onNavigateDevice = { viewModel.selectPage(Navigation.DEVICES_PAGE) },
+                        onSaved = { viewModel.refresh() })
                 }
             }
 
