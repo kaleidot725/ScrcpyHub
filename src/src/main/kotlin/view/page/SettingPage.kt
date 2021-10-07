@@ -2,6 +2,7 @@ package view.page
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
@@ -41,37 +42,41 @@ private fun onDrawPage(
     Column(modifier = Modifier.fillMaxSize()) {
         SettingHeader(onNavigateDevices = { onNavigateDevice?.invoke() })
 
-        Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-            Text(ADB_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
-            Text(IF_ADB_LOCATION_IS_EMPTY, fontSize = 14.sp)
-            Spacer(modifier = Modifier.height(8.dp))
-            TextField(
-                value = adbLocation,
-                modifier = Modifier.fillMaxWidth(),
-                onValueChange = {
-                    viewModel.updateAdbLocation(it)
-                }
-            )
+        Card(modifier = Modifier.padding(horizontal = 8.dp)) {
+            Column(modifier = Modifier.padding(8.dp)) {
+                Text(ADB_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+                Text(IF_ADB_LOCATION_IS_EMPTY, fontSize = 14.sp)
+                Spacer(modifier = Modifier.height(8.dp))
+                TextField(
+                    value = adbLocation,
+                    modifier = Modifier.fillMaxWidth(),
+                    onValueChange = {
+                        viewModel.updateAdbLocation(it)
+                    }
+                )
+            }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-        Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-            Text(SCRCPY_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
-            Text(IF_SCRCPY_LOCATION_IS_EMPTY, fontSize = 14.sp)
-            Spacer(modifier = Modifier.height(8.dp))
-            TextField(
-                value = scrcpyLocation,
-                modifier = Modifier.fillMaxWidth(),
-                onValueChange = {
-                    viewModel.updateScrcpyLocation(it)
-                }
-            )
+        Card(modifier = Modifier.padding(horizontal = 8.dp)) {
+            Column(modifier = Modifier.padding(8.dp)) {
+                Text(SCRCPY_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+                Text(IF_SCRCPY_LOCATION_IS_EMPTY, fontSize = 14.sp)
+                Spacer(modifier = Modifier.height(8.dp))
+                TextField(
+                    value = scrcpyLocation,
+                    modifier = Modifier.fillMaxWidth(),
+                    onValueChange = {
+                        viewModel.updateScrcpyLocation(it)
+                    }
+                )
+            }
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-        Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+        Box(modifier = Modifier.padding(horizontal = 8.dp)) {
             Button(
                 modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                 onClick = { viewModel.save() { onSaved?.invoke() } }
