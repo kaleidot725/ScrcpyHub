@@ -2,49 +2,49 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
 import model.di.appModule
+import org.koin.core.context.GlobalContext.getOrNull
 import org.koin.core.context.GlobalContext.startKoin
+import resource.Images
+import resource.Strings.APP_VERSION
 import view.MainContent
 
 fun main() = application {
     val trayState = rememberTrayState()
     var isOpen by remember { mutableStateOf(true) }
-    var windowState = rememberWindowState(width = 350.dp, height = 550.dp)
+    val windowState = rememberWindowState(width = 350.dp, height = 550.dp)
 
-    try {
+    if (getOrNull() == null) {
         startKoin {
             printLogger()
             modules(appModule)
         }
-    } catch (e: Exception) {
     }
 
     Tray(
         state = trayState,
-        icon = TrayIcon,
+        icon = painterResource(Images.TRAY),
         menu = {
             Item(
-                "Open",
+                "Toggle ScrcpyHub",
                 onClick = {
-                    isOpen = true
+                    isOpen = !isOpen
                 }
             )
 
             Item(
-                "Close",
-                onClick = {
-                    isOpen = false
-                }
+                "ScrcpyHub v${APP_VERSION}",
+                enabled = false,
+                onClick = {}
             )
 
+            Separator()
+
             Item(
-                "Exit",
+                "Quit",
                 onClick = {
                     exitApplication()
                 }
@@ -61,13 +61,5 @@ fun main() = application {
         ) {
             MainContent()
         }
-    }
-}
-
-object TrayIcon : Painter() {
-    override val intrinsicSize = Size(256f, 256f)
-
-    override fun DrawScope.onDraw() {
-        drawOval(Color(0xFFFFA500))
     }
 }
