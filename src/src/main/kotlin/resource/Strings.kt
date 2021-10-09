@@ -1,7 +1,6 @@
 package resource
 
 object Strings {
-    const val APP_NAME = "ScrcpyHub"
     const val RUN = "START"
     const val STOP = "STOP"
     const val NO_ANDROID_DEVICE = "No Android Device."
