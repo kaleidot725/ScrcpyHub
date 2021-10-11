@@ -14,15 +14,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.koin.core.context.GlobalContext
 import resource.Colors
 import resource.Navigation
 import resource.Strings.SETUP
 import view.extention.onInitialize
+import view.page.DevicePage
 import view.page.SettingPage
 import viewmodel.MainContentViewModel
 
 @Composable
-fun MainContent(mainContentViewModel: MainContentViewModel = MainContentViewModel()) {
+fun MainContent(mainContentViewModel: MainContentViewModel) {
     onInitialize(mainContentViewModel)
     onDrawWindow(mainContentViewModel)
 }
@@ -37,12 +39,22 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
         Box(modifier = Modifier.fillMaxSize().background(Colors.SMOKE_WHITE)) {
             Crossfade(selectedPages, animationSpec = tween(100)) { selectedPageName ->
                 when (selectedPageName) {
-                    Navigation.DEVICES_PAGE -> DevicesPage(
-                        onNavigateSetting = { viewModel.selectPage(Navigation.SETTING_PAGE) }
-                    )
-                    Navigation.SETTING_PAGE -> SettingPage(
-                        onNavigateDevice = { viewModel.selectPage(Navigation.DEVICES_PAGE) },
-                        onSaved = { viewModel.refresh() })
+                    Navigation.DEVICES_PAGE -> {
+                        DevicesPage(
+                            devicesPageViewModel = GlobalContext.get().get(),
+                            onNavigateSetting = { viewModel.selectPage(Navigation.SETTING_PAGE) }
+                        )
+                    }
+                    Navigation.SETTING_PAGE -> {
+                        SettingPage(
+                            settingPageViewModel = GlobalContext.get().get(),
+                            onNavigateDevice = { viewModel.selectPage(Navigation.DEVICES_PAGE) },
+                            onSaved = { viewModel.refresh() }
+                        )
+                    }
+                    Navigation.DEVICE_PAGE -> {
+                        DevicePage()
+                    }
                 }
             }
 
@@ -56,7 +68,7 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
                                 Text(
                                     SETUP,
                                     fontSize = 16.sp,
-                                    color = resource.Colors.NAVY,
+                                    color = Colors.NAVY,
                                     modifier = Modifier.clickable { viewModel.selectPage(Navigation.SETTING_PAGE) }
                                 )
                             }

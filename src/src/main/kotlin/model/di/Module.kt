@@ -6,6 +6,10 @@ import model.repository.*
 import model.usecase.*
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import viewmodel.DevicePageViewModel
+import viewmodel.DevicesPageViewModel
+import viewmodel.MainContentViewModel
+import viewmodel.SettingPageViewModel
 
 val appModule = module {
     single(named("setting_directory")) {
@@ -78,5 +82,21 @@ val appModule = module {
 
     single {
         UpdateSettingUseCase(get(), get(), get())
+    }
+
+    factory {
+        DevicesPageViewModel(get(), get(), get(), get())
+    }
+
+    factory {
+        DevicePageViewModel()
+    }
+
+    factory {
+        MainContentViewModel(get())
+    }
+
+    factory {
+        SettingPageViewModel(get(), get())
     }
 }

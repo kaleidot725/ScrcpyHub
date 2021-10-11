@@ -3,13 +3,13 @@ package viewmodel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import model.usecase.IsSetupCompletedUseCase
-import org.koin.core.component.inject
 import resource.Navigation
 import resource.Strings.NOT_FOUND_ADB_COMMAND
 import resource.Strings.NOT_FOUND_SCRCPY_COMMAND
 
-class MainContentViewModel : ViewModel() {
-    private val isSetupCompletedUseCase: IsSetupCompletedUseCase by inject()
+class MainContentViewModel(
+    private val isSetupCompletedUseCase: IsSetupCompletedUseCase
+) : ViewModel() {
 
     private val _selectedPages: MutableStateFlow<Navigation.Root> = MutableStateFlow(Navigation.DEVICES_PAGE)
     val selectedPages: StateFlow<Navigation.Root> = _selectedPages
