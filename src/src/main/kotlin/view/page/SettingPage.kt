@@ -10,15 +10,19 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import resource.Images
+import resource.Strings
 import resource.Strings.ADB_LOCATION
 import resource.Strings.IF_ADB_LOCATION_IS_EMPTY
 import resource.Strings.IF_SCRCPY_LOCATION_IS_EMPTY
 import resource.Strings.SAVE
 import resource.Strings.SCRCPY_LOCATION
 import view.extention.onInitialize
+import view.tab.PageHeader
 import viewmodel.SettingPageViewModel
 
 @Composable
@@ -41,7 +45,11 @@ private fun onDrawPage(
     val scrcpyLocation: String by viewModel.scrcpyLocation.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingHeader(onNavigateDevices = { onNavigateDevice?.invoke() })
+        PageHeader(
+            title = Strings.SETTING_PAGE_TITLE,
+            icon = painterResource(Images.CLOSE),
+            onAction = { onNavigateDevice?.invoke() }
+        )
 
         Card(modifier = Modifier.padding(horizontal = 8.dp)) {
             Column(modifier = Modifier.padding(8.dp)) {
