@@ -7,7 +7,7 @@ import java.io.File
 class ScrcpyCommand(private var adbPath: String? = null, private var scrcpyPath: String? = null) {
     fun run(device: Device? = null, resolution: Resolution? = null, port: Int? = null): Process? {
         return try {
-            runCommand()
+            runCommand(device, resolution, port)
         } catch (e: SecurityException) {
             null
         } catch (e: NullPointerException) {
