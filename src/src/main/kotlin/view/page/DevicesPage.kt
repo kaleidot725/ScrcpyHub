@@ -29,7 +29,7 @@ import viewmodel.DevicesPageViewModel
 
 @Composable
 fun DevicesPage(
-    devicesPageViewModel: DevicesPageViewModel = DevicesPageViewModel(),
+    devicesPageViewModel: DevicesPageViewModel,
     onNavigateSetting: (() -> Unit)? = null
 ) {
     onInitialize(devicesPageViewModel)

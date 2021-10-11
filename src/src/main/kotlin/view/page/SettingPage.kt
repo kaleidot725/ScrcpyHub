@@ -27,7 +27,7 @@ import viewmodel.SettingPageViewModel
 
 @Composable
 fun SettingPage(
-    settingPageViewModel: SettingPageViewModel = SettingPageViewModel(),
+    settingPageViewModel: SettingPageViewModel,
     onNavigateDevice: (() -> Unit)? = null,
     onSaved: (() -> Unit)? = null
 ) {

@@ -6,12 +6,11 @@ import kotlinx.coroutines.launch
 import model.entity.Setting
 import model.usecase.FetchSettingUseCase
 import model.usecase.UpdateSettingUseCase
-import org.koin.core.component.inject
 
-class SettingPageViewModel : ViewModel() {
-    private val fetchSettingUseCase by inject<FetchSettingUseCase>()
-    private val updateSettingUseCase by inject<UpdateSettingUseCase>()
-
+class SettingPageViewModel(
+    private val fetchSettingUseCase: FetchSettingUseCase,
+    private val updateSettingUseCase: UpdateSettingUseCase
+) : ViewModel() {
     private val _adbLocation: MutableStateFlow<String> = MutableStateFlow("")
     val adbLocation: StateFlow<String> = _adbLocation
 
