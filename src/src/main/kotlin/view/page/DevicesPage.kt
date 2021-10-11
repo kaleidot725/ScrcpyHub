@@ -24,7 +24,7 @@ import model.entity.Device
 import resource.Images
 import resource.Strings
 import view.extention.onInitialize
-import view.tab.DevicesHeader
+import view.tab.PageHeader
 import viewmodel.DevicesPageViewModel
 
 @Composable
@@ -43,7 +43,11 @@ private fun onDrawPage(viewModel: DevicesPageViewModel, onNavigateSetting: (() -
     Box(modifier = Modifier.fillMaxSize()) {
         if (states.isEmpty()) {
             Column(modifier = Modifier.fillMaxSize()) {
-                DevicesHeader(onNavigateSetting = { onNavigateSetting?.invoke() })
+                PageHeader(
+                    title = Strings.APP_NAME,
+                    icon = painterResource(Images.SETTING),
+                    onAction = { onNavigateSetting?.invoke() }
+                )
                 Box(modifier = Modifier.fillMaxSize()) {
                     Text(
                         Strings.NO_ANDROID_DEVICE,
@@ -54,7 +58,13 @@ private fun onDrawPage(viewModel: DevicesPageViewModel, onNavigateSetting: (() -
             }
         } else {
             LazyColumn(modifier = Modifier.fillMaxSize()) {
-                item { DevicesHeader(onNavigateSetting = { onNavigateSetting?.invoke() }) }
+                item {
+                    PageHeader(
+                        title = Strings.APP_NAME,
+                        icon = painterResource(Images.SETTING),
+                        onAction = { onNavigateSetting?.invoke() }
+                    )
+                }
                 items(states, itemContent = { device ->
                     DeviceCard(
                         device = device.first,

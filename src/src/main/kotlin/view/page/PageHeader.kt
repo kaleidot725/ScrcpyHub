@@ -1,4 +1,4 @@
-package view.page
+package view.tab
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -9,14 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import resource.Images
 
 @Composable
-fun SettingHeader(onNavigateDevices: () -> Unit) {
+fun PageHeader(title: String, icon: Painter, onAction: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -26,7 +25,7 @@ fun SettingHeader(onNavigateDevices: () -> Unit) {
             .padding(8.dp)
     ) {
         Text(
-            text = "Setting",
+            text = title,
             fontSize = 18.sp,
             color = Color.White,
             modifier = Modifier
@@ -35,14 +34,14 @@ fun SettingHeader(onNavigateDevices: () -> Unit) {
                 .align(Alignment.CenterVertically)
         )
         Image(
-            painter = painterResource(Images.CLOSE),
-            contentDescription = Images.CLOSE,
+            painter = icon,
+            contentDescription = "",
             contentScale = ContentScale.FillHeight,
             modifier = Modifier
                 .wrapContentWidth()
                 .height(18.dp)
                 .align(Alignment.CenterVertically)
-                .clickable { onNavigateDevices() }
+                .clickable { onAction() }
         )
     }
 }
