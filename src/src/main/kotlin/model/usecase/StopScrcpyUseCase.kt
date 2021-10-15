@@ -1,15 +1,12 @@
 package model.usecase
 
 import model.entity.Device
-import model.repository.PortRepository
 import model.repository.ProcessRepository
 
 class StopScrcpyUseCase(
-    private val processRepository: ProcessRepository,
-    private val portRepository: PortRepository
+    private val processRepository: ProcessRepository
 ) {
-    suspend fun execute(device: Device): Boolean {
-        portRepository.release(device.id)
+    fun execute(device: Device): Boolean {
         processRepository.delete(device.id)
         return true
     }

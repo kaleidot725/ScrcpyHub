@@ -4,22 +4,22 @@ import model.entity.Device
 import model.entity.Resolution
 import java.io.File
 
-class ScrcpyCommand(private var adbPath: String? = null, private var scrcpyPath: String? = null) {
-    fun run(device: Device? = null, resolution: Resolution? = null, port: Int? = null): Process? {
-        return try {
-            runCommand(device, resolution, port)
-        } catch (e: SecurityException) {
-            null
-        } catch (e: NullPointerException) {
-            null
-        } catch (e: IllegalArgumentException) {
-            null
-        }
+class ScrcpyCommand(
+    private var adbPath: String? = null,
+    private var scrcpyPath: String? = null
+) {
+    fun run(device: Device? = null, resolution: Resolution? = null): Process {
+        val command = createCommand(scrcpyPath, device, resolution)
+        return ProcessBuilder(command).apply {
+            environment()["PATH"] = adbPath + File.pathSeparator + System.getenv("PATH")
+        }.start()
     }
 
     fun isInstalled(): Boolean {
         return try {
-            runHelpCommand()
+            ProcessBuilder().apply {
+                environment()["PATH"] = adbPath + File.pathSeparator + System.getenv("PATH")
+            }.command(createHelpCommand(scrcpyPath)).start().destroy()
             true
         } catch (e: Exception) {
             false
@@ -31,34 +31,7 @@ class ScrcpyCommand(private var adbPath: String? = null, private var scrcpyPath:
         this.scrcpyPath = scrcpyPath
     }
 
-    private fun runCommand(device: Device? = null, resolution: Resolution? = null, port: Int? = null): Process {
-        return if (scrcpyPath != null && scrcpyPath!!.isNotEmpty()) {
-            ProcessBuilder().apply {
-                environment()["PATH"] = adbPath + File.pathSeparator + System.getenv("PATH")
-            }.command(createCommand(scrcpyPath, device, resolution, port)).start()
-        } else {
-            ProcessBuilder().apply {
-                environment()["PATH"] = adbPath + File.pathSeparator + System.getenv("PATH")
-            }.command(createCommand(null, device, resolution, port))
-                .start()
-        }
-    }
-
-    private fun runHelpCommand() {
-        return if (scrcpyPath != null && scrcpyPath!!.isNotEmpty()) {
-            ProcessBuilder()
-                .command(createHelpCommand(scrcpyPath))
-                .start()
-                .destroy()
-        } else {
-            ProcessBuilder()
-                .command(createHelpCommand(null))
-                .start()
-                .destroy()
-        }
-    }
-
-    private fun createCommand(path: String?, device: Device?, resolution: Resolution?, port: Int?): List<String> {
+    private fun createCommand(path: String?, device: Device?, resolution: Resolution?): List<String> {
         val command = mutableListOf<String>()
 
         if (path != null) {
@@ -68,13 +41,13 @@ class ScrcpyCommand(private var adbPath: String? = null, private var scrcpyPath:
         }
 
         if (device != null) {
-            command.add(" $DEVICE_OPTION_NAME ${device.id}")
+            command.add(DEVICE_OPTION_NAME)
+            command.add(device.id)
         }
+
         if (resolution != null) {
-            command.add(" $RESOLUTION_OPTION_NAME ${resolution.width}")
-        }
-        if (port != null) {
-            command.add((" $PORT_OPTION_NAME $port"))
+            command.add(RESOLUTION_OPTION_NAME)
+            command.add(resolution.width.toString())
         }
 
         return command
