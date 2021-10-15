@@ -11,8 +11,8 @@ class UpdateSettingUseCase(
     private val settingRepository: SettingRepository
 ) {
     fun execute(setting: Setting) {
-        adbCommand.updatePath(setting.adbLocation)
-        scrcpyCommand.updatePath(setting.scrcpyLocation)
+        adbCommand.setupPath(setting.adbLocation ?: "")
+        scrcpyCommand.setupPath(setting.adbLocation ?: "", setting.scrcpyLocation ?: "")
         return settingRepository.update(setting)
     }
 }
