@@ -4,7 +4,6 @@ import model.command.AdbCommand
 import model.command.ScrcpyCommand
 import model.repository.DeviceRepository
 import model.repository.ProcessRepository
-import model.repository.ResolutionRepository
 import model.repository.SettingRepository
 import model.usecase.*
 import org.koin.core.qualifier.named
@@ -43,20 +42,12 @@ val appModule = module {
     }
 
     single {
-        ResolutionRepository()
-    }
-
-    single {
         val directory = get<String>(named("setting_directory"))
         SettingRepository(directory)
     }
 
     single {
         FetchDevicesUseCase(get())
-    }
-
-    single {
-        FetchResolutionsUseCase(get())
     }
 
     single {
