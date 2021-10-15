@@ -28,11 +28,11 @@ import viewmodel.SettingPageViewModel
 @Composable
 fun SettingPage(
     settingPageViewModel: SettingPageViewModel,
-    onNavigateDevice: (() -> Unit)? = null,
+    onNavigateDevices: (() -> Unit)? = null,
     onSaved: (() -> Unit)? = null
 ) {
     onInitialize(settingPageViewModel)
-    onDrawPage(settingPageViewModel, onNavigateDevice, onSaved)
+    onDrawPage(settingPageViewModel, onNavigateDevices, onSaved)
 }
 
 @Composable
