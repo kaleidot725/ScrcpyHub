@@ -49,12 +49,15 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
                     Navigation.SETTING_PAGE -> {
                         SettingPage(
                             settingPageViewModel = GlobalContext.get().get(),
-                            onNavigateDevice = { viewModel.selectPage(Navigation.DEVICES_PAGE) },
+                            onNavigateDevices = { viewModel.selectPage(Navigation.DEVICES_PAGE) },
                             onSaved = { viewModel.refresh() }
                         )
                     }
                     Navigation.DEVICE_PAGE -> {
-                        DevicePage()
+                        DevicePage(
+                            deviceViewModel = GlobalContext.get().get(),
+                            onNavigateDevices = { viewModel.selectPage(Navigation.DEVICES_PAGE) }
+                        )
                     }
                 }
             }
