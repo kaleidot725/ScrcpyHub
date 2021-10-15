@@ -2,7 +2,10 @@ package model.di
 
 import model.command.AdbCommand
 import model.command.ScrcpyCommand
-import model.repository.*
+import model.repository.DeviceRepository
+import model.repository.ProcessRepository
+import model.repository.ResolutionRepository
+import model.repository.SettingRepository
 import model.usecase.*
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -29,10 +32,6 @@ val appModule = module {
         val settingRepository = get<SettingRepository>()
         val setting = settingRepository.get()
         ScrcpyCommand(adbPath = setting.adbLocation, scrcpyPath = setting.scrcpyLocation)
-    }
-
-    single {
-        PortRepository()
     }
 
     single {
@@ -69,11 +68,11 @@ val appModule = module {
     }
 
     single {
-        StartScrcpyUseCase(get(), get(), get())
+        StartScrcpyUseCase(get(), get())
     }
 
     single {
-        StopScrcpyUseCase(get(), get())
+        StopScrcpyUseCase(get())
     }
 
     single {

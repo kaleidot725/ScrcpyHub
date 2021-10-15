@@ -6,6 +6,10 @@ class ProcessRepository {
     private val processList: MutableMap<String, Process> = mutableMapOf()
     private val scope: CoroutineScope = MainScope()
 
+    fun any(key: String): Boolean {
+        return processList[key] != null
+    }
+
     fun insert(key: String, process: Process, onDestroy: (suspend () -> Unit)? = null) {
         processList[key] = process
         scope.launch(Dispatchers.IO) {
@@ -14,18 +18,9 @@ class ProcessRepository {
         }
     }
 
-    fun any(key: String): Boolean {
-        return processList[key] != null
-    }
-
     fun delete(key: String) {
         processList[key]?.destroy()
         processList.remove(key)
-    }
-
-    fun deleteAll() {
-        processList.values.forEach { it.destroy() }
-        processList.clear()
     }
 
     private suspend fun Process.waitForRunning(interval: Long) {
@@ -40,8 +35,6 @@ class ProcessRepository {
         while (this.isAlive) {
             delay(interval)
         }
-
-        delete(key)
         onDestroy.invoke()
     }
 
