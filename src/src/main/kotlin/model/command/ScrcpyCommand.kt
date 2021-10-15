@@ -1,15 +1,14 @@
 package model.command
 
 import model.entity.Device
-import model.entity.Resolution
 import java.io.File
 
 class ScrcpyCommand(
     private var adbPath: String? = null,
     private var scrcpyPath: String? = null
 ) {
-    fun run(device: Device? = null, resolution: Resolution? = null): Process {
-        val command = createCommand(scrcpyPath, device, resolution)
+    fun run(device: Device): Process {
+        val command = createCommand(scrcpyPath, device)
         return ProcessBuilder(command).apply {
             environment()["PATH"] = adbPath + File.pathSeparator + System.getenv("PATH")
         }.start()
@@ -31,7 +30,7 @@ class ScrcpyCommand(
         this.scrcpyPath = scrcpyPath
     }
 
-    private fun createCommand(path: String?, device: Device?, resolution: Resolution?): List<String> {
+    private fun createCommand(path: String?, device: Device?): List<String> {
         val command = mutableListOf<String>()
 
         if (path != null) {
@@ -43,11 +42,6 @@ class ScrcpyCommand(
         if (device != null) {
             command.add(DEVICE_OPTION_NAME)
             command.add(device.id)
-        }
-
-        if (resolution != null) {
-            command.add(RESOLUTION_OPTION_NAME)
-            command.add(resolution.width.toString())
         }
 
         return command
@@ -70,7 +64,6 @@ class ScrcpyCommand(
         private const val COMMAND_NAME = "scrcpy"
         private const val DEVICE_OPTION_NAME = "-s"
         private const val RESOLUTION_OPTION_NAME = "-m"
-        private const val PORT_OPTION_NAME = "-p"
         private const val HELP_OPTION_NAME = "-h"
     }
 }

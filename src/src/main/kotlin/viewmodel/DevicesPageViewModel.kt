@@ -26,7 +26,7 @@ class DevicesPageViewModel(
 
     fun startScrcpy(device: Device) {
         coroutineScope.launch {
-            startScrcpyUseCase.execute(device, null) { fetchStates() }
+            startScrcpyUseCase.execute(device) { fetchStates() }
             fetchStates()
         }
     }
