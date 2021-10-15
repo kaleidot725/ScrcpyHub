@@ -4,10 +4,21 @@ import model.entity.Device
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class AdbCommand(private var adbPath: String? = null) {
+class AdbCommand(private var adbPath: String) {
+    fun setupPath(adbPath: String) {
+        this.adbPath = adbPath
+    }
+
     fun fetchDevices(): List<Device> {
         return try {
-            runCommand().toDeviceList()
+            val process = ProcessBuilder()
+                .command("$adbPath$COMMAND_NAME", DEVICES_OPTION)
+                .start()
+            val reader = BufferedReader(InputStreamReader(process.inputStream))
+            reader.readAllLine().apply {
+                reader.close()
+                process.destroy()
+            }.toDeviceList()
         } catch (e: Exception) {
             emptyList()
         }
@@ -15,50 +26,13 @@ class AdbCommand(private var adbPath: String? = null) {
 
     fun isInstalled(): Boolean {
         return try {
-            runRuntimeCommand()
+            ProcessBuilder()
+                .command("$adbPath$COMMAND_NAME", DEVICES_OPTION)
+                .start()
+                .destroy()
             true
         } catch (e: Exception) {
             false
-        }
-    }
-
-    fun updatePath(adbPath: String? = null) {
-        this.adbPath = adbPath
-    }
-
-    private fun runCommand(): List<String> {
-        return if (adbPath != null && adbPath!!.isNotEmpty()) {
-            val process = ProcessBuilder()
-                .command("$adbPath$COMMAND_NAME", DEVICES_OPTION)
-                .start()
-            val reader = BufferedReader(InputStreamReader(process.inputStream))
-            reader.readAllLine().apply {
-                reader.close()
-                process.destroy()
-            }
-        } else {
-            val process = ProcessBuilder()
-                .command(COMMAND_NAME, DEVICES_OPTION)
-                .start()
-            val reader = BufferedReader(InputStreamReader(process.inputStream))
-            reader.readAllLine().apply {
-                reader.close()
-                process.destroy()
-            }
-        }
-    }
-
-    private fun runRuntimeCommand() {
-        if (adbPath != null && adbPath!!.isNotEmpty()) {
-            ProcessBuilder()
-                .command("$adbPath$COMMAND_NAME", DEVICES_OPTION)
-                .start()
-                .destroy()
-        } else {
-            ProcessBuilder()
-                .command(COMMAND_NAME)
-                .start()
-                .destroy()
         }
     }
 

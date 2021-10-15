@@ -4,9 +4,14 @@ import model.entity.Device
 import java.io.File
 
 class ScrcpyCommand(
-    private var adbPath: String? = null,
-    private var scrcpyPath: String? = null
+    private var adbPath: String,
+    private var scrcpyPath: String
 ) {
+    fun setupPath(adbPath: String, scrcpyPath: String) {
+        this.adbPath = adbPath
+        this.scrcpyPath = scrcpyPath
+    }
+
     fun run(device: Device): Process {
         val command = createCommand(scrcpyPath, device)
         return ProcessBuilder(command).apply {
@@ -16,18 +21,11 @@ class ScrcpyCommand(
 
     fun isInstalled(): Boolean {
         return try {
-            ProcessBuilder().apply {
-                environment()["PATH"] = adbPath + File.pathSeparator + System.getenv("PATH")
-            }.command(createHelpCommand(scrcpyPath)).start().destroy()
+            ProcessBuilder().command(createHelpCommand(scrcpyPath)).start().destroy()
             true
         } catch (e: Exception) {
             false
         }
-    }
-
-    fun updatePath(adbPath: String? = null, scrcpyPath: String? = null) {
-        this.adbPath = adbPath
-        this.scrcpyPath = scrcpyPath
     }
 
     private fun createCommand(path: String?, device: Device?): List<String> {
