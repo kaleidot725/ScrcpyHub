@@ -3,20 +3,20 @@ package model.repository
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import model.entity.Setting
+import model.entity.AppSetting
 import java.io.File
 
 class SettingRepository(private val root: String) {
-    fun get(): Setting {
+    fun get(): AppSetting {
         return load()
     }
 
-    fun update(setting: Setting) {
+    fun update(setting: AppSetting) {
         createDir()
         write(setting)
     }
 
-    private fun write(setting: Setting) {
+    private fun write(setting: AppSetting) {
         try {
             File(createFilePath()).outputStream().apply {
                 this.write(Json.encodeToString(setting).toByteArray())
@@ -27,12 +27,12 @@ class SettingRepository(private val root: String) {
         }
     }
 
-    private fun load(): Setting {
+    private fun load(): AppSetting {
         return try {
             val content = File(createFilePath()).readText()
             Json.decodeFromString(string = content)
         } catch (e: Exception) {
-            Setting()
+            AppSetting()
         }
     }
 

@@ -3,7 +3,7 @@ package viewmodel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import model.entity.Setting
+import model.entity.AppSetting
 import model.usecase.FetchSettingUseCase
 import model.usecase.UpdateSettingUseCase
 
@@ -33,7 +33,7 @@ class SettingPageViewModel(
 
     fun save(onSaved: () -> Unit) {
         coroutineScope.launch {
-            updateSettingUseCase.execute(Setting(_adbLocation.value, _scrcpyLocation.value))
+            updateSettingUseCase.execute(AppSetting(_adbLocation.value, _scrcpyLocation.value))
             onSaved.invoke()
         }
     }

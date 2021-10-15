@@ -1,10 +1,10 @@
 package model.usecase
 
-import model.entity.Setting
+import model.entity.AppSetting
 import model.repository.SettingRepository
 
 class FetchSettingUseCase(private val settingRepository: SettingRepository) {
-    fun execute(): Setting {
+    fun execute(): AppSetting {
         return settingRepository.get()
     }
 }
