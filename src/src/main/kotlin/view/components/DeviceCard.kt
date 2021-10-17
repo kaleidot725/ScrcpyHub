@@ -43,7 +43,7 @@ fun DeviceCard(
                 modifier = Modifier.fillMaxWidth(fraction = 0.65f).align(Alignment.CenterVertically)
             ) {
                 Text(
-                    device.name,
+                    device.displayName,
                     style = TextStyle(color = Color.Black, fontSize = 16.sp, fontWeight = FontWeight.SemiBold),
                 )
 
