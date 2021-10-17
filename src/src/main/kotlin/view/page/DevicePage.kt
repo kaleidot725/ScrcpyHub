@@ -1,16 +1,22 @@
 package view.page
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Card
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import model.entity.Device
 import resource.Images
+import resource.Strings
 import view.extention.onInitialize
 import view.tab.PageHeader
 import viewmodel.DevicePageViewModel
@@ -26,19 +32,44 @@ fun DevicePage(
 
 @Composable
 private fun onDrawPage(viewModel: DevicePageViewModel, onNavigateDevices: (() -> Unit)? = null) {
-    Box(modifier = Modifier.fillMaxSize()) {
+    val device: Device by viewModel.device.collectAsState()
+
+    Column(modifier = Modifier.fillMaxSize()) {
         PageHeader(
-            title = "Device Name",
+            title = device.name,
             icon = painterResource(Images.CLOSE),
             onAction = { onNavigateDevices?.invoke() }
         )
 
-        Box(modifier = Modifier.fillMaxSize()) {
+        DeviceNameSetting(device.name, { viewModel.updateName(it) }, modifier = Modifier.padding(horizontal = 8.dp))
+    }
+}
+
+@Composable
+private fun DeviceNameSetting(deviceName: String, onUpdate: (String) -> Unit, modifier: Modifier = Modifier) {
+    Card(modifier = modifier) {
+        Column(modifier = Modifier.padding(8.dp)) {
+            Text(Strings.DEVICE_NAME_SETTING, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
             Text(
-                "SAMPLE SAMPLE SAMPLE",
-                style = TextStyle(color = Color.Black, fontSize = 18.sp),
-                modifier = Modifier.align(Alignment.Center)
+                Strings.EDIT_DEVICE_NAME,
+                fontSize = 12.sp,
+                color = Color.Gray,
+                fontWeight = FontWeight.SemiBold
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            TextField(
+                value = deviceName,
+                modifier = Modifier.fillMaxWidth(),
+                onValueChange = { onUpdate(it) }
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun DeviceNameSetting_Preview() {
+    DeviceNameSetting("DEVICE", {})
 }
