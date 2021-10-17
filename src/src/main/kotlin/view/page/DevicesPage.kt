@@ -26,7 +26,7 @@ import viewmodel.DevicesPageViewModel
 fun DevicesPage(
     devicesPageViewModel: DevicesPageViewModel,
     onNavigateSetting: (() -> Unit)? = null,
-    onNavigateDevice: (() -> Unit)? = null
+    onNavigateDevice: ((Device) -> Unit)? = null
 ) {
     onInitialize(devicesPageViewModel)
     onDrawPage(devicesPageViewModel, onNavigateSetting, onNavigateDevice)
@@ -36,7 +36,7 @@ fun DevicesPage(
 private fun onDrawPage(
     viewModel: DevicesPageViewModel,
     onNavigateSetting: (() -> Unit)? = null,
-    onNavigateDevice: (() -> Unit)? = null
+    onNavigateDevice: ((Device) -> Unit)? = null
 ) {
     val states: List<Pair<Device, Boolean>> by viewModel.states.collectAsState()
 
@@ -71,7 +71,7 @@ private fun onDrawPage(
                         isRunning = device.second,
                         startScrcpy = { viewModel.startScrcpy(it) },
                         stopScrcpy = { viewModel.stopScrcpy(it) },
-                        goToDetail = { onNavigateDevice?.invoke() },
+                        goToDetail = { onNavigateDevice?.invoke(device.first) },
                         modifier = Modifier
                             .wrapContentHeight()
                             .fillMaxWidth()
