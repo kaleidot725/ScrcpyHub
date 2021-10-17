@@ -14,14 +14,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.koin.core.context.GlobalContext
+import org.koin.core.parameter.parametersOf
+import org.koin.java.KoinJavaComponent.inject
 import resource.Colors
-import resource.Navigation
+import resource.Page
 import resource.Strings.SETUP
 import view.extention.onInitialize
 import view.page.DevicePage
 import view.page.SettingPage
+import viewmodel.DevicePageViewModel
+import viewmodel.DevicesPageViewModel
 import viewmodel.MainContentViewModel
+import viewmodel.SettingPageViewModel
+
 
 @Composable
 fun MainContent(mainContentViewModel: MainContentViewModel) {
@@ -31,7 +36,7 @@ fun MainContent(mainContentViewModel: MainContentViewModel) {
 
 @Composable
 private fun onDrawWindow(viewModel: MainContentViewModel) {
-    val selectedPages: Navigation.Root by viewModel.selectedPages.collectAsState()
+    val selectedPages: Page by viewModel.selectedPages.collectAsState()
     val hasError: Boolean by viewModel.hasError.collectAsState()
     val errorMessage: String? by viewModel.errorMessage.collectAsState()
 
@@ -39,24 +44,29 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
         Box(modifier = Modifier.fillMaxSize().background(Colors.SMOKE_WHITE)) {
             Crossfade(selectedPages, animationSpec = tween(100)) { selectedPageName ->
                 when (selectedPageName) {
-                    Navigation.DEVICES_PAGE -> {
+                    Page.DevicesPage -> {
+                        val devicesPageViewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
                         DevicesPage(
-                            devicesPageViewModel = GlobalContext.get().get(),
-                            onNavigateSetting = { viewModel.selectPage(Navigation.SETTING_PAGE) },
-                            onNavigateDevice = { viewModel.selectPage(Navigation.DEVICE_PAGE) }
+                            devicesPageViewModel = devicesPageViewModel,
+                            onNavigateSetting = { viewModel.selectPage(Page.SettingPage) },
+                            onNavigateDevice = { viewModel.selectPage(Page.DevicePage(it)) }
                         )
                     }
-                    Navigation.SETTING_PAGE -> {
+                    Page.SettingPage -> {
+                        val settingPageViewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
                         SettingPage(
-                            settingPageViewModel = GlobalContext.get().get(),
-                            onNavigateDevices = { viewModel.selectPage(Navigation.DEVICES_PAGE) },
+                            settingPageViewModel = settingPageViewModel,
+                            onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) },
                             onSaved = { viewModel.refresh() }
                         )
                     }
-                    Navigation.DEVICE_PAGE -> {
+                    is Page.DevicePage -> {
+                        val devicePageViewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
+                            parametersOf(selectedPageName.device)
+                        }
                         DevicePage(
-                            deviceViewModel = GlobalContext.get().get(),
-                            onNavigateDevices = { viewModel.selectPage(Navigation.DEVICES_PAGE) }
+                            deviceViewModel = devicePageViewModel,
+                            onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) }
                         )
                     }
                 }
@@ -73,7 +83,7 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
                                     SETUP,
                                     fontSize = 16.sp,
                                     color = Colors.NAVY,
-                                    modifier = Modifier.clickable { viewModel.selectPage(Navigation.SETTING_PAGE) }
+                                    modifier = Modifier.clickable { viewModel.selectPage(Page.SettingPage) }
                                 )
                             }
                         }

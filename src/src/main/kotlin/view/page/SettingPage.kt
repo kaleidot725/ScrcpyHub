@@ -2,7 +2,6 @@ package view.page
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -20,8 +19,8 @@ import resource.Strings
 import resource.Strings.ADB_LOCATION
 import resource.Strings.IF_ADB_LOCATION_IS_EMPTY
 import resource.Strings.IF_SCRCPY_LOCATION_IS_EMPTY
-import resource.Strings.SAVE
 import resource.Strings.SCRCPY_LOCATION
+import view.components.SaveButton
 import view.extention.onInitialize
 import view.tab.PageHeader
 import viewmodel.SettingPageViewModel
@@ -72,14 +71,7 @@ private fun onDrawPage(
             modifier = Modifier.height(8.dp)
         )
 
-        Box(modifier = Modifier.padding(horizontal = 8.dp)) {
-            Button(
-                modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-                onClick = { viewModel.save() { onSaved?.invoke() } }
-            ) {
-                Text(SAVE)
-            }
-        }
+        SaveButton(modifier = Modifier.padding(horizontal = 8.dp), onSaved = { viewModel.save() { onSaved?.invoke() } })
     }
 }
 

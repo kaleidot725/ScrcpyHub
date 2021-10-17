@@ -3,7 +3,7 @@ package viewmodel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import model.usecase.IsSetupCompletedUseCase
-import resource.Navigation
+import resource.Page
 import resource.Strings.NOT_FOUND_ADB_COMMAND
 import resource.Strings.NOT_FOUND_SCRCPY_COMMAND
 
@@ -11,8 +11,8 @@ class MainContentViewModel(
     private val isSetupCompletedUseCase: IsSetupCompletedUseCase
 ) : ViewModel() {
 
-    private val _selectedPages: MutableStateFlow<Navigation.Root> = MutableStateFlow(Navigation.DEVICES_PAGE)
-    val selectedPages: StateFlow<Navigation.Root> = _selectedPages
+    private val _selectedPages: MutableStateFlow<Page> = MutableStateFlow(Page.DevicesPage)
+    val selectedPages: StateFlow<Page> = _selectedPages
 
     private val _hasError: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val hasError: StateFlow<Boolean> = _hasError
@@ -28,7 +28,7 @@ class MainContentViewModel(
         checkError()
     }
 
-    fun selectPage(page: Navigation.Root) {
+    fun selectPage(page: Page) {
         _selectedPages.value = page
     }
 

@@ -2,6 +2,7 @@ package model.di
 
 import model.command.AdbCommand
 import model.command.ScrcpyCommand
+import model.entity.Device
 import model.repository.DeviceRepository
 import model.repository.ProcessRepository
 import model.repository.SettingRepository
@@ -78,8 +79,8 @@ val appModule = module {
         DevicesPageViewModel(get(), get(), get(), get())
     }
 
-    factory {
-        DevicePageViewModel()
+    factory { (device: Device) ->
+        DevicePageViewModel(device)
     }
 
     factory {

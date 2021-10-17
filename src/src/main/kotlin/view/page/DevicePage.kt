@@ -14,9 +14,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import model.entity.Device
 import resource.Images
 import resource.Strings
+import view.components.SaveButton
 import view.extention.onInitialize
 import view.tab.PageHeader
 import viewmodel.DevicePageViewModel
@@ -32,16 +32,23 @@ fun DevicePage(
 
 @Composable
 private fun onDrawPage(viewModel: DevicePageViewModel, onNavigateDevices: (() -> Unit)? = null) {
-    val device: Device by viewModel.device.collectAsState()
+    val titleName: String by viewModel.titleName.collectAsState()
+    val name: String by viewModel.name.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
         PageHeader(
-            title = device.name,
+            title = titleName,
             icon = painterResource(Images.CLOSE),
             onAction = { onNavigateDevices?.invoke() }
         )
 
-        DeviceNameSetting(device.name, { viewModel.updateName(it) }, modifier = Modifier.padding(horizontal = 8.dp))
+        DeviceNameSetting(name, { viewModel.updateName(it) }, modifier = Modifier.padding(horizontal = 8.dp))
+
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
+
+        SaveButton(modifier = Modifier.padding(horizontal = 8.dp), onSaved = { viewModel.save() })
     }
 }
 
