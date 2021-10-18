@@ -33,7 +33,7 @@ fun DevicePage(
 @Composable
 private fun onDrawPage(viewModel: DevicePageViewModel, onNavigateDevices: (() -> Unit)? = null) {
     val titleName: String by viewModel.titleName.collectAsState()
-    val name: String by viewModel.name.collectAsState()
+    val name: String by viewModel.editName.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
         PageHeader(
