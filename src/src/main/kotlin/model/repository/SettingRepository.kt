@@ -4,7 +4,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.entity.AppSetting
-import java.io.File
+import model.utils.FileUtils
 
 class SettingRepository(private val root: String) {
     fun get(): AppSetting {
@@ -18,7 +18,7 @@ class SettingRepository(private val root: String) {
 
     private fun write(setting: AppSetting) {
         try {
-            File(createFilePath()).outputStream().apply {
+            FileUtils.createFileFile(root, SETTING_FILE_NAME).outputStream().apply {
                 this.write(Json.encodeToString(setting).toByteArray())
                 this.close()
             }
@@ -29,7 +29,7 @@ class SettingRepository(private val root: String) {
 
     private fun load(): AppSetting {
         return try {
-            val content = File(createFilePath()).readText()
+            val content = FileUtils.createFileFile(root, SETTING_FILE_NAME).readText()
             Json.decodeFromString(string = content)
         } catch (e: Exception) {
             AppSetting()
@@ -38,24 +38,11 @@ class SettingRepository(private val root: String) {
 
     private fun createDir() {
         try {
-            val file = File(createDirPath())
-            if (!file.exists()) {
-                val b = file.mkdir()
-                print(b)
-            }
+            val file = FileUtils.createDirFile(root)
+            if (!file.exists()) file.mkdir()
         } catch (e: Exception) {
             return
         }
-    }
-
-    private fun createDirPath(): String {
-        val home = System.getProperty("user.home")
-        return "$home$root"
-    }
-
-    private fun createFilePath(): String {
-        val dir = createDirPath()
-        return "$dir$SETTING_FILE_NAME"
     }
 
     companion object {
