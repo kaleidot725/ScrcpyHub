@@ -39,7 +39,8 @@ val appModule = module {
     }
 
     single {
-        DeviceRepository(get())
+        val directory = get<String>(named("setting_directory"))
+        DeviceRepository(directory, get())
     }
 
     single {
@@ -75,12 +76,16 @@ val appModule = module {
         UpdateSettingUseCase(get(), get(), get())
     }
 
+    single {
+        UpdateDeviceNameUseCase(get())
+    }
+
     factory {
         DevicesPageViewModel(get(), get(), get(), get())
     }
 
     factory { (device: Device) ->
-        DevicePageViewModel(device)
+        DevicePageViewModel(device, get())
     }
 
     factory {
