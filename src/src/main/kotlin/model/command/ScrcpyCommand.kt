@@ -40,8 +40,13 @@ class ScrcpyCommand(
         if (device != null) {
             command.add(DEVICE_OPTION_NAME)
             command.add(device.id)
-        }
 
+            val maxSize = device.maxSize
+            if (maxSize != null) {
+                command.add(MAX_SIZE_OPTION_NAME)
+                command.add(maxSize.toString())
+            }
+        }
         return command
     }
 
@@ -61,7 +66,7 @@ class ScrcpyCommand(
     companion object {
         private const val COMMAND_NAME = "scrcpy"
         private const val DEVICE_OPTION_NAME = "-s"
-        private const val RESOLUTION_OPTION_NAME = "-m"
+        private const val MAX_SIZE_OPTION_NAME = "-m"
         private const val HELP_OPTION_NAME = "-h"
     }
 }
