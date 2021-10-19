@@ -4,9 +4,9 @@ import model.entity.Device
 import model.repository.DeviceRepository
 
 class UpdateDeviceNameUseCase(private val deviceRepository: DeviceRepository) {
-    fun execute(device: Device, newName: String): Boolean {
+    fun execute(device: Device, newName: String, maxSize: Int?): Boolean {
         return try {
-            deviceRepository.rename(device, newName)
+            deviceRepository.updateSetting(device, newName, maxSize)
             true
         } catch (e: Exception) {
             false

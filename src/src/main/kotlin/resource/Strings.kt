@@ -11,7 +11,9 @@ object Strings {
 
     // Device Page
     const val DEVICE_NAME_SETTING = "Device Name"
-    const val EDIT_DEVICE_NAME = "Edit device name"
+    const val EDIT_DEVICE_NAME = "Display device name"
+    const val DEVICE_RESOLUTION_SETTING = "Max Size"
+    const val EDIT_RESOLUTION_NAME = "Video width and height size limit"
 
     // Setting Page
     const val SETTING_PAGE_TITLE = "Setting"
