@@ -15,9 +15,9 @@ class DeviceRepository(
         return adbCommand.fetchDevices().map { loadCache(it) }
     }
 
-    fun rename(device: Device, newName: String) {
+    fun updateSetting(device: Device, newName: String, newMaxSize: Int?) {
         createDir()
-        writeCache(device.copy(customName = newName))
+        writeCache(device.copy(customName = newName, maxSize = newMaxSize))
     }
 
     private fun writeCache(device: Device) {
