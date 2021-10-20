@@ -22,7 +22,7 @@ fun RefreshButton(onReload: () -> Unit, modifier: Modifier = Modifier) {
         Card(
             shape = CircleShape,
             backgroundColor = Colors.NAVY,
-            modifier = Modifier.size(32.dp).clickable { onReload() }.align(Alignment.Center)
+            modifier = Modifier.size(24.dp).clickable { onReload() }.align(Alignment.Center)
         ) {
             Image(
                 painter = painterResource(Images.REFRESH),
