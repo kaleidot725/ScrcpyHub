@@ -18,6 +18,7 @@ import model.entity.Device
 import resource.Images
 import resource.Strings
 import view.components.DeviceCard
+import view.components.RefreshButton
 import view.extention.onInitialize
 import view.tab.PageHeader
 import viewmodel.DevicesPageViewModel
@@ -57,28 +58,40 @@ private fun onDrawPage(
                 }
             }
         } else {
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                item {
-                    PageHeader(
-                        title = Strings.APP_NAME,
-                        icon = painterResource(Images.SETTING),
-                        onAction = { onNavigateSetting?.invoke() }
+            Column {
+                PageHeader(
+                    title = Strings.APP_NAME,
+                    icon = painterResource(Images.SETTING),
+                    onAction = { onNavigateSetting?.invoke() }
+                )
+
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(
+                        states,
+                        itemContent = { device ->
+                            DeviceCard(
+                                device = device.first,
+                                isRunning = device.second,
+                                startScrcpy = { viewModel.startScrcpy(it) },
+                                stopScrcpy = { viewModel.stopScrcpy(it) },
+                                goToDetail = { onNavigateDevice?.invoke(device.first) },
+                                modifier = Modifier
+                                    .wrapContentHeight()
+                                    .fillMaxWidth()
+                                    .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+                            )
+                        }
                     )
+                    item {
+                        Spacer(modifier = Modifier.height(48.dp))
+                    }
                 }
-                items(states, itemContent = { device ->
-                    DeviceCard(
-                        device = device.first,
-                        isRunning = device.second,
-                        startScrcpy = { viewModel.startScrcpy(it) },
-                        stopScrcpy = { viewModel.stopScrcpy(it) },
-                        goToDetail = { onNavigateDevice?.invoke(device.first) },
-                        modifier = Modifier
-                            .wrapContentHeight()
-                            .fillMaxWidth()
-                            .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
-                    )
-                })
             }
         }
+
+        RefreshButton(
+            onReload = { viewModel.refresh() },
+            modifier = Modifier.wrapContentSize().align(Alignment.BottomEnd).padding(8.dp)
+        )
     }
 }
