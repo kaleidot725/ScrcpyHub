@@ -10,7 +10,7 @@ import org.koin.core.context.GlobalContext
 import org.koin.core.context.GlobalContext.getOrNull
 import org.koin.core.context.GlobalContext.startKoin
 import resource.Images
-import resource.Strings.APP_VERSION
+import resource.Strings
 import view.MainContent
 
 fun main() = application {
@@ -30,14 +30,12 @@ fun main() = application {
         icon = painterResource(Images.TRAY),
         menu = {
             Item(
-                "Toggle ScrcpyHub",
-                onClick = {
-                    isOpen = !isOpen
-                }
+                Strings.TRAY_TOGGLE_SCRCPY_HUB,
+                onClick = { isOpen = !isOpen }
             )
 
             Item(
-                "ScrcpyHub v${APP_VERSION}",
+                Strings.TRAY_VERSION,
                 enabled = false,
                 onClick = {}
             )
@@ -45,7 +43,7 @@ fun main() = application {
             Separator()
 
             Item(
-                "Quit",
+                Strings.TRAY_QUIT,
                 onClick = {
                     exitApplication()
                 }
@@ -55,7 +53,7 @@ fun main() = application {
 
     if (isOpen) {
         Window(
-            title = "HOME",
+            title = Strings.HOME_TITLE,
             onCloseRequest = { isOpen = false },
             resizable = false,
             state = windowState

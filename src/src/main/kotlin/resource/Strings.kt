@@ -1,8 +1,17 @@
 package resource
 
 object Strings {
+    // COMMON
     const val APP_VERSION = "1.0.0"
     const val APP_NAME = "ScrcpyHub"
+
+    // HOME
+    const val HOME_TITLE = "HOME"
+
+    // TRAY
+    const val TRAY_TOGGLE_SCRCPY_HUB = "Toggle ScrcpyHub"
+    const val TRAY_VERSION = "$TRAY_TOGGLE_SCRCPY_HUB v$APP_VERSION"
+    const val TRAY_QUIT = "Quit"
 
     // DEVICES PAGE
     const val RUN = "START"
