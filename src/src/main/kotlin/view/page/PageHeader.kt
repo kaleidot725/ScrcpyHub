@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -31,7 +32,9 @@ fun PageHeader(title: String, icon: Painter, onAction: () -> Unit) {
             modifier = Modifier
                 .wrapContentHeight()
                 .fillMaxWidth(fraction = 0.95f)
-                .align(Alignment.CenterVertically)
+                .align(Alignment.CenterVertically),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
         Image(
             painter = icon,
