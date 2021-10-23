@@ -51,7 +51,7 @@ private fun onDrawPage(
                 )
                 Box(modifier = Modifier.fillMaxSize()) {
                     Text(
-                        Strings.NO_ANDROID_DEVICE,
+                        Strings.DEVICES_PAGE_NOT_FOUND_DEVICES,
                         style = TextStyle(color = Color.Black, fontSize = 18.sp),
                         modifier = Modifier.align(Alignment.Center)
                     )

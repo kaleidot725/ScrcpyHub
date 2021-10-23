@@ -73,9 +73,9 @@ private fun onDrawPage(viewModel: DevicePageViewModel, onNavigateDevices: (() ->
 private fun DeviceNameSetting(deviceName: String, onUpdate: (String) -> Unit, modifier: Modifier = Modifier) {
     Card(modifier = modifier) {
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(Strings.DEVICE_NAME_SETTING, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            Text(Strings.DEVICE_PAGE_EDIT_NAME_TITLE, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
             Text(
-                Strings.EDIT_DEVICE_NAME,
+                Strings.DEVICE_PAGE_EDIT_NAME_DETAILS,
                 fontSize = 12.sp,
                 color = Color.Gray,
                 fontWeight = FontWeight.SemiBold
@@ -96,9 +96,9 @@ private fun DeviceNameSetting(deviceName: String, onUpdate: (String) -> Unit, mo
 private fun MaxSizeSetting(maxSize: String, onUpdate: (String) -> Unit, modifier: Modifier = Modifier) {
     Card(modifier = modifier) {
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(Strings.DEVICE_RESOLUTION_SETTING, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            Text(Strings.DEVICE_PAGE_EDIT_MAX_SIZE_TITLE, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
             Text(
-                Strings.EDIT_RESOLUTION_NAME,
+                Strings.DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS,
                 fontSize = 12.sp,
                 color = Color.Gray,
                 fontWeight = FontWeight.SemiBold

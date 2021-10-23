@@ -57,7 +57,7 @@ fun DeviceCard(
                 onClick = { if (!isRunning) startScrcpy?.invoke(device) else stopScrcpy?.invoke(device) },
                 modifier = Modifier.width(80.dp).height(30.dp).align(Alignment.CenterVertically)
             ) {
-                Text(if (!isRunning) Strings.RUN else Strings.STOP, fontSize = 12.sp)
+                Text(if (!isRunning) Strings.DEVICES_PAGE_START else Strings.DEVICES_PAGE_STOP, fontSize = 12.sp)
             }
 
             Image(

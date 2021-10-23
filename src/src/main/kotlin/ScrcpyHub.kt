@@ -43,7 +43,7 @@ fun main() = application {
             Separator()
 
             Item(
-                Strings.TRAY_QUIT,
+                Strings.QUIT,
                 onClick = {
                     exitApplication()
                 }
