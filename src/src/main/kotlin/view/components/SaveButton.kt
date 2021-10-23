@@ -10,9 +10,10 @@ import androidx.compose.ui.Modifier
 import resource.Strings
 
 @Composable
-fun SaveButton(onSaved: () -> Unit, modifier: Modifier = Modifier) {
+fun SaveButton(savable: Boolean, onSaved: () -> Unit, modifier: Modifier = Modifier) {
     Box(modifier = modifier) {
         Button(
+            enabled = savable,
             modifier = Modifier.fillMaxWidth().wrapContentHeight(),
             onClick = { onSaved() }
         ) {

@@ -37,6 +37,8 @@ private fun onDrawPage(viewModel: DevicePageViewModel, onNavigateDevices: (() ->
     val titleName: String by viewModel.titleName.collectAsState()
     val name: String by viewModel.editName.collectAsState()
     val maxSize: String by viewModel.maxSize.collectAsState()
+    val maxSizeError: String by viewModel.maxSizeError.collectAsState()
+    val savable: Boolean by viewModel.savable.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
         PageHeader(
@@ -57,6 +59,7 @@ private fun onDrawPage(viewModel: DevicePageViewModel, onNavigateDevices: (() ->
 
         MaxSizeSetting(
             maxSize,
+            maxSizeError,
             { viewModel.updateMaxSize(it) },
             modifier = Modifier.padding(horizontal = 8.dp)
         )
@@ -65,7 +68,11 @@ private fun onDrawPage(viewModel: DevicePageViewModel, onNavigateDevices: (() ->
             modifier = Modifier.height(8.dp)
         )
 
-        SaveButton(modifier = Modifier.padding(horizontal = 8.dp), onSaved = { viewModel.save() })
+        SaveButton(
+            savable = savable,
+            modifier = Modifier.padding(horizontal = 8.dp),
+            onSaved = { viewModel.save() }
+        )
     }
 }
 
@@ -86,14 +93,17 @@ private fun DeviceNameSetting(deviceName: String, onUpdate: (String) -> Unit, mo
             TextField(
                 value = deviceName,
                 modifier = Modifier.fillMaxWidth(),
-                onValueChange = { onUpdate(it) }
+                onValueChange = { onUpdate(it) },
+                maxLines = 1
             )
         }
     }
 }
 
 @Composable
-private fun MaxSizeSetting(maxSize: String, onUpdate: (String) -> Unit, modifier: Modifier = Modifier) {
+private fun MaxSizeSetting(maxSize: String, error: String, onUpdate: (String) -> Unit, modifier: Modifier = Modifier) {
+    val hasError = error.isNotEmpty()
+
     Card(modifier = modifier) {
         Column(modifier = Modifier.padding(8.dp)) {
             Text(Strings.DEVICE_PAGE_EDIT_MAX_SIZE_TITLE, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
@@ -110,8 +120,21 @@ private fun MaxSizeSetting(maxSize: String, onUpdate: (String) -> Unit, modifier
                 value = maxSize,
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                onValueChange = { onUpdate(it) }
+                onValueChange = { onUpdate(it) },
+                isError = hasError,
+                maxLines = 1
             )
+
+            if (hasError) {
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    error,
+                    fontSize = 12.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
         }
     }
 }
@@ -125,5 +148,5 @@ private fun DeviceNameSetting_Preview() {
 @Preview
 @Composable
 private fun MaxSizeSetting_Preview() {
-    MaxSizeSetting("1920", {})
+    MaxSizeSetting("1920", "", {})
 }
