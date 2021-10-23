@@ -16,10 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import resource.Images
 import resource.Strings
-import resource.Strings.ADB_LOCATION
-import resource.Strings.IF_ADB_LOCATION_IS_EMPTY
-import resource.Strings.IF_SCRCPY_LOCATION_IS_EMPTY
-import resource.Strings.SCRCPY_LOCATION
+import resource.Strings.SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS
+import resource.Strings.SETTING_PAGE_EDIT_ADB_LOCATION_TITLE
+import resource.Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS
+import resource.Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE
 import view.components.SaveButton
 import view.extention.onInitialize
 import view.tab.PageHeader
@@ -79,8 +79,13 @@ private fun onDrawPage(
 private fun AdbLocationSetting(adbLocation: String, onUpdate: (String) -> Unit, modifier: Modifier = Modifier) {
     Card(modifier = modifier) {
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(ADB_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
-            Text(IF_ADB_LOCATION_IS_EMPTY, fontSize = 12.sp, color = Color.Gray, fontWeight = FontWeight.SemiBold)
+            Text(SETTING_PAGE_EDIT_ADB_LOCATION_TITLE, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            Text(
+                SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS,
+                fontSize = 12.sp,
+                color = Color.Gray,
+                fontWeight = FontWeight.SemiBold
+            )
             Spacer(modifier = Modifier.height(8.dp))
             TextField(
                 value = adbLocation,
@@ -101,9 +106,9 @@ private fun AdbLocationSetting_Preview() {
 private fun ScrcpyLocationSetting(scrcpyLocation: String, onUpdate: (String) -> Unit, modifier: Modifier = Modifier) {
     Card(modifier = modifier) {
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(SCRCPY_LOCATION, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            Text(SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
             Text(
-                IF_SCRCPY_LOCATION_IS_EMPTY,
+                SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS,
                 fontSize = 12.sp,
                 color = Color.Gray,
                 fontWeight = FontWeight.SemiBold
