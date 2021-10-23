@@ -1,5 +1,6 @@
 package view.components
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -34,4 +35,10 @@ fun RefreshButton(onReload: () -> Unit, modifier: Modifier = Modifier) {
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun RefreshButton_Preview() {
+    RefreshButton({})
 }

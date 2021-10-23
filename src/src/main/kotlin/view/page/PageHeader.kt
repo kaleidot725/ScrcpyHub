@@ -21,7 +21,7 @@ fun PageHeader(title: String, icon: Painter, onAction: () -> Unit) {
             .fillMaxWidth()
             .height(48.dp)
             .padding(bottom = 8.dp)
-            .background(Color.Black)
+            .background(Color(red = 51, blue = 51, green = 51))
             .padding(8.dp)
     ) {
         Text(
