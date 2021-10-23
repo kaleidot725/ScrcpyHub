@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.entity.Device
@@ -45,11 +46,17 @@ fun DeviceCard(
                 Text(
                     device.displayName,
                     style = TextStyle(color = Color.Black, fontSize = 16.sp, fontWeight = FontWeight.SemiBold),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(horizontal = 4.dp)
                 )
 
                 Text(
                     device.id,
                     style = TextStyle(color = Color.Gray, fontSize = 12.sp, fontWeight = FontWeight.SemiBold),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(horizontal = 4.dp)
                 )
             }
 
@@ -81,4 +88,12 @@ fun DeviceCard(
 @Composable
 private fun DeviceCard_Preview() {
     DeviceCard(Device("ID", "NAME"), false)
+}
+
+@Preview
+@Composable
+private fun DeviceCard_Preview_Overflow() {
+    val id = "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+    val name = "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+    DeviceCard(Device(id, name), false)
 }
