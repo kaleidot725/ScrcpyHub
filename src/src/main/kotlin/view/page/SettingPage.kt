@@ -71,7 +71,11 @@ private fun onDrawPage(
             modifier = Modifier.height(8.dp)
         )
 
-        SaveButton(modifier = Modifier.padding(horizontal = 8.dp), onSaved = { viewModel.save() { onSaved?.invoke() } })
+        SaveButton(
+            savable = true,
+            modifier = Modifier.padding(horizontal = 8.dp),
+            onSaved = { viewModel.save() { onSaved?.invoke() } }
+        )
     }
 }
 
@@ -90,7 +94,8 @@ private fun AdbLocationSetting(adbLocation: String, onUpdate: (String) -> Unit, 
             TextField(
                 value = adbLocation,
                 modifier = Modifier.fillMaxWidth(),
-                onValueChange = { onUpdate(it) }
+                onValueChange = { onUpdate(it) },
+                maxLines = 1
             )
         }
     }
@@ -117,7 +122,8 @@ private fun ScrcpyLocationSetting(scrcpyLocation: String, onUpdate: (String) -> 
             TextField(
                 value = scrcpyLocation,
                 modifier = Modifier.fillMaxWidth(),
-                onValueChange = { onUpdate(it) }
+                onValueChange = { onUpdate(it) },
+                maxLines = 1
             )
         }
     }
