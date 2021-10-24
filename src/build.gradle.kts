@@ -43,6 +43,10 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "ScrcpyHub"
+
+            macOS {
+                bundleID = "jp.kaleidot725.scrcpyhub"
+            }
         }
     }
 }
