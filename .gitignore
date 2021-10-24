@@ -22,3 +22,5 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle
 src/setting.json
+src/gradle.properties
+src/gradle.properties
