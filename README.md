@@ -12,7 +12,7 @@ ScrcpyHub is a GUI application to use [scrcpy](https://github.com/Genymobile/scr
 - Support multi android device mirroring.
 - Support Windows10 or Ubuntu or Mac OS
 
-| ![demo1](one.PNG) | ![demo2](two.PNG) | ![demo3](three.PNG) |
+| ![demo1](one.png) | ![demo2](two.png) | ![demo3](three.png) |
 | --- | ---- | --- |
 |  |  |  |
 
