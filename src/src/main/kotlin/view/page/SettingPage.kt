@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.WindowScope
 import resource.Images
 import resource.Strings
 import resource.Strings.SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS
@@ -27,16 +28,18 @@ import viewmodel.SettingPageViewModel
 
 @Composable
 fun SettingPage(
+    windowScope: WindowScope,
     settingPageViewModel: SettingPageViewModel,
     onNavigateDevices: (() -> Unit)? = null,
     onSaved: (() -> Unit)? = null
 ) {
     onInitialize(settingPageViewModel)
-    onDrawPage(settingPageViewModel, onNavigateDevices, onSaved)
+    onDrawPage(windowScope, settingPageViewModel, onNavigateDevices, onSaved)
 }
 
 @Composable
 private fun onDrawPage(
+    windowScope: WindowScope,
     viewModel: SettingPageViewModel,
     onNavigateDevice: (() -> Unit)? = null,
     onSaved: (() -> Unit)? = null
@@ -46,6 +49,7 @@ private fun onDrawPage(
 
     Column(modifier = Modifier.fillMaxSize()) {
         PageHeader(
+            windowScope = windowScope,
             title = Strings.SETTING_PAGE_TITLE,
             icon = painterResource(Images.CLOSE),
             onAction = { onNavigateDevice?.invoke() }

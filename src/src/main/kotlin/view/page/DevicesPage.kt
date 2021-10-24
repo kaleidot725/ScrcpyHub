@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.WindowScope
 import model.entity.Device
 import resource.Images
 import resource.Strings
@@ -25,16 +26,18 @@ import viewmodel.DevicesPageViewModel
 
 @Composable
 fun DevicesPage(
+    windowScope: WindowScope,
     devicesPageViewModel: DevicesPageViewModel,
     onNavigateSetting: (() -> Unit)? = null,
     onNavigateDevice: ((Device) -> Unit)? = null
 ) {
     onInitialize(devicesPageViewModel)
-    onDrawPage(devicesPageViewModel, onNavigateSetting, onNavigateDevice)
+    onDrawPage(windowScope, devicesPageViewModel, onNavigateSetting, onNavigateDevice)
 }
 
 @Composable
 private fun onDrawPage(
+    windowScope: WindowScope,
     viewModel: DevicesPageViewModel,
     onNavigateSetting: (() -> Unit)? = null,
     onNavigateDevice: ((Device) -> Unit)? = null
@@ -45,6 +48,7 @@ private fun onDrawPage(
         if (states.isEmpty()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 PageHeader(
+                    windowScope = windowScope,
                     title = Strings.APP_NAME,
                     icon = painterResource(Images.SETTING),
                     onAction = { onNavigateSetting?.invoke() }
@@ -60,6 +64,7 @@ private fun onDrawPage(
         } else {
             Column {
                 PageHeader(
+                    windowScope = windowScope,
                     title = Strings.APP_NAME,
                     icon = painterResource(Images.SETTING),
                     onAction = { onNavigateSetting?.invoke() }

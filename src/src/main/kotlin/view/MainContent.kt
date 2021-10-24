@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.WindowScope
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
 import resource.Colors
@@ -29,13 +30,13 @@ import viewmodel.SettingPageViewModel
 
 
 @Composable
-fun MainContent(mainContentViewModel: MainContentViewModel) {
+fun MainContent(windowScope: WindowScope, mainContentViewModel: MainContentViewModel) {
     onInitialize(mainContentViewModel)
-    onDrawWindow(mainContentViewModel)
+    onDrawWindow(windowScope, mainContentViewModel)
 }
 
 @Composable
-private fun onDrawWindow(viewModel: MainContentViewModel) {
+private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewModel) {
     val selectedPages: Page by viewModel.selectedPages.collectAsState()
     val hasError: Boolean by viewModel.hasError.collectAsState()
     val errorMessage: String? by viewModel.errorMessage.collectAsState()
@@ -47,6 +48,7 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
                     Page.DevicesPage -> {
                         val devicesPageViewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
                         DevicesPage(
+                            windowScope = windowScope,
                             devicesPageViewModel = devicesPageViewModel,
                             onNavigateSetting = { viewModel.selectPage(Page.SettingPage) },
                             onNavigateDevice = { viewModel.selectPage(Page.DevicePage(it)) }
@@ -55,6 +57,7 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
                     Page.SettingPage -> {
                         val settingPageViewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
                         SettingPage(
+                            windowScope = windowScope,
                             settingPageViewModel = settingPageViewModel,
                             onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) },
                             onSaved = { viewModel.refresh() }
@@ -65,6 +68,7 @@ private fun onDrawWindow(viewModel: MainContentViewModel) {
                             parametersOf(selectedPageName.device)
                         }
                         DevicePage(
+                            windowScope = windowScope,
                             deviceViewModel = devicePageViewModel,
                             onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) }
                         )

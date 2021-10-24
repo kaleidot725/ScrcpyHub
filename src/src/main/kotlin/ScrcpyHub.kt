@@ -4,7 +4,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.*
+import androidx.compose.ui.window.Tray
+import androidx.compose.ui.window.application
+import androidx.compose.ui.window.rememberTrayState
+import androidx.compose.ui.window.rememberWindowState
 import model.di.appModule
 import org.koin.core.context.GlobalContext
 import org.koin.core.context.GlobalContext.getOrNull
@@ -12,6 +15,7 @@ import org.koin.core.context.GlobalContext.startKoin
 import resource.Images
 import resource.Strings
 import view.MainContent
+import view.components.AppWindow
 
 fun main() = application {
     val trayState = rememberTrayState()
@@ -52,13 +56,8 @@ fun main() = application {
     )
 
     if (isOpen) {
-        Window(
-            title = Strings.HOME_TITLE,
-            onCloseRequest = { isOpen = false },
-            resizable = false,
-            state = windowState
-        ) {
-            MainContent(mainContentViewModel = GlobalContext.get().get())
+        AppWindow(onCloseRequest = { isOpen = false }, state = windowState) {
+            MainContent(windowScope = this, mainContentViewModel = GlobalContext.get().get())
         }
     }
 }
