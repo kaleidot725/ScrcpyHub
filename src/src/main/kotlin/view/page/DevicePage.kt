@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.WindowScope
 import resource.Images
 import resource.Strings
 import view.components.SaveButton
@@ -25,15 +26,20 @@ import viewmodel.DevicePageViewModel
 
 @Composable
 fun DevicePage(
+    windowScope: WindowScope,
     deviceViewModel: DevicePageViewModel,
     onNavigateDevices: (() -> Unit)? = null
 ) {
     onInitialize(deviceViewModel)
-    onDrawPage(deviceViewModel, onNavigateDevices)
+    onDrawPage(windowScope, deviceViewModel, onNavigateDevices)
 }
 
 @Composable
-private fun onDrawPage(viewModel: DevicePageViewModel, onNavigateDevices: (() -> Unit)? = null) {
+private fun onDrawPage(
+    windowScope: WindowScope,
+    viewModel: DevicePageViewModel,
+    onNavigateDevices: (() -> Unit)? = null
+) {
     val titleName: String by viewModel.titleName.collectAsState()
     val name: String by viewModel.editName.collectAsState()
     val maxSize: String by viewModel.maxSize.collectAsState()
@@ -42,6 +48,7 @@ private fun onDrawPage(viewModel: DevicePageViewModel, onNavigateDevices: (() ->
 
     Column(modifier = Modifier.fillMaxSize()) {
         PageHeader(
+            windowScope = windowScope,
             title = titleName,
             icon = painterResource(Images.CLOSE),
             onAction = { onNavigateDevices?.invoke() }
