@@ -1,37 +1,47 @@
-## Welcome to GitHub Pages
+# ScrcpyHub
 
-You can use the [editor on GitHub](https://github.com/kaleidot725/ScrcpyHub/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+ScrcpyHub is a GUI application to use [scrcpy](https://github.com/Genymobile/scrcpy).    
+[scrcpy](https://github.com/Genymobile/scrcpy) is a tool to mirror the android screen.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+![demo](../demo.gif)
 
-### Markdown
+# Feature
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- Created with [Compose for Desktop](https://github.com/JetBrains/compose-jb)
+- Support mirroring control. (Start / Stop)
+- Support multi android device mirroring.
+- Support Windows10 or Ubuntu or Mac OS
 
-```markdown
-Syntax highlighted code block
+| ![demo1](../one.png) | ![demo2](../two.png) | ![demo3](../three.png) |
+| --- | ---- | --- |
+|  |  |  |
 
-# Header 1
-## Header 2
-### Header 3
+# Install
 
-- Bulleted
-- List
+Install adb and scrcpy, ScrcpyHub.
 
-1. Numbered
-2. List
+## Mac OS
 
-**Bold** and _Italic_ and `Code` text
+You need adb and scrcpy, accesible from your PATH, If you don't have it yet.
 
-[Link](url) and ![Image](src)
+```
+brew install android-platform-tools
+brew install scrcpy
+```
+Download and launch ScrcpyHub. Mac application download [here](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.0.0).
+
+## Windows 10
+
+You need adb and scrcpy, accessible from your PATH, If you don't have it yet.
+
+```
+choco install adb
+choco install scrcpy
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Download and launch ScrcpyHub. Windows application download [here](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.0.0).
 
-### Jekyll Themes
+# References
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kaleidot725/ScrcpyHub/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+- [Compose for Desktop](https://www.jetbrains.com/lp/compose/)
+- [scrcpy](https://github.com/Genymobile/scrcpy)
