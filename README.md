@@ -7,13 +7,17 @@ ScrcpyHub is a GUI application to use [scrcpy](https://github.com/Genymobile/scr
 
 # ✨ Feature
 
-- Created with [Compose for Desktop](https://github.com/JetBrains/compose-jb)
-- Support mirroring control. (Start / Stop)
-- Support multi android device mirroring
-- Support tray menu
-- Support Windows10 or Mac OS
+- Support Windows10 or Mac OS.
 
-<img src="docs/one.png" width=256 hspace="5"><img src="docs/two.png" width=256 hspace="5"><img src="docs/three.png" width=256 hspace="5">
+- Control mirroing (Start / Stop)
+
+- Mirror multi android device.
+
+- Support Tary Menu.
+
+  
+
+<img src="docs/one.png" width=256 hspace="5"><img src="docs/two.png" width=256 hspace="5"><img src="docs/three.png" width=256 hspace="5"><img src=docs/tray.png width=256 hspace=5>
 
 # ⬇️ Install
 
@@ -27,7 +31,7 @@ You need adb and scrcpy, accesible from your PATH, If you don't have it yet.
 brew install android-platform-tools
 brew install scrcpy
 ```
-Download and launch ScrcpyHub. Mac application download [here](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.1.0).
+Download and launch ScrcpyHub. Mac application download [here ](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.1.0)and install.
 
 ## 💻 Windows 10
 
@@ -38,13 +42,8 @@ choco install adb
 choco install scrcpy
 ```
 
-Download and launch ScrcpyHub. Windows application download [here](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.1.0).
+Download and launch ScrcpyHub. Windows application download [here](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.1.0) and install.
 
 # 🎫 Licence
 
 The GNU General Public License v3.0 (GPLv3)
-
-# 🔗 References
-
-- [Compose for Desktop](https://www.jetbrains.com/lp/compose/)
-- [scrcpy](https://github.com/Genymobile/scrcpy)
