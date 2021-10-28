@@ -1,6 +1,8 @@
 package view.page
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Card
@@ -11,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -50,8 +53,17 @@ private fun onDrawPage(
         PageHeader(
             windowScope = windowScope,
             title = titleName,
-            icon = painterResource(Images.CLOSE),
-            onAction = { onNavigateDevices?.invoke() }
+            optionContent = {
+                Image(
+                    painter = painterResource(Images.CLOSE),
+                    contentDescription = "",
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .height(18.dp)
+                        .clickable { onNavigateDevices?.invoke() }
+                )
+            }
         )
 
         DeviceNameSetting(

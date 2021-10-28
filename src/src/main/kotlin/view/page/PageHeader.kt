@@ -1,8 +1,6 @@
 package view.tab
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.Text
@@ -10,15 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.WindowScope
 
 @Composable
-fun PageHeader(windowScope: WindowScope, title: String, icon: Painter, onAction: () -> Unit) {
+fun PageHeader(windowScope: WindowScope, title: String, optionContent: @Composable () -> Unit) {
     windowScope.WindowDraggableArea {
         Row(
             modifier = Modifier
@@ -39,16 +35,7 @@ fun PageHeader(windowScope: WindowScope, title: String, icon: Painter, onAction:
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-            Image(
-                painter = icon,
-                contentDescription = "",
-                contentScale = ContentScale.FillHeight,
-                modifier = Modifier
-                    .wrapContentWidth()
-                    .height(18.dp)
-                    .align(Alignment.CenterVertically)
-                    .clickable { onAction() }
-            )
+            Box(modifier = Modifier.align(Alignment.CenterVertically)) { optionContent() }
         }
     }
 }
