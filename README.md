@@ -9,12 +9,15 @@ ScrcpyHub is a GUI application to use [scrcpy](https://github.com/Genymobile/scr
 
 - Created with [Compose for Desktop](https://github.com/JetBrains/compose-jb)
 - Support mirroring control. (Start / Stop)
-- Support multi android device mirroring.
-- Support Windows10 or Ubuntu or Mac OS
+- Support multi android device mirroring
+- Support tray menu
+- Support Windows10 or Mac OS
 
-| ![demo1](docs/one.png) | ![demo2](docs/two.png) | ![demo3](docs/three.png) |
-| --- | ---- | --- |
-|  |  |  |
+![demo1](docs/one.png)
+
+![demo2](docs/two.png)
+
+![demo3](docs/three.png)
 
 # ⬇️ Install
 
