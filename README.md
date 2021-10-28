@@ -13,11 +13,7 @@ ScrcpyHub is a GUI application to use [scrcpy](https://github.com/Genymobile/scr
 - Support tray menu
 - Support Windows10 or Mac OS
 
-![demo1](docs/one.png)
-
-![demo2](docs/two.png)
-
-![demo3](docs/three.png)
+<img src="docs/one.png" width=256 hspace="5"><img src="docs/two.png" width=256 hspace="5"><img src="docs/three.png" width=256 hspace="5">
 
 # ⬇️ Install
 
