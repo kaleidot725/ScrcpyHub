@@ -24,6 +24,9 @@ object Strings {
     const val DEVICES_PAGE_STOP = "STOP"
     const val DEVICES_PAGE_NOT_FOUND_DEVICES = "Not found devices"
 
+    const val DEVICES_DROP_DOWN_SETTING_MENU_TITLE = "Setting"
+    const val DEVICES_DROP_DOWN_QUIT_MENU_TITLE = "Quit"
+
     // Device Page
     const val DEVICE_PAGE_EDIT_NAME_TITLE = "Device Name"
     const val DEVICE_PAGE_EDIT_NAME_DETAILS = "Display device name"
