@@ -5,10 +5,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,11 +21,14 @@ import androidx.compose.ui.window.WindowScope
 import model.entity.Device
 import resource.Images
 import resource.Strings
+import resource.Strings.DEVICES_DROP_DOWN_QUIT_MENU_TITLE
+import resource.Strings.DEVICES_DROP_DOWN_SETTING_MENU_TITLE
 import view.components.DeviceCard
 import view.components.RefreshButton
 import view.extention.onInitialize
 import view.tab.PageHeader
 import viewmodel.DevicesPageViewModel
+import kotlin.system.exitProcess
 
 @Composable
 fun DevicesPage(
@@ -50,21 +53,8 @@ private fun onDrawPage(
     Box(modifier = Modifier.fillMaxSize()) {
         if (states.isEmpty()) {
             Column(modifier = Modifier.fillMaxSize()) {
-                PageHeader(
-                    windowScope = windowScope,
-                    title = Strings.APP_NAME,
-                    optionContent = {
-                        Image(
-                            painter = painterResource(Images.SETTING),
-                            contentDescription = "",
-                            contentScale = ContentScale.FillHeight,
-                            modifier = Modifier
-                                .wrapContentWidth()
-                                .height(18.dp)
-                                .clickable { onNavigateSetting?.invoke() }
-                        )
-                    }
-                )
+                DevicePageHeader(windowScope = windowScope, onNavigateSetting)
+
                 Box(modifier = Modifier.fillMaxSize()) {
                     Text(
                         Strings.DEVICES_PAGE_NOT_FOUND_DEVICES,
@@ -75,36 +65,20 @@ private fun onDrawPage(
             }
         } else {
             Column {
-                PageHeader(
-                    windowScope = windowScope,
-                    title = Strings.APP_NAME,
-                    optionContent = {
-                        Image(
-                            painter = painterResource(Images.SETTING),
-                            contentDescription = "",
-                            contentScale = ContentScale.FillHeight,
-                            modifier = Modifier
-                                .wrapContentWidth()
-                                .height(18.dp)
-                                .clickable { onNavigateSetting?.invoke() }
-                        )
-                    }
-                )
+                DevicePageHeader(windowScope = windowScope, onNavigateSetting)
 
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    items(
-                        states,
-                        itemContent = { device ->
-                            DeviceCard(
-                                device = device.first,
-                                isRunning = device.second,
-                                startScrcpy = { viewModel.startScrcpy(it) },
-                                stopScrcpy = { viewModel.stopScrcpy(it) },
-                                goToDetail = { onNavigateDevice?.invoke(device.first) },
-                                modifier = Modifier
-                                    .wrapContentHeight()
-                                    .fillMaxWidth()
-                                    .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+                    items(states, itemContent = { device ->
+                        DeviceCard(
+                            device = device.first,
+                            isRunning = device.second,
+                            startScrcpy = { viewModel.startScrcpy(it) },
+                            stopScrcpy = { viewModel.stopScrcpy(it) },
+                            goToDetail = { onNavigateDevice?.invoke(device.first) },
+                            modifier = Modifier
+                                .wrapContentHeight()
+                                .fillMaxWidth()
+                                .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
                             )
                         }
                     )
@@ -120,4 +94,52 @@ private fun onDrawPage(
             modifier = Modifier.wrapContentSize().align(Alignment.BottomEnd).padding(8.dp)
         )
     }
+}
+
+@Composable
+private fun DevicePageHeader(windowScope: WindowScope, onNavigateSetting: (() -> Unit)?) {
+    PageHeader(
+        windowScope = windowScope,
+        title = Strings.APP_NAME,
+        optionContent = {
+            ApplicationDropDownMenu(
+                onSetting = { onNavigateSetting?.invoke() },
+                onQuit = { exitProcess(0) },
+                modifier = Modifier.height(18.dp).width(24.dp)
+            )
+        }
+    )
+}
+
+@Composable
+private fun ApplicationDropDownMenu(
+    onSetting: () -> Unit,
+    onQuit: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Box(modifier = modifier) {
+        Image(
+            painter = painterResource(Images.SETTING),
+            contentDescription = "",
+            contentScale = ContentScale.FillHeight,
+            modifier = Modifier.matchParentSize().clickable { expanded = true }
+        )
+
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            DropdownMenuItem(onClick = {
+                onSetting()
+            }) {
+                Text(text = DEVICES_DROP_DOWN_SETTING_MENU_TITLE)
+            }
+
+            DropdownMenuItem(onClick = {
+                onQuit()
+            }) {
+                Text(text = DEVICES_DROP_DOWN_QUIT_MENU_TITLE)
+            }
+        }
+    }
+
 }
