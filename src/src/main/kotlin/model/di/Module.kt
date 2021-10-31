@@ -1,6 +1,5 @@
 package model.di
 
-import model.command.AdbCommand
 import model.command.ScrcpyCommand
 import model.entity.Device
 import model.repository.DeviceRepository
@@ -25,12 +24,6 @@ val appModule = module {
     single {
         val settingRepository = get<SettingRepository>()
         val setting = settingRepository.get()
-        AdbCommand(adbPath = setting.adbLocation ?: "")
-    }
-
-    single {
-        val settingRepository = get<SettingRepository>()
-        val setting = settingRepository.get()
         ScrcpyCommand(adbPath = setting.adbLocation ?: "", scrcpyPath = setting.scrcpyLocation ?: "")
     }
 
@@ -40,7 +33,7 @@ val appModule = module {
 
     single {
         val directory = get<String>(named("setting_directory"))
-        DeviceRepository(directory, get())
+        DeviceRepository(directory)
     }
 
     single {
@@ -69,11 +62,11 @@ val appModule = module {
     }
 
     single {
-        IsSetupCompletedUseCase(get(), get())
+        IsSetupCompletedUseCase(get())
     }
 
     single {
-        UpdateSettingUseCase(get(), get(), get())
+        UpdateSettingUseCase(get(), get())
     }
 
     single {

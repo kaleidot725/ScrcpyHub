@@ -1,18 +1,14 @@
 package model.usecase
 
-import model.command.AdbCommand
 import model.command.ScrcpyCommand
 
-class IsSetupCompletedUseCase(
-    private val adbCommand: AdbCommand,
-    private val scrcpyCommand: ScrcpyCommand
-) {
+class IsSetupCompletedUseCase(private val scrcpyCommand: ScrcpyCommand) {
     fun execute(): Result {
-        if (!adbCommand.isInstalled()) {
+        if (!scrcpyCommand.adbIsInstalled()) {
             return Result.NOT_FOUND_ADB_COMMAND
         }
 
-        if (!scrcpyCommand.isInstalled()) {
+        if (!scrcpyCommand.scrcpyIsInstalled()) {
             return Result.NOT_FOUND_SCRCPY_COMMAND
         }
 

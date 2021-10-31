@@ -42,7 +42,7 @@ class DevicesPageViewModel(
         }
     }
 
-    private fun fetchStates() {
+    private suspend fun fetchStates() {
         val devices = fetchDevicesUseCase.execute()
         val states = devices.map { device -> device to isRunningScrcpyUseCase.execute(device) }
         _states.value = states
