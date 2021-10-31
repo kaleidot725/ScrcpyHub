@@ -22,6 +22,7 @@ dependencies {
     implementation("com.lordcodes.turtle:turtle:0.5.0")
     implementation("io.insert-koin:koin-core:3.1.2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
+    implementation("com.malinskiy.adam:adam:0.4.3")
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("io.mockk:mockk:1.10.5")
