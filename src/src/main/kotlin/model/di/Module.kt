@@ -41,40 +41,44 @@ val appModule = module {
         SettingRepository(directory)
     }
 
-    single {
+    factory {
         FetchDevicesUseCase(get())
     }
 
-    single {
+    factory {
+        GetDevicesFlowUseCase(get())
+    }
+    
+    factory {
         FetchSettingUseCase(get())
     }
 
-    single {
+    factory {
         IsScrcpyRunningUseCase(get())
     }
 
-    single {
+    factory {
         StartScrcpyUseCase(get(), get())
     }
 
-    single {
+    factory {
         StopScrcpyUseCase(get())
     }
 
-    single {
+    factory {
         IsSetupCompletedUseCase(get())
     }
 
-    single {
+    factory {
         UpdateSettingUseCase(get(), get())
     }
 
-    single {
+    factory {
         UpdateDeviceNameUseCase(get())
     }
 
     factory {
-        DevicesPageViewModel(get(), get(), get(), get())
+        DevicesPageViewModel(get(), get(), get(), get(), get())
     }
 
     factory { (device: Device) ->
