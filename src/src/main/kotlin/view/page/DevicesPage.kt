@@ -24,9 +24,9 @@ import resource.Strings
 import resource.Strings.DEVICES_DROP_DOWN_QUIT_MENU_TITLE
 import resource.Strings.DEVICES_DROP_DOWN_SETTING_MENU_TITLE
 import view.components.DeviceCard
-import view.components.RefreshButton
 import view.extention.onInitialize
 import view.tab.PageHeader
+import viewmodel.DeviceStatus
 import viewmodel.DevicesPageViewModel
 import kotlin.system.exitProcess
 
@@ -48,7 +48,7 @@ private fun onDrawPage(
     onNavigateSetting: (() -> Unit)? = null,
     onNavigateDevice: ((Device) -> Unit)? = null
 ) {
-    val states: List<Pair<Device, Boolean>> by viewModel.states.collectAsState()
+    val states: List<DeviceStatus> by viewModel.states.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         if (states.isEmpty()) {
@@ -68,18 +68,18 @@ private fun onDrawPage(
                 DevicePageHeader(windowScope = windowScope, onNavigateSetting)
 
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    items(states, itemContent = { device ->
+                    items(states, itemContent = { status ->
                         DeviceCard(
-                            device = device.first,
-                            isRunning = device.second,
+                            device = status.device,
+                            isRunning = status.isRunning,
                             startScrcpy = { viewModel.startScrcpy(it) },
                             stopScrcpy = { viewModel.stopScrcpy(it) },
-                            goToDetail = { onNavigateDevice?.invoke(device.first) },
+                            goToDetail = { onNavigateDevice?.invoke(status.device) },
                             modifier = Modifier
                                 .wrapContentHeight()
                                 .fillMaxWidth()
                                 .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
-                            )
+                        )
                         }
                     )
                     item {
@@ -88,11 +88,6 @@ private fun onDrawPage(
                 }
             }
         }
-
-        RefreshButton(
-            onReload = { viewModel.refresh() },
-            modifier = Modifier.wrapContentSize().align(Alignment.BottomEnd).padding(8.dp)
-        )
     }
 }
 
