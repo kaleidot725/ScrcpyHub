@@ -39,6 +39,10 @@ class DevicesPageViewModel(
         }
     }
 
+    fun saveScreenshotToDesktop(device: Device) {
+        // TODO
+    }
+
     private suspend fun fetchStates() {
         updateStates(fetchDevicesUseCase.execute())
     }

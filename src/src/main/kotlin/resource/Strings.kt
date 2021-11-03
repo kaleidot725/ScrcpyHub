@@ -20,9 +20,10 @@ object Strings {
     const val DEVICES_PAGE_START = "Start"
     const val DEVICES_PAGE_STOP = "Stop"
     const val DEVICES_PAGE_NOT_FOUND_DEVICES = "Not found devices"
-
     const val DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE = "Preferences"
     const val DEVICES_DROP_DOWN_QUIT_MENU_TITLE = "Quit"
+    const val DEVICE_DROP_DOWN_PREFERENCE_MENU_TITLE = "Edit Device Setting"
+    const val DEVICE_DROP_DOWN_SCREEN_SHOT_MENU_TITLE = "Save Screenshot to Desktop"
 
     // Device Page
     const val DEVICE_PAGE_EDIT_NAME_TITLE = "Device Name"

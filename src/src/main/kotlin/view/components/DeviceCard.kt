@@ -4,11 +4,8 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -26,6 +23,7 @@ fun DeviceCard(
     startScrcpy: ((Device) -> Unit)? = null,
     stopScrcpy: ((Device) -> Unit)? = null,
     goToDetail: ((Device) -> Unit)? = null,
+    takeScreenshot: ((Device) -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     Card(modifier = modifier) {
@@ -68,19 +66,50 @@ fun DeviceCard(
                 )
             }
 
-            Image(
-                painter = painterResource(Images.DOTS),
-                contentScale = ContentScale.FillWidth,
-                contentDescription = null,
-                modifier = Modifier
-                    .width(30.dp)
-                    .height(30.dp)
-                    .padding(start = 4.dp)
-                    .align(Alignment.CenterVertically)
-                    .clickable {
-                        goToDetail?.invoke(device)
-                    }
+            DeviceDropDownMenu(
+                onSetting = { goToDetail?.invoke(device) },
+                onScreenShot = { takeScreenshot?.invoke(device) },
+                modifier = Modifier.align(Alignment.CenterVertically)
             )
+        }
+    }
+}
+
+@Composable
+private fun DeviceDropDownMenu(
+    onSetting: () -> Unit,
+    onScreenShot: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Box(modifier = modifier) {
+        Image(
+            painter = painterResource(Images.DOTS),
+            contentDescription = "",
+            modifier = Modifier.size(30.dp).padding(start = 4.dp).clickable { expanded = true }
+        )
+
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            DropdownMenuItem(
+                onClick = { onSetting() },
+                modifier = Modifier.height(32.dp)
+            ) {
+                Text(
+                    text = Strings.DEVICE_DROP_DOWN_PREFERENCE_MENU_TITLE,
+                    style = MaterialTheme.typography.body2
+                )
+            }
+
+            DropdownMenuItem(
+                onClick = { onScreenShot() },
+                modifier = Modifier.height(32.dp)
+            ) {
+                Text(
+                    text = Strings.DEVICE_DROP_DOWN_SCREEN_SHOT_MENU_TITLE,
+                    style = MaterialTheme.typography.body2
+                )
+            }
         }
     }
 }

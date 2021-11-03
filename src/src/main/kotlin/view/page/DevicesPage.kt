@@ -75,6 +75,7 @@ private fun onDrawPage(
                                 startScrcpy = { viewModel.startScrcpy(it) },
                                 stopScrcpy = { viewModel.stopScrcpy(it) },
                                 goToDetail = { onNavigateDevice?.invoke(status.device) },
+                                takeScreenshot = { viewModel.saveScreenshotToDesktop(status.device) },
                                 modifier = Modifier
                                     .wrapContentHeight()
                                     .fillMaxWidth()
@@ -123,24 +124,25 @@ private fun ApplicationDropDownMenu(
         )
 
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            DropdownMenuItem(onClick = {
-                onSetting()
-            }) {
+            DropdownMenuItem(
+                onClick = { onSetting() },
+                modifier = Modifier.height(32.dp)
+            ) {
                 Text(
                     text = DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE,
-                    style = MaterialTheme.typography.body1
+                    style = MaterialTheme.typography.body2
                 )
             }
 
-            DropdownMenuItem(onClick = {
-                onQuit()
-            }) {
+            DropdownMenuItem(
+                onClick = { onQuit() },
+                modifier = Modifier.height(32.dp)
+            ) {
                 Text(
                     text = DEVICES_DROP_DOWN_QUIT_MENU_TITLE,
-                    style = MaterialTheme.typography.body1
+                    style = MaterialTheme.typography.body2
                 )
             }
         }
     }
-
 }
