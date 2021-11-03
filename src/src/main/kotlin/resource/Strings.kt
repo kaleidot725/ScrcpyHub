@@ -2,18 +2,15 @@ package resource
 
 object Strings {
     // COMMON
-    const val APP_VERSION = "1.0.0"
+    const val APP_VERSION = "1.2.0"
     const val APP_NAME = "ScrcpyHub"
     const val SAVE = "Save"
     const val SETUP = "Setup"
     const val QUIT = "Quit"
 
-    // HOME
-    const val HOME_TITLE = "HOME"
-
     // TRAY
     const val TRAY_TOGGLE_SCRCPY_HUB = "Toggle ScrcpyHub"
-    const val TRAY_VERSION = "$TRAY_TOGGLE_SCRCPY_HUB v$APP_VERSION"
+    const val TRAY_VERSION = "Version v$APP_VERSION"
 
     // Error
     const val NOT_FOUND_ADB_COMMAND = "Not found ADB Command"
