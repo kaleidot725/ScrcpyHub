@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Snackbar
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,7 +14,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.WindowScope
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
@@ -81,11 +81,11 @@ private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewMod
                     Snackbar(modifier = Modifier.padding(8.dp).align(Alignment.BottomCenter)) {
                         Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
                             Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
-                                Text(errorMessage ?: "", fontSize = 16.sp)
+                                Text(errorMessage ?: "", style = MaterialTheme.typography.button)
                                 Spacer(modifier = Modifier.width(16.dp))
                                 Text(
                                     SETUP,
-                                    fontSize = 16.sp,
+                                    style = MaterialTheme.typography.button,
                                     color = Colors.NAVY,
                                     modifier = Modifier.clickable { viewModel.selectPage(Page.SettingPage) }
                                 )

@@ -7,16 +7,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Device
 import resource.Images
@@ -58,7 +56,7 @@ private fun onDrawPage(
                 Box(modifier = Modifier.fillMaxSize()) {
                     Text(
                         Strings.DEVICES_PAGE_NOT_FOUND_DEVICES,
-                        style = TextStyle(color = Color.Black, fontSize = 18.sp),
+                        style = MaterialTheme.typography.body1,
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }
@@ -68,18 +66,20 @@ private fun onDrawPage(
                 DevicePageHeader(windowScope = windowScope, onNavigateSetting)
 
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    items(states, itemContent = { status ->
-                        DeviceCard(
-                            device = status.device,
-                            isRunning = status.isRunning,
-                            startScrcpy = { viewModel.startScrcpy(it) },
-                            stopScrcpy = { viewModel.stopScrcpy(it) },
-                            goToDetail = { onNavigateDevice?.invoke(status.device) },
-                            modifier = Modifier
-                                .wrapContentHeight()
-                                .fillMaxWidth()
-                                .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
-                        )
+                    items(
+                        states,
+                        itemContent = { status ->
+                            DeviceCard(
+                                device = status.device,
+                                isRunning = status.isRunning,
+                                startScrcpy = { viewModel.startScrcpy(it) },
+                                stopScrcpy = { viewModel.stopScrcpy(it) },
+                                goToDetail = { onNavigateDevice?.invoke(status.device) },
+                                modifier = Modifier
+                                    .wrapContentHeight()
+                                    .fillMaxWidth()
+                                    .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+                            )
                         }
                     )
                     item {
@@ -126,13 +126,19 @@ private fun ApplicationDropDownMenu(
             DropdownMenuItem(onClick = {
                 onSetting()
             }) {
-                Text(text = DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE)
+                Text(
+                    text = DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE,
+                    style = MaterialTheme.typography.body1
+                )
             }
 
             DropdownMenuItem(onClick = {
                 onQuit()
             }) {
-                Text(text = DEVICES_DROP_DOWN_QUIT_MENU_TITLE)
+                Text(
+                    text = DEVICES_DROP_DOWN_QUIT_MENU_TITLE,
+                    style = MaterialTheme.typography.body1
+                )
             }
         }
     }

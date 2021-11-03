@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,7 +18,10 @@ fun SaveButton(savable: Boolean, onSaved: () -> Unit, modifier: Modifier = Modif
             modifier = Modifier.fillMaxWidth().wrapContentHeight(),
             onClick = { onSaved() }
         ) {
-            Text(Strings.SAVE)
+            Text(
+                text = Strings.SAVE,
+                style = MaterialTheme.typography.button,
+            )
         }
     }
 }

@@ -17,8 +17,8 @@ object Strings {
     const val NOT_FOUND_SCRCPY_COMMAND = "Not found Scrcpy Command"
 
     // DEVICES PAGE
-    const val DEVICES_PAGE_START = "START"
-    const val DEVICES_PAGE_STOP = "STOP"
+    const val DEVICES_PAGE_START = "Start"
+    const val DEVICES_PAGE_STOP = "Stop"
     const val DEVICES_PAGE_NOT_FOUND_DEVICES = "Not found devices"
 
     const val DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE = "Preferences"
