@@ -6,18 +6,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import model.entity.Device
 import resource.Images
 import resource.Strings
@@ -45,7 +42,7 @@ fun DeviceCard(
             ) {
                 Text(
                     device.displayName,
-                    style = TextStyle(color = Color.Black, fontSize = 16.sp, fontWeight = FontWeight.SemiBold),
+                    style = MaterialTheme.typography.subtitle1,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(horizontal = 4.dp)
@@ -53,18 +50,22 @@ fun DeviceCard(
 
                 Text(
                     device.id,
-                    style = TextStyle(color = Color.Gray, fontSize = 12.sp, fontWeight = FontWeight.SemiBold),
+                    style = MaterialTheme.typography.subtitle2,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(horizontal = 4.dp)
+                    modifier = Modifier.padding(horizontal = 4.dp),
+                    color = androidx.compose.ui.graphics.Color.Gray,
                 )
             }
 
             Button(
                 onClick = { if (!isRunning) startScrcpy?.invoke(device) else stopScrcpy?.invoke(device) },
-                modifier = Modifier.width(80.dp).height(30.dp).align(Alignment.CenterVertically)
+                modifier = Modifier.wrapContentHeight().width(80.dp).align(Alignment.CenterVertically)
             ) {
-                Text(if (!isRunning) Strings.DEVICES_PAGE_START else Strings.DEVICES_PAGE_STOP, fontSize = 12.sp)
+                Text(
+                    text = if (!isRunning) Strings.DEVICES_PAGE_START else Strings.DEVICES_PAGE_STOP,
+                    style = MaterialTheme.typography.button
+                )
             }
 
             Image(

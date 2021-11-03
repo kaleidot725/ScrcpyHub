@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
@@ -14,9 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.WindowScope
 import resource.Images
 import resource.Strings
@@ -99,12 +98,14 @@ private fun onDrawPage(
 private fun AdbLocationSetting(adbLocation: String, onUpdate: (String) -> Unit, modifier: Modifier = Modifier) {
     Card(modifier = modifier) {
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(SETTING_PAGE_EDIT_ADB_LOCATION_TITLE, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            Text(
+                SETTING_PAGE_EDIT_ADB_LOCATION_TITLE,
+                style = MaterialTheme.typography.subtitle1,
+            )
             Text(
                 SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS,
-                fontSize = 12.sp,
+                style = MaterialTheme.typography.subtitle2,
                 color = Color.Gray,
-                fontWeight = FontWeight.SemiBold
             )
             Spacer(modifier = Modifier.height(8.dp))
             TextField(
@@ -127,12 +128,14 @@ private fun AdbLocationSetting_Preview() {
 private fun ScrcpyLocationSetting(scrcpyLocation: String, onUpdate: (String) -> Unit, modifier: Modifier = Modifier) {
     Card(modifier = modifier) {
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            Text(
+                SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE,
+                style = MaterialTheme.typography.subtitle1,
+            )
             Text(
                 SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS,
-                fontSize = 12.sp,
+                style = MaterialTheme.typography.subtitle2,
                 color = Color.Gray,
-                fontWeight = FontWeight.SemiBold
             )
             Spacer(modifier = Modifier.height(8.dp))
             TextField(
