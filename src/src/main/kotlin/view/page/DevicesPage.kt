@@ -21,8 +21,8 @@ import androidx.compose.ui.window.WindowScope
 import model.entity.Device
 import resource.Images
 import resource.Strings
+import resource.Strings.DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE
 import resource.Strings.DEVICES_DROP_DOWN_QUIT_MENU_TITLE
-import resource.Strings.DEVICES_DROP_DOWN_SETTING_MENU_TITLE
 import view.components.DeviceCard
 import view.extention.onInitialize
 import view.tab.PageHeader
@@ -126,7 +126,7 @@ private fun ApplicationDropDownMenu(
             DropdownMenuItem(onClick = {
                 onSetting()
             }) {
-                Text(text = DEVICES_DROP_DOWN_SETTING_MENU_TITLE)
+                Text(text = DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE)
             }
 
             DropdownMenuItem(onClick = {
