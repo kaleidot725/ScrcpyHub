@@ -1,18 +1,18 @@
 package model.usecase
 
 import model.entity.Device
+import model.entity.Message
 import model.repository.DeviceRepository
 import model.repository.MessageRepository
 
-class SaveScreenshotToDesktop(
+class SaveScreenshotToDesktopUseCase(
     private val deviceRepository: DeviceRepository,
-    private val messageEventRepository: MessageRepository,
+    private val messageRepository: MessageRepository,
 ) {
     suspend fun execute(device: Device): Boolean {
-        val result = deviceRepository.saveScreenshot(device)
-        if (result) {
-
+        return deviceRepository.saveScreenshot(device).apply {
+            val message = if (this) Message.SaveScreenshotSuccessMessage else Message.SaveScreenshotFailedMessage
+            messageRepository.push(message)
         }
-        return
     }
 }

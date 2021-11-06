@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
+import model.entity.Message
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
 import resource.Colors
@@ -37,60 +38,80 @@ fun MainContent(windowScope: WindowScope, mainContentViewModel: MainContentViewM
 
 @Composable
 private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewModel) {
-    val selectedPages: Page by viewModel.selectedPages.collectAsState()
-    val hasError: Boolean by viewModel.hasError.collectAsState()
-    val errorMessage: String? by viewModel.errorMessage.collectAsState()
-
     MainTheme {
         Box(modifier = Modifier.fillMaxSize().background(Colors.SMOKE_WHITE)) {
-            Crossfade(selectedPages, animationSpec = tween(100)) { selectedPageName ->
-                when (selectedPageName) {
-                    Page.DevicesPage -> {
-                        val devicesPageViewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
-                        DevicesPage(
-                            windowScope = windowScope,
-                            devicesPageViewModel = devicesPageViewModel,
-                            onNavigateSetting = { viewModel.selectPage(Page.SettingPage) },
-                            onNavigateDevice = { viewModel.selectPage(Page.DevicePage(it)) }
-                        )
+            MainPages(windowScope, viewModel)
+            MainSnacks(viewModel)
+        }
+    }
+}
+
+@Composable
+private fun MainPages(windowScope: WindowScope, viewModel: MainContentViewModel) {
+    val selectedPages: Page by viewModel.selectedPages.collectAsState()
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Crossfade(selectedPages, animationSpec = tween(100)) { selectedPageName ->
+            when (selectedPageName) {
+                Page.DevicesPage -> {
+                    val devicesPageViewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
+                    DevicesPage(
+                        windowScope = windowScope,
+                        devicesPageViewModel = devicesPageViewModel,
+                        onNavigateSetting = { viewModel.selectPage(Page.SettingPage) },
+                        onNavigateDevice = { viewModel.selectPage(Page.DevicePage(it)) }
+                    )
+                }
+                Page.SettingPage -> {
+                    val settingPageViewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
+                    SettingPage(
+                        windowScope = windowScope,
+                        settingPageViewModel = settingPageViewModel,
+                        onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) },
+                        onSaved = { viewModel.checkError() }
+                    )
+                }
+                is Page.DevicePage -> {
+                    val devicePageViewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
+                        parametersOf(selectedPageName.device)
                     }
-                    Page.SettingPage -> {
-                        val settingPageViewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
-                        SettingPage(
-                            windowScope = windowScope,
-                            settingPageViewModel = settingPageViewModel,
-                            onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) },
-                            onSaved = { viewModel.refresh() }
-                        )
-                    }
-                    is Page.DevicePage -> {
-                        val devicePageViewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
-                            parametersOf(selectedPageName.device)
-                        }
-                        DevicePage(
-                            windowScope = windowScope,
-                            deviceViewModel = devicePageViewModel,
-                            onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) }
+                    DevicePage(
+                        windowScope = windowScope,
+                        deviceViewModel = devicePageViewModel,
+                        onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) }
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun MainSnacks(viewModel: MainContentViewModel) {
+    val errorMessage: String? by viewModel.errorMessage.collectAsState()
+    val notifyMessage: Message by viewModel.notifyMessage.collectAsState()
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        if (errorMessage != null) {
+            Snackbar(modifier = Modifier.padding(8.dp).align(Alignment.BottomCenter)) {
+                Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
+                    Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
+                        Text(errorMessage ?: "", style = MaterialTheme.typography.button)
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Text(
+                            SETUP,
+                            style = MaterialTheme.typography.button,
+                            color = Colors.NAVY,
+                            modifier = Modifier.clickable { viewModel.selectPage(Page.SettingPage) }
                         )
                     }
                 }
             }
-
-            if (hasError) {
-                if (errorMessage != null) {
-                    Snackbar(modifier = Modifier.padding(8.dp).align(Alignment.BottomCenter)) {
-                        Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
-                            Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
-                                Text(errorMessage ?: "", style = MaterialTheme.typography.button)
-                                Spacer(modifier = Modifier.width(16.dp))
-                                Text(
-                                    SETUP,
-                                    style = MaterialTheme.typography.button,
-                                    color = Colors.NAVY,
-                                    modifier = Modifier.clickable { viewModel.selectPage(Page.SettingPage) }
-                                )
-                            }
-                        }
+        } else if (notifyMessage != Message.EmptyMessage) {
+            Snackbar(modifier = Modifier.padding(8.dp).align(Alignment.BottomCenter)) {
+                Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
+                    Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
+                        Text(notifyMessage.toStringMessage(), style = MaterialTheme.typography.button)
                     }
                 }
             }
@@ -98,3 +119,10 @@ private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewMod
     }
 }
 
+private fun Message.toStringMessage(): String {
+    return when (this) {
+        Message.EmptyMessage -> ""
+        Message.SaveScreenshotSuccessMessage -> "Save Screenshot → Success"
+        Message.SaveScreenshotFailedMessage -> "Save Screenshot → Failed"
+    }
+}
