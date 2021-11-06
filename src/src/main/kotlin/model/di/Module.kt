@@ -2,6 +2,7 @@ package model.di
 
 import model.entity.Device
 import model.repository.DeviceRepository
+import model.repository.MessageRepository
 import model.repository.ProcessRepository
 import model.repository.SettingRepository
 import model.usecase.*
@@ -18,6 +19,10 @@ val appModule = module {
             "Mac OS X" -> "/Library/Application Support/ScrcpyHub/"
             else -> "./"
         }
+    }
+
+    single {
+        MessageRepository()
     }
 
     single {
@@ -75,6 +80,10 @@ val appModule = module {
     }
 
     factory {
+        GetMessageFlowUseCase(get())
+    }
+
+    factory {
         DevicesPageViewModel(get(), get(), get(), get(), get(), get())
     }
 
@@ -83,7 +92,7 @@ val appModule = module {
     }
 
     factory {
-        MainContentViewModel(get())
+        MainContentViewModel(get(), get())
     }
 
     factory {
