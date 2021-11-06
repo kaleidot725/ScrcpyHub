@@ -125,7 +125,10 @@ private fun ApplicationDropDownMenu(
 
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             DropdownMenuItem(
-                onClick = { onSetting() },
+                onClick = {
+                    onSetting()
+                    expanded = false
+                },
                 modifier = Modifier.height(32.dp)
             ) {
                 Text(
@@ -135,7 +138,10 @@ private fun ApplicationDropDownMenu(
             }
 
             DropdownMenuItem(
-                onClick = { onQuit() },
+                onClick = {
+                    onQuit()
+                    expanded = false
+                },
                 modifier = Modifier.height(32.dp)
             ) {
                 Text(

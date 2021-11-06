@@ -12,7 +12,8 @@ class DevicesPageViewModel(
     private val getDevicesFlowUseCase: GetDevicesFlowUseCase,
     private val startScrcpyUseCase: StartScrcpyUseCase,
     private val stopScrcpyUseCase: StopScrcpyUseCase,
-    private val isRunningScrcpyUseCase: IsScrcpyRunningUseCase
+    private val isRunningScrcpyUseCase: IsScrcpyRunningUseCase,
+    private val saveScreenshotToDesktop: SaveScreenshotToDesktop
 ) : ViewModel() {
     private val _states: MutableStateFlow<List<DeviceStatus>> = MutableStateFlow(emptyList())
     val states: StateFlow<List<DeviceStatus>> = _states
@@ -40,7 +41,9 @@ class DevicesPageViewModel(
     }
 
     fun saveScreenshotToDesktop(device: Device) {
-        // TODO
+        coroutineScope.launch {
+            saveScreenshotToDesktop.execute(device)
+        }
     }
 
     private suspend fun fetchStates() {
