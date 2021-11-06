@@ -1,6 +1,5 @@
 package model.di
 
-import model.command.ScrcpyCommand
 import model.entity.Device
 import model.repository.DeviceRepository
 import model.repository.ProcessRepository
@@ -22,21 +21,15 @@ val appModule = module {
     }
 
     single {
-        val settingRepository = get<SettingRepository>()
-        val setting = settingRepository.get()
-        ScrcpyCommand(adbPath = setting.adbLocation ?: "", scrcpyPath = setting.scrcpyLocation ?: "")
-    }
-
-    single {
         ProcessRepository()
     }
 
-    single {
+    factory {
         val directory = get<String>(named("setting_directory"))
         DeviceRepository(directory)
     }
 
-    single {
+    factory {
         val directory = get<String>(named("setting_directory"))
         SettingRepository(directory)
     }
@@ -62,6 +55,10 @@ val appModule = module {
     }
 
     factory {
+        SaveScreenshotToDesktop(get())
+    }
+
+    factory {
         StopScrcpyUseCase(get())
     }
 
@@ -70,7 +67,7 @@ val appModule = module {
     }
 
     factory {
-        UpdateSettingUseCase(get(), get())
+        UpdateSettingUseCase(get())
     }
 
     factory {
@@ -78,7 +75,7 @@ val appModule = module {
     }
 
     factory {
-        DevicesPageViewModel(get(), get(), get(), get(), get())
+        DevicesPageViewModel(get(), get(), get(), get(), get(), get())
     }
 
     factory { (device: Device) ->

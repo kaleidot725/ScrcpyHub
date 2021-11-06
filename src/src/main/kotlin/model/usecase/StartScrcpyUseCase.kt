@@ -3,12 +3,16 @@ package model.usecase
 import model.command.ScrcpyCommand
 import model.entity.Device
 import model.repository.ProcessRepository
+import model.repository.SettingRepository
 
 class StartScrcpyUseCase(
-    private val scrcpyCommand: ScrcpyCommand,
+    private val settingRepository: SettingRepository,
     private val processRepository: ProcessRepository
 ) {
-    fun execute(device: Device, onDestroy: suspend () -> Unit): Boolean {
+    suspend fun execute(device: Device, onDestroy: suspend () -> Unit): Boolean {
+        val setting = settingRepository.get()
+        val scrcpyCommand = ScrcpyCommand(setting.adbLocation, setting.scrcpyLocation)
+
         val exists = processRepository.any(device.id)
         if (exists) {
             return false
