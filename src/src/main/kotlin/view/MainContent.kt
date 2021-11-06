@@ -92,26 +92,30 @@ private fun MainSnacks(viewModel: MainContentViewModel) {
     val notifyMessage: Message by viewModel.notifyMessage.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        if (errorMessage != null) {
-            Snackbar(modifier = Modifier.padding(8.dp).align(Alignment.BottomCenter)) {
-                Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
-                    Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
-                        Text(errorMessage ?: "", style = MaterialTheme.typography.button)
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Text(
-                            SETUP,
-                            style = MaterialTheme.typography.button,
-                            color = Colors.NAVY,
-                            modifier = Modifier.clickable { viewModel.selectPage(Page.SettingPage) }
-                        )
+        Column(modifier = Modifier.align(Alignment.BottomCenter)) {
+            if (notifyMessage != Message.EmptyMessage) {
+                Snackbar(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
+                    Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
+                        Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
+                            Text(notifyMessage.toStringMessage(), style = MaterialTheme.typography.button)
+                        }
                     }
                 }
             }
-        } else if (notifyMessage != Message.EmptyMessage) {
-            Snackbar(modifier = Modifier.padding(8.dp).align(Alignment.BottomCenter)) {
-                Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
-                    Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
-                        Text(notifyMessage.toStringMessage(), style = MaterialTheme.typography.button)
+
+            if (errorMessage != null) {
+                Snackbar(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
+                    Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
+                        Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
+                            Text(errorMessage ?: "", style = MaterialTheme.typography.button)
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Text(
+                                SETUP,
+                                style = MaterialTheme.typography.button,
+                                color = Colors.NAVY,
+                                modifier = Modifier.clickable { viewModel.selectPage(Page.SettingPage) }
+                            )
+                        }
                     }
                 }
             }
