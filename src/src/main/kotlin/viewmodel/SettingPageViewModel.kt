@@ -18,9 +18,11 @@ class SettingPageViewModel(
     val scrcpyLocation: StateFlow<String> = _scrcpyLocation
 
     init {
-        val setting = fetchSettingUseCase.execute()
-        _adbLocation.value = setting.adbLocation ?: ""
-        _scrcpyLocation.value = setting.scrcpyLocation ?: ""
+        coroutineScope.launch {
+            val setting = fetchSettingUseCase.execute()
+            _adbLocation.value = setting.adbLocation ?: ""
+            _scrcpyLocation.value = setting.scrcpyLocation ?: ""
+        }
     }
 
     fun updateAdbLocation(location: String) {

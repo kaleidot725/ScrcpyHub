@@ -1,9 +1,15 @@
 package model.usecase
 
 import model.command.ScrcpyCommand
+import model.repository.SettingRepository
 
-class IsSetupCompletedUseCase(private val scrcpyCommand: ScrcpyCommand) {
-    fun execute(): Result {
+class IsSetupCompletedUseCase(
+    private val settingRepository: SettingRepository
+) {
+    suspend fun execute(): Result {
+        val setting = settingRepository.get()
+        val scrcpyCommand = ScrcpyCommand(setting.adbLocation, setting.scrcpyLocation)
+        
         if (!scrcpyCommand.adbIsInstalled()) {
             return Result.NOT_FOUND_ADB_COMMAND
         }

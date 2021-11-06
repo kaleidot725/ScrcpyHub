@@ -6,7 +6,7 @@ import model.repository.DeviceRepository
 class UpdateDeviceNameUseCase(private val deviceRepository: DeviceRepository) {
     suspend fun execute(device: Device, newName: String, maxSize: Int?): Boolean {
         return try {
-            deviceRepository.updateSetting(device, newName, maxSize)
+            deviceRepository.saveDeviceSetting(device, newName, maxSize)
             true
         } catch (e: Exception) {
             false

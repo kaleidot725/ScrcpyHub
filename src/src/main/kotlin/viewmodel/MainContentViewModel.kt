@@ -2,6 +2,7 @@ package viewmodel
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import model.usecase.IsSetupCompletedUseCase
 import resource.Page
 import resource.Strings.NOT_FOUND_ADB_COMMAND
@@ -21,7 +22,7 @@ class MainContentViewModel(
     val errorMessage: StateFlow<String?> = _errorMessage
 
     override fun onStarted() {
-        refresh()
+        checkError()
     }
 
     fun refresh() {
@@ -33,12 +34,14 @@ class MainContentViewModel(
     }
 
     private fun checkError() {
-        val result = isSetupCompletedUseCase.execute()
-        _hasError.value = (result != IsSetupCompletedUseCase.Result.OK)
-        _errorMessage.value = when (result) {
-            IsSetupCompletedUseCase.Result.NOT_FOUND_SCRCPY_COMMAND -> NOT_FOUND_SCRCPY_COMMAND
-            IsSetupCompletedUseCase.Result.NOT_FOUND_ADB_COMMAND -> NOT_FOUND_ADB_COMMAND
-            else -> null
+        coroutineScope.launch {
+            val result = isSetupCompletedUseCase.execute()
+            _hasError.value = (result != IsSetupCompletedUseCase.Result.OK)
+            _errorMessage.value = when (result) {
+                IsSetupCompletedUseCase.Result.NOT_FOUND_SCRCPY_COMMAND -> NOT_FOUND_SCRCPY_COMMAND
+                IsSetupCompletedUseCase.Result.NOT_FOUND_ADB_COMMAND -> NOT_FOUND_ADB_COMMAND
+                else -> null
+            }
         }
     }
 }

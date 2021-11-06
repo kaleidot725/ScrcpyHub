@@ -1,5 +1,7 @@
 package model.repository
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -7,13 +9,17 @@ import model.entity.AppSetting
 import model.utils.FileUtils
 
 class SettingRepository(private val root: String) {
-    fun get(): AppSetting {
-        return load()
+    suspend fun get(): AppSetting {
+        return withContext(Dispatchers.IO) {
+            load()
+        }
     }
 
-    fun update(setting: AppSetting) {
-        createDir()
-        write(setting)
+    suspend fun update(setting: AppSetting) {
+        withContext(Dispatchers.IO) {
+            createDir()
+            write(setting)
+        }
     }
 
     private fun write(setting: AppSetting) {
