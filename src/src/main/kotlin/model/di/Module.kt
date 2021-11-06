@@ -55,7 +55,7 @@ val appModule = module {
     }
 
     factory {
-        SaveScreenshotToDesktop(get())
+        SaveScreenshotToDesktopUseCase(get(), get())
     }
 
     factory {

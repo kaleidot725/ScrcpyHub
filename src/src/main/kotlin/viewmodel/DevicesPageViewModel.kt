@@ -13,7 +13,7 @@ class DevicesPageViewModel(
     private val startScrcpyUseCase: StartScrcpyUseCase,
     private val stopScrcpyUseCase: StopScrcpyUseCase,
     private val isRunningScrcpyUseCase: IsScrcpyRunningUseCase,
-    private val saveScreenshotToDesktop: SaveScreenshotToDesktop
+    private val saveScreenshotToDesktop: SaveScreenshotToDesktopUseCase
 ) : ViewModel() {
     private val _states: MutableStateFlow<List<DeviceStatus>> = MutableStateFlow(emptyList())
     val states: StateFlow<List<DeviceStatus>> = _states
