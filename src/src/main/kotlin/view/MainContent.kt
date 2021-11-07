@@ -1,9 +1,7 @@
 package view
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.MutableTransitionState
-import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
@@ -56,36 +54,34 @@ private fun MainPages(windowScope: WindowScope, viewModel: MainContentViewModel)
     val selectedPages: Page by viewModel.selectedPages.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Crossfade(selectedPages, animationSpec = tween(100)) { selectedPageName ->
-            when (selectedPageName) {
-                Page.DevicesPage -> {
-                    val devicesPageViewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
-                    DevicesPage(
-                        windowScope = windowScope,
-                        devicesPageViewModel = devicesPageViewModel,
-                        onNavigateSetting = { viewModel.selectPage(Page.SettingPage) },
-                        onNavigateDevice = { viewModel.selectPage(Page.DevicePage(it)) }
-                    )
+        when (val page = selectedPages) {
+            Page.DevicesPage -> {
+                val devicesPageViewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
+                DevicesPage(
+                    windowScope = windowScope,
+                    devicesPageViewModel = devicesPageViewModel,
+                    onNavigateSetting = { viewModel.selectPage(Page.SettingPage) },
+                    onNavigateDevice = { viewModel.selectPage(Page.DevicePage(it)) }
+                )
+            }
+            Page.SettingPage -> {
+                val settingPageViewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
+                SettingPage(
+                    windowScope = windowScope,
+                    settingPageViewModel = settingPageViewModel,
+                    onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) },
+                    onSaved = { viewModel.checkError() }
+                )
+            }
+            is Page.DevicePage -> {
+                val devicePageViewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
+                    parametersOf(page.device)
                 }
-                Page.SettingPage -> {
-                    val settingPageViewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
-                    SettingPage(
-                        windowScope = windowScope,
-                        settingPageViewModel = settingPageViewModel,
-                        onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) },
-                        onSaved = { viewModel.checkError() }
-                    )
-                }
-                is Page.DevicePage -> {
-                    val devicePageViewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
-                        parametersOf(selectedPageName.device)
-                    }
-                    DevicePage(
-                        windowScope = windowScope,
-                        deviceViewModel = devicePageViewModel,
-                        onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) }
-                    )
-                }
+                DevicePage(
+                    windowScope = windowScope,
+                    deviceViewModel = devicePageViewModel,
+                    onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) }
+                )
             }
         }
     }
