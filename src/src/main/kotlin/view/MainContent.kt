@@ -1,7 +1,11 @@
 package view
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,6 +15,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -91,9 +96,15 @@ private fun MainSnacks(viewModel: MainContentViewModel) {
     val errorMessage: String? by viewModel.errorMessage.collectAsState()
     val notifyMessage: Message by viewModel.notifyMessage.collectAsState()
 
+    val notifyMessageState = remember { MutableTransitionState(false) }
+    val errorMessageState = remember { MutableTransitionState(false) }
+
+    notifyMessageState.targetState = notifyMessage != Message.EmptyMessage
+    errorMessageState.targetState = errorMessage != null
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.align(Alignment.BottomCenter)) {
-            if (notifyMessage != Message.EmptyMessage) {
+            AnimatedVisibility(notifyMessageState, enter = fadeIn(), exit = fadeOut()) {
                 Snackbar(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
                     Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
                         Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
@@ -102,8 +113,7 @@ private fun MainSnacks(viewModel: MainContentViewModel) {
                     }
                 }
             }
-
-            if (errorMessage != null) {
+            AnimatedVisibility(errorMessageState, enter = fadeIn(), exit = fadeOut()) {
                 Snackbar(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
                     Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
                         Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
