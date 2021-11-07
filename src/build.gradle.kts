@@ -4,12 +4,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.5.31"
-    id("org.jetbrains.compose") version "1.0.0-beta1"
+    id("org.jetbrains.compose") version "1.0.0-beta5"
     kotlin("plugin.serialization") version "1.4.31"
 }
 
 group = "me.kaleidot725"
-version = "1.1.0"
+version = "1.2.0"
 
 repositories {
     mavenCentral()
