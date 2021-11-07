@@ -32,7 +32,7 @@ object Strings {
     const val DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS = "Video width and height size limit"
 
     // Setting Page
-    const val SETTING_PAGE_TITLE = "Setting"
+    const val SETTING_PAGE_TITLE = "Preferences"
     const val SETTING_PAGE_EDIT_ADB_LOCATION_TITLE = "ADB Location"
     const val SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS = "If it is empty, use an environment variable"
     const val SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE = "Scrcpy Location"
