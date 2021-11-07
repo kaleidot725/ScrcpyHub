@@ -126,7 +126,7 @@ private fun MainSnacks(viewModel: MainContentViewModel) {
 private fun Message.toStringMessage(): String {
     return when (this) {
         Message.EmptyMessage -> ""
-        Message.SaveScreenshotSuccessMessage -> "Save Screenshot → Success"
-        Message.SaveScreenshotFailedMessage -> "Save Screenshot → Failed"
+        is Message.SuccessToSaveScreenshot -> "Success to save ${this.device.displayName} Screenshot!"
+        is Message.FailedToSaveScreenshot -> "Failed to save ${this.device.displayName} Screenshot!"
     }
 }
