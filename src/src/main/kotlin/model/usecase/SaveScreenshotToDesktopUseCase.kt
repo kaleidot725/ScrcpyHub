@@ -10,8 +10,13 @@ class SaveScreenshotToDesktopUseCase(
     private val messageRepository: MessageRepository,
 ) {
     suspend fun execute(device: Device): Boolean {
-        return deviceRepository.saveScreenshot(device).apply {
-            val message = if (this) Message.SaveScreenshotSuccessMessage else Message.SaveScreenshotFailedMessage
+        val filePath = deviceRepository.createScreenshotPathForDesktop(device)
+        return deviceRepository.saveScreenshot(device, filePath).apply {
+            val message = if (this) {
+                Message.SuccessToSaveScreenshot(device, filePath)
+            } else {
+                Message.FailedToSaveScreenshot(device)
+            }
             messageRepository.push(message)
         }
     }

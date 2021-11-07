@@ -45,14 +45,21 @@ class DeviceRepository(private val root: String) {
         }
     }
 
-    suspend fun saveScreenshot(device: Device): Boolean {
+    suspend fun saveScreenshot(device: Device, filePath: String): Boolean {
         return withContext(Dispatchers.IO) {
             val image = adb.execute(
                 request = ScreenCaptureRequest(screenshotAdapter),
                 serial = device.id
             ).toBufferedImage()
-            ImageIO.write(image, "png", File(createScreenshotPath(device)))
+            ImageIO.write(image, "png", File(filePath))
         }
+    }
+
+    fun createScreenshotPathForDesktop(device: Device): String {
+        val date = ZonedDateTime
+            .now(ZoneId.systemDefault())
+            .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
+        return "${System.getProperty("user.home")}/Desktop/${device.displayName}-${date}.png"
     }
 
     private fun writeCache(device: Device) {
@@ -86,13 +93,6 @@ class DeviceRepository(private val root: String) {
         } catch (e: Exception) {
             return
         }
-    }
-
-    private fun createScreenshotPath(device: Device): String {
-        val date = ZonedDateTime
-            .now(ZoneId.systemDefault())
-            .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
-        return "${System.getProperty("user.home")}/Desktop/${device.displayName}-${date}.png"
     }
 
     private fun List<com.malinskiy.adam.request.device.Device>.toDeviceList(): List<Device> {
