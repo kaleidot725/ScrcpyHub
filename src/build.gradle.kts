@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "me.kaleidot725"
-version = "1.2.0"
+version = "1.2.1"
 
 repositories {
     mavenCentral()
@@ -44,7 +44,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "ScrcpyHub"
-
+            modules("jdk.management")
             macOS {
                 bundleID = "jp.kaleidot725.scrcpyhub"
             }
