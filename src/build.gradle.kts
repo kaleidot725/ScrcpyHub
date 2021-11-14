@@ -42,11 +42,18 @@ compose.desktop {
     application {
         mainClass = "ScrcpyHubKt"
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "ScrcpyHub"
             modules("jdk.management")
+
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi)
+
             macOS {
                 bundleID = "jp.kaleidot725.scrcpyhub"
+                iconFile.set(project.file("icon.icns"))
+            }
+
+            windows {
+                iconFile.set(project.file("icon.ico"))
             }
         }
     }
