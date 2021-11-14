@@ -7,11 +7,6 @@ class ScrcpyCommand(
     private var adbPath: String,
     private var scrcpyPath: String
 ) {
-    fun setupPath(adbPath: String, scrcpyPath: String) {
-        this.adbPath = adbPath
-        this.scrcpyPath = scrcpyPath
-    }
-
     fun scrcpyIsInstalled(): Boolean {
         return try {
             ProcessBuilder().command(createHelpCommand(scrcpyPath)).start().destroy()
