@@ -33,7 +33,7 @@ You need adb and scrcpy, accesible from your PATH, If you don't have it yet.
 brew install android-platform-tools
 brew install scrcpy
 ```
-Download and launch ScrcpyHub. Mac application download [here ](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.2.1)and install.
+Download and launch ScrcpyHub. Mac application download [here ](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.2.2)and install.
 
 ## 💻 Windows 10
 
@@ -44,7 +44,7 @@ choco install adb
 choco install scrcpy
 ```
 
-Download and launch ScrcpyHub. Windows application download [here](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.2.1) and install.
+Download and launch ScrcpyHub. Windows application download [here](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.2.2) and install.
 
 # 🎫 Licence
 
