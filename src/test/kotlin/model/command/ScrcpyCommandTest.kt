@@ -1,5 +1,7 @@
 package model.command
 
-class ScrcpyCommandTest {
-    // NOT IMPLEMENTED
-}
+import io.kotest.core.spec.style.StringSpec
+
+class ScrcpyCommandTest: StringSpec({
+    "run_test"
+})
