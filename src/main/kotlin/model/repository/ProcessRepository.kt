@@ -14,7 +14,7 @@ class ProcessRepository {
         processList[key] = process
         scope.launch(Dispatchers.IO) {
             process.waitForRunning(MONITORING_DELAY)
-            process.monitor(key, MONITORING_INTERVAL) { onDestroy?.invoke() }
+            process.monitor(MONITORING_INTERVAL) { onDestroy?.invoke() }
         }
     }
 
@@ -31,7 +31,7 @@ class ProcessRepository {
         }
     }
 
-    private suspend fun Process.monitor(key: String, interval: Long, onDestroy: suspend () -> Unit) {
+    private suspend fun Process.monitor(interval: Long, onDestroy: suspend () -> Unit) {
         while (this.isAlive) {
             delay(interval)
         }

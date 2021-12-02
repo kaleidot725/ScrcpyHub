@@ -20,8 +20,8 @@ class SettingPageViewModel(
     init {
         coroutineScope.launch {
             val setting = fetchSettingUseCase.execute()
-            _adbLocation.value = setting.adbLocation ?: ""
-            _scrcpyLocation.value = setting.scrcpyLocation ?: ""
+            _adbLocation.value = setting.adbLocation
+            _scrcpyLocation.value = setting.scrcpyLocation
         }
     }
 
