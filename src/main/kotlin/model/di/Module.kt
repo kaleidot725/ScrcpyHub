@@ -46,7 +46,7 @@ val appModule = module {
     factory {
         GetDevicesFlowUseCase(get())
     }
-    
+
     factory {
         FetchSettingUseCase(get())
     }
