@@ -8,7 +8,11 @@ class ScrcpyCommandFactory(
     @OptIn(kotlin.ExperimentalStdlibApi::class)
     override fun create(data: Device): List<String> {
         return buildList {
-            if (path != null) add("$path${COMMAND_NAME}") else add(COMMAND_NAME)
+            if (path != null) {
+                add("$path$COMMAND_NAME")
+            } else {
+                add(COMMAND_NAME)
+            }
 
             add(DEVICE_OPTION_NAME)
             add(data.id)
@@ -24,7 +28,11 @@ class ScrcpyCommandFactory(
     @OptIn(kotlin.ExperimentalStdlibApi::class)
     override fun createHelp(): List<String> {
         return buildList {
-            if (path != null) add("$path${COMMAND_NAME}") else add(COMMAND_NAME)
+            if (path != null) {
+                add("$path$COMMAND_NAME")
+            } else {
+                add(COMMAND_NAME)
+            }
             add(HELP_OPTION_NAME)
         }
     }
