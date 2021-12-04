@@ -1,8 +1,6 @@
 package model.usecase
 
-import model.command.AdbCommand
 import model.command.ScrcpyCommand
-import model.command.factory.AdbCommandFactory
 import model.command.factory.ScrcpyCommandFactory
 import model.entity.Device
 import model.repository.ProcessRepository

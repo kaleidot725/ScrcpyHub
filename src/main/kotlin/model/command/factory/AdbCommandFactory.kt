@@ -1,15 +1,8 @@
 package model.command.factory
 
-import model.command.ScrcpyCommand
-import model.entity.Device
-import java.io.File
-
 class AdbCommandFactory(
-    override val path: String?
-): CommandFactory<Unit> {
-    override val envPath: String
-        get() = path + File.pathSeparator + System.getenv("PATH")
-
+    override val path: String? = null
+) : CommandFactory<Unit> {
     @OptIn(kotlin.ExperimentalStdlibApi::class)
     override fun create(data: Unit): List<String> {
         return buildList {
