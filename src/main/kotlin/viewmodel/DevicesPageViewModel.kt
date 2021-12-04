@@ -5,7 +5,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import model.entity.Device
-import model.usecase.*
+import model.usecase.FetchDevicesUseCase
+import model.usecase.GetDevicesFlowUseCase
+import model.usecase.IsScrcpyRunningUseCase
+import model.usecase.SaveScreenshotToDesktopUseCase
+import model.usecase.StartScrcpyUseCase
+import model.usecase.StopScrcpyUseCase
 
 class DevicesPageViewModel(
     private val fetchDevicesUseCase: FetchDevicesUseCase,
