@@ -13,6 +13,7 @@ jobs:
         with:
           ruby-version: '2.6'
       - name: run ktlintCheck
+        continue-on-error: true
         run: |
           ./gradlew --continue ktlintCheck
       - name: run test
