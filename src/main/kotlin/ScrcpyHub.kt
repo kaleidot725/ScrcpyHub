@@ -30,28 +30,16 @@ fun main() = application {
     }
 
     Tray(
-        state = trayState,
-        icon = painterResource(Images.TRAY),
-        menu = {
-            Item(
-                Strings.TRAY_TOGGLE_SCRCPY_HUB,
-                onClick = { isOpen = !isOpen }
-            )
+        state = trayState, icon = painterResource(Images.TRAY), menu = {
+            Item(Strings.TRAY_TOGGLE_SCRCPY_HUB, onClick = { isOpen = !isOpen })
 
-            Item(
-                Strings.TRAY_VERSION,
-                enabled = false,
-                onClick = {}
-            )
+            Item(Strings.TRAY_VERSION, enabled = false, onClick = {})
 
             Separator()
 
-            Item(
-                Strings.QUIT,
-                onClick = {
-                    exitApplication()
-                }
-            )
+            Item(Strings.QUIT, onClick = {
+                exitApplication()
+            })
         }
     )
 
