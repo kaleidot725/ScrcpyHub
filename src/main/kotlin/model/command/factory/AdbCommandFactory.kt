@@ -6,14 +6,22 @@ class AdbCommandFactory(
     @OptIn(kotlin.ExperimentalStdlibApi::class)
     override fun create(data: Unit): List<String> {
         return buildList {
-            if (path != null) add("$path${COMMAND_NAME}") else add(COMMAND_NAME)
+            if (path != null) {
+                add("$path$COMMAND_NAME")
+            } else {
+                add(COMMAND_NAME)
+            }
         }
     }
 
     @OptIn(kotlin.ExperimentalStdlibApi::class)
     override fun createHelp(): List<String> {
         return buildList {
-            if (path != null) add("$path${COMMAND_NAME}") else add(COMMAND_NAME)
+            if (path != null) {
+                add("$path$COMMAND_NAME")
+            } else {
+                add(COMMAND_NAME)
+            }
             add(HELP_OPTION)
         }
     }
