@@ -4,12 +4,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.5.31"
-    id("org.jetbrains.compose") version "1.0.0-beta5"
+    id("org.jetbrains.compose") version "1.0.0"
     kotlin("plugin.serialization") version "1.4.31"
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 }
 
 group = "me.kaleidot725"
-version = "1.2.2"
+version = "1.2.3"
 
 repositories {
     mavenCentral()
@@ -19,15 +20,14 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    implementation("com.lordcodes.turtle:turtle:0.5.0")
-    implementation("io.insert-koin:koin-core:3.1.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
+    implementation("com.lordcodes.turtle:turtle:0.6.0")
+    implementation("io.insert-koin:koin-core:3.1.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
     implementation("com.malinskiy.adam:adam:0.4.3")
 
     testImplementation(kotlin("test-junit5"))
-    testImplementation("io.mockk:mockk:1.10.5")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
+    testImplementation("io.kotest:kotest-runner-junit5:5.0.1")
+    testImplementation("io.mockk:mockk:1.12.1")
 }
 
 tasks.test {
@@ -35,7 +35,13 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "15"
+    kotlinOptions.jvmTarget = "11"
+}
+
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
 }
 
 compose.desktop {
