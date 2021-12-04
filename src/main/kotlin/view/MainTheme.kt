@@ -10,7 +10,7 @@ fun MainTheme(content: @Composable () -> Unit) {
     MaterialTheme(content = content, colors = colors)
 }
 
-private val colors =  Colors(
+private val colors = Colors(
     primary = resource.Colors.NAVY,
     primaryVariant = resource.Colors.NAVY,
     background = Color.White,
