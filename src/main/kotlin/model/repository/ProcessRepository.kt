@@ -7,16 +7,23 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
 
+private data class ProcessState(
+    val value: Process,
+    val status: ProcessStatus
+)
+
+enum class ProcessStatus {
+    IDLE,
+    RUNNING,
+    RECORDING
+}
+
 class ProcessRepository {
-    private val processList: MutableMap<String, Process> = mutableMapOf()
+    private val processList: MutableMap<String, ProcessState> = mutableMapOf()
     private val scope: CoroutineScope = MainScope()
 
-    fun any(key: String): Boolean {
-        return processList[key] != null
-    }
-
-    fun insert(key: String, process: Process, onDestroy: (suspend () -> Unit)? = null) {
-        processList[key] = process
+    fun add(key: String, process: Process, status: ProcessStatus, onDestroy: (suspend () -> Unit)? = null) {
+        processList[key] = ProcessState(process, status)
         scope.launch(Dispatchers.IO) {
             process.waitForRunning(MONITORING_DELAY)
             process.monitor(MONITORING_INTERVAL) { onDestroy?.invoke() }
@@ -24,8 +31,12 @@ class ProcessRepository {
     }
 
     fun delete(key: String) {
-        processList[key]?.destroy()
+        processList[key]?.value?.kill()
         processList.remove(key)
+    }
+
+    fun getStatus(key: String): ProcessStatus {
+        return processList[key]?.status ?: ProcessStatus.IDLE
     }
 
     private suspend fun Process.waitForRunning(interval: Long) {
@@ -41,6 +52,10 @@ class ProcessRepository {
             delay(interval)
         }
         onDestroy.invoke()
+    }
+
+    private fun Process.kill() {
+        Runtime.getRuntime().exec("kill -SIGINT ${this.pid()}").waitFor()
     }
 
     companion object {

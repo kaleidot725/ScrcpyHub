@@ -11,8 +11,7 @@ data class Device(
     data class Context(
         val device: Device,
         val customName: String? = null,
-        val maxSize: Int? = null,
-        val enableRecording: Boolean = false
+        val maxSize: Int? = null
     ) {
         val displayName get() = customName ?: device.name
     }

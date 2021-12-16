@@ -1,10 +1,10 @@
 package model.command.factory
 
 class AdbCommandFactory(
-    override val path: String? = null
-) : CommandFactory<Unit> {
+    val path: String? = null
+) {
     @OptIn(kotlin.ExperimentalStdlibApi::class)
-    override fun create(data: Unit): List<String> {
+    fun create(): List<String> {
         return buildList {
             if (path != null) {
                 add("$path$COMMAND_NAME")
@@ -15,7 +15,7 @@ class AdbCommandFactory(
     }
 
     @OptIn(kotlin.ExperimentalStdlibApi::class)
-    override fun createHelp(): List<String> {
+    fun createHelp(): List<String> {
         return buildList {
             if (path != null) {
                 add("$path$COMMAND_NAME")
