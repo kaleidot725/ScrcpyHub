@@ -31,23 +31,23 @@ class DevicesPageViewModel(
         }
     }
 
-    fun startScrcpy(device: Device) {
+    fun startScrcpy(context: Device.Context) {
         coroutineScope.launch {
-            startScrcpyUseCase.execute(device) { fetchStates() }
+            startScrcpyUseCase.execute(context) { fetchStates() }
             fetchStates()
         }
     }
 
-    fun stopScrcpy(device: Device) {
+    fun stopScrcpy(context: Device.Context) {
         coroutineScope.launch {
-            stopScrcpyUseCase.execute(device)
+            stopScrcpyUseCase.execute(context)
             fetchStates()
         }
     }
 
-    fun saveScreenshotToDesktop(device: Device) {
+    fun saveScreenshotToDesktop(context: Device.Context) {
         coroutineScope.launch {
-            saveScreenshotToDesktop.execute(device)
+            saveScreenshotToDesktop.execute(context)
         }
     }
 
@@ -55,9 +55,10 @@ class DevicesPageViewModel(
         updateStates(fetchDevicesUseCase.execute())
     }
 
-    private fun updateStates(devices: List<Device>) {
-        _states.value = devices.map { device -> DeviceStatus(device, isRunningScrcpyUseCase.execute(device)) }
+    private fun updateStates(contextList: List<Device.Context>) {
+        _states.value =
+            contextList.map { config -> DeviceStatus(config, isRunningScrcpyUseCase.execute(config)) }
     }
 }
 
-data class DeviceStatus(val device: Device, val isRunning: Boolean)
+data class DeviceStatus(val context: Device.Context, val isRunning: Boolean)

@@ -1,7 +1,7 @@
 package model.entity
 
 sealed class Message {
-    data class SuccessToSaveScreenshot(val device: Device, val fileName: String) : Message()
-    data class FailedToSaveScreenshot(val device: Device) : Message()
+    data class SuccessToSaveScreenshot(val context: Device.Context, val fileName: String) : Message()
+    data class FailedToSaveScreenshot(val context: Device.Context) : Message()
     object EmptyMessage : Message()
 }

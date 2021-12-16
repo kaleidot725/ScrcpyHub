@@ -10,8 +10,8 @@ class StartScrcpyUseCase(
     private val settingRepository: SettingRepository,
     private val processRepository: ProcessRepository
 ) {
-    suspend fun execute(device: Device, onDestroy: suspend () -> Unit): Boolean {
-        val exists = processRepository.any(device.id)
+    suspend fun execute(context: Device.Context, onDestroy: suspend () -> Unit): Boolean {
+        val exists = processRepository.any(context.device.id)
         if (exists) {
             return false
         }
@@ -20,9 +20,9 @@ class StartScrcpyUseCase(
         val scrcpyCommand = ScrcpyCommand(ScrcpyCommandFactory(setting.scrcpyLocation))
 
         return try {
-            val process = scrcpyCommand.run(device)
-            processRepository.insert(device.id, process) {
-                processRepository.delete(device.id)
+            val process = scrcpyCommand.run(context)
+            processRepository.insert(context.device.id, process) {
+                processRepository.delete(context.device.id)
                 onDestroy.invoke()
             }
             true

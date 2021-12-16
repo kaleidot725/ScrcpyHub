@@ -10,26 +10,22 @@ class ScrcpyCommandFactoryTest : StringSpec(
         "create" {
             val factory = ScrcpyCommandFactory(path = "test/")
 
-            val device1 = Device(
-                id = "DEVICE1", name = "NAME", Device.Setting(customName = "CUSTOM_NAME", maxSize = null)
-            )
+            val device1 = Device.Context(Device(id = "DEVICE1", name = "NAME"), maxSize = null)
             factory.create(device1) shouldBe listOf("test/scrcpy", "-s", "DEVICE1")
 
-            val device2 = Device(
-                id = "DEVICE2", name = "NAME", Device.Setting(customName = "CUSTOM_NAME", maxSize = 1000)
-            )
+            val device2 = Device.Context(Device(id = "DEVICE2", name = "NAME"), maxSize = 1000)
             factory.create(device2) shouldBe listOf("test/scrcpy", "-s", "DEVICE2", "-m", "1000")
         }
         "create_when_no_path_specified" {
             val factory = ScrcpyCommandFactory()
 
-            val device1 = Device(
-                id = "DEVICE1", name = "NAME", Device.Setting(customName = "CUSTOM_NAME", maxSize = null)
+            val device1 = Device.Context(
+                Device(id = "DEVICE1", name = "NAME"), customName = "CUSTOM_NAME", maxSize = null
             )
             factory.create(device1) shouldBe listOf("scrcpy", "-s", "DEVICE1")
 
-            val device2 = Device(
-                id = "DEVICE2", name = "NAME", Device.Setting(customName = "CUSTOM_NAME", maxSize = 1000)
+            val device2 = Device.Context(
+                Device(id = "DEVICE2", name = "NAME"), customName = "CUSTOM_NAME", maxSize = 1000
             )
             factory.create(device2) shouldBe listOf("scrcpy", "-s", "DEVICE2", "-m", "1000")
         }

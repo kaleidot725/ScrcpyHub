@@ -26,24 +26,22 @@ class DeviceRepository(private val root: String) {
     private val adb = AndroidDebugBridgeClientFactory().build()
     private val screenshotAdapter = RawImageScreenCaptureAdapter()
 
-    suspend fun getAll(): List<Device> {
+    suspend fun getAll(): List<Device.Context> {
         return withContext(Dispatchers.IO) {
             val devices: List<Device> = adb.execute(request = ListDevicesRequest()).toDeviceList()
             loadCaches(devices)
         }
     }
 
-    fun getAllFlow(scope: CoroutineScope): Flow<List<Device>> {
+    fun getAllFlow(scope: CoroutineScope): Flow<List<Device.Context>> {
         val allFlow = adb.execute(request = AsyncDeviceMonitorRequest(), scope = scope).receiveAsFlow()
         return allFlow.map { loadCaches(it.toDeviceList()) }
     }
 
-    suspend fun saveDeviceSetting(device: Device, setting: Device.Setting) {
+    suspend fun saveDeviceSetting(context: Device.Context) {
         withContext(Dispatchers.IO) {
             createDir()
-            writeCache(
-                device.copy(setting = setting)
-            )
+            writeCache(context)
         }
     }
 
@@ -57,17 +55,17 @@ class DeviceRepository(private val root: String) {
         }
     }
 
-    fun createScreenshotPathForDesktop(device: Device): String {
+    fun createScreenshotPathForDesktop(context: Device.Context): String {
         val date = ZonedDateTime
             .now(ZoneId.systemDefault())
             .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
-        return "${System.getProperty("user.home")}/Desktop/${device.displayName}-${date}.png"
+        return "${System.getProperty("user.home")}/Desktop/${context.displayName}-${date}.png"
     }
 
-    private fun writeCache(device: Device) {
+    private fun writeCache(context: Device.Context) {
         try {
-            FileUtils.createFileFile(root, device.id).outputStream().apply {
-                this.write(Json.encodeToString(device).toByteArray())
+            FileUtils.createFileFile(root, context.device.id).outputStream().apply {
+                this.write(Json.encodeToString(context).toByteArray())
                 this.close()
             }
         } catch (e: Exception) {
@@ -75,16 +73,16 @@ class DeviceRepository(private val root: String) {
         }
     }
 
-    private fun loadCaches(devices: List<Device>): List<Device> {
+    private fun loadCaches(devices: List<Device>): List<Device.Context> {
         return devices.map { loadCache(it) }
     }
 
-    private fun loadCache(device: Device): Device {
+    private fun loadCache(device: Device): Device.Context {
         return try {
             val content = FileUtils.createFileFile(root, device.id).readText()
             Json.decodeFromString(string = content)
         } catch (e: Exception) {
-            device
+            Device.Context(device = device)
         }
     }
 
@@ -102,6 +100,6 @@ class DeviceRepository(private val root: String) {
     }
 
     private fun com.malinskiy.adam.request.device.Device.toDevice(): Device {
-        return Device(id = serial, name = "Device", setting = Device.Setting())
+        return Device(id = serial, name = "Device")
     }
 }

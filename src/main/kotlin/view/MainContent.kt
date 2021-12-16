@@ -84,7 +84,7 @@ private fun MainPages(windowScope: WindowScope, viewModel: MainContentViewModel)
             }
             is Page.DevicePage -> {
                 val devicePageViewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
-                    parametersOf(page.device)
+                    parametersOf(page.context)
                 }
                 DevicePage(
                     windowScope = windowScope,
@@ -141,7 +141,7 @@ private fun MainSnacks(viewModel: MainContentViewModel) {
 private fun Message.toStringMessage(): String {
     return when (this) {
         Message.EmptyMessage -> ""
-        is Message.SuccessToSaveScreenshot -> "Success to save ${this.device.displayName} Screenshot!"
-        is Message.FailedToSaveScreenshot -> "Failed to save ${this.device.displayName} Screenshot!"
+        is Message.SuccessToSaveScreenshot -> "Success to save ${this.context.displayName} Screenshot!"
+        is Message.FailedToSaveScreenshot -> "Failed to save ${this.context.displayName} Screenshot!"
     }
 }
