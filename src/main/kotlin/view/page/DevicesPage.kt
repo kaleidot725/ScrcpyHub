@@ -84,11 +84,13 @@ private fun onDrawPage(
                         itemContent = { status ->
                             DeviceCard(
                                 context = status.context,
-                                isRunning = status.isRunning,
+                                processStatus = status.processStatus,
                                 startScrcpy = { viewModel.startScrcpy(it) },
                                 stopScrcpy = { viewModel.stopScrcpy(it) },
                                 goToDetail = { onNavigateDevice?.invoke(status.context) },
                                 takeScreenshot = { viewModel.saveScreenshotToDesktop(status.context) },
+                                startRecording = { viewModel.startScrcpyRecord(status.context) },
+                                stopRecording = { viewModel.stopScrcpy(status.context) },
                                 modifier = Modifier
                                     .wrapContentHeight()
                                     .fillMaxWidth()

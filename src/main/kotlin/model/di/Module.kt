@@ -9,9 +9,10 @@ import model.usecase.FetchDevicesUseCase
 import model.usecase.FetchSettingUseCase
 import model.usecase.GetDevicesFlowUseCase
 import model.usecase.GetMessageFlowUseCase
-import model.usecase.IsScrcpyRunningUseCase
+import model.usecase.GetScrcpyStatusUseCase
 import model.usecase.IsSetupCompletedUseCase
 import model.usecase.SaveScreenshotToDesktopUseCase
+import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyUseCase
 import model.usecase.UpdateDeviceNameUseCase
@@ -62,11 +63,11 @@ val appModule = module {
     }
 
     factory {
-        IsScrcpyRunningUseCase(get())
+        GetScrcpyStatusUseCase(get())
     }
 
     factory {
-        StartScrcpyUseCase(get(), get())
+        StartScrcpyUseCase(get(), get(), get())
     }
 
     factory {
@@ -94,7 +95,11 @@ val appModule = module {
     }
 
     factory {
-        DevicesPageViewModel(get(), get(), get(), get(), get(), get())
+        StartScrcpyRecordUseCase(get(), get(), get())
+    }
+
+    factory {
+        DevicesPageViewModel(get(), get(), get(), get(), get(), get(), get())
     }
 
     factory { (context: Device.Context) ->
