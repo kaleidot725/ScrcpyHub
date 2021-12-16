@@ -12,6 +12,13 @@ class ScrcpyCommand(private val factory: ScrcpyCommandFactory) {
         }.start()
     }
 
+    fun record(context: Device.Context, fileName: String): Process {
+        val command = factory.createRecord(context, fileName)
+        return ProcessBuilder(command).apply {
+            setupCommandPath(factory.path)
+        }.start()
+    }
+
     fun isInstalled(): Boolean {
         return try {
             ProcessBuilder(factory.createHelp()).start().destroy()

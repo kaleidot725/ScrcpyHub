@@ -5,10 +5,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import model.entity.Device
+import model.repository.ProcessStatus
 import model.usecase.FetchDevicesUseCase
 import model.usecase.GetDevicesFlowUseCase
-import model.usecase.IsScrcpyRunningUseCase
+import model.usecase.GetScrcpyStatusUseCase
 import model.usecase.SaveScreenshotToDesktopUseCase
+import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyUseCase
 
@@ -16,8 +18,9 @@ class DevicesPageViewModel(
     private val fetchDevicesUseCase: FetchDevicesUseCase,
     private val getDevicesFlowUseCase: GetDevicesFlowUseCase,
     private val startScrcpyUseCase: StartScrcpyUseCase,
+    private val startScrcpyRecordUseCase: StartScrcpyRecordUseCase,
     private val stopScrcpyUseCase: StopScrcpyUseCase,
-    private val isRunningScrcpyUseCase: IsScrcpyRunningUseCase,
+    private val getScrcpyProcessStatusUseCase: GetScrcpyStatusUseCase,
     private val saveScreenshotToDesktop: SaveScreenshotToDesktopUseCase
 ) : ViewModel() {
     private val _states: MutableStateFlow<List<DeviceStatus>> = MutableStateFlow(emptyList())
@@ -34,6 +37,13 @@ class DevicesPageViewModel(
     fun startScrcpy(context: Device.Context) {
         coroutineScope.launch {
             startScrcpyUseCase.execute(context) { fetchStates() }
+            fetchStates()
+        }
+    }
+
+    fun startScrcpyRecord(context: Device.Context) {
+        coroutineScope.launch {
+            startScrcpyRecordUseCase.execute(context) { fetchStates() }
             fetchStates()
         }
     }
@@ -56,9 +66,10 @@ class DevicesPageViewModel(
     }
 
     private fun updateStates(contextList: List<Device.Context>) {
-        _states.value =
-            contextList.map { config -> DeviceStatus(config, isRunningScrcpyUseCase.execute(config)) }
+        _states.value = contextList.map { context ->
+            DeviceStatus(context, getScrcpyProcessStatusUseCase.execute(context))
+        }
     }
 }
 
-data class DeviceStatus(val context: Device.Context, val isRunning: Boolean)
+data class DeviceStatus(val context: Device.Context, val processStatus: ProcessStatus)

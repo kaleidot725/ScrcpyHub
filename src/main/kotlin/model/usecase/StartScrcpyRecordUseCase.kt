@@ -8,7 +8,7 @@ import model.repository.ProcessRepository
 import model.repository.ProcessStatus
 import model.repository.SettingRepository
 
-class StartScrcpyUseCase(
+class StartScrcpyRecordUseCase(
     private val deviceRepository: DeviceRepository,
     private val settingRepository: SettingRepository,
     private val processRepository: ProcessRepository
@@ -23,8 +23,8 @@ class StartScrcpyUseCase(
         val scrcpyCommand = ScrcpyCommand(ScrcpyCommandFactory(setting.scrcpyLocation))
 
         return try {
-            val process = scrcpyCommand.run(context)
-            processRepository.add(context.device.id, process, ProcessStatus.RUNNING) {
+            val process = scrcpyCommand.record(context, deviceRepository.createRecordPathForDesktop(context))
+            processRepository.add(context.device.id, process, ProcessStatus.RECORDING) {
                 processRepository.delete(context.device.id)
                 onDestroy.invoke()
             }
