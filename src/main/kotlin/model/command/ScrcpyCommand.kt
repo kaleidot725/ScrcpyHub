@@ -5,8 +5,8 @@ import model.entity.Device
 import java.io.File
 
 class ScrcpyCommand(private val factory: ScrcpyCommandFactory) {
-    fun run(device: Device): Process {
-        val command = factory.create(device)
+    fun run(context: Device.Context): Process {
+        val command = factory.create(context)
         return ProcessBuilder(command).apply {
             setupCommandPath(factory.path)
         }.start()

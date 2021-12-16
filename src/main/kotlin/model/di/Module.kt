@@ -97,8 +97,8 @@ val appModule = module {
         DevicesPageViewModel(get(), get(), get(), get(), get(), get())
     }
 
-    factory { (device: Device) ->
-        DevicePageViewModel(device, get())
+    factory { (context: Device.Context) ->
+        DevicePageViewModel(context, get())
     }
 
     factory {
