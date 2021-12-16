@@ -5,15 +5,15 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Device(
     val id: String = "",
-    val name: String = "",
-    var setting: Setting
+    val name: String = ""
 ) {
-    val displayName get() = setting.customName ?: name
-
     @Serializable
-    data class Setting(
+    data class Context(
+        val device: Device,
         val customName: String? = null,
         val maxSize: Int? = null,
         val enableRecording: Boolean = false
-    )
+    ) {
+        val displayName get() = customName ?: device.name
+    }
 }

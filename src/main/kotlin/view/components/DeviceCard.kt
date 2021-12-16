@@ -35,12 +35,12 @@ import resource.Strings
 
 @Composable
 fun DeviceCard(
-    device: Device,
+    context: Device.Context,
     isRunning: Boolean,
-    startScrcpy: ((Device) -> Unit)? = null,
-    stopScrcpy: ((Device) -> Unit)? = null,
-    goToDetail: ((Device) -> Unit)? = null,
-    takeScreenshot: ((Device) -> Unit)? = null,
+    startScrcpy: ((Device.Context) -> Unit)? = null,
+    stopScrcpy: ((Device.Context) -> Unit)? = null,
+    goToDetail: ((Device.Context) -> Unit)? = null,
+    takeScreenshot: ((Device.Context) -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     Card(modifier = modifier) {
@@ -56,7 +56,7 @@ fun DeviceCard(
                 modifier = Modifier.fillMaxWidth(fraction = 0.65f).align(Alignment.CenterVertically)
             ) {
                 Text(
-                    device.displayName,
+                    context.displayName,
                     style = MaterialTheme.typography.subtitle1,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -64,7 +64,7 @@ fun DeviceCard(
                 )
 
                 Text(
-                    device.id,
+                    context.device.id,
                     style = MaterialTheme.typography.subtitle2,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -74,7 +74,7 @@ fun DeviceCard(
             }
 
             Button(
-                onClick = { if (!isRunning) startScrcpy?.invoke(device) else stopScrcpy?.invoke(device) },
+                onClick = { if (!isRunning) startScrcpy?.invoke(context) else stopScrcpy?.invoke(context) },
                 modifier = Modifier.wrapContentHeight().width(80.dp).align(Alignment.CenterVertically)
             ) {
                 Text(
@@ -84,8 +84,8 @@ fun DeviceCard(
             }
 
             DeviceDropDownMenu(
-                onSetting = { goToDetail?.invoke(device) },
-                onScreenShot = { takeScreenshot?.invoke(device) },
+                onSetting = { goToDetail?.invoke(context) },
+                onScreenShot = { takeScreenshot?.invoke(context) },
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
@@ -140,7 +140,7 @@ private fun DeviceDropDownMenu(
 @Preview
 @Composable
 private fun DeviceCard_Preview() {
-    DeviceCard(Device("ID", "NAME", Device.Setting()), false)
+    DeviceCard(Device.Context(Device("ID", "NAME")), false)
 }
 
 @Preview
@@ -148,5 +148,5 @@ private fun DeviceCard_Preview() {
 private fun DeviceCard_Preview_Overflow() {
     val id = "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
     val name = "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-    DeviceCard(Device(id, name, Device.Setting()), false)
+    DeviceCard(Device.Context(Device(id, name)), false)
 }

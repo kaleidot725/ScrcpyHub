@@ -3,11 +3,9 @@ package model.command.factory
 import model.entity.Device
 import java.io.File
 
-class ScrcpyCommandFactory(
-    override val path: String? = null
-) : CommandFactory<Device> {
+class ScrcpyCommandFactory(val path: String? = null) {
     @OptIn(kotlin.ExperimentalStdlibApi::class)
-    override fun create(data: Device): List<String> {
+    fun create(context: Device.Context): List<String> {
         return buildList {
             if (path != null) {
                 if (path.endsWith(File.separator)) {
@@ -20,9 +18,9 @@ class ScrcpyCommandFactory(
             }
 
             add(DEVICE_OPTION_NAME)
-            add(data.id)
+            add(context.device.id)
 
-            val maxSize = data.setting.maxSize
+            val maxSize = context.maxSize
             if (maxSize != null) {
                 add(MAX_SIZE_OPTION_NAME)
                 add(maxSize.toString())
@@ -31,7 +29,7 @@ class ScrcpyCommandFactory(
     }
 
     @OptIn(kotlin.ExperimentalStdlibApi::class)
-    override fun createHelp(): List<String> {
+    fun createHelp(): List<String> {
         return buildList {
             if (path != null) {
                 if (path.endsWith(File.separator)) {

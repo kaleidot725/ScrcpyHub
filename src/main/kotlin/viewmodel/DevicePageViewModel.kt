@@ -7,22 +7,22 @@ import model.entity.Device
 import model.usecase.UpdateDeviceNameUseCase
 
 class DevicePageViewModel(
-    private val device: Device,
+    private val context: Device.Context,
     private val updateDeviceNameUseCase: UpdateDeviceNameUseCase
 ) : ViewModel() {
-    private val _titleName: MutableStateFlow<String> = MutableStateFlow(device.displayName)
+    private val _titleName: MutableStateFlow<String> = MutableStateFlow(context.displayName)
     val titleName: StateFlow<String> = _titleName
 
-    private val _editName: MutableStateFlow<String> = MutableStateFlow(device.displayName)
+    private val _editName: MutableStateFlow<String> = MutableStateFlow(context.displayName)
     val editName: StateFlow<String> = _editName
 
-    private val _maxSize: MutableStateFlow<String> = MutableStateFlow(device.setting.maxSize?.toString() ?: "")
+    private val _maxSize: MutableStateFlow<String> = MutableStateFlow(context.maxSize?.toString() ?: "")
     val maxSize: StateFlow<String> = _maxSize
 
     private val _maxSizeError: MutableStateFlow<String> = MutableStateFlow("")
     val maxSizeError: StateFlow<String> = _maxSizeError
 
-    private val _enableRecording: MutableStateFlow<Boolean> = MutableStateFlow(device.setting.enableRecording)
+    private val _enableRecording: MutableStateFlow<Boolean> = MutableStateFlow(context.enableRecording)
     val enableRecording: StateFlow<Boolean> = _enableRecording
 
     private val _savable: MutableStateFlow<Boolean> = MutableStateFlow(true)
@@ -50,13 +50,14 @@ class DevicePageViewModel(
 
     fun save() {
         coroutineScope.launch {
-            val setting = Device.Setting(
+            val newContext = Device.Context(
+                device = context.device,
                 customName = _editName.value,
                 maxSize = _maxSize.value.toIntOrNull(),
                 enableRecording = _enableRecording.value
             )
 
-            updateDeviceNameUseCase.execute(device, setting)
+            updateDeviceNameUseCase.execute(newContext)
             _titleName.value = _editName.value
         }
     }
