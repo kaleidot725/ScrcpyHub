@@ -38,10 +38,12 @@ class DeviceRepository(private val root: String) {
         return allFlow.map { loadCaches(it.toDeviceList()) }
     }
 
-    suspend fun saveDeviceSetting(device: Device, newName: String, newMaxSize: Int?) {
+    suspend fun saveDeviceSetting(device: Device, setting: Device.Setting) {
         withContext(Dispatchers.IO) {
             createDir()
-            writeCache(device.copy(customName = newName, maxSize = newMaxSize))
+            writeCache(
+                device.copy(setting = setting)
+            )
         }
     }
 
@@ -100,6 +102,6 @@ class DeviceRepository(private val root: String) {
     }
 
     private fun com.malinskiy.adam.request.device.Device.toDevice(): Device {
-        return Device(id = serial, name = "Device")
+        return Device(id = serial, name = "Device", setting = Device.Setting())
     }
 }

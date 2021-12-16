@@ -16,7 +16,7 @@ class DevicePageViewModel(
     private val _editName: MutableStateFlow<String> = MutableStateFlow(device.displayName)
     val editName: StateFlow<String> = _editName
 
-    private val _maxSize: MutableStateFlow<String> = MutableStateFlow(device.maxSize?.toString() ?: "")
+    private val _maxSize: MutableStateFlow<String> = MutableStateFlow(device.setting.maxSize?.toString() ?: "")
     val maxSize: StateFlow<String> = _maxSize
 
     private val _maxSizeError: MutableStateFlow<String> = MutableStateFlow("")
@@ -41,7 +41,8 @@ class DevicePageViewModel(
 
     fun save() {
         coroutineScope.launch {
-            updateDeviceNameUseCase.execute(device, _editName.value, _maxSize.value.toIntOrNull())
+            val setting = Device.Setting(customName = _editName.value, maxSize = _maxSize.value.toIntOrNull())
+            updateDeviceNameUseCase.execute(device, setting)
             _titleName.value = _editName.value
         }
     }
