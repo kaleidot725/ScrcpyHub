@@ -22,6 +22,9 @@ class DevicePageViewModel(
     private val _maxSizeError: MutableStateFlow<String> = MutableStateFlow("")
     val maxSizeError: StateFlow<String> = _maxSizeError
 
+    private val _enableRecording: MutableStateFlow<Boolean> = MutableStateFlow(device.setting.enableRecording)
+    val enableRecording: StateFlow<Boolean> = _enableRecording
+
     private val _savable: MutableStateFlow<Boolean> = MutableStateFlow(true)
     val savable: StateFlow<Boolean> = _savable
 
@@ -39,9 +42,20 @@ class DevicePageViewModel(
         }
     }
 
+    fun updateEnableRecording(enableRecording: Boolean) {
+        coroutineScope.launch {
+            _enableRecording.emit(enableRecording)
+        }
+    }
+
     fun save() {
         coroutineScope.launch {
-            val setting = Device.Setting(customName = _editName.value, maxSize = _maxSize.value.toIntOrNull())
+            val setting = Device.Setting(
+                customName = _editName.value,
+                maxSize = _maxSize.value.toIntOrNull(),
+                enableRecording = _enableRecording.value
+            )
+
             updateDeviceNameUseCase.execute(device, setting)
             _titleName.value = _editName.value
         }

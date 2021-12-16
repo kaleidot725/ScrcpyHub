@@ -3,21 +3,26 @@ package view.page
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Card
+import androidx.compose.material.Checkbox
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -52,6 +57,7 @@ private fun onDrawPage(
     val name: String by viewModel.editName.collectAsState()
     val maxSize: String by viewModel.maxSize.collectAsState()
     val maxSizeError: String by viewModel.maxSizeError.collectAsState()
+    val enableRecording: Boolean by viewModel.enableRecording.collectAsState()
     val savable: Boolean by viewModel.savable.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -92,6 +98,16 @@ private fun onDrawPage(
             modifier = Modifier.height(8.dp)
         )
 
+        RecordingSetting(
+            enableRecording = enableRecording,
+            { viewModel.updateEnableRecording(it) },
+            modifier = Modifier.padding(horizontal = 8.dp)
+        )
+
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
+
         SaveButton(
             savable = savable,
             modifier = Modifier.padding(horizontal = 8.dp),
@@ -124,6 +140,12 @@ private fun DeviceNameSetting(deviceName: String, onUpdate: (String) -> Unit, mo
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun DeviceNameSetting_Preview() {
+    DeviceNameSetting("DEVICE", {})
 }
 
 @Composable
@@ -168,12 +190,44 @@ private fun MaxSizeSetting(maxSize: String, error: String, onUpdate: (String) ->
 
 @Preview
 @Composable
-private fun DeviceNameSetting_Preview() {
-    DeviceNameSetting("DEVICE", {})
+private fun MaxSizeSetting_Preview() {
+    MaxSizeSetting("1920", "", {})
+}
+
+@Composable
+private fun RecordingSetting(
+    enableRecording: Boolean,
+    onUpdate: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(modifier = modifier) {
+        Box(modifier = Modifier.wrapContentHeight().fillMaxWidth()) {
+            Column(modifier = Modifier.fillMaxWidth().padding(8.dp).align(Alignment.CenterStart)) {
+                Text(
+                    Strings.DEVICE_PAGE_EDIT_RECORDING_TITLE,
+                    style = MaterialTheme.typography.subtitle1,
+                )
+
+                Text(
+                    Strings.DEVICE_PAGE_EDIT_RECORDING_DETAILS,
+                    style = MaterialTheme.typography.subtitle2,
+                    color = Color.Gray,
+                )
+            }
+
+            Box(modifier = Modifier.fillMaxWidth().wrapContentHeight().align(Alignment.CenterEnd)) {
+                Checkbox(
+                    checked = enableRecording,
+                    onCheckedChange = onUpdate,
+                    modifier = Modifier.align(Alignment.CenterEnd)
+                )
+            }
+        }
+    }
 }
 
 @Preview
 @Composable
-private fun MaxSizeSetting_Preview() {
-    MaxSizeSetting("1920", "", {})
+private fun RecordingSetting_Preview() {
+    RecordingSetting(true, {}, modifier = Modifier.wrapContentHeight().width(300.dp))
 }
