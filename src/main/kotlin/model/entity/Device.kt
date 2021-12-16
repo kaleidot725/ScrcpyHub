@@ -6,8 +6,14 @@ import kotlinx.serialization.Serializable
 data class Device(
     val id: String = "",
     val name: String = "",
-    var customName: String? = null,
-    var maxSize: Int? = null
+    var setting: Setting
 ) {
-    val displayName get() = customName ?: name
+    val displayName get() = setting.customName ?: name
+
+    @Serializable
+    data class Setting(
+        val customName: String? = null,
+        val maxSize: Int? = null,
+        val enableRecording: Boolean = false
+    )
 }

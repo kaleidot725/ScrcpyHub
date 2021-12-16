@@ -17,7 +17,7 @@ class ScrcpyCommandFactory(
             add(DEVICE_OPTION_NAME)
             add(data.id)
 
-            val maxSize = data.maxSize
+            val maxSize = data.setting.maxSize
             if (maxSize != null) {
                 add(MAX_SIZE_OPTION_NAME)
                 add(maxSize.toString())
@@ -42,5 +42,6 @@ class ScrcpyCommandFactory(
         private const val DEVICE_OPTION_NAME = "-s"
         private const val MAX_SIZE_OPTION_NAME = "-m"
         private const val HELP_OPTION_NAME = "-h"
+        private const val RECORD_OPTION_NAME = "-r"
     }
 }

@@ -140,7 +140,7 @@ private fun DeviceDropDownMenu(
 @Preview
 @Composable
 private fun DeviceCard_Preview() {
-    DeviceCard(Device("ID", "NAME"), false)
+    DeviceCard(Device("ID", "NAME", Device.Setting()), false)
 }
 
 @Preview
@@ -148,5 +148,5 @@ private fun DeviceCard_Preview() {
 private fun DeviceCard_Preview_Overflow() {
     val id = "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
     val name = "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-    DeviceCard(Device(id, name), false)
+    DeviceCard(Device(id, name, Device.Setting()), false)
 }
