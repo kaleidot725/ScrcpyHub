@@ -30,6 +30,8 @@ object Strings {
     const val DEVICE_PAGE_EDIT_NAME_DETAILS = "Display device name"
     const val DEVICE_PAGE_EDIT_MAX_SIZE_TITLE = "Max Size"
     const val DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS = "Video width and height size limit"
+    const val DEVICE_PAGE_EDIT_RECORDING_TITLE = "Enable Recording"
+    const val DEVICE_PAGE_EDIT_RECORDING_DETAILS = "Start record when mirroring"
 
     // Setting Page
     const val SETTING_PAGE_TITLE = "Preferences"
