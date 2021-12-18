@@ -67,7 +67,7 @@ val appModule = module {
     }
 
     factory {
-        StartScrcpyUseCase(get(), get(), get())
+        StartScrcpyUseCase(get(), get())
     }
 
     factory {

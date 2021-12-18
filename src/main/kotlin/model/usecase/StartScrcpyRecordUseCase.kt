@@ -24,11 +24,7 @@ class StartScrcpyRecordUseCase(
 
         return try {
             val process = scrcpyCommand.record(context, deviceRepository.createRecordPathForDesktop(context))
-            processRepository.add(context.device.id, process, ProcessStatus.RECORDING) {
-                processRepository.delete(context.device.id)
-                onDestroy.invoke()
-            }
-
+            processRepository.add(context.device.id, process, ProcessStatus.RECORDING) { onDestroy.invoke() }
             true
         } catch (e: Exception) {
             false
