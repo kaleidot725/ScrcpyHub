@@ -23,6 +23,7 @@ interface KillCommandFactory {
                 add("taskkill")
                 add("/PID")
                 add(pid.toString())
+                add("--shimgen-gui")
             }
         }
     }
@@ -36,4 +37,3 @@ interface KillCommandFactory {
         }
     }
 }
-
