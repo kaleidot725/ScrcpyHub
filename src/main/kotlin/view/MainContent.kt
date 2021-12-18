@@ -41,7 +41,6 @@ import viewmodel.DevicesPageViewModel
 import viewmodel.MainContentViewModel
 import viewmodel.SettingPageViewModel
 
-
 @Composable
 fun MainContent(windowScope: WindowScope, mainContentViewModel: MainContentViewModel) {
     onInitialize(mainContentViewModel)
