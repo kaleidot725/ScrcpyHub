@@ -26,7 +26,10 @@ class ProcessRepository {
         processList[key] = ProcessState(process, status)
         scope.launch(Dispatchers.IO) {
             process.waitForRunning(MONITORING_DELAY)
-            process.monitor(MONITORING_INTERVAL) { onDestroy?.invoke() }
+            process.monitor(MONITORING_INTERVAL) {
+                processList.remove(key)
+                onDestroy?.invoke()
+            }
         }
     }
 
