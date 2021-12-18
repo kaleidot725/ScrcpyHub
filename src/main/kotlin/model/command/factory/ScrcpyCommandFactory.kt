@@ -1,6 +1,7 @@
 package model.command.factory
 
 import model.entity.Device
+import java.io.File
 
 class ScrcpyCommandFactory(
     override val path: String? = null
@@ -9,7 +10,11 @@ class ScrcpyCommandFactory(
     override fun create(data: Device): List<String> {
         return buildList {
             if (path != null) {
-                add("$path$COMMAND_NAME")
+                if (path.endsWith(File.separator)) {
+                    add("$path$COMMAND_NAME")
+                } else {
+                    add("$path${File.separator}$COMMAND_NAME")
+                }
             } else {
                 add(COMMAND_NAME)
             }
@@ -29,7 +34,11 @@ class ScrcpyCommandFactory(
     override fun createHelp(): List<String> {
         return buildList {
             if (path != null) {
-                add("$path$COMMAND_NAME")
+                if (path.endsWith(File.separator)) {
+                    add("$path$COMMAND_NAME")
+                } else {
+                    add("$path${File.separator}$COMMAND_NAME")
+                }
             } else {
                 add(COMMAND_NAME)
             }
