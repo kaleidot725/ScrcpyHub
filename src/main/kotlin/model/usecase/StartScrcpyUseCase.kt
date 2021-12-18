@@ -1,7 +1,5 @@
 package model.usecase
 
-import model.command.ScrcpyCommand
-import model.command.factory.ScrcpyCommandFactory
 import model.entity.Device
 import model.repository.ProcessRepository
 import model.repository.ProcessStatus
@@ -17,12 +15,10 @@ class StartScrcpyUseCase(
             return false
         }
 
-        val setting = settingRepository.get()
-        val scrcpyCommand = ScrcpyCommand(ScrcpyCommandFactory(setting.scrcpyLocation))
-
         return try {
-            val process = scrcpyCommand.run(context)
-            processRepository.add(context.device.id, process, ProcessStatus.RUNNING) { onDestroy.invoke() }
+            processRepository.addMirroringProcess(context, settingRepository.get().scrcpyLocation) {
+                onDestroy.invoke()
+            }
             true
         } catch (e: Exception) {
             false

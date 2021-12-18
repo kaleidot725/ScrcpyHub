@@ -1,7 +1,5 @@
 package model.usecase
 
-import model.command.ScrcpyCommand
-import model.command.factory.ScrcpyCommandFactory
 import model.entity.Device
 import model.repository.DeviceRepository
 import model.repository.ProcessRepository
@@ -19,12 +17,12 @@ class StartScrcpyRecordUseCase(
             return false
         }
 
-        val setting = settingRepository.get()
-        val scrcpyCommand = ScrcpyCommand(ScrcpyCommandFactory(setting.scrcpyLocation))
-
         return try {
-            val process = scrcpyCommand.record(context, deviceRepository.createRecordPathForDesktop(context))
-            processRepository.add(context.device.id, process, ProcessStatus.RECORDING) { onDestroy.invoke() }
+            val fileName = deviceRepository.createRecordPathForDesktop(context)
+            val scrcpyLocation = settingRepository.get().scrcpyLocation
+            processRepository.addRecordingProcess(context, fileName, scrcpyLocation) {
+                onDestroy.invoke()
+            }
             true
         } catch (e: Exception) {
             false
