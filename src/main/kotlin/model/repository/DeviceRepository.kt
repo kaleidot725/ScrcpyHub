@@ -66,7 +66,7 @@ class DeviceRepository(private val home: String) {
         val date = ZonedDateTime
             .now(ZoneId.systemDefault())
             .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
-        return "${System.getProperty("user.home")}/Desktop/${context.displayName}-${date}.mp4"
+        return "${System.getProperty("user.home")}/Desktop/${context.displayName}-$date.mp4"
     }
 
     private fun writeCache(context: Device.Context) {

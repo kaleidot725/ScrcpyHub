@@ -58,7 +58,9 @@ class ProcessRepository(
     }
 
     fun delete(key: String) {
-        processList[key]?.let { killCommand.run(it.value.pid()) }
+        processList[key]?.let {
+            killCommand.run(it.value.pid())
+        }
         processList.remove(key)
     }
 
