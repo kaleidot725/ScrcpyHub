@@ -47,7 +47,7 @@ class ProcessRepository(
         onDestroy: (suspend () -> Unit)? = null
     ) {
         val process = ScrcpyCommand(ScrcpyCommandFactory(commandLocation)).record(context, fileName)
-        processList[context.device.id] = ProcessState(process, ProcessStatus.RUNNING)
+        processList[context.device.id] = ProcessState(process, ProcessStatus.RECORDING)
         scope.launch(Dispatchers.IO) {
             process.waitForRunning(MONITORING_DELAY)
             process.monitor(MONITORING_INTERVAL) {
