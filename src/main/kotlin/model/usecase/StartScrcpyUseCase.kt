@@ -3,13 +3,11 @@ package model.usecase
 import model.command.ScrcpyCommand
 import model.command.factory.ScrcpyCommandFactory
 import model.entity.Device
-import model.repository.DeviceRepository
 import model.repository.ProcessRepository
 import model.repository.ProcessStatus
 import model.repository.SettingRepository
 
 class StartScrcpyUseCase(
-    private val deviceRepository: DeviceRepository,
     private val settingRepository: SettingRepository,
     private val processRepository: ProcessRepository
 ) {
@@ -24,11 +22,7 @@ class StartScrcpyUseCase(
 
         return try {
             val process = scrcpyCommand.run(context)
-            processRepository.add(context.device.id, process, ProcessStatus.RUNNING) {
-                processRepository.delete(context.device.id)
-                onDestroy.invoke()
-            }
-
+            processRepository.add(context.device.id, process, ProcessStatus.RUNNING) { onDestroy.invoke() }
             true
         } catch (e: Exception) {
             false
