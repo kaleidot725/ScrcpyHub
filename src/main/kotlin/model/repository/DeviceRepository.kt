@@ -22,7 +22,7 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import javax.imageio.ImageIO
 
-class DeviceRepository(private val root: String) {
+class DeviceRepository(private val home: String) {
     private val adb = AndroidDebugBridgeClientFactory().build()
     private val screenshotAdapter = RawImageScreenCaptureAdapter()
 
@@ -71,7 +71,7 @@ class DeviceRepository(private val root: String) {
 
     private fun writeCache(context: Device.Context) {
         try {
-            FileUtils.createFileFile(root, context.device.id).outputStream().apply {
+            FileUtils.createFileFile(home, context.device.id).outputStream().apply {
                 this.write(Json.encodeToString(context).toByteArray())
                 this.close()
             }
@@ -86,7 +86,7 @@ class DeviceRepository(private val root: String) {
 
     private fun loadCache(device: Device): Device.Context {
         return try {
-            val content = FileUtils.createFileFile(root, device.id).readText()
+            val content = FileUtils.createFileFile(home, device.id).readText()
             Json.decodeFromString(string = content)
         } catch (e: Exception) {
             Device.Context(device = device)
@@ -95,7 +95,7 @@ class DeviceRepository(private val root: String) {
 
     private fun createDir() {
         try {
-            val file = FileUtils.createDirFile(root)
+            val file = FileUtils.createDirFile(home)
             if (!file.exists()) file.mkdir()
         } catch (e: Exception) {
             return
