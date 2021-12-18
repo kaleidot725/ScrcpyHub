@@ -6,6 +6,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
+import model.command.KillCommand
 import model.command.ScrcpyCommand
 import model.command.factory.ScrcpyCommandFactory
 import model.entity.Device
@@ -21,8 +22,10 @@ enum class ProcessStatus {
     RECORDING
 }
 
-class ProcessRepository {
-    private val processList: MutableMap<String, ProcessState> = mutableMapOf()
+class ProcessRepository(
+    val scrcpyCommand: ScrcpyCommand,
+    val killCommand: KillCommand
+) {
     private val scope: CoroutineScope = MainScope()
 
     fun addMirroringProcess(context: Device.Context, scrcpyLocation: String, onDestroy: (suspend () -> Unit)? = null) {
@@ -86,5 +89,6 @@ class ProcessRepository {
         private const val TIMEOUT = 10000L
         private const val MONITORING_DELAY = 1000L
         private const val MONITORING_INTERVAL = 1000L
+        private val processList: MutableMap<String, ProcessState> = mutableMapOf()
     }
 }

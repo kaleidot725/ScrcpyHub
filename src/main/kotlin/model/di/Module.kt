@@ -2,6 +2,11 @@ package model.di
 
 import common.OsType
 import common.osType
+import kotlinx.coroutines.runBlocking
+import model.command.KillCommand
+import model.command.ScrcpyCommand
+import model.command.factory.KillCommandFactory
+import model.command.factory.ScrcpyCommandFactory
 import model.entity.Device
 import model.repository.DeviceRepository
 import model.repository.MessageRepository
@@ -38,8 +43,11 @@ val appModule = module {
         MessageRepository()
     }
 
-    single {
-        ProcessRepository()
+    factory {
+        val setting = runBlocking { get<SettingRepository>().get() }
+        val scrcpyCommand = ScrcpyCommand(ScrcpyCommandFactory(setting.scrcpyLocation))
+        val killCommand = KillCommand(KillCommandFactory.get(osType()))
+        ProcessRepository(scrcpyCommand, killCommand)
     }
 
     factory {
