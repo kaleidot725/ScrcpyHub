@@ -1,5 +1,7 @@
 package model.command.factory
 
+import java.io.File
+
 class AdbCommandFactory(
     override val path: String? = null
 ) : CommandFactory<Unit> {
@@ -7,7 +9,11 @@ class AdbCommandFactory(
     override fun create(data: Unit): List<String> {
         return buildList {
             if (path != null) {
-                add("$path$COMMAND_NAME")
+                if (path.endsWith(File.separator)) {
+                    add("$path$COMMAND_NAME")
+                } else {
+                    add("$path${File.separator}$COMMAND_NAME")
+                }
             } else {
                 add(COMMAND_NAME)
             }
@@ -18,7 +24,11 @@ class AdbCommandFactory(
     override fun createHelp(): List<String> {
         return buildList {
             if (path != null) {
-                add("$path$COMMAND_NAME")
+                if (path.endsWith(File.separator)) {
+                    add("$path$COMMAND_NAME")
+                } else {
+                    add("$path${File.separator}$COMMAND_NAME")
+                }
             } else {
                 add(COMMAND_NAME)
             }
