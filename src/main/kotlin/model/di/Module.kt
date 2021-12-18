@@ -1,5 +1,7 @@
 package model.di
 
+import common.OsType
+import common.osType
 import model.entity.Device
 import model.repository.DeviceRepository
 import model.repository.MessageRepository
@@ -26,9 +28,9 @@ import viewmodel.SettingPageViewModel
 
 val appModule = module {
     single(named("setting_directory")) {
-        when (System.getProperty("os.name")) {
-            "Mac OS X" -> "/Library/Application Support/ScrcpyHub/"
-            else -> "./"
+        when (osType()) {
+            OsType.MAC_OS -> "/Library/Application Support/ScrcpyHub/"
+            OsType.WINDOWS -> "./"
         }
     }
 
