@@ -58,7 +58,7 @@ class ProcessRepository(
     }
 
     fun delete(key: String) {
-        processList[key]?.value?.kill()
+        processList[key]?.let { killCommand.run(it.value.pid()) }
         processList.remove(key)
     }
 
@@ -79,10 +79,6 @@ class ProcessRepository(
             delay(interval)
         }
         onDestroy.invoke()
-    }
-
-    private fun Process.kill() {
-        Runtime.getRuntime().exec("kill -SIGINT ${this.pid()}").waitFor()
     }
 
     companion object {
