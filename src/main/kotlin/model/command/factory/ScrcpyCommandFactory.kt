@@ -32,7 +32,11 @@ class ScrcpyCommandFactory(val path: String? = null) {
     fun createRecord(context: Device.Context, fileName: String): List<String> {
         return buildList {
             if (path != null) {
-                add("$path$COMMAND_NAME")
+                if (path.endsWith(File.separator)) {
+                    add("$path$COMMAND_NAME")
+                } else {
+                    add("$path${File.separator}$COMMAND_NAME")
+                }
             } else {
                 add(COMMAND_NAME)
             }
