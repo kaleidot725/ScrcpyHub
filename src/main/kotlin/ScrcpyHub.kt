@@ -45,7 +45,7 @@ fun main() = application {
 
     if (isOpen) {
         AppWindow(onCloseRequest = { isOpen = false }, state = windowState) {
-            MainContent(windowScope = this, mainContentViewModel = GlobalContext.get().get())
-        }
+        MainContent(windowScope = this, mainContentViewModel = GlobalContext.get().get())
+    }
     }
 }
