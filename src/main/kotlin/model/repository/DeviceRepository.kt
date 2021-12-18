@@ -59,7 +59,7 @@ class DeviceRepository(private val root: String) {
         val date = ZonedDateTime
             .now(ZoneId.systemDefault())
             .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
-        return "${System.getProperty("user.home")}/Desktop/${device.displayName}-${date}.png"
+        return "${System.getProperty("user.home")}/Desktop/${device.displayName}-$date.png"
     }
 
     private fun writeCache(device: Device) {
