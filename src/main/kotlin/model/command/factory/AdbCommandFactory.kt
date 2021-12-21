@@ -3,10 +3,10 @@ package model.command.factory
 import java.io.File
 
 class AdbCommandFactory(
-    override val path: String? = null
-) : CommandFactory<Unit> {
+    val path: String? = null
+) {
     @OptIn(kotlin.ExperimentalStdlibApi::class)
-    override fun create(data: Unit): List<String> {
+    fun create(): List<String> {
         return buildList {
             if (path != null) {
                 if (path.endsWith(File.separator)) {
@@ -21,7 +21,7 @@ class AdbCommandFactory(
     }
 
     @OptIn(kotlin.ExperimentalStdlibApi::class)
-    override fun createHelp(): List<String> {
+    fun createHelp(): List<String> {
         return buildList {
             if (path != null) {
                 if (path.endsWith(File.separator)) {

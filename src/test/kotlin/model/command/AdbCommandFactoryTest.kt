@@ -8,14 +8,14 @@ class AdbCommandFactoryTest : StringSpec(
     {
         "create" {
             val factory = AdbCommandFactory(path = "test/")
-            factory.create(Unit) shouldBe listOf("test/adb")
+            factory.create() shouldBe listOf("test/adb")
 
             val factoryWhenNoSeparator = AdbCommandFactory(path = "test")
-            factoryWhenNoSeparator.create(Unit) shouldBe listOf("test/adb")
+            factoryWhenNoSeparator.create() shouldBe listOf("test/adb")
         }
         "create_when_no_path_specified" {
             val factory = AdbCommandFactory()
-            factory.create(Unit) shouldBe listOf("adb")
+            factory.create() shouldBe listOf("adb")
         }
         "create_help" {
             val factory = AdbCommandFactory(path = "test/")

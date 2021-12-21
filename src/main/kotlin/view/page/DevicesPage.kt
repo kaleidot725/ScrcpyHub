@@ -46,7 +46,7 @@ fun DevicesPage(
     windowScope: WindowScope,
     devicesPageViewModel: DevicesPageViewModel,
     onNavigateSetting: (() -> Unit)? = null,
-    onNavigateDevice: ((Device) -> Unit)? = null
+    onNavigateDevice: ((Device.Context) -> Unit)? = null
 ) {
     onInitialize(devicesPageViewModel)
     onDrawPage(windowScope, devicesPageViewModel, onNavigateSetting, onNavigateDevice)
@@ -57,7 +57,7 @@ private fun onDrawPage(
     windowScope: WindowScope,
     viewModel: DevicesPageViewModel,
     onNavigateSetting: (() -> Unit)? = null,
-    onNavigateDevice: ((Device) -> Unit)? = null
+    onNavigateDevice: ((Device.Context) -> Unit)? = null
 ) {
     val states: List<DeviceStatus> by viewModel.states.collectAsState()
 
@@ -83,12 +83,14 @@ private fun onDrawPage(
                         states,
                         itemContent = { status ->
                             DeviceCard(
-                                device = status.device,
-                                isRunning = status.isRunning,
+                                context = status.context,
+                                processStatus = status.processStatus,
                                 startScrcpy = { viewModel.startScrcpy(it) },
                                 stopScrcpy = { viewModel.stopScrcpy(it) },
-                                goToDetail = { onNavigateDevice?.invoke(status.device) },
-                                takeScreenshot = { viewModel.saveScreenshotToDesktop(status.device) },
+                                goToDetail = { onNavigateDevice?.invoke(status.context) },
+                                takeScreenshot = { viewModel.saveScreenshotToDesktop(status.context) },
+                                startRecording = { viewModel.startScrcpyRecord(status.context) },
+                                stopRecording = { viewModel.stopScrcpy(status.context) },
                                 modifier = Modifier
                                     .wrapContentHeight()
                                     .fillMaxWidth()

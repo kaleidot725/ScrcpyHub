@@ -5,10 +5,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import model.entity.Device
+import model.repository.ProcessStatus
 import model.usecase.FetchDevicesUseCase
 import model.usecase.GetDevicesFlowUseCase
-import model.usecase.IsScrcpyRunningUseCase
+import model.usecase.GetScrcpyStatusUseCase
 import model.usecase.SaveScreenshotToDesktopUseCase
+import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyUseCase
 
@@ -16,8 +18,9 @@ class DevicesPageViewModel(
     private val fetchDevicesUseCase: FetchDevicesUseCase,
     private val getDevicesFlowUseCase: GetDevicesFlowUseCase,
     private val startScrcpyUseCase: StartScrcpyUseCase,
+    private val startScrcpyRecordUseCase: StartScrcpyRecordUseCase,
     private val stopScrcpyUseCase: StopScrcpyUseCase,
-    private val isRunningScrcpyUseCase: IsScrcpyRunningUseCase,
+    private val getScrcpyProcessStatusUseCase: GetScrcpyStatusUseCase,
     private val saveScreenshotToDesktop: SaveScreenshotToDesktopUseCase
 ) : ViewModel() {
     private val _states: MutableStateFlow<List<DeviceStatus>> = MutableStateFlow(emptyList())
@@ -31,23 +34,30 @@ class DevicesPageViewModel(
         }
     }
 
-    fun startScrcpy(device: Device) {
+    fun startScrcpy(context: Device.Context) {
         coroutineScope.launch {
-            startScrcpyUseCase.execute(device) { fetchStates() }
+            startScrcpyUseCase.execute(context) { fetchStates() }
             fetchStates()
         }
     }
 
-    fun stopScrcpy(device: Device) {
+    fun startScrcpyRecord(context: Device.Context) {
         coroutineScope.launch {
-            stopScrcpyUseCase.execute(device)
+            startScrcpyRecordUseCase.execute(context) { fetchStates() }
             fetchStates()
         }
     }
 
-    fun saveScreenshotToDesktop(device: Device) {
+    fun stopScrcpy(context: Device.Context) {
         coroutineScope.launch {
-            saveScreenshotToDesktop.execute(device)
+            stopScrcpyUseCase.execute(context)
+            fetchStates()
+        }
+    }
+
+    fun saveScreenshotToDesktop(context: Device.Context) {
+        coroutineScope.launch {
+            saveScreenshotToDesktop.execute(context)
         }
     }
 
@@ -55,9 +65,11 @@ class DevicesPageViewModel(
         updateStates(fetchDevicesUseCase.execute())
     }
 
-    private fun updateStates(devices: List<Device>) {
-        _states.value = devices.map { device -> DeviceStatus(device, isRunningScrcpyUseCase.execute(device)) }
+    private fun updateStates(contextList: List<Device.Context>) {
+        _states.value = contextList.map { context ->
+            DeviceStatus(context, getScrcpyProcessStatusUseCase.execute(context))
+        }
     }
 }
 
-data class DeviceStatus(val device: Device, val isRunning: Boolean)
+data class DeviceStatus(val context: Device.Context, val processStatus: ProcessStatus)

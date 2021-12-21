@@ -7,16 +7,16 @@ import model.entity.Device
 import model.usecase.UpdateDeviceNameUseCase
 
 class DevicePageViewModel(
-    private val device: Device,
+    private val context: Device.Context,
     private val updateDeviceNameUseCase: UpdateDeviceNameUseCase
 ) : ViewModel() {
-    private val _titleName: MutableStateFlow<String> = MutableStateFlow(device.displayName)
+    private val _titleName: MutableStateFlow<String> = MutableStateFlow(context.displayName)
     val titleName: StateFlow<String> = _titleName
 
-    private val _editName: MutableStateFlow<String> = MutableStateFlow(device.displayName)
+    private val _editName: MutableStateFlow<String> = MutableStateFlow(context.displayName)
     val editName: StateFlow<String> = _editName
 
-    private val _maxSize: MutableStateFlow<String> = MutableStateFlow(device.maxSize?.toString() ?: "")
+    private val _maxSize: MutableStateFlow<String> = MutableStateFlow(context.maxSize?.toString() ?: "")
     val maxSize: StateFlow<String> = _maxSize
 
     private val _maxSizeError: MutableStateFlow<String> = MutableStateFlow("")
@@ -41,7 +41,13 @@ class DevicePageViewModel(
 
     fun save() {
         coroutineScope.launch {
-            updateDeviceNameUseCase.execute(device, _editName.value, _maxSize.value.toIntOrNull())
+            val newContext = Device.Context(
+                device = context.device,
+                customName = _editName.value,
+                maxSize = _maxSize.value.toIntOrNull()
+            )
+
+            updateDeviceNameUseCase.execute(newContext)
             _titleName.value = _editName.value
         }
     }
