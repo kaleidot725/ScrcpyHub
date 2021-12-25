@@ -5,9 +5,14 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Device(
     val id: String = "",
-    val name: String = "",
-    var customName: String? = null,
-    var maxSize: Int? = null
+    val name: String = ""
 ) {
-    val displayName get() = customName ?: name
+    @Serializable
+    data class Context(
+        val device: Device,
+        val customName: String? = null,
+        val maxSize: Int? = null
+    ) {
+        val displayName get() = customName ?: device.name
+    }
 }

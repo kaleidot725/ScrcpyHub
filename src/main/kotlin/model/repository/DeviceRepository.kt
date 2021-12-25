@@ -22,26 +22,26 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import javax.imageio.ImageIO
 
-class DeviceRepository(private val root: String) {
+class DeviceRepository(private val home: String) {
     private val adb = AndroidDebugBridgeClientFactory().build()
     private val screenshotAdapter = RawImageScreenCaptureAdapter()
 
-    suspend fun getAll(): List<Device> {
+    suspend fun getAll(): List<Device.Context> {
         return withContext(Dispatchers.IO) {
             val devices: List<Device> = adb.execute(request = ListDevicesRequest()).toDeviceList()
             loadCaches(devices)
         }
     }
 
-    fun getAllFlow(scope: CoroutineScope): Flow<List<Device>> {
+    fun getAllFlow(scope: CoroutineScope): Flow<List<Device.Context>> {
         val allFlow = adb.execute(request = AsyncDeviceMonitorRequest(), scope = scope).receiveAsFlow()
         return allFlow.map { loadCaches(it.toDeviceList()) }
     }
 
-    suspend fun saveDeviceSetting(device: Device, newName: String, newMaxSize: Int?) {
+    suspend fun saveDeviceSetting(context: Device.Context) {
         withContext(Dispatchers.IO) {
             createDir()
-            writeCache(device.copy(customName = newName, maxSize = newMaxSize))
+            writeCache(context)
         }
     }
 
@@ -55,17 +55,24 @@ class DeviceRepository(private val root: String) {
         }
     }
 
-    fun createScreenshotPathForDesktop(device: Device): String {
+    fun createScreenshotPathForDesktop(context: Device.Context): String {
         val date = ZonedDateTime
             .now(ZoneId.systemDefault())
             .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
-        return "${System.getProperty("user.home")}/Desktop/${device.displayName}-$date.png"
+        return "${System.getProperty("user.home")}/Desktop/${context.displayName}-$date.png"
     }
 
-    private fun writeCache(device: Device) {
+    fun createRecordPathForDesktop(context: Device.Context): String {
+        val date = ZonedDateTime
+            .now(ZoneId.systemDefault())
+            .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
+        return "${System.getProperty("user.home")}/Desktop/${context.displayName}-$date.mp4"
+    }
+
+    private fun writeCache(context: Device.Context) {
         try {
-            FileUtils.createFileFile(root, device.id).outputStream().apply {
-                this.write(Json.encodeToString(device).toByteArray())
+            FileUtils.createFileFile(home, context.device.id).outputStream().apply {
+                this.write(Json.encodeToString(context).toByteArray())
                 this.close()
             }
         } catch (e: Exception) {
@@ -73,22 +80,22 @@ class DeviceRepository(private val root: String) {
         }
     }
 
-    private fun loadCaches(devices: List<Device>): List<Device> {
+    private fun loadCaches(devices: List<Device>): List<Device.Context> {
         return devices.map { loadCache(it) }
     }
 
-    private fun loadCache(device: Device): Device {
+    private fun loadCache(device: Device): Device.Context {
         return try {
-            val content = FileUtils.createFileFile(root, device.id).readText()
+            val content = FileUtils.createFileFile(home, device.id).readText()
             Json.decodeFromString(string = content)
         } catch (e: Exception) {
-            device
+            Device.Context(device = device)
         }
     }
 
     private fun createDir() {
         try {
-            val file = FileUtils.createDirFile(root)
+            val file = FileUtils.createDirFile(home)
             if (!file.exists()) file.mkdir()
         } catch (e: Exception) {
             return
