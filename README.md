@@ -35,8 +35,8 @@ brew install android-platform-tools
 brew install scrcpy
 ```
 2. Download [here](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.3.0) and launch ScrcpyHub.
-2. Open ScrcpyHub Preferences.
-2. Input adb and scrcpy location, save settings.
+3. Open ScrcpyHub Preferences.
+4. Input adb and scrcpy location, save settings.
 
 ## 💻 Windows 10/11
 
