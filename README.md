@@ -1,7 +1,6 @@
 # 🐻‍❄️ ScrcpyHub
 
-ScrcpyHub is a GUI application to use [scrcpy](https://github.com/Genymobile/scrcpy).    
-[scrcpy](https://github.com/Genymobile/scrcpy) is a tool to mirror the android screen.
+ScrcpyHub is a GUI application to use [scrcpy](https://github.com/Genymobile/scrcpy). ([scrcpy](https://github.com/Genymobile/scrcpy) is a tool mirroring android screen android.)
 
 ![demo](docs/demo.gif)
 
@@ -29,13 +28,15 @@ Install adb and scrcpy, ScrcpyHub.
 
 ## 💻 Mac OS
 
-1. You need adb and scrcpy, accesible from your PATH, If you don't have it yet.
+1. Install android-platform-tools and scrcpy.
 
 ```
 brew install android-platform-tools
 brew install scrcpy
 ```
-2. Download and launch ScrcpyHub. Mac application download [here ](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.2.3)and install.
+2. Download here and launch ScrcpyHub.
+2. Open ScrcpyHub Preferences.
+2. Input adb and scrcpy location, save settings.
 
 ## 💻 Windows 10/11
 
