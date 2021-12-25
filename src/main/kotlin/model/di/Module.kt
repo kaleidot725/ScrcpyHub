@@ -1,5 +1,12 @@
 package model.di
 
+import common.OsType
+import common.osType
+import kotlinx.coroutines.runBlocking
+import model.command.KillCommand
+import model.command.ScrcpyCommand
+import model.command.factory.KillCommandFactory
+import model.command.factory.ScrcpyCommandFactory
 import model.entity.Device
 import model.repository.DeviceRepository
 import model.repository.MessageRepository
@@ -9,9 +16,10 @@ import model.usecase.FetchDevicesUseCase
 import model.usecase.FetchSettingUseCase
 import model.usecase.GetDevicesFlowUseCase
 import model.usecase.GetMessageFlowUseCase
-import model.usecase.IsScrcpyRunningUseCase
+import model.usecase.GetScrcpyStatusUseCase
 import model.usecase.IsSetupCompletedUseCase
 import model.usecase.SaveScreenshotToDesktopUseCase
+import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyUseCase
 import model.usecase.UpdateDeviceNameUseCase
@@ -25,9 +33,9 @@ import viewmodel.SettingPageViewModel
 
 val appModule = module {
     single(named("setting_directory")) {
-        when (System.getProperty("os.name")) {
-            "Mac OS X" -> "/Library/Application Support/ScrcpyHub/"
-            else -> "./"
+        when (osType()) {
+            OsType.MAC_OS -> "/Library/Application Support/ScrcpyHub/"
+            OsType.WINDOWS -> "./"
         }
     }
 
@@ -35,8 +43,11 @@ val appModule = module {
         MessageRepository()
     }
 
-    single {
-        ProcessRepository()
+    factory {
+        val setting = runBlocking { get<SettingRepository>().get() }
+        val scrcpyCommand = ScrcpyCommand(ScrcpyCommandFactory(setting.scrcpyLocation))
+        val killCommand = KillCommand(KillCommandFactory.get(osType()))
+        ProcessRepository(scrcpyCommand, killCommand)
     }
 
     factory {
@@ -62,7 +73,7 @@ val appModule = module {
     }
 
     factory {
-        IsScrcpyRunningUseCase(get())
+        GetScrcpyStatusUseCase(get())
     }
 
     factory {
@@ -94,11 +105,15 @@ val appModule = module {
     }
 
     factory {
-        DevicesPageViewModel(get(), get(), get(), get(), get(), get())
+        StartScrcpyRecordUseCase(get(), get(), get())
     }
 
-    factory { (device: Device) ->
-        DevicePageViewModel(device, get())
+    factory {
+        DevicesPageViewModel(get(), get(), get(), get(), get(), get(), get())
+    }
+
+    factory { (context: Device.Context) ->
+        DevicePageViewModel(context, get())
     }
 
     factory {

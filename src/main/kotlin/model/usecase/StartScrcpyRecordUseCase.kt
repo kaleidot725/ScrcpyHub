@@ -1,11 +1,13 @@
 package model.usecase
 
 import model.entity.Device
+import model.repository.DeviceRepository
 import model.repository.ProcessRepository
 import model.repository.ProcessStatus
 import model.repository.SettingRepository
 
-class StartScrcpyUseCase(
+class StartScrcpyRecordUseCase(
+    private val deviceRepository: DeviceRepository,
     private val settingRepository: SettingRepository,
     private val processRepository: ProcessRepository
 ) {
@@ -16,7 +18,9 @@ class StartScrcpyUseCase(
         }
 
         return try {
-            processRepository.addMirroringProcess(context, settingRepository.get().scrcpyLocation) {
+            val fileName = deviceRepository.createRecordPathForDesktop(context)
+            val scrcpyLocation = settingRepository.get().scrcpyLocation
+            processRepository.addRecordingProcess(context, fileName, scrcpyLocation) {
                 onDestroy.invoke()
             }
             true

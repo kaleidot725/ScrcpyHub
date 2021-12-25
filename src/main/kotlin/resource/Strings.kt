@@ -2,7 +2,7 @@ package resource
 
 object Strings {
     // COMMON
-    const val APP_VERSION = "1.2.3"
+    const val APP_VERSION = "1.3.0"
     const val APP_NAME = "ScrcpyHub"
     const val SAVE = "Save"
     const val SETUP = "Setup"
@@ -19,11 +19,14 @@ object Strings {
     // DEVICES PAGE
     const val DEVICES_PAGE_START = "Start"
     const val DEVICES_PAGE_STOP = "Stop"
+    const val DEVICES_PAGE_RECORDING = "REC"
     const val DEVICES_PAGE_NOT_FOUND_DEVICES = "Not found devices"
     const val DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE = "Preferences"
     const val DEVICES_DROP_DOWN_QUIT_MENU_TITLE = "Quit"
     const val DEVICE_DROP_DOWN_PREFERENCE_MENU_TITLE = "Edit Device Setting"
     const val DEVICE_DROP_DOWN_SCREEN_SHOT_MENU_TITLE = "Save Screenshot to Desktop"
+    const val DEVICE_DROP_DOWN_START_RECORDING_MENU_TITLE = "Start Recoding and Save to Desktop"
+    const val DEVICE_DROP_DOWN_STOP_RECORDING_MENU_TITLE = "Stop Recoding"
 
     // Device Page
     const val DEVICE_PAGE_EDIT_NAME_TITLE = "Device Name"

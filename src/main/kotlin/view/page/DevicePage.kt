@@ -126,6 +126,12 @@ private fun DeviceNameSetting(deviceName: String, onUpdate: (String) -> Unit, mo
     }
 }
 
+@Preview
+@Composable
+private fun DeviceNameSetting_Preview() {
+    DeviceNameSetting("DEVICE", {})
+}
+
 @Composable
 private fun MaxSizeSetting(maxSize: String, error: String, onUpdate: (String) -> Unit, modifier: Modifier = Modifier) {
     val hasError = error.isNotEmpty()
@@ -164,12 +170,6 @@ private fun MaxSizeSetting(maxSize: String, error: String, onUpdate: (String) ->
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun DeviceNameSetting_Preview() {
-    DeviceNameSetting("DEVICE", {})
 }
 
 @Preview
