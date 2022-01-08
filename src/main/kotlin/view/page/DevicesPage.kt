@@ -70,6 +70,7 @@ private fun onDrawPage(
                     Text(
                         Strings.DEVICES_PAGE_NOT_FOUND_DEVICES,
                         style = MaterialTheme.typography.body1,
+                        color = MaterialTheme.colors.onSurface,
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }

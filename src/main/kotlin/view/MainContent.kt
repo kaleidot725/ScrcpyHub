@@ -118,17 +118,21 @@ private fun MainSnacks(viewModel: MainContentViewModel) {
                 }
             }
             AnimatedVisibility(errorMessageState, enter = fadeIn(), exit = fadeOut()) {
-                Snackbar(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
-                    Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
-                        Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
-                            Text(errorMessage ?: "", style = MaterialTheme.typography.button)
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Text(
-                                SETUP,
-                                style = MaterialTheme.typography.button,
-                                color = MaterialTheme.colors.primary,
-                                modifier = Modifier.clickable { viewModel.selectPage(Page.SettingPage) }
-                            )
+                if (errorMessage != null) {
+                    Snackbar(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
+                        Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
+                            Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
+                                Text(
+                                    errorMessage!!,
+                                    style = MaterialTheme.typography.button
+                                )
+                                Spacer(modifier = Modifier.width(16.dp))
+                                Text(
+                                    SETUP,
+                                    style = MaterialTheme.typography.button,
+                                    color = MaterialTheme.colors.onPrimary,
+                                    modifier = Modifier.clickable { viewModel.selectPage(Page.SettingPage) })
+                            }
                         }
                     }
                 }

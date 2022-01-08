@@ -26,7 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -54,6 +54,7 @@ fun DeviceCard(
                 painter = painterResource(Images.DEVICE),
                 contentDescription = Images.DEVICE,
                 contentScale = ContentScale.Inside,
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.onSurface),
                 modifier = Modifier.width(32.dp).align(Alignment.CenterVertically).padding(end = 4.dp)
             )
 
@@ -88,7 +89,7 @@ fun DeviceCard(
                 colors = when (processStatus) {
                     ProcessStatus.IDLE -> ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
                     ProcessStatus.RUNNING -> ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
-                    ProcessStatus.RECORDING -> ButtonDefaults.buttonColors(Color.Red)
+                    ProcessStatus.RECORDING -> ButtonDefaults.buttonColors(MaterialTheme.colors.error)
                 },
                 modifier = Modifier.wrapContentHeight().width(80.dp).align(Alignment.CenterVertically)
             ) {
@@ -129,6 +130,7 @@ private fun DeviceDropDownMenu(
         Image(
             painter = painterResource(Images.DOTS),
             contentDescription = "",
+            colorFilter = ColorFilter.tint(MaterialTheme.colors.onSurface),
             modifier = Modifier.size(30.dp).clickable { expanded = true }
         )
 
