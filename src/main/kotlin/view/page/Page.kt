@@ -1,4 +1,4 @@
-package resource
+package view.page
 
 import model.entity.Device
 
