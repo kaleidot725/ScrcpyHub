@@ -24,7 +24,6 @@ fun main() = application {
 
     if (getOrNull() == null) {
         startKoin {
-            printLogger()
             modules(appModule)
         }
     }
@@ -45,7 +44,7 @@ fun main() = application {
 
     if (isOpen) {
         AppWindow(onCloseRequest = { isOpen = false }, state = windowState) {
-        MainContent(windowScope = this, mainContentViewModel = GlobalContext.get().get())
-    }
+            MainContent(windowScope = this, mainContentViewModel = GlobalContext.get().get())
+        }
     }
 }

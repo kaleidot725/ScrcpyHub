@@ -36,8 +36,14 @@ object Strings {
 
     // Setting Page
     const val SETTING_PAGE_TITLE = "Preferences"
+    const val SETTING_PAGE_EDIT_THEME_TITLE = "Theme"
+    const val SETTING_PAGE_EDIT_THEME_DETAILS = "Select application theme"
     const val SETTING_PAGE_EDIT_ADB_LOCATION_TITLE = "ADB Location"
     const val SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS = "If it is empty, use an environment variable"
     const val SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE = "Scrcpy Location"
     const val SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS = "If it is empty, use an environment variable"
+
+    const val SETTING_THEME_LIGHT = "Light"
+    const val SETTING_THEME_DARK = "Dark"
+    const val SETTING_THEME_SYNC_WITH_OS = "Sync with OS"
 }
