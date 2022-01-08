@@ -1,5 +1,6 @@
 package viewmodel
 
+import com.jthemedetecor.OsThemeDetector
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,6 +12,7 @@ import model.usecase.IsSetupCompletedUseCase
 import resource.Strings.NOT_FOUND_ADB_COMMAND
 import resource.Strings.NOT_FOUND_SCRCPY_COMMAND
 import view.page.Page
+
 
 class MainContentViewModel(
     private val isSetupCompletedUseCase: IsSetupCompletedUseCase,
@@ -26,12 +28,21 @@ class MainContentViewModel(
     private val _notifyMessage: MutableStateFlow<Message> = MutableStateFlow(Message.EmptyMessage)
     val notifyMessage: StateFlow<Message> = _notifyMessage
 
+    private val detector = OsThemeDetector.getDetector()
+    private val darkThemeListener: (Boolean) -> Unit = { isDark: Boolean ->
+        coroutineScope.launch { _isDarkMode.emit(isDark) }
+    }
     private val _isDarkMode: MutableStateFlow<Boolean> = MutableStateFlow(true)
     val isDarkMode: StateFlow<Boolean> = _isDarkMode
 
     override fun onStarted() {
         checkError()
         observeNotifyMessage()
+        detector.registerListener(darkThemeListener)
+    }
+
+    override fun onCleared() {
+        detector.removeListener(darkThemeListener)
     }
 
     fun selectPage(page: Page) {
