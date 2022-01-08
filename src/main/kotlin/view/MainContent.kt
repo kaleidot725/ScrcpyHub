@@ -45,12 +45,14 @@ fun MainContent(windowScope: WindowScope, mainContentViewModel: MainContentViewM
 
 @Composable
 private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewModel) {
-    val isDarkMode: Boolean by viewModel.isDarkMode.collectAsState()
+    val isDarkMode: Boolean? by viewModel.isDarkMode.collectAsState(null)
 
-    MainTheme(isDarkMode = isDarkMode) {
-        Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background)) {
-            MainPages(windowScope, viewModel)
-            MainSnacks(viewModel)
+    isDarkMode?.let {
+        MainTheme(isDarkMode = it) {
+            Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background)) {
+                MainPages(windowScope, viewModel)
+                MainSnacks(viewModel)
+            }
         }
     }
 }
@@ -76,7 +78,7 @@ private fun MainPages(windowScope: WindowScope, viewModel: MainContentViewModel)
                     windowScope = windowScope,
                     settingPageViewModel = settingPageViewModel,
                     onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) },
-                    onSaved = { viewModel.checkError() }
+                    onSaved = { viewModel.refreshSetting() }
                 )
             }
             is Page.DevicePage -> {

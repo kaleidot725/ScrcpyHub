@@ -17,6 +17,7 @@ import model.usecase.FetchSettingUseCase
 import model.usecase.GetDevicesFlowUseCase
 import model.usecase.GetMessageFlowUseCase
 import model.usecase.GetScrcpyStatusUseCase
+import model.usecase.GetSystemDarkModeFlowUseCase
 import model.usecase.IsSetupCompletedUseCase
 import model.usecase.SaveScreenshotToDesktopUseCase
 import model.usecase.StartScrcpyRecordUseCase
@@ -109,6 +110,10 @@ val appModule = module {
     }
 
     factory {
+        GetSystemDarkModeFlowUseCase(get())
+    }
+
+    factory {
         DevicesPageViewModel(get(), get(), get(), get(), get(), get(), get())
     }
 
@@ -117,7 +122,7 @@ val appModule = module {
     }
 
     factory {
-        MainContentViewModel(get(), get())
+        MainContentViewModel(get(), get(), get(), get())
     }
 
     factory {
