@@ -9,7 +9,7 @@ object Colors {
     val md_theme_light_onSecondary = Color(0xFFffffff)
     val md_theme_light_error = Color(0xFFba1b1b)
     val md_theme_light_onError = Color(0xFFffffff)
-    val md_theme_light_background = Color(0xFFfcfcff)
+    val md_theme_light_background = Color(238, 238, 238)
     val md_theme_light_onBackground = Color(0xFF1a1c1e)
     val md_theme_light_surface = Color(0xFFfcfcff)
     val md_theme_light_onSurface = Color(0xFF1a1c1e)

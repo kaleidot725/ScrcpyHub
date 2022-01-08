@@ -45,5 +45,5 @@ object Strings {
 
     const val SETTING_THEME_LIGHT = "Light"
     const val SETTING_THEME_DARK = "Dark"
-    const val SETTING_THEME_SYNC_WITH_OS = "Sync with OS"
+    const val SETTING_THEME_SYNC_WITH_OS = "Auto"
 }
