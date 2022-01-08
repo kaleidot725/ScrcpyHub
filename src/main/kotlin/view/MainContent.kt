@@ -6,6 +6,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,11 +31,10 @@ import androidx.compose.ui.window.WindowScope
 import model.entity.Message
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
-import resource.Colors
-import resource.Page
 import resource.Strings.SETUP
 import view.extention.onInitialize
 import view.page.DevicePage
+import view.page.Page
 import view.page.SettingPage
 import viewmodel.DevicePageViewModel
 import viewmodel.DevicesPageViewModel
@@ -49,8 +49,8 @@ fun MainContent(windowScope: WindowScope, mainContentViewModel: MainContentViewM
 
 @Composable
 private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewModel) {
-    MainTheme {
-        Box(modifier = Modifier.fillMaxSize().background(Colors.SMOKE_WHITE)) {
+    MainTheme(isDarkMode = isSystemInDarkTheme()) {
+        Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background)) {
             MainPages(windowScope, viewModel)
             MainSnacks(viewModel)
         }
@@ -126,7 +126,7 @@ private fun MainSnacks(viewModel: MainContentViewModel) {
                             Text(
                                 SETUP,
                                 style = MaterialTheme.typography.button,
-                                color = Colors.NAVY,
+                                color = MaterialTheme.colors.primary,
                                 modifier = Modifier.clickable { viewModel.selectPage(Page.SettingPage) }
                             )
                         }

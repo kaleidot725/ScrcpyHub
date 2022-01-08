@@ -8,9 +8,9 @@ import kotlinx.coroutines.launch
 import model.entity.Message
 import model.usecase.GetMessageFlowUseCase
 import model.usecase.IsSetupCompletedUseCase
-import resource.Page
 import resource.Strings.NOT_FOUND_ADB_COMMAND
 import resource.Strings.NOT_FOUND_SCRCPY_COMMAND
+import view.page.Page
 
 class MainContentViewModel(
     private val isSetupCompletedUseCase: IsSetupCompletedUseCase,
@@ -25,6 +25,9 @@ class MainContentViewModel(
 
     private val _notifyMessage: MutableStateFlow<Message> = MutableStateFlow(Message.EmptyMessage)
     val notifyMessage: StateFlow<Message> = _notifyMessage
+
+    private val _isDarkMode: MutableStateFlow<Boolean> = MutableStateFlow(true)
+    val isDarkMode: StateFlow<Boolean> = _isDarkMode
 
     override fun onStarted() {
         checkError()

@@ -13,8 +13,9 @@ group = "me.kaleidot725"
 version = "1.3.0"
 
 repositories {
-    mavenCentral()
+    maven("https://jitpack.io")
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    mavenCentral()
     google()
 }
 
@@ -24,6 +25,7 @@ dependencies {
     implementation("io.insert-koin:koin-core:3.1.3")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
     implementation("com.malinskiy.adam:adam:0.4.3")
+    implementation("com.github.Dansoftowner:jSystemThemeDetector:3.6")
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("io.kotest:kotest-runner-junit5:5.0.1")

@@ -73,8 +73,7 @@ fun DeviceCard(
                     style = MaterialTheme.typography.subtitle2,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(horizontal = 4.dp),
-                    color = Color.Gray,
+                    modifier = Modifier.padding(horizontal = 4.dp)
                 )
             }
 
@@ -99,7 +98,7 @@ fun DeviceCard(
                         ProcessStatus.RUNNING -> Strings.DEVICES_PAGE_STOP
                         ProcessStatus.RECORDING -> Strings.DEVICES_PAGE_RECORDING
                     },
-                    color = Color.White, style = MaterialTheme.typography.button
+                    style = MaterialTheme.typography.button
                 )
             }
 
@@ -139,62 +138,62 @@ private fun DeviceDropDownMenu(
                     onSetting()
                     expanded = false
                 }, modifier = Modifier.height(32.dp)
-                ) {
-                    Text(
-                        text = Strings.DEVICE_DROP_DOWN_PREFERENCE_MENU_TITLE, style = MaterialTheme.typography.body2
-                    )
-                }
+            ) {
+                Text(
+                    text = Strings.DEVICE_DROP_DOWN_PREFERENCE_MENU_TITLE, style = MaterialTheme.typography.body2
+                )
+            }
 
-                DropdownMenuItem(
-                    onClick = {
-                        onScreenShot()
-                        expanded = false
-                    }, modifier = Modifier.height(32.dp)
-                    ) {
-                        Text(
-                            text = Strings.DEVICE_DROP_DOWN_SCREEN_SHOT_MENU_TITLE, style = MaterialTheme.typography.body2
-                        )
+            DropdownMenuItem(
+                onClick = {
+                    onScreenShot()
+                    expanded = false
+                }, modifier = Modifier.height(32.dp)
+            ) {
+                Text(
+                    text = Strings.DEVICE_DROP_DOWN_SCREEN_SHOT_MENU_TITLE, style = MaterialTheme.typography.body2
+                )
+            }
+
+            DropdownMenuItem(
+                enabled = when (processStatus) {
+                    ProcessStatus.IDLE -> true
+                    ProcessStatus.RUNNING -> false
+                    ProcessStatus.RECORDING -> true
+                },
+                onClick = {
+                    when (processStatus) {
+                        ProcessStatus.IDLE -> onStartRecording.invoke()
+                        ProcessStatus.RUNNING -> Unit
+                        ProcessStatus.RECORDING -> onStopRecording.invoke()
                     }
-
-                    DropdownMenuItem(
-                        enabled = when (processStatus) {
-                            ProcessStatus.IDLE -> true
-                            ProcessStatus.RUNNING -> false
-                            ProcessStatus.RECORDING -> true
-                        },
-                        onClick = {
-                            when (processStatus) {
-                                ProcessStatus.IDLE -> onStartRecording.invoke()
-                                ProcessStatus.RUNNING -> Unit
-                                ProcessStatus.RECORDING -> onStopRecording.invoke()
-                            }
-                            expanded = false
-                        }, modifier = Modifier.height(32.dp)
-                        ) {
-                            Text(
-                                text = when (processStatus) {
-                                    ProcessStatus.IDLE -> Strings.DEVICE_DROP_DOWN_START_RECORDING_MENU_TITLE
-                                    ProcessStatus.RUNNING -> Strings.DEVICE_DROP_DOWN_START_RECORDING_MENU_TITLE
-                                    ProcessStatus.RECORDING -> Strings.DEVICE_DROP_DOWN_STOP_RECORDING_MENU_TITLE
-                                },
-                                style = MaterialTheme.typography.body2
-                            )
-                        }
-                    }
-                }
+                    expanded = false
+                }, modifier = Modifier.height(32.dp)
+            ) {
+                Text(
+                    text = when (processStatus) {
+                        ProcessStatus.IDLE -> Strings.DEVICE_DROP_DOWN_START_RECORDING_MENU_TITLE
+                        ProcessStatus.RUNNING -> Strings.DEVICE_DROP_DOWN_START_RECORDING_MENU_TITLE
+                        ProcessStatus.RECORDING -> Strings.DEVICE_DROP_DOWN_STOP_RECORDING_MENU_TITLE
+                    },
+                    style = MaterialTheme.typography.body2
+                )
             }
+        }
+    }
+}
 
-            @Preview
-            @Composable
-            private fun DeviceCard_Preview() {
-                DeviceCard(Device.Context(Device("ID", "NAME")), ProcessStatus.IDLE)
-            }
+@Preview
+@Composable
+private fun DeviceCard_Preview() {
+    DeviceCard(Device.Context(Device("ID", "NAME")), ProcessStatus.IDLE)
+}
 
-            @Preview
-            @Composable
-            private fun DeviceCard_Preview_Overflow() {
-                val id = "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-                val name = "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-                DeviceCard(Device.Context(Device(id, name)), ProcessStatus.IDLE)
-            }
+@Preview
+@Composable
+private fun DeviceCard_Preview_Overflow() {
+    val id = "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+    val name = "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+    DeviceCard(Device.Context(Device(id, name)), ProcessStatus.IDLE)
+}
             
