@@ -5,16 +5,12 @@ import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.MaterialTheme
@@ -26,12 +22,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Message
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
-import resource.Strings.SETUP
 import view.extention.onInitialize
 import view.page.DevicePage
 import view.page.Page
@@ -49,7 +45,9 @@ fun MainContent(windowScope: WindowScope, mainContentViewModel: MainContentViewM
 
 @Composable
 private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewModel) {
-    MainTheme(isDarkMode = isSystemInDarkTheme()) {
+    val isDarkMode: Boolean by viewModel.isDarkMode.collectAsState()
+
+    MainTheme(isDarkMode = isDarkMode) {
         Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background)) {
             MainPages(windowScope, viewModel)
             MainSnacks(viewModel)
@@ -120,20 +118,12 @@ private fun MainSnacks(viewModel: MainContentViewModel) {
             AnimatedVisibility(errorMessageState, enter = fadeIn(), exit = fadeOut()) {
                 if (errorMessage != null) {
                     Snackbar(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
-                        Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
-                            Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
-                                Text(
-                                    errorMessage!!,
-                                    style = MaterialTheme.typography.button
-                                )
-                                Spacer(modifier = Modifier.width(16.dp))
-                                Text(
-                                    SETUP,
-                                    style = MaterialTheme.typography.button,
-                                    color = MaterialTheme.colors.onPrimary,
-                                    modifier = Modifier.clickable { viewModel.selectPage(Page.SettingPage) })
-                            }
-                        }
+                        Text(
+                            errorMessage!!,
+                            style = MaterialTheme.typography.button,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth().wrapContentHeight()
+                        )
                     }
                 }
             }
