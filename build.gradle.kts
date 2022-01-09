@@ -3,7 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "me.kaleidot725"
-version = "1.3.0"
+version = "1.4.0"
 
 plugins {
     kotlin("jvm") version "1.6.10"
