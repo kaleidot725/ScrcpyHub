@@ -24,7 +24,6 @@ fun main() = application {
 
     if (getOrNull() == null) {
         startKoin {
-            printLogger()
             modules(appModule)
         }
     }
