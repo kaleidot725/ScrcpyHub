@@ -176,7 +176,6 @@ private fun ThemeSetting_Preview() {
     ThemeSetting(Theme.SYNC_WITH_OS, Theme.values().toList(), {}, Modifier)
 }
 
-
 @Composable
 private fun AdbLocationSetting(adbLocation: String, onUpdate: (String) -> Unit, modifier: Modifier = Modifier) {
     Card(modifier = modifier) {
