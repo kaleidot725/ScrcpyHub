@@ -64,7 +64,7 @@ private fun onDrawPage(
     Box(modifier = Modifier.fillMaxSize()) {
         if (states.isEmpty()) {
             Column(modifier = Modifier.fillMaxSize()) {
-                LoadingPageHeader(windowScope = windowScope, onNavigateSetting)
+                DevicesPageHeader(windowScope = windowScope, onNavigateSetting)
 
                 Box(modifier = Modifier.fillMaxSize()) {
                     Text(
@@ -77,7 +77,7 @@ private fun onDrawPage(
             }
         } else {
             Column {
-                LoadingPageHeader(windowScope = windowScope, onNavigateSetting)
+                DevicesPageHeader(windowScope = windowScope, onNavigateSetting)
 
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(
@@ -109,7 +109,7 @@ private fun onDrawPage(
 }
 
 @Composable
-private fun LoadingPageHeader(windowScope: WindowScope, onNavigateSetting: (() -> Unit)?) {
+private fun DevicesPageHeader(windowScope: WindowScope, onNavigateSetting: (() -> Unit)?) {
     PageHeader(
         windowScope = windowScope,
         title = Strings.APP_NAME,
