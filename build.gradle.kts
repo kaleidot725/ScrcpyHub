@@ -8,9 +8,8 @@ version = "1.3.0"
 plugins {
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.serialization") version "1.6.10"
-
     id("org.jetbrains.compose") version "1.0.1"
-//    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
 }
 
 repositories {
@@ -41,11 +40,11 @@ tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "11"
 }
 
-//configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
-//    reporters {
-//        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
-//    }
-//}
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
+}
 
 compose.desktop {
     application {
