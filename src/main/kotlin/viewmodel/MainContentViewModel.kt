@@ -18,7 +18,6 @@ import resource.Strings.NOT_FOUND_ADB_COMMAND
 import resource.Strings.NOT_FOUND_SCRCPY_COMMAND
 import view.page.Page
 
-
 class MainContentViewModel(
     private val fetchSettingUseCase: FetchSettingUseCase,
     private val isSetupCompletedUseCase: IsSetupCompletedUseCase,
