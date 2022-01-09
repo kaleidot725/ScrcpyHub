@@ -6,7 +6,7 @@ import viewmodel.ViewModel
 
 @Composable
 fun onInitialize(viewModel: ViewModel) {
-    DisposableEffect(Unit) {
+    DisposableEffect(viewModel) {
         viewModel.onStarted()
         onDispose {
             viewModel.onCleared()
