@@ -64,19 +64,20 @@ private fun onDrawPage(
     Box(modifier = Modifier.fillMaxSize()) {
         if (states.isEmpty()) {
             Column(modifier = Modifier.fillMaxSize()) {
-                DevicePageHeader(windowScope = windowScope, onNavigateSetting)
+                DevicesPageHeader(windowScope = windowScope, onNavigateSetting)
 
                 Box(modifier = Modifier.fillMaxSize()) {
                     Text(
                         Strings.DEVICES_PAGE_NOT_FOUND_DEVICES,
                         style = MaterialTheme.typography.body1,
+                        color = MaterialTheme.colors.onSurface,
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }
             }
         } else {
             Column {
-                DevicePageHeader(windowScope = windowScope, onNavigateSetting)
+                DevicesPageHeader(windowScope = windowScope, onNavigateSetting)
 
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(
@@ -108,7 +109,7 @@ private fun onDrawPage(
 }
 
 @Composable
-private fun DevicePageHeader(windowScope: WindowScope, onNavigateSetting: (() -> Unit)?) {
+private fun DevicesPageHeader(windowScope: WindowScope, onNavigateSetting: (() -> Unit)?) {
     PageHeader(
         windowScope = windowScope,
         title = Strings.APP_NAME,

@@ -3,10 +3,7 @@ package model.entity
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Device(
-    val id: String = "",
-    val name: String = ""
-) {
+data class Device(val id: String = "", val name: String = "") {
     @Serializable
     data class Context(
         val device: Device,
