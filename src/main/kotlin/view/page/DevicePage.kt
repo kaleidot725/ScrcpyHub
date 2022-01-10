@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -110,8 +109,7 @@ private fun DeviceNameSetting(deviceName: String, onUpdate: (String) -> Unit, mo
             )
             Text(
                 Strings.DEVICE_PAGE_EDIT_NAME_DETAILS,
-                style = MaterialTheme.typography.subtitle2,
-                color = Color.Gray,
+                style = MaterialTheme.typography.subtitle2
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -144,8 +142,7 @@ private fun MaxSizeSetting(maxSize: String, error: String, onUpdate: (String) ->
             )
             Text(
                 Strings.DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS,
-                style = MaterialTheme.typography.subtitle2,
-                color = Color.Gray,
+                style = MaterialTheme.typography.subtitle2
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -164,8 +161,7 @@ private fun MaxSizeSetting(maxSize: String, error: String, onUpdate: (String) ->
 
                 Text(
                     error,
-                    style = MaterialTheme.typography.caption,
-                    color = Color.Red,
+                    style = MaterialTheme.typography.caption
                 )
             }
         }

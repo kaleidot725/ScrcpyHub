@@ -32,13 +32,13 @@ fun PageHeader(windowScope: WindowScope, title: String, optionContent: @Composab
             Text(
                 text = title,
                 style = MaterialTheme.typography.h6,
-                color = Color.White,
                 modifier = Modifier
                     .wrapContentHeight()
                     .fillMaxWidth(fraction = 0.95f)
                     .align(Alignment.CenterVertically),
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                color = Color.White
             )
             Box(modifier = Modifier.align(Alignment.CenterVertically)) { optionContent() }
         }

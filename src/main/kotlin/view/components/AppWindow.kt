@@ -18,7 +18,7 @@ fun AppWindow(onCloseRequest: () -> Unit, state: WindowState, content: @Composab
         resizable = false,
         undecorated = true,
         transparent = true,
-        icon = painterResource(Images.DEVICE)
+        icon = painterResource(Images.DEVICE),
     ) {
         Card(shape = RoundedCornerShape(8.dp)) { content.invoke(this) }
     }
