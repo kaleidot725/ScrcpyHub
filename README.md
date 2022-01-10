@@ -6,21 +6,28 @@ ScrcpyHub is a GUI application to use [scrcpy](https://github.com/Genymobile/scr
 
 # ✨ Feature
 
-- Support Windows10/11 or Mac OS.
+- Support Windows10/11 or Mac OS. 🖥️ 
 
-- Control mirroing (Start / Stop).
+- Support light theme and dark theme. 🖼️
 
-- Mirror multi android device.
+- Control mirroing (Start / Stop). 🪞
 
-- Save Screenshot.
+- Mirror multi android device. 📱
 
-- Record Movie.
+- Save Screenshot. 📸
 
-- Support Tary Menu.
+- Record Movie. 🎥
+
+- Support Tary Menu. 📥
 
   
-
-<img src="docs/one.png" width=256 hspace="5"><img src="docs/two.png" width=256 hspace="5"><img src="docs/three.png" width=256 hspace="5"><img src=docs/tray.png width=256 hspace=5>
+<img src="docs/5.png" width=256 hspace="5">
+<img src="docs/6.png" width=256 hspace="5">
+<img src="docs/1.png" width=256 hspace="5">
+<img src="docs/2.png" width=256 hspace="5">
+<img src="docs/3.png" width=256 hspace="5">
+<img src="docs/4.png" width=256 hspace="5">
+<img src=docs/tray.png width=256 hspace=5>
 
 # ⬇️ Install
 
