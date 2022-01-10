@@ -21,13 +21,7 @@ ScrcpyHub is a GUI application to use [scrcpy](https://github.com/Genymobile/scr
 - Support Tary Menu. 📥
 
   
-<img src="docs/5.png" width=256 hspace="5">
-<img src="docs/6.png" width=256 hspace="5">
-<img src="docs/1.png" width=256 hspace="5">
-<img src="docs/2.png" width=256 hspace="5">
-<img src="docs/3.png" width=256 hspace="5">
-<img src="docs/4.png" width=256 hspace="5">
-<img src=docs/tray.png width=256 hspace=5>
+<img src="docs/5.png" width=256 hspace="5"><img src="docs/6.png" width=256 hspace="5"><img src="docs/1.png" width=256 hspace="5"><img src="docs/2.png" width=256 hspace="5"><img src="docs/3.png" width=256 hspace="5"><img src="docs/4.png" width=256 hspace="5"><img src=docs/tray.png width=256 hspace=5>
 
 # ⬇️ Install
 
