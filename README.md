@@ -46,8 +46,6 @@ brew install scrcpy
 3. Open ScrcpyHub Preferences.
 4. Input adb and scrcpy location, save settings.
 
-<img src="docs/four.png" width=256 hspace="5">
-
 #### WARNING: Not recommend Chocolately.
 
 ScrcpyHub doesn't work mirroring start and stop when install scrcpy throught Chocolately.
