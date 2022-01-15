@@ -1,10 +1,10 @@
 package model.command
 
-import model.command.factory.ScrcpyCommandFactory
+import model.command.creator.ScrcpyCommandCreator
 import model.entity.Device
 import java.io.File
 
-class ScrcpyCommand(private val factory: ScrcpyCommandFactory) {
+class ScrcpyCommand(private val factory: ScrcpyCommandCreator) {
     fun run(context: Device.Context): Process {
         val command = factory.create(context)
         return ProcessBuilder(command).apply {
