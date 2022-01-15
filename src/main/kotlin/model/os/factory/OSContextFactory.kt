@@ -16,7 +16,7 @@ class OSContextFactory {
                 }
                 OSType.LINUX -> object : OSContext {
                     override val type: OSType = OSType.LINUX
-                    override val settingPath: String = "/etc/scrcpyhub/"
+                    override val settingPath: String = System.getProperty("user.home") + "/ScrcpyHub/"
                     override val desktopPath: String = System.getProperty("user.home") + "/Desktop/"
                 }
                 OSType.WINDOWS -> object : OSContext {
