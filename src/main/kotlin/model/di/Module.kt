@@ -1,13 +1,12 @@
 package model.di
 
-import common.OsType
-import common.osType
 import kotlinx.coroutines.runBlocking
 import model.command.KillCommand
 import model.command.ScrcpyCommand
 import model.command.factory.KillCommandFactory
 import model.command.factory.ScrcpyCommandFactory
 import model.entity.Device
+import model.os.factory.OSContextFactory
 import model.repository.DeviceRepository
 import model.repository.MessageRepository
 import model.repository.ProcessRepository
@@ -33,12 +32,7 @@ import viewmodel.MainContentViewModel
 import viewmodel.SettingPageViewModel
 
 val appModule = module {
-    single(named("setting_directory")) {
-        when (osType()) {
-            OsType.MAC_OS -> "/Library/Application Support/ScrcpyHub/"
-            OsType.WINDOWS -> "./"
-        }
-    }
+
 
     single {
         MessageRepository()
@@ -47,7 +41,7 @@ val appModule = module {
     factory {
         val setting = runBlocking { get<SettingRepository>().get() }
         val scrcpyCommand = ScrcpyCommand(ScrcpyCommandFactory(setting.scrcpyLocation))
-        val killCommand = KillCommand(KillCommandFactory.get(osType()))
+        val killCommand = KillCommand(KillCommandFactory.create(OSContextFactory.create()))
         ProcessRepository(scrcpyCommand, killCommand)
     }
 
