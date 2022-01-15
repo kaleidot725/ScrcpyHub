@@ -28,7 +28,6 @@ import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyUseCase
 import model.usecase.UpdateDeviceNameUseCase
 import model.usecase.UpdateSettingUseCase
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import viewmodel.DevicePageViewModel
 import viewmodel.DevicesPageViewModel
@@ -64,13 +63,11 @@ val appModule = module {
     }
 
     factory {
-        val directory = get<String>(named("setting_directory"))
-        DeviceRepository(directory)
+        DeviceRepository(get())
     }
 
     factory {
-        val directory = get<String>(named("setting_directory"))
-        SettingRepository(directory)
+        SettingRepository(get())
     }
 
     factory {

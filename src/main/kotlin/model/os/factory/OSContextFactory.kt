@@ -5,30 +5,24 @@ import model.os.OSType
 
 class OSContextFactory {
     companion object {
-//        single(named("setting_directory")) {
-//            when (getOSType()) {
-//                OSType.MAC_OS -> "/Library/Application Support/ScrcpyHub/"
-//                OSType.LINUX -> "/ScrcpyHub/"
-//                OSType.WINDOWS -> "./"
-//            }
-//        }
-
         fun create(): OSContext {
             return when (getOSType()) {
                 OSType.MAC_OS -> object : OSContext {
                     override val type: OSType = OSType.MAC_OS
-                    override val settingPath: String = ""
-                    override val desktopPath: String = ""
+                    override val settingPath: String =
+                        System.getProperty("user.home") + "/Library/Application Support/ScrcpyHub/"
+                    override val desktopPath: String =
+                        System.getProperty("user.home") + "/Desktop/"
                 }
                 OSType.LINUX -> object : OSContext {
                     override val type: OSType = OSType.LINUX
-                    override val settingPath: String = ""
-                    override val desktopPath: String = ""
+                    override val settingPath: String = System.getProperty("user.home") + "/ScrcpyHub/"
+                    override val desktopPath: String = System.getProperty("user.home") + "/Desktop/"
                 }
                 OSType.WINDOWS -> object : OSContext {
                     override val type: OSType = OSType.WINDOWS
-                    override val settingPath: String = ""
-                    override val desktopPath: String = ""
+                    override val settingPath: String = "./"
+                    override val desktopPath: String = System.getProperty("user.home") + "/Desktop/"
                 }
             }
         }

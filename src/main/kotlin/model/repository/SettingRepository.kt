@@ -6,9 +6,10 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.entity.AppSetting
-import model.utils.FileUtils
+import model.os.OSContext
+import java.io.File
 
-class SettingRepository(private val root: String) {
+class SettingRepository(private val osContext: OSContext) {
     suspend fun get(): AppSetting {
         return withContext(Dispatchers.IO) {
             load()
@@ -24,7 +25,7 @@ class SettingRepository(private val root: String) {
 
     private fun write(setting: AppSetting) {
         try {
-            FileUtils.createFileFile(root, SETTING_FILE_NAME).outputStream().apply {
+            File(osContext.settingPath + SETTING_FILE_NAME).outputStream().apply {
                 this.write(Json.encodeToString(setting).toByteArray())
                 this.close()
             }
@@ -35,7 +36,7 @@ class SettingRepository(private val root: String) {
 
     private fun load(): AppSetting {
         return try {
-            val content = FileUtils.createFileFile(root, SETTING_FILE_NAME).readText()
+            val content = File(osContext.settingPath + SETTING_FILE_NAME).readText()
             Json.decodeFromString(string = content)
         } catch (e: Exception) {
             AppSetting()
@@ -44,7 +45,7 @@ class SettingRepository(private val root: String) {
 
     private fun createDir() {
         try {
-            val file = FileUtils.createDirFile(root)
+            val file = File(osContext.settingPath)
             if (!file.exists()) file.mkdir()
         } catch (e: Exception) {
             return

@@ -16,7 +16,6 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.entity.Device
 import model.os.OSContext
-import model.utils.FileUtils
 import java.io.File
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -70,10 +69,10 @@ class DeviceRepository(private val osContext: OSContext) {
         return "${System.getProperty("user.home")}/Desktop/${context.displayName}-$date.mp4"
     }
 
-    private fun writeCache(context: Device.Context) {
+    private fun writeCache(deviceContext: Device.Context) {
         try {
-            FileUtils.createFileFile(osContext.settingPath, context.device.id).outputStream().apply {
-                this.write(Json.encodeToString(context).toByteArray())
+            File(osContext.settingPath + deviceContext.device.id).outputStream().apply {
+                this.write(Json.encodeToString(deviceContext).toByteArray())
                 this.close()
             }
         } catch (e: Exception) {
@@ -87,7 +86,7 @@ class DeviceRepository(private val osContext: OSContext) {
 
     private fun loadCache(device: Device): Device.Context {
         return try {
-            val content = FileUtils.createFileFile(osContext.settingPath, device.id).readText()
+            val content = File(osContext.settingPath + device.id).readText()
             Json.decodeFromString(string = content)
         } catch (e: Exception) {
             Device.Context(device = device)
@@ -96,7 +95,7 @@ class DeviceRepository(private val osContext: OSContext) {
 
     private fun createDir() {
         try {
-            val file = FileUtils.createDirFile(osContext.settingPath)
+            val file = File(osContext.settingPath)
             if (!file.exists()) file.mkdir()
         } catch (e: Exception) {
             return
