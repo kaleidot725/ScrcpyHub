@@ -3,9 +3,13 @@ package model.di
 import kotlinx.coroutines.runBlocking
 import model.command.KillCommand
 import model.command.ScrcpyCommand
-import model.command.factory.KillCommandFactory
-import model.command.factory.ScrcpyCommandFactory
+import model.command.creator.KillCommandCreatorForLinux
+import model.command.creator.KillCommandCreatorForMacOS
+import model.command.creator.KillCommandCreatorForWindows
+import model.command.creator.ScrcpyCommandCreator
 import model.entity.Device
+import model.os.OSContext
+import model.os.OSType
 import model.os.factory.OSContextFactory
 import model.repository.DeviceRepository
 import model.repository.MessageRepository
@@ -32,17 +36,31 @@ import viewmodel.MainContentViewModel
 import viewmodel.SettingPageViewModel
 
 val appModule = module {
-
-
     single {
         MessageRepository()
     }
 
     factory {
+        OSContextFactory.create()
+    }
+
+    factory {
+        KillCommand(
+            when (get<OSContext>().type) {
+                OSType.MAC_OS -> KillCommandCreatorForMacOS()
+                OSType.LINUX -> KillCommandCreatorForLinux()
+                OSType.WINDOWS -> KillCommandCreatorForWindows()
+            }
+        )
+    }
+
+    factory {
         val setting = runBlocking { get<SettingRepository>().get() }
-        val scrcpyCommand = ScrcpyCommand(ScrcpyCommandFactory(setting.scrcpyLocation))
-        val killCommand = KillCommand(KillCommandFactory.create(OSContextFactory.create()))
-        ProcessRepository(scrcpyCommand, killCommand)
+        ScrcpyCommand(ScrcpyCommandCreator(setting.scrcpyLocation))
+    }
+
+    factory {
+        ProcessRepository(get(), get())
     }
 
     factory {
