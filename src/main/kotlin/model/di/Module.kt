@@ -119,7 +119,7 @@ val appModule = module {
     }
 
     factory {
-        GetSystemDarkModeFlowUseCase(get())
+        GetSystemDarkModeFlowUseCase()
     }
 
     factory {
