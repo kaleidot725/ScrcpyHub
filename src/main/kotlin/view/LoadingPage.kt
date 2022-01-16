@@ -12,11 +12,11 @@ import androidx.compose.ui.window.WindowScope
 
 @Composable
 fun LoadingPage(windowScope: WindowScope) {
-    onDrawPage(windowScope)
+    onDrawPage()
 }
 
 @Composable
-private fun onDrawPage(windowScope: WindowScope) {
+private fun onDrawPage() {
     Box(
         modifier = Modifier
             .fillMaxSize()
