@@ -2,7 +2,7 @@ package resource
 
 object Strings {
     // COMMON
-    const val APP_VERSION = "1.4.0"
+    const val APP_VERSION = "1.5.0"
     const val APP_NAME = "ScrcpyHub"
     const val SAVE = "Save"
     const val SETUP = "Setup"

@@ -3,7 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "me.kaleidot725"
-version = "1.4.0"
+version = "1.5.0"
 
 plugins {
     kotlin("jvm") version "1.6.10"
@@ -53,7 +53,7 @@ compose.desktop {
             packageName = "ScrcpyHub"
             modules("jdk.management")
 
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi)
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Rpm)
 
             macOS {
                 bundleID = "jp.kaleidot725.scrcpyhub"
@@ -61,6 +61,10 @@ compose.desktop {
             }
 
             windows {
+                iconFile.set(project.file("icon.ico"))
+            }
+
+            linux {
                 iconFile.set(project.file("icon.ico"))
             }
         }
