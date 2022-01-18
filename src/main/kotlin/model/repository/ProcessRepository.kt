@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
 import model.command.KillCommand
 import model.command.ScrcpyCommand
-import model.command.factory.ScrcpyCommandFactory
+import model.command.creator.ScrcpyCommandCreator
 import model.entity.Device
 
 private data class ProcessState(
@@ -29,7 +29,7 @@ class ProcessRepository(
     private val scope: CoroutineScope = MainScope()
 
     fun addMirroringProcess(context: Device.Context, scrcpyLocation: String, onDestroy: (suspend () -> Unit)? = null) {
-        val process = ScrcpyCommand(ScrcpyCommandFactory(scrcpyLocation)).run(context)
+        val process = ScrcpyCommand(ScrcpyCommandCreator(scrcpyLocation)).run(context)
         processList[context.device.id] = ProcessState(process, ProcessStatus.RUNNING)
         scope.launch(Dispatchers.IO) {
             process.waitForRunning(MONITORING_DELAY)
@@ -46,7 +46,7 @@ class ProcessRepository(
         commandLocation: String,
         onDestroy: (suspend () -> Unit)? = null
     ) {
-        val process = ScrcpyCommand(ScrcpyCommandFactory(commandLocation)).record(context, fileName)
+        val process = ScrcpyCommand(ScrcpyCommandCreator(commandLocation)).record(context, fileName)
         processList[context.device.id] = ProcessState(process, ProcessStatus.RECORDING)
         scope.launch(Dispatchers.IO) {
             process.waitForRunning(MONITORING_DELAY)

@@ -1,13 +1,16 @@
 package model.di
 
-import common.OsType
-import common.osType
 import kotlinx.coroutines.runBlocking
 import model.command.KillCommand
 import model.command.ScrcpyCommand
-import model.command.factory.KillCommandFactory
-import model.command.factory.ScrcpyCommandFactory
+import model.command.creator.KillCommandCreatorForLinux
+import model.command.creator.KillCommandCreatorForMacOS
+import model.command.creator.KillCommandCreatorForWindows
+import model.command.creator.ScrcpyCommandCreator
 import model.entity.Device
+import model.os.OSContext
+import model.os.OSType
+import model.os.factory.OSContextFactory
 import model.repository.DeviceRepository
 import model.repository.MessageRepository
 import model.repository.ProcessRepository
@@ -25,7 +28,6 @@ import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyUseCase
 import model.usecase.UpdateDeviceNameUseCase
 import model.usecase.UpdateSettingUseCase
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import viewmodel.DevicePageViewModel
 import viewmodel.DevicesPageViewModel
@@ -33,32 +35,39 @@ import viewmodel.MainContentViewModel
 import viewmodel.SettingPageViewModel
 
 val appModule = module {
-    single(named("setting_directory")) {
-        when (osType()) {
-            OsType.MAC_OS -> "/Library/Application Support/ScrcpyHub/"
-            OsType.WINDOWS -> "./"
-        }
-    }
-
     single {
         MessageRepository()
     }
 
     factory {
+        OSContextFactory.create()
+    }
+
+    factory {
+        KillCommand(
+            when (get<OSContext>().type) {
+                OSType.MAC_OS -> KillCommandCreatorForMacOS()
+                OSType.LINUX -> KillCommandCreatorForLinux()
+                OSType.WINDOWS -> KillCommandCreatorForWindows()
+            }
+        )
+    }
+
+    factory {
         val setting = runBlocking { get<SettingRepository>().get() }
-        val scrcpyCommand = ScrcpyCommand(ScrcpyCommandFactory(setting.scrcpyLocation))
-        val killCommand = KillCommand(KillCommandFactory.get(osType()))
-        ProcessRepository(scrcpyCommand, killCommand)
+        ScrcpyCommand(ScrcpyCommandCreator(setting.scrcpyLocation))
     }
 
     factory {
-        val directory = get<String>(named("setting_directory"))
-        DeviceRepository(directory)
+        ProcessRepository(get(), get())
     }
 
     factory {
-        val directory = get<String>(named("setting_directory"))
-        SettingRepository(directory)
+        DeviceRepository(get())
+    }
+
+    factory {
+        SettingRepository(get())
     }
 
     factory {
@@ -110,7 +119,7 @@ val appModule = module {
     }
 
     factory {
-        GetSystemDarkModeFlowUseCase(get())
+        GetSystemDarkModeFlowUseCase()
     }
 
     factory {

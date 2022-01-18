@@ -2,13 +2,13 @@ package model.command
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import model.command.factory.ScrcpyCommandFactory
+import model.command.creator.ScrcpyCommandCreator
 import model.entity.Device
 
-class ScrcpyCommandFactoryTest : StringSpec({
+class ScrcpyCommandCreatorTest : StringSpec({
     "create" {
-        val factory = ScrcpyCommandFactory(path = "test/")
-        val factoryWhenNoSeparator = ScrcpyCommandFactory(path = "test")
+        val factory = ScrcpyCommandCreator(path = "test/")
+        val factoryWhenNoSeparator = ScrcpyCommandCreator(path = "test")
 
         val device1 = Device.Context(
             Device(id = "DEVICE1", name = "NAME"), maxSize = null
@@ -23,7 +23,7 @@ class ScrcpyCommandFactoryTest : StringSpec({
         factoryWhenNoSeparator.create(device2) shouldBe listOf("test/scrcpy", "-s", "DEVICE2", "-m", "1000")
     }
     "create_when_no_path_specified" {
-        val factory = ScrcpyCommandFactory()
+        val factory = ScrcpyCommandCreator()
 
         val device1 = Device.Context(
             Device(id = "DEVICE1", name = "NAME"), customName = "CUSTOM_NAME", maxSize = null
@@ -36,8 +36,8 @@ class ScrcpyCommandFactoryTest : StringSpec({
         factory.create(device2) shouldBe listOf("scrcpy", "-s", "DEVICE2", "-m", "1000")
     }
     "create_record" {
-        val factory = ScrcpyCommandFactory(path = "test/")
-        val factoryWhenNoSeparator = ScrcpyCommandFactory(path = "test")
+        val factory = ScrcpyCommandCreator(path = "test/")
+        val factoryWhenNoSeparator = ScrcpyCommandCreator(path = "test")
 
         val device1 = Device.Context(
             Device(id = "DEVICE1", name = "NAME"), maxSize = null
@@ -60,7 +60,7 @@ class ScrcpyCommandFactoryTest : StringSpec({
         )
     }
     "create_record_when_no_path_specified" {
-        val factory = ScrcpyCommandFactory()
+        val factory = ScrcpyCommandCreator()
 
         val device1 = Device.Context(
             Device(id = "DEVICE1", name = "NAME"), customName = "CUSTOM_NAME", maxSize = null
@@ -77,14 +77,14 @@ class ScrcpyCommandFactoryTest : StringSpec({
         )
     }
     "create_help" {
-        val factory = ScrcpyCommandFactory(path = "test/")
-        val factoryWhenNoSeparator = ScrcpyCommandFactory(path = "test")
+        val factory = ScrcpyCommandCreator(path = "test/")
+        val factoryWhenNoSeparator = ScrcpyCommandCreator(path = "test")
 
         factory.createHelp() shouldBe listOf("test/scrcpy", "-h")
         factoryWhenNoSeparator.createHelp() shouldBe listOf("test/scrcpy", "-h")
     }
     "create_help_when_no_path_specified" {
-        val factory = ScrcpyCommandFactory()
+        val factory = ScrcpyCommandCreator()
         factory.createHelp() shouldBe listOf("scrcpy", "-h")
     }
 })

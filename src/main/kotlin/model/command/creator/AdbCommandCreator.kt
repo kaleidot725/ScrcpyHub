@@ -1,11 +1,10 @@
-package model.command.factory
+package model.command.creator
 
 import java.io.File
 
-class AdbCommandFactory(
+class AdbCommandCreator(
     val path: String? = null
 ) {
-    @OptIn(kotlin.ExperimentalStdlibApi::class)
     fun create(): List<String> {
         return buildList {
             if (path != null) {
@@ -20,7 +19,6 @@ class AdbCommandFactory(
         }
     }
 
-    @OptIn(kotlin.ExperimentalStdlibApi::class)
     fun createHelp(): List<String> {
         return buildList {
             if (path != null) {

@@ -15,14 +15,14 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.entity.Device
-import model.utils.FileUtils
+import model.os.OSContext
 import java.io.File
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import javax.imageio.ImageIO
 
-class DeviceRepository(private val home: String) {
+class DeviceRepository(private val osContext: OSContext) {
     private val adb = AndroidDebugBridgeClientFactory().build()
     private val screenshotAdapter = RawImageScreenCaptureAdapter()
 
@@ -69,10 +69,10 @@ class DeviceRepository(private val home: String) {
         return "${System.getProperty("user.home")}/Desktop/${context.displayName}-$date.mp4"
     }
 
-    private fun writeCache(context: Device.Context) {
+    private fun writeCache(deviceContext: Device.Context) {
         try {
-            FileUtils.createFileFile(home, context.device.id).outputStream().apply {
-                this.write(Json.encodeToString(context).toByteArray())
+            File(osContext.settingPath + deviceContext.device.id).outputStream().apply {
+                this.write(Json.encodeToString(deviceContext).toByteArray())
                 this.close()
             }
         } catch (e: Exception) {
@@ -86,7 +86,7 @@ class DeviceRepository(private val home: String) {
 
     private fun loadCache(device: Device): Device.Context {
         return try {
-            val content = FileUtils.createFileFile(home, device.id).readText()
+            val content = File(osContext.settingPath + device.id).readText()
             Json.decodeFromString(string = content)
         } catch (e: Exception) {
             Device.Context(device = device)
@@ -95,7 +95,7 @@ class DeviceRepository(private val home: String) {
 
     private fun createDir() {
         try {
-            val file = FileUtils.createDirFile(home)
+            val file = File(osContext.settingPath)
             if (!file.exists()) file.mkdir()
         } catch (e: Exception) {
             return

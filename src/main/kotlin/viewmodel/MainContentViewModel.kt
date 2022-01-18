@@ -1,5 +1,6 @@
 package viewmodel
 
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -83,7 +84,7 @@ class MainContentViewModel(
     }
 
     private fun initSetting() {
-        coroutineScope.launch {
+        coroutineScope.launch(NonCancellable) {
             setting.value = fetchSettingUseCase.execute()
             delay(2000)
             _selectedPages.value = Page.DevicesPage

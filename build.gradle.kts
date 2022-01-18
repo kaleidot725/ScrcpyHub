@@ -1,9 +1,8 @@
 import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "me.kaleidot725"
-version = "1.4.0"
+version = "1.5.0"
 
 plugins {
     kotlin("jvm") version "1.6.10"
@@ -36,10 +35,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
-}
-
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
     reporters {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
@@ -53,7 +48,7 @@ compose.desktop {
             packageName = "ScrcpyHub"
             modules("jdk.management")
 
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi)
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
 
             macOS {
                 bundleID = "jp.kaleidot725.scrcpyhub"
@@ -61,6 +56,10 @@ compose.desktop {
             }
 
             windows {
+                iconFile.set(project.file("icon.ico"))
+            }
+
+            linux {
                 iconFile.set(project.file("icon.ico"))
             }
         }
