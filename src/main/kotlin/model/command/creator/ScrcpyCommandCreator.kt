@@ -1,10 +1,9 @@
-package model.command.factory
+package model.command.creator
 
 import model.entity.Device
 import java.io.File
 
-class ScrcpyCommandFactory(val path: String? = null) {
-    @OptIn(kotlin.ExperimentalStdlibApi::class)
+class ScrcpyCommandCreator(val path: String? = null) {
     fun create(context: Device.Context): List<String> {
         return buildList {
             if (path != null) {
@@ -28,7 +27,6 @@ class ScrcpyCommandFactory(val path: String? = null) {
         }
     }
 
-    @OptIn(kotlin.ExperimentalStdlibApi::class)
     fun createRecord(context: Device.Context, fileName: String): List<String> {
         return buildList {
             if (path != null) {
@@ -55,7 +53,6 @@ class ScrcpyCommandFactory(val path: String? = null) {
         }
     }
 
-    @OptIn(kotlin.ExperimentalStdlibApi::class)
     fun createHelp(): List<String> {
         return buildList {
             if (path != null) {

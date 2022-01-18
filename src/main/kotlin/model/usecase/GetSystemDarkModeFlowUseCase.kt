@@ -5,11 +5,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import model.repository.SettingRepository
 
-class GetSystemDarkModeFlowUseCase(
-    private val settingRepository: SettingRepository
-) {
+class GetSystemDarkModeFlowUseCase() {
     @OptIn(ExperimentalCoroutinesApi::class)
     operator fun invoke(): Flow<Boolean> {
         return callbackFlow {

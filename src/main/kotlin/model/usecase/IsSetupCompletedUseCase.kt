@@ -2,8 +2,8 @@ package model.usecase
 
 import model.command.AdbCommand
 import model.command.ScrcpyCommand
-import model.command.factory.AdbCommandFactory
-import model.command.factory.ScrcpyCommandFactory
+import model.command.creator.AdbCommandCreator
+import model.command.creator.ScrcpyCommandCreator
 import model.repository.SettingRepository
 
 class IsSetupCompletedUseCase(
@@ -12,12 +12,12 @@ class IsSetupCompletedUseCase(
     suspend fun execute(): Result {
         val setting = settingRepository.get()
 
-        val adbCommand = AdbCommand(AdbCommandFactory(setting.adbLocation))
+        val adbCommand = AdbCommand(AdbCommandCreator(setting.adbLocation))
         if (!adbCommand.isInstalled()) {
             return Result.NOT_FOUND_ADB_COMMAND
         }
 
-        val scrcpyCommand = ScrcpyCommand(ScrcpyCommandFactory(setting.scrcpyLocation))
+        val scrcpyCommand = ScrcpyCommand(ScrcpyCommandCreator(setting.scrcpyLocation))
         if (!scrcpyCommand.isInstalled()) {
             return Result.NOT_FOUND_SCRCPY_COMMAND
         }
