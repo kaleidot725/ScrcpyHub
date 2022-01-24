@@ -1,7 +1,7 @@
 # 🐻‍❄️ ScrcpyHub
 
-ScrcpyHub is a GUI application to mirror android screen.   
-ScrcpyHub use [scrcpy](https://github.com/Genymobile/scrcpy). [scrcpy](https://github.com/Genymobile/scrcpy) is a mirroring android command tool.
+ScrcpyHub is a GUI application to mirror android screens.   
+ScrcpyHub uses [scrcpy](https://github.com/Genymobile/scrcpy). [scrcpy](https://github.com/Genymobile/scrcpy) is a mirroring android command tool.
 
 ![demo](docs/demo.gif)
 
@@ -13,11 +13,11 @@ ScrcpyHub use [scrcpy](https://github.com/Genymobile/scrcpy). [scrcpy](https://g
 
 - Control mirroing (Start / Stop). 🪞
 
-- Mirror multi android device. 📱
+- Mirror multi android devices. 📱
 
-- Save Screenshot. 📸
+- Save Screenshots. 📸
 
-- Record Movie. 🎥
+- Record Movies. 🎥
 
 - Support Tary Menu. 📥
 
@@ -37,7 +37,7 @@ Install adb and scrcpy, ScrcpyHub.
 
 #### WARNING: Not recommend Chocolately.
 
-ScrcpyHub doesn't work mirroring start and stop when install scrcpy throught Chocolately.
+ScrcpyHub doesn't work mirroring start and stop if you install scrcpy through Chocolately.
 
 ## 💻 Linux(Ubuntu)
 
@@ -72,4 +72,3 @@ brew install scrcpy
 # 🎫 Licence
 
 The GNU General Public License v3.0 (GPLv3)
-n
