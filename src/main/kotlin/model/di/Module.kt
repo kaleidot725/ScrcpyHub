@@ -25,6 +25,7 @@ import model.usecase.IsSetupCompletedUseCase
 import model.usecase.SaveScreenshotToDesktopUseCase
 import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
+import model.usecase.StopScrcpyRecordUseCase
 import model.usecase.StopScrcpyUseCase
 import model.usecase.UpdateDeviceNameUseCase
 import model.usecase.UpdateSettingUseCase
@@ -115,7 +116,11 @@ val appModule = module {
     }
 
     factory {
-        StartScrcpyRecordUseCase(get(), get(), get())
+        StartScrcpyRecordUseCase(get(), get(), get(), get())
+    }
+
+    factory {
+        StopScrcpyRecordUseCase(get(), get())
     }
 
     factory {
@@ -123,7 +128,7 @@ val appModule = module {
     }
 
     factory {
-        DevicesPageViewModel(get(), get(), get(), get(), get(), get(), get())
+        DevicesPageViewModel(get(), get(), get(), get(), get(), get(), get(), get())
     }
 
     factory { (context: Device.Context) ->

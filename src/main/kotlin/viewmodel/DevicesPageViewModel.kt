@@ -12,14 +12,16 @@ import model.usecase.GetScrcpyStatusUseCase
 import model.usecase.SaveScreenshotToDesktopUseCase
 import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
+import model.usecase.StopScrcpyRecordUseCase
 import model.usecase.StopScrcpyUseCase
 
 class DevicesPageViewModel(
     private val fetchDevicesUseCase: FetchDevicesUseCase,
     private val getDevicesFlowUseCase: GetDevicesFlowUseCase,
     private val startScrcpyUseCase: StartScrcpyUseCase,
-    private val startScrcpyRecordUseCase: StartScrcpyRecordUseCase,
     private val stopScrcpyUseCase: StopScrcpyUseCase,
+    private val startScrcpyRecordUseCase: StartScrcpyRecordUseCase,
+    private val stopScrcpyRecordUseCase: StopScrcpyRecordUseCase,
     private val getScrcpyProcessStatusUseCase: GetScrcpyStatusUseCase,
     private val saveScreenshotToDesktop: SaveScreenshotToDesktopUseCase
 ) : ViewModel() {
@@ -41,6 +43,13 @@ class DevicesPageViewModel(
         }
     }
 
+    fun stopScrcpy(context: Device.Context) {
+        coroutineScope.launch {
+            stopScrcpyUseCase.execute(context)
+            fetchStates()
+        }
+    }
+
     fun startScrcpyRecord(context: Device.Context) {
         coroutineScope.launch {
             startScrcpyRecordUseCase.execute(context) { fetchStates() }
@@ -48,9 +57,9 @@ class DevicesPageViewModel(
         }
     }
 
-    fun stopScrcpy(context: Device.Context) {
+    fun stopScrcpyRecord(context: Device.Context) {
         coroutineScope.launch {
-            stopScrcpyUseCase.execute(context)
+            stopScrcpyRecordUseCase.execute(context)
             fetchStates()
         }
     }

@@ -91,7 +91,7 @@ private fun onDrawPage(
                                 goToDetail = { onNavigateDevice?.invoke(status.context) },
                                 takeScreenshot = { viewModel.saveScreenshotToDesktop(status.context) },
                                 startRecording = { viewModel.startScrcpyRecord(status.context) },
-                                stopRecording = { viewModel.stopScrcpy(status.context) },
+                                stopRecording = { viewModel.stopScrcpyRecord(status.context) },
                                 modifier = Modifier
                                     .wrapContentHeight()
                                     .fillMaxWidth()
