@@ -25,8 +25,8 @@ object Strings {
     const val DEVICES_DROP_DOWN_QUIT_MENU_TITLE = "Quit"
     const val DEVICE_DROP_DOWN_PREFERENCE_MENU_TITLE = "Edit Device Setting"
     const val DEVICE_DROP_DOWN_SCREEN_SHOT_MENU_TITLE = "Save Screenshot to Desktop"
-    const val DEVICE_DROP_DOWN_START_RECORDING_MENU_TITLE = "Start Recoding and Save to Desktop"
-    const val DEVICE_DROP_DOWN_STOP_RECORDING_MENU_TITLE = "Stop Recoding"
+    const val DEVICE_DROP_DOWN_START_RECORDING_MENU_TITLE = "Start Recording and Save to Desktop"
+    const val DEVICE_DROP_DOWN_STOP_RECORDING_MENU_TITLE = "Stop Recording"
 
     // Device Page
     const val DEVICE_PAGE_EDIT_NAME_TITLE = "Device Name"
