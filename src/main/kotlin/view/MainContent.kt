@@ -19,6 +19,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,8 +56,8 @@ private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewMod
 }
 
 @Composable
-private fun MainPages(windowScope: WindowScope, viewModel: MainContentViewModel) {
-    val selectedPages: Page by viewModel.selectedPages.collectAsState()
+private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewModel) {
+    val selectedPages: Page by mainViewModel.selectedPages.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         when (val page = selectedPages) {
@@ -64,32 +65,38 @@ private fun MainPages(windowScope: WindowScope, viewModel: MainContentViewModel)
                 LoadingPage(windowScope = windowScope)
             }
             Page.DevicesPage -> {
-                val devicesPageViewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
-                DevicesPage(
-                    windowScope = windowScope,
+                val devicesPageViewModel by remember {
+                    val viewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
+                    mutableStateOf(viewModel)
+                }
+
+                DevicesPage(windowScope = windowScope,
                     devicesPageViewModel = devicesPageViewModel,
-                    onNavigateSetting = { viewModel.selectPage(Page.SettingPage) },
-                    onNavigateDevice = { viewModel.selectPage(Page.DevicePage(it)) }
-                )
+                    onNavigateSetting = { mainViewModel.selectPage(Page.SettingPage) },
+                    onNavigateDevice = { mainViewModel.selectPage(Page.DevicePage(it)) })
             }
             Page.SettingPage -> {
-                val settingPageViewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
-                SettingPage(
-                    windowScope = windowScope,
+                val settingPageViewModel by remember {
+                    val viewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
+                    mutableStateOf(viewModel)
+                }
+                
+                SettingPage(windowScope = windowScope,
                     settingPageViewModel = settingPageViewModel,
-                    onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) },
-                    onSaved = { viewModel.refreshSetting() }
-                )
+                    onNavigateDevices = { mainViewModel.selectPage(Page.DevicesPage) },
+                    onSaved = { mainViewModel.refreshSetting() })
             }
             is Page.DevicePage -> {
-                val devicePageViewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
-                    parametersOf(page.context)
+                val devicePageViewModel by remember {
+                    val viewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
+                        parametersOf(page.context)
+                    }
+                    mutableStateOf(viewModel)
                 }
-                DevicePage(
-                    windowScope = windowScope,
+
+                DevicePage(windowScope = windowScope,
                     deviceViewModel = devicePageViewModel,
-                    onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) }
-                )
+                    onNavigateDevices = { mainViewModel.selectPage(Page.DevicesPage) })
             }
         }
     }

@@ -16,35 +16,35 @@ import resource.Images
 import resource.Strings
 import view.MainContent
 import view.components.AppWindow
+import viewmodel.MainContentViewModel
 
 fun main() = application {
-    val trayState = rememberTrayState()
-    var isOpen by remember { mutableStateOf(true) }
-    val windowState = rememberWindowState(width = 350.dp, height = 550.dp)
-
     if (getOrNull() == null) {
         startKoin {
             modules(appModule)
         }
     }
 
-    Tray(
-        state = trayState, icon = painterResource(Images.TRAY), menu = {
-            Item(Strings.TRAY_TOGGLE_SCRCPY_HUB, onClick = { isOpen = !isOpen })
+    val trayState = rememberTrayState()
+    val windowState = rememberWindowState(width = 350.dp, height = 550.dp)
+    val viewModel by remember { mutableStateOf(GlobalContext.get().get<MainContentViewModel>()) }
+    var isOpen by remember { mutableStateOf(true) }
 
-            Item(Strings.TRAY_VERSION, enabled = false, onClick = {})
+    Tray(state = trayState, icon = painterResource(Images.TRAY), menu = {
+        Item(Strings.TRAY_TOGGLE_SCRCPY_HUB, onClick = { isOpen = !isOpen })
 
-            Separator()
+        Item(Strings.TRAY_VERSION, enabled = false, onClick = {})
 
-            Item(Strings.QUIT, onClick = {
-                exitApplication()
-            })
-        }
-    )
+        Separator()
+
+        Item(Strings.QUIT, onClick = {
+            exitApplication()
+        })
+    })
 
     if (isOpen) {
         AppWindow(onCloseRequest = { isOpen = false }, state = windowState) {
-        MainContent(windowScope = this, mainContentViewModel = GlobalContext.get().get())
-    }
+            MainContent(windowScope = this, mainContentViewModel = viewModel)
+        }
     }
 }
