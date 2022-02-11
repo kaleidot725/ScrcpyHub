@@ -151,5 +151,8 @@ private fun Message.toStringMessage(): String {
         Message.EmptyMessage -> ""
         is Message.SuccessToSaveScreenshot -> "Success to save ${this.context.displayName} Screenshot!"
         is Message.FailedToSaveScreenshot -> "Failed to save ${this.context.displayName} Screenshot!"
+        is Message.StartRecordingMovie -> "Start recording movie on ${this.context.displayName}"
+        is Message.StopRecordingMovie -> "Stop recording movie on ${this.context.displayName}"
+        is Message.FailedRecordingMovie -> "Failed recording movie on ${this.context.displayName}"
     }
 }
