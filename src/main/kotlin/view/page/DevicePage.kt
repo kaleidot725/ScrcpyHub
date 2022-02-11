@@ -33,9 +33,7 @@ import viewmodel.DevicePageViewModel
 
 @Composable
 fun DevicePage(
-    windowScope: WindowScope,
-    deviceViewModel: DevicePageViewModel,
-    onNavigateDevices: (() -> Unit)? = null
+    windowScope: WindowScope, deviceViewModel: DevicePageViewModel, onNavigateDevices: (() -> Unit)? = null
 ) {
     onInitialize(deviceViewModel)
     onDrawPage(windowScope, deviceViewModel, onNavigateDevices)
@@ -43,9 +41,7 @@ fun DevicePage(
 
 @Composable
 private fun onDrawPage(
-    windowScope: WindowScope,
-    viewModel: DevicePageViewModel,
-    onNavigateDevices: (() -> Unit)? = null
+    windowScope: WindowScope, viewModel: DevicePageViewModel, onNavigateDevices: (() -> Unit)? = null
 ) {
     val titleName: String by viewModel.titleName.collectAsState()
     val name: String by viewModel.editName.collectAsState()
@@ -54,26 +50,15 @@ private fun onDrawPage(
     val savable: Boolean by viewModel.savable.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        PageHeader(
-            windowScope = windowScope,
-            title = titleName,
-            optionContent = {
-                Image(
-                    painter = painterResource(Images.CLOSE),
-                    contentDescription = "",
-                    contentScale = ContentScale.FillHeight,
-                    modifier = Modifier
-                        .wrapContentWidth()
-                        .height(18.dp)
-                        .clickable { onNavigateDevices?.invoke() }
-                )
-            }
-        )
+        PageHeader(windowScope = windowScope, title = titleName, optionContent = {
+            Image(painter = painterResource(Images.CLOSE),
+                contentDescription = "",
+                contentScale = ContentScale.FillHeight,
+                modifier = Modifier.wrapContentWidth().height(18.dp).clickable { onNavigateDevices?.invoke() })
+        })
 
         DeviceNameSetting(
-            name,
-            { viewModel.updateName(it) },
-            modifier = Modifier.padding(horizontal = 8.dp)
+            name, { viewModel.updateName(it) }, modifier = Modifier.padding(horizontal = 8.dp)
         )
 
         Spacer(
@@ -81,21 +66,14 @@ private fun onDrawPage(
         )
 
         MaxSizeSetting(
-            maxSize,
-            maxSizeError,
-            { viewModel.updateMaxSize(it) },
-            modifier = Modifier.padding(horizontal = 8.dp)
+            maxSize, maxSizeError, { viewModel.updateMaxSize(it) }, modifier = Modifier.padding(horizontal = 8.dp)
         )
 
         Spacer(
             modifier = Modifier.height(8.dp)
         )
 
-        SaveButton(
-            savable = savable,
-            modifier = Modifier.padding(horizontal = 8.dp),
-            onSaved = { viewModel.save() }
-        )
+        SaveButton(savable = savable, modifier = Modifier.padding(horizontal = 8.dp), onSaved = { viewModel.save() })
     }
 }
 
@@ -108,17 +86,13 @@ private fun DeviceNameSetting(deviceName: String, onUpdate: (String) -> Unit, mo
                 style = MaterialTheme.typography.subtitle1,
             )
             Text(
-                Strings.DEVICE_PAGE_EDIT_NAME_DETAILS,
-                style = MaterialTheme.typography.subtitle2
+                Strings.DEVICE_PAGE_EDIT_NAME_DETAILS, style = MaterialTheme.typography.subtitle2
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             TextField(
-                value = deviceName,
-                modifier = Modifier.fillMaxWidth(),
-                onValueChange = { onUpdate(it) },
-                maxLines = 1
+                value = deviceName, modifier = Modifier.fillMaxWidth(), onValueChange = { onUpdate(it) }, maxLines = 1
             )
         }
     }
@@ -141,8 +115,7 @@ private fun MaxSizeSetting(maxSize: String, error: String, onUpdate: (String) ->
                 style = MaterialTheme.typography.subtitle1,
             )
             Text(
-                Strings.DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS,
-                style = MaterialTheme.typography.subtitle2
+                Strings.DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS, style = MaterialTheme.typography.subtitle2
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -160,8 +133,7 @@ private fun MaxSizeSetting(maxSize: String, error: String, onUpdate: (String) ->
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    error,
-                    style = MaterialTheme.typography.caption
+                    error, style = MaterialTheme.typography.caption
                 )
             }
         }
@@ -173,3 +145,4 @@ private fun MaxSizeSetting(maxSize: String, error: String, onUpdate: (String) ->
 private fun MaxSizeSetting_Preview() {
     MaxSizeSetting("1920", "", {})
 }
+        

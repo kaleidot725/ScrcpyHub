@@ -13,11 +13,7 @@ import resource.Strings
 @Composable
 fun SaveButton(savable: Boolean, onSaved: () -> Unit, modifier: Modifier = Modifier) {
     Box(modifier = modifier) {
-        Button(
-            enabled = savable,
-            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            onClick = { onSaved() }
-        ) {
+        Button(enabled = savable, modifier = Modifier.fillMaxWidth().wrapContentHeight(), onClick = { onSaved() }) {
             Text(
                 text = Strings.SAVE,
                 style = MaterialTheme.typography.button,
