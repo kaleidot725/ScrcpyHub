@@ -97,7 +97,8 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                     }
                     mutableStateOf(viewModel)
                 }
-
+                onInitialize(devicePageViewModel)
+                
                 DevicePage(
                     windowScope = windowScope,
                     deviceViewModel = devicePageViewModel,
