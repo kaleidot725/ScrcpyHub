@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
@@ -36,7 +37,7 @@ import resource.Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS
 import resource.Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE
 import resource.Strings.SETTING_PAGE_EDIT_THEME_DETAILS
 import resource.Strings.SETTING_PAGE_EDIT_THEME_TITLE
-import view.components.SaveButton
+import view.components.atoms.Texts
 import view.extention.onInitialize
 import view.tab.PageHeader
 import viewmodel.SettingPageViewModel
@@ -112,11 +113,12 @@ private fun onDrawPage(
             modifier = Modifier.height(8.dp)
         )
 
-        SaveButton(
-            savable = true,
-            modifier = Modifier.padding(horizontal = 8.dp),
-            onSaved = { viewModel.save() { onSaved?.invoke() } }
-        )
+        Button(
+            onClick = { viewModel.save() { onSaved?.invoke() } },
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)
+        ) {
+            Texts.Button(Strings.SAVE)
+        }
     }
 }
 
