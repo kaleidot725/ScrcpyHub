@@ -21,7 +21,7 @@ repositories {
 dependencies {
     implementation(compose.desktop.currentOs)
     implementation("com.lordcodes.turtle:turtle:0.6.0")
-    implementation("io.insert-koin:koin-core:3.1.4")
+    implementation("io.insert-koin:koin-core:3.1.5")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
     implementation("com.malinskiy.adam:adam:0.4.3")
     implementation("com.github.Dansoftowner:jSystemThemeDetector:3.6")
