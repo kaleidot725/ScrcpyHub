@@ -62,7 +62,7 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
     Box(modifier = Modifier.fillMaxSize()) {
         when (val page = selectedPages) {
             Page.LoadingPage -> {
-                LoadingPage(windowScope = windowScope)
+                LoadingPage()
             }
             Page.DevicesPage -> {
                 val devicesPageViewModel by remember {
