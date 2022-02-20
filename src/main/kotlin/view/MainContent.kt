@@ -82,6 +82,7 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                     val viewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
                     mutableStateOf(viewModel)
                 }
+                onInitialize(settingPageViewModel)
 
                 SettingPage(
                     windowScope = windowScope,
@@ -98,7 +99,7 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                     mutableStateOf(viewModel)
                 }
                 onInitialize(devicePageViewModel)
-                
+
                 DevicePage(
                     windowScope = windowScope,
                     deviceViewModel = devicePageViewModel,

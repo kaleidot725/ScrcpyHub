@@ -27,7 +27,10 @@ import resource.Colors.md_theme_light_surface
 
 @Composable
 fun MainTheme(isDarkMode: Boolean, content: @Composable () -> Unit) {
-    MaterialTheme(content = content, colors = if (isDarkMode) darkThemeColors else lightThemeColors)
+    MaterialTheme(
+        content = content,
+        colors = if (isDarkMode) darkThemeColors else lightThemeColors
+    )
 }
 
 private val lightThemeColors = lightColors(
