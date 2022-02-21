@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -28,28 +29,34 @@ fun AppSetting(
     onSave: () -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize().padding(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        TitleAndRadioButtons(
-            subtitle1 = Strings.SETTING_PAGE_EDIT_THEME_TITLE,
-            subtitle2 = Strings.SETTING_PAGE_EDIT_THEME_DETAILS,
-            selectedItem = theme.toLabel(),
-            items = themes.map { it.toLabel() },
-            onSelect = { label -> onUpdateTheme(themes.first { it.toLabel() == label }) },
-            modifier = Modifier.fillMaxWidth()
-        )
+        Card {
+            TitleAndRadioButtons(
+                subtitle1 = Strings.SETTING_PAGE_EDIT_THEME_TITLE,
+                subtitle2 = Strings.SETTING_PAGE_EDIT_THEME_DETAILS,
+                selectedItem = theme.toLabel(),
+                items = themes.map { it.toLabel() },
+                onSelect = { label -> onUpdateTheme(themes.first { it.toLabel() == label }) },
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
 
-        TitleAndTextField(
-            subtitle1 = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_TITLE,
-            subtitle2 = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS,
-            inputText = adbLocation,
-            onUpdateInputText = { onUpdateAdbLocation(it) },
-        )
+        Card {
+            TitleAndTextField(
+                subtitle1 = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_TITLE,
+                subtitle2 = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS,
+                inputText = adbLocation,
+                onUpdateInputText = { onUpdateAdbLocation(it) },
+            )
+        }
 
-        TitleAndTextField(
-            subtitle1 = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE,
-            subtitle2 = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS,
-            inputText = scrcpyLocation,
-            onUpdateInputText = { onUpdateScrcpyLocation(it) },
-        )
+        Card {
+            TitleAndTextField(
+                subtitle1 = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE,
+                subtitle2 = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS,
+                inputText = scrcpyLocation,
+                onUpdateInputText = { onUpdateScrcpyLocation(it) },
+            )
+        }
 
         Button(onClick = { onSave() }, modifier = Modifier.fillMaxWidth()) {
             Texts.Button(Strings.SAVE)
