@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,20 +26,24 @@ fun DeviceSetting(
     onSave: () -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize().padding(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        TitleAndTextField(
-            subtitle1 = Strings.DEVICE_PAGE_EDIT_NAME_TITLE,
-            subtitle2 = Strings.DEVICE_PAGE_EDIT_NAME_DETAILS,
-            inputText = name,
-            onUpdateInputText = { onUpdateName(it) },
-        )
+        Card {
+            TitleAndTextField(
+                subtitle1 = Strings.DEVICE_PAGE_EDIT_NAME_TITLE,
+                subtitle2 = Strings.DEVICE_PAGE_EDIT_NAME_DETAILS,
+                inputText = name,
+                onUpdateInputText = { onUpdateName(it) },
+            )
+        }
 
-        TitleAndTextField(
-            subtitle1 = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_TITLE,
-            subtitle2 = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS,
-            inputText = maxSize,
-            onUpdateInputText = { onUpdateMaxSize(it) },
-            error = maxSizeError
-        )
+        Card {
+            TitleAndTextField(
+                subtitle1 = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_TITLE,
+                subtitle2 = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS,
+                inputText = maxSize,
+                onUpdateInputText = { onUpdateMaxSize(it) },
+                error = maxSizeError
+            )
+        }
 
         Button(
             enabled = savable, onClick = { onSave() }, modifier = Modifier.fillMaxWidth()

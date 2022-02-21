@@ -2,10 +2,10 @@ package view.components.molecules
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,7 +21,7 @@ fun TitleAndTextField(
     error: String = "",
     modifier: Modifier = Modifier
 ) {
-    Card(modifier = modifier) {
+    Box(modifier) {
         Column(modifier = Modifier.padding(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Texts.Subtitle1(subtitle1)
             Texts.Subtitle2(subtitle2)
