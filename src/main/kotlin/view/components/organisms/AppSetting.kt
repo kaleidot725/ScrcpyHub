@@ -36,7 +36,7 @@ fun AppSetting(
                 selectedItem = theme.toLabel(),
                 items = themes.map { it.toLabel() },
                 onSelect = { label -> onUpdateTheme(themes.first { it.toLabel() == label }) },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             )
         }
 
@@ -46,6 +46,7 @@ fun AppSetting(
                 subtitle2 = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS,
                 inputText = adbLocation,
                 onUpdateInputText = { onUpdateAdbLocation(it) },
+                modifier = Modifier.padding(8.dp)
             )
         }
 
@@ -55,6 +56,7 @@ fun AppSetting(
                 subtitle2 = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS,
                 inputText = scrcpyLocation,
                 onUpdateInputText = { onUpdateScrcpyLocation(it) },
+                modifier = Modifier.padding(8.dp)
             )
         }
 

@@ -32,6 +32,7 @@ fun DeviceSetting(
                 subtitle2 = Strings.DEVICE_PAGE_EDIT_NAME_DETAILS,
                 inputText = name,
                 onUpdateInputText = { onUpdateName(it) },
+                modifier = Modifier.padding(8.dp)
             )
         }
 
@@ -41,7 +42,8 @@ fun DeviceSetting(
                 subtitle2 = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS,
                 inputText = maxSize,
                 onUpdateInputText = { onUpdateMaxSize(it) },
-                error = maxSizeError
+                error = maxSizeError,
+                modifier = Modifier.padding(8.dp)
             )
         }
 

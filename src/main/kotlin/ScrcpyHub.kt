@@ -14,8 +14,8 @@ import org.koin.core.context.GlobalContext.getOrNull
 import org.koin.core.context.GlobalContext.startKoin
 import resource.Images
 import resource.Strings
+import view.AppWindow
 import view.MainContent
-import view.components.AppWindow
 import viewmodel.MainContentViewModel
 
 fun main() = application {
@@ -44,7 +44,7 @@ fun main() = application {
 
     if (isOpen) {
         AppWindow(onCloseRequest = { isOpen = false }, state = windowState) {
-        MainContent(windowScope = this, mainContentViewModel = viewModel)
-    }
+            MainContent(windowScope = this, mainContentViewModel = viewModel)
+        }
     }
 }

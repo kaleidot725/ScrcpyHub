@@ -20,7 +20,9 @@ import viewmodel.DevicePageViewModel
 
 @Composable
 fun DevicePage(
-    windowScope: WindowScope, deviceViewModel: DevicePageViewModel, onNavigateDevices: (() -> Unit)? = null
+    windowScope: WindowScope,
+    deviceViewModel: DevicePageViewModel,
+    onNavigateDevices: (() -> Unit)? = null
 ) {
     val titleName: String by deviceViewModel.titleName.collectAsState()
     val name: String by deviceViewModel.editName.collectAsState()
