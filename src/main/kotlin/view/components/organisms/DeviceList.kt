@@ -80,7 +80,7 @@ fun DeviceList(
                     )
 
                     DeviceDropDownMenu(
-                        processStatus = ProcessStatus.IDLE,
+                        processStatus = deviceStatus.processStatus,
                         onSetting = { goToDetail?.invoke(deviceStatus.context) },
                         onScreenShot = { takeScreenshot?.invoke(deviceStatus.context) },
                         onStartRecording = { startRecording?.invoke(deviceStatus.context) },
