@@ -47,6 +47,21 @@ import viewmodel.MainContentViewModel
 import viewmodel.SettingPageViewModel
 import viewmodel.ViewModel
 
+
+@Composable
+fun AppWindow(onCloseRequest: () -> Unit, state: WindowState, content: @Composable FrameWindowScope.() -> Unit) {
+    Window(
+        onCloseRequest = onCloseRequest,
+        state = state,
+        resizable = false,
+        undecorated = true,
+        transparent = true,
+        icon = painterResource(Images.DEVICE),
+    ) {
+        Card(shape = RoundedCornerShape(8.dp)) { content.invoke(this) }
+    }
+}
+
 @Composable
 fun MainContent(windowScope: WindowScope, mainContentViewModel: MainContentViewModel) {
     onInitialize(mainContentViewModel)
@@ -170,19 +185,5 @@ private fun onInitialize(viewModel: ViewModel) {
         onDispose {
             viewModel.onCleared()
         }
-    }
-}
-
-@Composable
-fun AppWindow(onCloseRequest: () -> Unit, state: WindowState, content: @Composable FrameWindowScope.() -> Unit) {
-    Window(
-        onCloseRequest = onCloseRequest,
-        state = state,
-        resizable = false,
-        undecorated = true,
-        transparent = true,
-        icon = painterResource(Images.DEVICE),
-    ) {
-        Card(shape = RoundedCornerShape(8.dp)) { content.invoke(this) }
     }
 }
