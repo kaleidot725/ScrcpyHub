@@ -49,7 +49,9 @@ fun DeviceList(
     LazyColumn(modifier = modifier) {
         items(deviceStatusList) { deviceStatus ->
             Card {
-                Row(modifier = Modifier.padding(horizontal = 8.dp).height(48.dp).fillMaxWidth()) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 8.dp).height(48.dp).fillMaxWidth()
+                ) {
                     SmallIcon(
                         filePath = Images.DEVICE,
                         description = Images.DEVICE,
@@ -93,7 +95,6 @@ fun DeviceList(
     }
 }
 
-
 @Composable
 private fun DeviceDropDownMenu(
     processStatus: ProcessStatus,
@@ -106,17 +107,23 @@ private fun DeviceDropDownMenu(
     var expanded by remember { mutableStateOf(false) }
 
     Box(modifier = modifier) {
-        Image(painter = painterResource(Images.DOTS),
+        Image(
+            painter = painterResource(Images.DOTS),
             contentDescription = "",
             colorFilter = ColorFilter.tint(MaterialTheme.colors.onSurface),
-            modifier = Modifier.size(30.dp).clickable { expanded = true })
+            modifier = Modifier.size(30.dp).clickable { expanded = true }
+        )
 
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
             DropdownMenuItem(
                 onClick = {
                     onSetting()
                     expanded = false
-                }, modifier = Modifier.height(32.dp)
+                },
+                modifier = Modifier.height(32.dp)
             ) {
                 Text(
                     text = Strings.DEVICE_DROP_DOWN_PREFERENCE_MENU_TITLE, style = MaterialTheme.typography.body2
@@ -127,7 +134,8 @@ private fun DeviceDropDownMenu(
                 onClick = {
                     onScreenShot()
                     expanded = false
-                }, modifier = Modifier.height(32.dp)
+                },
+                modifier = Modifier.height(32.dp)
             ) {
                 Text(
                     text = Strings.DEVICE_DROP_DOWN_SCREEN_SHOT_MENU_TITLE, style = MaterialTheme.typography.body2
@@ -139,21 +147,24 @@ private fun DeviceDropDownMenu(
                     ProcessStatus.IDLE -> true
                     ProcessStatus.RUNNING -> false
                     ProcessStatus.RECORDING -> true
-                }, onClick = {
+                },
+                onClick = {
                     when (processStatus) {
                         ProcessStatus.IDLE -> onStartRecording.invoke()
                         ProcessStatus.RUNNING -> Unit
                         ProcessStatus.RECORDING -> onStopRecording.invoke()
                     }
                     expanded = false
-                }, modifier = Modifier.height(32.dp)
+                },
+                modifier = Modifier.height(32.dp)
             ) {
                 Text(
                     text = when (processStatus) {
                         ProcessStatus.IDLE -> Strings.DEVICE_DROP_DOWN_START_RECORDING_MENU_TITLE
                         ProcessStatus.RUNNING -> Strings.DEVICE_DROP_DOWN_START_RECORDING_MENU_TITLE
                         ProcessStatus.RECORDING -> Strings.DEVICE_DROP_DOWN_STOP_RECORDING_MENU_TITLE
-                    }, style = MaterialTheme.typography.body2
+                    },
+                    style = MaterialTheme.typography.body2
                 )
             }
         }

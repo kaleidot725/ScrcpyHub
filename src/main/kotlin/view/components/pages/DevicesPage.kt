@@ -46,51 +46,49 @@ fun DevicesPage(
 ) {
     val deviceStatusList: List<DeviceStatus> by devicesPageViewModel.states.collectAsState()
 
-    DevicesTemplate(
-        header = {
-            PageHeader(windowScope = windowScope, title = Strings.APP_NAME, optionContent = {
-                ApplicationDropDownMenu(
-                    onSetting = { onNavigateSetting?.invoke() },
-                    onQuit = { exitProcess(0) },
-                    modifier = Modifier.height(18.dp).width(24.dp)
-                )
-            })
-        },
-        content = {
-            if (deviceStatusList.isEmpty()) {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
-                }
-            } else {
-                DeviceList(
-                    deviceStatusList = deviceStatusList,
-                    startScrcpy = { devicesPageViewModel.startScrcpy(it) },
-                    stopScrcpy = { devicesPageViewModel.stopScrcpy(it) },
-                    goToDetail = { onNavigateDevice?.invoke(it) },
-                    takeScreenshot = { devicesPageViewModel.saveScreenshotToDesktop(it) },
-                    startRecording = { devicesPageViewModel.startScrcpyRecord(it) },
-                    stopRecording = { devicesPageViewModel.stopScrcpyRecord(it) },
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .fillMaxWidth()
-                        .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
-                )
+    DevicesTemplate(header = {
+        PageHeader(windowScope = windowScope, title = Strings.APP_NAME, optionContent = {
+            ApplicationDropDownMenu(
+                onSetting = { onNavigateSetting?.invoke() },
+                onQuit = { exitProcess(0) },
+                modifier = Modifier.height(18.dp).width(24.dp)
+            )
+        })
+    }, content = {
+        if (deviceStatusList.isEmpty()) {
+            Box(modifier = Modifier.fillMaxSize()) {
+                Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
             }
+        } else {
+            DeviceList(
+                deviceStatusList = deviceStatusList,
+                startScrcpy = { devicesPageViewModel.startScrcpy(it) },
+                stopScrcpy = { devicesPageViewModel.stopScrcpy(it) },
+                goToDetail = { onNavigateDevice?.invoke(it) },
+                takeScreenshot = { devicesPageViewModel.saveScreenshotToDesktop(it) },
+                startRecording = { devicesPageViewModel.startScrcpyRecord(it) },
+                stopRecording = { devicesPageViewModel.stopScrcpyRecord(it) },
+                modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+            )
         }
-    )
+    })
 }
 
 @Composable
 private fun ApplicationDropDownMenu(
-    onSetting: () -> Unit, onQuit: () -> Unit, modifier: Modifier = Modifier
+    onSetting: () -> Unit,
+    onQuit: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
 
     Box(modifier = modifier) {
-        Image(painter = painterResource(Images.SETTING),
+        Image(
+            painter = painterResource(Images.SETTING),
             contentDescription = "",
             contentScale = ContentScale.FillHeight,
-            modifier = Modifier.matchParentSize().clickable { expanded = true })
+            modifier = Modifier.matchParentSize().clickable { expanded = true }
+        )
 
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             DropdownMenuItem(
@@ -98,22 +96,23 @@ private fun ApplicationDropDownMenu(
                     onSetting()
                     expanded = false
                 }, modifier = Modifier.height(32.dp)
-            ) {
-                Text(
-                    text = Strings.DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE, style = MaterialTheme.typography.body2
-                )
-            }
+                ) {
+                    Text(
+                        text = Strings.DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE, style = MaterialTheme.typography.body2
+                    )
+                }
 
-            DropdownMenuItem(
-                onClick = {
-                    onQuit()
-                    expanded = false
-                }, modifier = Modifier.height(32.dp)
-            ) {
-                Text(
-                    text = Strings.DEVICES_DROP_DOWN_QUIT_MENU_TITLE, style = MaterialTheme.typography.body2
-                )
+                DropdownMenuItem(
+                    onClick = {
+                        onQuit()
+                        expanded = false
+                    }, modifier = Modifier.height(32.dp)
+                    ) {
+                        Text(
+                            text = Strings.DEVICES_DROP_DOWN_QUIT_MENU_TITLE, style = MaterialTheme.typography.body2
+                        )
+                    }
+                }
             }
         }
-    }
-}
+        
