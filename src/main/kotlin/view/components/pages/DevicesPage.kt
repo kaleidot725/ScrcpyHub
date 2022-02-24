@@ -3,6 +3,7 @@ package view.components.pages
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -18,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -26,6 +28,8 @@ import androidx.compose.ui.window.WindowScope
 import model.entity.Device
 import resource.Images
 import resource.Strings
+import resource.Strings.DEVICES_PAGE_NOT_FOUND_DEVICES
+import view.components.atoms.Texts
 import view.components.organisms.DeviceList
 import view.components.templates.DevicesTemplate
 import view.tab.PageHeader
@@ -53,19 +57,25 @@ fun DevicesPage(
             })
         },
         content = {
-            DeviceList(
-                deviceStatusList = deviceStatusList,
-                startScrcpy = { devicesPageViewModel.startScrcpy(it) },
-                stopScrcpy = { devicesPageViewModel.stopScrcpy(it) },
-                goToDetail = { onNavigateDevice?.invoke(it) },
-                takeScreenshot = { devicesPageViewModel.saveScreenshotToDesktop(it) },
-                startRecording = { devicesPageViewModel.startScrcpyRecord(it) },
-                stopRecording = { devicesPageViewModel.stopScrcpyRecord(it) },
-                modifier = Modifier
-                    .wrapContentHeight()
-                    .fillMaxWidth()
-                    .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
-            )
+            if (deviceStatusList.isEmpty()) {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
+                }
+            } else {
+                DeviceList(
+                    deviceStatusList = deviceStatusList,
+                    startScrcpy = { devicesPageViewModel.startScrcpy(it) },
+                    stopScrcpy = { devicesPageViewModel.stopScrcpy(it) },
+                    goToDetail = { onNavigateDevice?.invoke(it) },
+                    takeScreenshot = { devicesPageViewModel.saveScreenshotToDesktop(it) },
+                    startRecording = { devicesPageViewModel.startScrcpyRecord(it) },
+                    stopRecording = { devicesPageViewModel.stopScrcpyRecord(it) },
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .fillMaxWidth()
+                        .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+                )
+            }
         }
     )
 }
