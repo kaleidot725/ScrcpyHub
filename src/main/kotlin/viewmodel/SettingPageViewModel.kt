@@ -18,8 +18,8 @@ class SettingPageViewModel(
     private val _scrcpyLocation: MutableStateFlow<String> = MutableStateFlow("")
     val scrcpyLocation: StateFlow<String> = _scrcpyLocation
 
-    private val _theme: MutableStateFlow<Theme?> = MutableStateFlow(null)
-    val theme: StateFlow<Theme?> = _theme
+    private val _theme: MutableStateFlow<Theme> = MutableStateFlow(Theme.LIGHT)
+    val theme: StateFlow<Theme> = _theme
     val themes: StateFlow<List<Theme>> = MutableStateFlow(Theme.values().toList())
 
     init {

@@ -1,4 +1,4 @@
-package view.page
+package view.components.pages
 
 import model.entity.Device
 

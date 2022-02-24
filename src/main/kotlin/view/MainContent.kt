@@ -13,29 +13,53 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Snackbar
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.FrameWindowScope
+import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowScope
+import androidx.compose.ui.window.WindowState
 import model.entity.Message
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
-import view.extention.onInitialize
+import resource.Images
+import view.components.pages.DevicesPage
+import view.components.pages.Page
 import view.page.DevicePage
-import view.page.Page
 import view.page.SettingPage
 import viewmodel.DevicePageViewModel
 import viewmodel.DevicesPageViewModel
 import viewmodel.MainContentViewModel
 import viewmodel.SettingPageViewModel
+import viewmodel.ViewModel
+
+@Composable
+fun AppWindow(onCloseRequest: () -> Unit, state: WindowState, content: @Composable FrameWindowScope.() -> Unit) {
+    Window(
+        onCloseRequest = onCloseRequest,
+        state = state,
+        resizable = false,
+        undecorated = true,
+        transparent = true,
+        icon = painterResource(Images.DEVICE),
+    ) {
+        Card(shape = RoundedCornerShape(8.dp)) { content.invoke(this) }
+    }
+}
 
 @Composable
 fun MainContent(windowScope: WindowScope, mainContentViewModel: MainContentViewModel) {
@@ -55,40 +79,55 @@ private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewMod
 }
 
 @Composable
-private fun MainPages(windowScope: WindowScope, viewModel: MainContentViewModel) {
-    val selectedPages: Page by viewModel.selectedPages.collectAsState()
+private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewModel) {
+    val selectedPages: Page by mainViewModel.selectedPages.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         when (val page = selectedPages) {
             Page.LoadingPage -> {
-                LoadingPage(windowScope = windowScope)
+                LoadingPage()
             }
             Page.DevicesPage -> {
-                val devicesPageViewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
+                val devicesPageViewModel by remember {
+                    val viewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
+                    mutableStateOf(viewModel)
+                }
+                onInitialize(devicesPageViewModel)
+
                 DevicesPage(
                     windowScope = windowScope,
                     devicesPageViewModel = devicesPageViewModel,
-                    onNavigateSetting = { viewModel.selectPage(Page.SettingPage) },
-                    onNavigateDevice = { viewModel.selectPage(Page.DevicePage(it)) }
+                    onNavigateSetting = { mainViewModel.selectPage(Page.SettingPage) },
+                    onNavigateDevice = { mainViewModel.selectPage(Page.DevicePage(it)) }
                 )
             }
             Page.SettingPage -> {
-                val settingPageViewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
+                val settingPageViewModel by remember {
+                    val viewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
+                    mutableStateOf(viewModel)
+                }
+                onInitialize(settingPageViewModel)
+
                 SettingPage(
                     windowScope = windowScope,
                     settingPageViewModel = settingPageViewModel,
-                    onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) },
-                    onSaved = { viewModel.refreshSetting() }
+                    onNavigateDevices = { mainViewModel.selectPage(Page.DevicesPage) },
+                    onSaved = { mainViewModel.refreshSetting() }
                 )
             }
             is Page.DevicePage -> {
-                val devicePageViewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
-                    parametersOf(page.context)
+                val devicePageViewModel by remember {
+                    val viewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
+                        parametersOf(page.context)
+                    }
+                    mutableStateOf(viewModel)
                 }
+                onInitialize(devicePageViewModel)
+
                 DevicePage(
                     windowScope = windowScope,
                     deviceViewModel = devicePageViewModel,
-                    onNavigateDevices = { viewModel.selectPage(Page.DevicesPage) }
+                    onNavigateDevices = { mainViewModel.selectPage(Page.DevicesPage) }
                 )
             }
         }
@@ -138,5 +177,18 @@ private fun Message.toStringMessage(): String {
         Message.EmptyMessage -> ""
         is Message.SuccessToSaveScreenshot -> "Success to save ${this.context.displayName} Screenshot!"
         is Message.FailedToSaveScreenshot -> "Failed to save ${this.context.displayName} Screenshot!"
+        is Message.StartRecordingMovie -> "Start recording movie on ${this.context.displayName}"
+        is Message.StopRecordingMovie -> "Stop recording movie on ${this.context.displayName}"
+        is Message.FailedRecordingMovie -> "Failed recording movie on ${this.context.displayName}"
+    }
+}
+
+@Composable
+private fun onInitialize(viewModel: ViewModel) {
+    DisposableEffect(viewModel) {
+        viewModel.onStarted()
+        onDispose {
+            viewModel.onCleared()
+        }
     }
 }
