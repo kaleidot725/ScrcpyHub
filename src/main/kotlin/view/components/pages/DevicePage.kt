@@ -32,18 +32,22 @@ fun DevicePage(
 
     DeviceTemplate(header = {
         PageHeader(windowScope = windowScope, title = titleName, optionContent = {
-            Image(painter = painterResource(Images.CLOSE),
+            Image(
+                painter = painterResource(Images.CLOSE),
                 contentDescription = "",
                 contentScale = ContentScale.FillHeight,
-                modifier = Modifier.wrapContentWidth().height(18.dp).clickable { onNavigateDevices?.invoke() })
+                modifier = Modifier.wrapContentWidth().height(18.dp).clickable { onNavigateDevices?.invoke() }
+            )
         })
     }, content = {
-        DeviceSetting(name = name,
+        DeviceSetting(
+            name = name,
             onUpdateName = { deviceViewModel.updateName(it) },
             maxSize = maxSize,
             onUpdateMaxSize = { deviceViewModel.updateMaxSize(it) },
             maxSizeError = maxSizeError,
             savable = savable,
-            onSave = { deviceViewModel.save() })
+            onSave = { deviceViewModel.save() }
+        )
     })
 }

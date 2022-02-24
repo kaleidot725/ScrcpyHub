@@ -12,12 +12,17 @@ import view.components.atoms.Texts
 
 @Composable
 fun RadioButtons(
-    selectedItem: String, items: List<String>, onSelect: (String) -> Unit, modifier: Modifier = Modifier
+    selectedItem: String,
+    items: List<String>,
+    onSelect: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier) {
         items.forEach { item ->
             RadioButton(
-                selected = (item == selectedItem), onClick = { onSelect(item) }, modifier = Modifier.size(16.dp)
+                selected = (item == selectedItem),
+                onClick = { onSelect(item) },
+                modifier = Modifier.size(16.dp)
             )
             Texts.Caption(item, modifier = Modifier.padding(horizontal = 16.dp))
         }

@@ -48,7 +48,9 @@ fun DeviceSetting(
         }
 
         Button(
-            enabled = savable, onClick = { onSave() }, modifier = Modifier.fillMaxWidth()
+            enabled = savable,
+            onClick = { onSave() },
+            modifier = Modifier.fillMaxWidth()
         ) {
             Texts.Button(Strings.SAVE)
         }

@@ -47,7 +47,6 @@ import viewmodel.MainContentViewModel
 import viewmodel.SettingPageViewModel
 import viewmodel.ViewModel
 
-
 @Composable
 fun AppWindow(onCloseRequest: () -> Unit, state: WindowState, content: @Composable FrameWindowScope.() -> Unit) {
     Window(
@@ -95,10 +94,12 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                 }
                 onInitialize(devicesPageViewModel)
 
-                DevicesPage(windowScope = windowScope,
+                DevicesPage(
+                    windowScope = windowScope,
                     devicesPageViewModel = devicesPageViewModel,
                     onNavigateSetting = { mainViewModel.selectPage(Page.SettingPage) },
-                    onNavigateDevice = { mainViewModel.selectPage(Page.DevicePage(it)) })
+                    onNavigateDevice = { mainViewModel.selectPage(Page.DevicePage(it)) }
+                )
             }
             Page.SettingPage -> {
                 val settingPageViewModel by remember {
@@ -107,10 +108,12 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                 }
                 onInitialize(settingPageViewModel)
 
-                SettingPage(windowScope = windowScope,
+                SettingPage(
+                    windowScope = windowScope,
                     settingPageViewModel = settingPageViewModel,
                     onNavigateDevices = { mainViewModel.selectPage(Page.DevicesPage) },
-                    onSaved = { mainViewModel.refreshSetting() })
+                    onSaved = { mainViewModel.refreshSetting() }
+                )
             }
             is Page.DevicePage -> {
                 val devicePageViewModel by remember {
@@ -121,9 +124,11 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                 }
                 onInitialize(devicePageViewModel)
 
-                DevicePage(windowScope = windowScope,
+                DevicePage(
+                    windowScope = windowScope,
                     deviceViewModel = devicePageViewModel,
-                    onNavigateDevices = { mainViewModel.selectPage(Page.DevicesPage) })
+                    onNavigateDevices = { mainViewModel.selectPage(Page.DevicesPage) }
+                )
             }
         }
     }
