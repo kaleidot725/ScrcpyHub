@@ -11,18 +11,18 @@ class ScrcpyCommandCreatorTest : StringSpec({
         val factoryWhenNoSeparator = ScrcpyCommandCreator(path = "test")
 
         val device1 = Device.Context(
-            Device(id = "DEVICE1", name = "NAME"), maxSize = null, maxFrameRate = null
+            Device(id = "DEVICE1", name = "NAME"), maxSize = null, maxFrameRate = null, bitrate = null
         )
         factory.create(device1) shouldBe listOf("test/scrcpy", "-s", "DEVICE1")
         factoryWhenNoSeparator.create(device1) shouldBe listOf("test/scrcpy", "-s", "DEVICE1")
 
         val device2 = Device.Context(
-            Device(id = "DEVICE2", name = "NAME"), maxSize = 1000, maxFrameRate = 60
+            Device(id = "DEVICE2", name = "NAME"), maxSize = 1000, maxFrameRate = 60, bitrate = 2
         )
         factory.create(device2) shouldBe
-                listOf("test/scrcpy", "-s", "DEVICE2", "-m", "1000", "--max-fps", "60")
+                listOf("test/scrcpy", "-s", "DEVICE2", "-m", "1000", "--max-fps", "60", "-b", "2M")
         factoryWhenNoSeparator.create(device2) shouldBe
-                listOf("test/scrcpy", "-s", "DEVICE2", "-m", "1000", "--max-fps", "60")
+                listOf("test/scrcpy", "-s", "DEVICE2", "-m", "1000", "--max-fps", "60", "-b", "2M")
     }
     "create_when_no_path_specified" {
         val factory = ScrcpyCommandCreator()
@@ -33,16 +33,20 @@ class ScrcpyCommandCreatorTest : StringSpec({
         factory.create(device1) shouldBe listOf("scrcpy", "-s", "DEVICE1")
 
         val device2 = Device.Context(
-            Device(id = "DEVICE2", name = "NAME"), customName = "CUSTOM_NAME", maxSize = 1000, maxFrameRate = 60
+            Device(id = "DEVICE2", name = "NAME"),
+            customName = "CUSTOM_NAME",
+            maxSize = 1000,
+            maxFrameRate = 60,
+            bitrate = 2
         )
-        factory.create(device2) shouldBe listOf("scrcpy", "-s", "DEVICE2", "-m", "1000", "--max-fps", "60")
+        factory.create(device2) shouldBe listOf("scrcpy", "-s", "DEVICE2", "-m", "1000", "--max-fps", "60", "-b", "2M")
     }
     "create_record" {
         val factory = ScrcpyCommandCreator(path = "test/")
         val factoryWhenNoSeparator = ScrcpyCommandCreator(path = "test")
 
         val device1 = Device.Context(
-            Device(id = "DEVICE1", name = "NAME"), maxSize = null, maxFrameRate = null
+            Device(id = "DEVICE1", name = "NAME"), maxSize = null, maxFrameRate = null, bitrate = null
         )
         factory.createRecord(device1, "fileName1") shouldBe listOf(
             "test/scrcpy", "-s", "DEVICE1", "-r", "fileName1"
@@ -52,30 +56,38 @@ class ScrcpyCommandCreatorTest : StringSpec({
         )
 
         val device2 = Device.Context(
-            Device(id = "DEVICE2", name = "NAME"), maxSize = 1000, maxFrameRate = 60
+            Device(id = "DEVICE2", name = "NAME"), maxSize = 1000, maxFrameRate = 60, bitrate = 2
         )
         factory.createRecord(device2, "fileName2") shouldBe listOf(
-            "test/scrcpy", "-s", "DEVICE2", "-m", "1000", "-r", "fileName2", "--max-fps", "60"
+            "test/scrcpy", "-s", "DEVICE2", "-m", "1000", "-r", "fileName2", "--max-fps", "60", "-b", "2M"
         )
         factoryWhenNoSeparator.createRecord(device2, "fileName2") shouldBe listOf(
-            "test/scrcpy", "-s", "DEVICE2", "-m", "1000", "-r", "fileName2", "--max-fps", "60"
+            "test/scrcpy", "-s", "DEVICE2", "-m", "1000", "-r", "fileName2", "--max-fps", "60", "-b", "2M"
         )
     }
     "create_record_when_no_path_specified" {
         val factory = ScrcpyCommandCreator()
 
         val device1 = Device.Context(
-            Device(id = "DEVICE1", name = "NAME"), customName = "CUSTOM_NAME", maxSize = null, maxFrameRate = null
+            Device(id = "DEVICE1", name = "NAME"),
+            customName = "CUSTOM_NAME",
+            maxSize = null,
+            maxFrameRate = null,
+            bitrate = null
         )
         factory.createRecord(device1, "fileName1") shouldBe listOf(
             "scrcpy", "-s", "DEVICE1", "-r", "fileName1"
         )
 
         val device2 = Device.Context(
-            Device(id = "DEVICE2", name = "NAME"), customName = "CUSTOM_NAME", maxSize = 1000, maxFrameRate = 60
+            Device(id = "DEVICE2", name = "NAME"),
+            customName = "CUSTOM_NAME",
+            maxSize = 1000,
+            maxFrameRate = 60,
+            bitrate = 2
         )
         factory.createRecord(device2, "fileName2") shouldBe listOf(
-            "scrcpy", "-s", "DEVICE2", "-m", "1000", "-r", "fileName2", "--max-fps", "60"
+            "scrcpy", "-s", "DEVICE2", "-m", "1000", "-r", "fileName2", "--max-fps", "60", "-b", "2M"
         )
     }
     "create_help" {
