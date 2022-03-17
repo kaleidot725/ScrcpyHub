@@ -10,6 +10,7 @@ data class Device(val id: String = "", val name: String = "") {
         val customName: String? = null,
         val maxSize: Int? = null,
         val maxFrameRate: Int? = null,
+        val bitrate: Int? = null
     ) {
         val displayName get() = customName ?: device.name
     }

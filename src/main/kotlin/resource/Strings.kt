@@ -30,11 +30,13 @@ object Strings {
 
     // Device Page
     const val DEVICE_PAGE_EDIT_NAME_TITLE = "Device Name"
-    const val DEVICE_PAGE_EDIT_NAME_DETAILS = "Display device name"
-    const val DEVICE_PAGE_EDIT_MAX_SIZE_TITLE = "Max Size"
-    const val DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS = "Video width and height size limit"
-    const val DEVICE_PAGE_EDIT_MAX_FRAME_RATE_TITLE = "Frame Rate"
-    const val DEVICE_PAGE_EDIT_MAX_FRAME_RATE_DETAILS = "Video fps limit"
+    const val DEVICE_PAGE_EDIT_NAME_DETAILS = "Customize device name"
+    const val DEVICE_PAGE_EDIT_MAX_SIZE_TITLE = "Max Video Size"
+    const val DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS = "Set video width and height limit"
+    const val DEVICE_PAGE_EDIT_MAX_FRAME_RATE_TITLE = "FPS (frame per second)"
+    const val DEVICE_PAGE_EDIT_MAX_FRAME_RATE_DETAILS = "Set video fps limit"
+    const val DEVICE_PAGE_EDIT_MAX_BITRATE_TITLE = "Bitrate (kbps)"
+    const val DEVICE_PAGE_EDIT_MAX_BITRATE_DETAILS = "Set video bitrate limit"
 
     // Setting Page
     const val SETTING_PAGE_TITLE = "Preferences"

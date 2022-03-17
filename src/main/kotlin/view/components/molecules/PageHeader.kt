@@ -25,7 +25,6 @@ fun PageHeader(windowScope: WindowScope, title: String, optionContent: @Composab
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .padding(bottom = 8.dp)
                 .background(Color(red = 51, blue = 51, green = 51))
                 .padding(8.dp)
         ) {
