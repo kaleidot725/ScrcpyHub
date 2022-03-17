@@ -48,10 +48,8 @@ fun DeviceList(
 ) {
     LazyColumn(modifier = modifier) {
         items(deviceStatusList) { deviceStatus ->
-            Card {
-                Row(
-                    modifier = Modifier.padding(horizontal = 8.dp).height(48.dp).fillMaxWidth()
-                ) {
+            Card(elevation = 4.dp) {
+                Row(modifier = Modifier.height(48.dp).fillMaxWidth()) {
                     SmallIcon(
                         filePath = Images.DEVICE,
                         description = Images.DEVICE,

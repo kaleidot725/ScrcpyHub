@@ -27,7 +27,7 @@ import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyRecordUseCase
 import model.usecase.StopScrcpyUseCase
-import model.usecase.UpdateDeviceNameUseCase
+import model.usecase.UpdateDeviceSetting
 import model.usecase.UpdateSettingUseCase
 import org.koin.dsl.module
 import viewmodel.DevicePageViewModel
@@ -108,7 +108,7 @@ val appModule = module {
     }
 
     factory {
-        UpdateDeviceNameUseCase(get())
+        UpdateDeviceSetting(get())
     }
 
     factory {

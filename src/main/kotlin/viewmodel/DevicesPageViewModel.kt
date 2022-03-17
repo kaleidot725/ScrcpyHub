@@ -30,6 +30,7 @@ class DevicesPageViewModel(
 
     override fun onStarted() {
         coroutineScope.launch {
+            fetchStates()
             getDevicesFlowUseCase.get(coroutineScope).collect {
                 updateStates(it)
             }
