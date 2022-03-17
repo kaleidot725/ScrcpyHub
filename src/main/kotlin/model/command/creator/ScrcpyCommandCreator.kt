@@ -30,6 +30,12 @@ class ScrcpyCommandCreator(val path: String? = null) {
                 add(MAX_FRAME_RATE_OPTION_NAME)
                 add(maxFrameRate.toString())
             }
+
+            val bitrate = context.bitrate
+            if (bitrate != null) {
+                add(BITRATE_OPTION_NAME)
+                add(bitrate.toString() + "M")
+            }
         }
     }
 
@@ -62,6 +68,12 @@ class ScrcpyCommandCreator(val path: String? = null) {
                 add(MAX_FRAME_RATE_OPTION_NAME)
                 add(maxFrameRate.toString())
             }
+
+            val bitrate = context.bitrate
+            if (bitrate != null) {
+                add(BITRATE_OPTION_NAME)
+                add(bitrate.toString() + "M")
+            }
         }
     }
 
@@ -87,5 +99,7 @@ class ScrcpyCommandCreator(val path: String? = null) {
         private const val HELP_OPTION_NAME = "-h"
         private const val RECORD_OPTION_NAME = "-r"
         private const val MAX_FRAME_RATE_OPTION_NAME = "--max-fps"
+        private const val BITRATE_OPTION_NAME = "-b"
+
     }
 }

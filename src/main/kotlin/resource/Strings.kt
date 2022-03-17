@@ -35,7 +35,7 @@ object Strings {
     const val DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS = "Set video width and height limit"
     const val DEVICE_PAGE_EDIT_MAX_FRAME_RATE_TITLE = "FPS (frame per second)"
     const val DEVICE_PAGE_EDIT_MAX_FRAME_RATE_DETAILS = "Set video fps limit"
-    const val DEVICE_PAGE_EDIT_MAX_BITRATE_TITLE = "Bitrate (kbps)"
+    const val DEVICE_PAGE_EDIT_MAX_BITRATE_TITLE = "Bitrate (Mbps)"
     const val DEVICE_PAGE_EDIT_MAX_BITRATE_DETAILS = "Set video bitrate limit"
 
     // Setting Page
