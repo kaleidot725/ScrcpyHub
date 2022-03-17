@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -28,8 +30,14 @@ fun AppSetting(
     onUpdateScrcpyLocation: (String) -> Unit,
     onSave: () -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxSize().padding(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Card {
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
+            .padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Card(elevation = 4.dp) {
             TitleAndRadioButtons(
                 subtitle1 = Strings.SETTING_PAGE_EDIT_THEME_TITLE,
                 subtitle2 = Strings.SETTING_PAGE_EDIT_THEME_DETAILS,
@@ -40,7 +48,7 @@ fun AppSetting(
             )
         }
 
-        Card {
+        Card(elevation = 4.dp) {
             TitleAndTextField(
                 subtitle1 = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_TITLE,
                 subtitle2 = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS,
@@ -50,7 +58,7 @@ fun AppSetting(
             )
         }
 
-        Card {
+        Card(elevation = 4.dp) {
             TitleAndTextField(
                 subtitle1 = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE,
                 subtitle2 = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS,
@@ -61,8 +69,8 @@ fun AppSetting(
         }
 
         Button(onClick = { onSave() }, modifier = Modifier.fillMaxWidth()) {
-        Texts.Button(Strings.SAVE)
-    }
+            Texts.Button(Strings.SAVE)
+        }
     }
 }
 

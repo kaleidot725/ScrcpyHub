@@ -33,6 +33,8 @@ object Strings {
     const val DEVICE_PAGE_EDIT_NAME_DETAILS = "Display device name"
     const val DEVICE_PAGE_EDIT_MAX_SIZE_TITLE = "Max Size"
     const val DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS = "Video width and height size limit"
+    const val DEVICE_PAGE_EDIT_MAX_FRAME_RATE_TITLE = "Frame Rate"
+    const val DEVICE_PAGE_EDIT_MAX_FRAME_RATE_DETAILS = "Video fps limit"
 
     // Setting Page
     const val SETTING_PAGE_TITLE = "Preferences"

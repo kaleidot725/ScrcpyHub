@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -22,11 +24,20 @@ fun DeviceSetting(
     maxSize: String,
     onUpdateMaxSize: (String) -> Unit,
     maxSizeError: String,
+    maxFrameRate: String,
+    onUpdateFrameRate: (String) -> Unit,
+    maxFrameRateError: String,
     savable: Boolean,
     onSave: () -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxSize().padding(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Card {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
+            .padding(8.dp)
+    ) {
+        Card(elevation = 4.dp) {
             TitleAndTextField(
                 subtitle1 = Strings.DEVICE_PAGE_EDIT_NAME_TITLE,
                 subtitle2 = Strings.DEVICE_PAGE_EDIT_NAME_DETAILS,
@@ -36,13 +47,24 @@ fun DeviceSetting(
             )
         }
 
-        Card {
+        Card(elevation = 4.dp) {
             TitleAndTextField(
                 subtitle1 = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_TITLE,
                 subtitle2 = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS,
                 inputText = maxSize,
                 onUpdateInputText = { onUpdateMaxSize(it) },
                 error = maxSizeError,
+                modifier = Modifier.padding(8.dp)
+            )
+        }
+
+        Card(elevation = 4.dp) {
+            TitleAndTextField(
+                subtitle1 = Strings.DEVICE_PAGE_EDIT_MAX_FRAME_RATE_TITLE,
+                subtitle2 = Strings.DEVICE_PAGE_EDIT_MAX_FRAME_RATE_DETAILS,
+                inputText = maxFrameRate,
+                onUpdateInputText = { onUpdateFrameRate(it) },
+                error = maxFrameRateError,
                 modifier = Modifier.padding(8.dp)
             )
         }
@@ -66,6 +88,9 @@ private fun DeviceSetting_Savable_True_Preview() {
         maxSize = "1200",
         onUpdateMaxSize = {},
         maxSizeError = "",
+        maxFrameRate = "60",
+        onUpdateFrameRate = {},
+        maxFrameRateError = "",
         savable = true,
         onSave = {}
     )
@@ -80,6 +105,9 @@ private fun DeviceSetting_Savable_False_Preview() {
         maxSize = "ERROR VALUE",
         onUpdateMaxSize = {},
         maxSizeError = "INVALID MAX SIZE",
+        maxFrameRate = "ERROR VALUE",
+        onUpdateFrameRate = {},
+        maxFrameRateError = "INVALID MAX FRAME RATE",
         savable = false,
         onSave = {}
     )

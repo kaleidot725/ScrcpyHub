@@ -24,6 +24,12 @@ class ScrcpyCommandCreator(val path: String? = null) {
                 add(MAX_SIZE_OPTION_NAME)
                 add(maxSize.toString())
             }
+
+            val maxFrameRate = context.maxFrameRate
+            if (maxFrameRate != null) {
+                add(MAX_FRAME_RATE_OPTION_NAME)
+                add(maxFrameRate.toString())
+            }
         }
     }
 
@@ -50,6 +56,12 @@ class ScrcpyCommandCreator(val path: String? = null) {
 
             add(RECORD_OPTION_NAME)
             add(fileName)
+
+            val maxFrameRate = context.maxFrameRate
+            if (maxFrameRate != null) {
+                add(MAX_FRAME_RATE_OPTION_NAME)
+                add(maxFrameRate.toString())
+            }
         }
     }
 
@@ -74,5 +86,6 @@ class ScrcpyCommandCreator(val path: String? = null) {
         private const val MAX_SIZE_OPTION_NAME = "-m"
         private const val HELP_OPTION_NAME = "-h"
         private const val RECORD_OPTION_NAME = "-r"
+        private const val MAX_FRAME_RATE_OPTION_NAME = "--max-fps"
     }
 }
