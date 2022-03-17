@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import view.components.atoms.Texts
 
 @Composable
-fun TitleAndTextField(
+fun TitlesAndTextField(
     subtitle1: String,
     subtitle2: String,
     inputText: String,
@@ -22,6 +22,7 @@ fun TitleAndTextField(
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Texts.Subtitle1(subtitle1)
         Texts.Subtitle2(subtitle2)
+
         TextField(
             value = inputText,
             modifier = Modifier.fillMaxWidth(),
@@ -37,8 +38,8 @@ fun TitleAndTextField(
 
 @Preview
 @Composable
-private fun DeviceNameSetting_Preview() {
-    TitleAndTextField(
+private fun TitlesAndTextField_Preview() {
+    TitlesAndTextField(
         subtitle1 = "SUBTITLE1",
         subtitle2 = "SUBTITLE2",
         inputText = "INPUT TEXT",

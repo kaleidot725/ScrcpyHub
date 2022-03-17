@@ -28,6 +28,12 @@ class DevicePageViewModel(
     private val _maxFrameRateError: MutableStateFlow<String> = MutableStateFlow("")
     val maxFrameRateError: StateFlow<String> = _maxFrameRateError
 
+    private val _bitrate: MutableStateFlow<String> = MutableStateFlow(context.bitrate?.toString() ?: "")
+    val bitrate: StateFlow<String> = _bitrate
+
+    private val _bitrateError: MutableStateFlow<String> = MutableStateFlow("")
+    val bitrateError: StateFlow<String> = _bitrateError
+
     private val _savable: MutableStateFlow<Boolean> = MutableStateFlow(true)
     val savable: StateFlow<Boolean> = _savable
 
@@ -58,13 +64,21 @@ class DevicePageViewModel(
         }
     }
 
+    fun updateBitrate(bitrate: String) {
+        coroutineScope.launch {
+            _bitrate.emit(bitrate)
+            validate()
+        }
+    }
+
     fun save() {
         coroutineScope.launch {
             val newContext = Device.Context(
                 device = context.device,
                 customName = _editName.value,
                 maxSize = _maxSize.value.toIntOrNull(),
-                maxFrameRate = _maxFrameRate.value.toIntOrNull()
+                maxFrameRate = _maxFrameRate.value.toIntOrNull(),
+                bitrate = _bitrate.value.toIntOrNull()
             )
 
             updateDeviceSetting.execute(newContext)
@@ -81,7 +95,11 @@ class DevicePageViewModel(
         val maxFrameRateErrorMessage = if (maxFrameRateError) "Please input a number" else ""
         _maxFrameRateError.emit(maxFrameRateErrorMessage)
 
-        val hasError = maxSizeError || maxFrameRateError
+        val bitrateError = _bitrate.value.isNotEmpty() && _bitrate.value.toIntOrNull() == null
+        val bitrateErrorMessage = if (bitrateError) "Please input a number" else ""
+        _bitrateError.emit(bitrateErrorMessage)
+
+        val hasError = maxSizeError || maxFrameRateError || bitrateError
         _savable.emit(!hasError)
     }
 }
