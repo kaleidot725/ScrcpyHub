@@ -92,23 +92,23 @@ private fun ApplicationDropDownMenu(
                     onSetting()
                     expanded = false
                 }, modifier = Modifier.height(32.dp)
-            ) {
-                Text(
-                    text = Strings.DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE, style = MaterialTheme.typography.body2
-                )
-            }
+                ) {
+                    Text(
+                        text = Strings.DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE, style = MaterialTheme.typography.body2
+                    )
+                }
 
-            DropdownMenuItem(
-                onClick = {
-                    onQuit()
-                    expanded = false
-                }, modifier = Modifier.height(32.dp)
-            ) {
-                Text(
-                    text = Strings.DEVICES_DROP_DOWN_QUIT_MENU_TITLE, style = MaterialTheme.typography.body2
-                )
+                DropdownMenuItem(
+                    onClick = {
+                        onQuit()
+                        expanded = false
+                    }, modifier = Modifier.height(32.dp)
+                    ) {
+                        Text(
+                            text = Strings.DEVICES_DROP_DOWN_QUIT_MENU_TITLE, style = MaterialTheme.typography.body2
+                        )
+                    }
+                }
             }
         }
-    }
-}
         

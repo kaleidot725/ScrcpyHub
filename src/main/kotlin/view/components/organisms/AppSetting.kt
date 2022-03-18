@@ -78,8 +78,8 @@ fun AppSetting(
             }
 
             Button(onClick = { onSave() }, modifier = Modifier.fillMaxWidth()) {
-                Texts.Button(Strings.SAVE)
-            }
+            Texts.Button(Strings.SAVE)
+        }
         }
 
         VerticalScrollbar(
