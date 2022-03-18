@@ -19,7 +19,7 @@ class AdbCommandCreator(
         }
     }
 
-    fun createStartSerfver(): List<String> {
+    fun createStartServer(): List<String> {
         return buildList {
             if (path != null) {
                 if (path.endsWith(File.separator)) {
