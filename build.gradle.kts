@@ -2,11 +2,12 @@ import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 group = "me.kaleidot725"
-version = "1.5.1"
+version = "1.6.0"
 
 plugins {
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.serialization") version "1.6.10"
+
     id("org.jetbrains.compose") version "1.0.1"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
 }
@@ -27,8 +28,8 @@ dependencies {
     implementation("com.github.Dansoftowner:jSystemThemeDetector:3.6")
 
     testImplementation(kotlin("test-junit5"))
-    testImplementation("io.kotest:kotest-runner-junit5:5.0.3")
-    testImplementation("io.mockk:mockk:1.12.1")
+    testImplementation("io.mockk:mockk:1.12.3")
+    testImplementation("io.kotest:kotest-runner-junit5:5.1.0")
 }
 
 tasks.test {

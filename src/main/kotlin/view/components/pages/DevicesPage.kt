@@ -4,11 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.MaterialTheme
@@ -68,7 +65,6 @@ fun DevicesPage(
                 takeScreenshot = { devicesPageViewModel.saveScreenshotToDesktop(it) },
                 startRecording = { devicesPageViewModel.startScrcpyRecord(it) },
                 stopRecording = { devicesPageViewModel.stopScrcpyRecord(it) },
-                modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
             )
         }
     })

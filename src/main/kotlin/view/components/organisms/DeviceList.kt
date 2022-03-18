@@ -1,16 +1,22 @@
 package view.components.organisms
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.rememberScrollbarAdapter
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.DropdownMenu
@@ -38,7 +44,6 @@ import viewmodel.DeviceStatus
 @Composable
 fun DeviceList(
     deviceStatusList: List<DeviceStatus>,
-    modifier: Modifier = Modifier,
     startScrcpy: ((Device.Context) -> Unit)? = null,
     stopScrcpy: ((Device.Context) -> Unit)? = null,
     goToDetail: ((Device.Context) -> Unit)? = null,
@@ -46,52 +51,66 @@ fun DeviceList(
     startRecording: ((Device.Context) -> Unit)? = null,
     stopRecording: ((Device.Context) -> Unit)? = null,
 ) {
-    LazyColumn(modifier = modifier) {
-        items(deviceStatusList) { deviceStatus ->
-            Card {
-                Row(
-                    modifier = Modifier.padding(horizontal = 8.dp).height(48.dp).fillMaxWidth()
-                ) {
-                    SmallIcon(
-                        filePath = Images.DEVICE,
-                        description = Images.DEVICE,
-                        modifier = Modifier.align(Alignment.CenterVertically)
-                    )
+    Box(modifier = Modifier.fillMaxSize()) {
+        val scrollState = rememberScrollState()
 
-                    TitleAndActionButton(
-                        subtitle1 = deviceStatus.context.displayName,
-                        subtitle2 = deviceStatus.context.device.id,
-                        actionButtonText = when (deviceStatus.processStatus) {
-                            ProcessStatus.IDLE -> Strings.DEVICES_PAGE_START
-                            ProcessStatus.RUNNING -> Strings.DEVICES_PAGE_STOP
-                            ProcessStatus.RECORDING -> Strings.DEVICES_PAGE_RECORDING
-                        },
-                        actionButtonColors = when (deviceStatus.processStatus) {
-                            ProcessStatus.IDLE -> ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
-                            ProcessStatus.RUNNING -> ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
-                            ProcessStatus.RECORDING -> ButtonDefaults.buttonColors(MaterialTheme.colors.error)
-                        },
-                        onClickActionButton = {
-                            when (deviceStatus.processStatus) {
-                                ProcessStatus.IDLE -> startScrcpy?.invoke(deviceStatus.context)
-                                ProcessStatus.RUNNING -> stopScrcpy?.invoke(deviceStatus.context)
-                                ProcessStatus.RECORDING -> {}
-                            }
-                        },
-                        modifier = Modifier.padding(8.dp).fillMaxWidth(fraction = 0.90f)
-                    )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 12.dp)
+                .padding(vertical = 8.dp)
+                .verticalScroll(scrollState),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            deviceStatusList.forEach { deviceStatus ->
+                Card(elevation = 4.dp) {
+                    Row(modifier = Modifier.height(48.dp).fillMaxWidth()) {
+                        SmallIcon(
+                            filePath = Images.DEVICE,
+                            description = Images.DEVICE,
+                            modifier = Modifier.align(Alignment.CenterVertically)
+                        )
 
-                    DeviceDropDownMenu(
-                        processStatus = deviceStatus.processStatus,
-                        onSetting = { goToDetail?.invoke(deviceStatus.context) },
-                        onScreenShot = { takeScreenshot?.invoke(deviceStatus.context) },
-                        onStartRecording = { startRecording?.invoke(deviceStatus.context) },
-                        onStopRecording = { stopRecording?.invoke(deviceStatus.context) },
-                        modifier = Modifier.width(30.dp).align(Alignment.CenterVertically).padding(start = 4.dp)
-                    )
+                        TitleAndActionButton(
+                            subtitle1 = deviceStatus.context.displayName,
+                            subtitle2 = deviceStatus.context.device.id,
+                            actionButtonText = when (deviceStatus.processStatus) {
+                                ProcessStatus.IDLE -> Strings.DEVICES_PAGE_START
+                                ProcessStatus.RUNNING -> Strings.DEVICES_PAGE_STOP
+                                ProcessStatus.RECORDING -> Strings.DEVICES_PAGE_RECORDING
+                            },
+                            actionButtonColors = when (deviceStatus.processStatus) {
+                                ProcessStatus.IDLE -> ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
+                                ProcessStatus.RUNNING -> ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
+                                ProcessStatus.RECORDING -> ButtonDefaults.buttonColors(MaterialTheme.colors.error)
+                            },
+                            onClickActionButton = {
+                                when (deviceStatus.processStatus) {
+                                    ProcessStatus.IDLE -> startScrcpy?.invoke(deviceStatus.context)
+                                    ProcessStatus.RUNNING -> stopScrcpy?.invoke(deviceStatus.context)
+                                    ProcessStatus.RECORDING -> {}
+                                }
+                            },
+                            modifier = Modifier.padding(8.dp).fillMaxWidth(fraction = 0.90f)
+                        )
+
+                        DeviceDropDownMenu(
+                            processStatus = deviceStatus.processStatus,
+                            onSetting = { goToDetail?.invoke(deviceStatus.context) },
+                            onScreenShot = { takeScreenshot?.invoke(deviceStatus.context) },
+                            onStartRecording = { startRecording?.invoke(deviceStatus.context) },
+                            onStopRecording = { stopRecording?.invoke(deviceStatus.context) },
+                            modifier = Modifier.width(30.dp).align(Alignment.CenterVertically).padding(start = 4.dp)
+                        )
+                    }
                 }
             }
         }
+
+        VerticalScrollbar(
+            adapter = rememberScrollbarAdapter(scrollState),
+            modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight()
+        )
     }
 }
 

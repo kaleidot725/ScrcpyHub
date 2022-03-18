@@ -29,6 +29,10 @@ fun DevicePage(
     val maxSize: String by deviceViewModel.maxSize.collectAsState()
     val maxSizeError: String by deviceViewModel.maxSizeError.collectAsState()
     val savable: Boolean by deviceViewModel.savable.collectAsState()
+    val maxFrameRate: String by deviceViewModel.maxFrameRate.collectAsState()
+    val maxFrameRateError: String by deviceViewModel.maxFrameRateError.collectAsState()
+    val bitrate: String by deviceViewModel.bitrate.collectAsState()
+    val bitrateError: String by deviceViewModel.bitrateError.collectAsState()
 
     DeviceTemplate(header = {
         PageHeader(windowScope = windowScope, title = titleName, optionContent = {
@@ -46,6 +50,12 @@ fun DevicePage(
             maxSize = maxSize,
             onUpdateMaxSize = { deviceViewModel.updateMaxSize(it) },
             maxSizeError = maxSizeError,
+            maxFrameRate = maxFrameRate,
+            onUpdateFrameRate = { deviceViewModel.updateMaxFrameRate(it) },
+            maxFrameRateError = maxFrameRateError,
+            bitrate = bitrate,
+            onUpdateBitrate = { deviceViewModel.updateBitrate(it) },
+            bitrateError = bitrateError,
             savable = savable,
             onSave = { deviceViewModel.save() }
         )
