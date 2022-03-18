@@ -23,6 +23,7 @@ import model.usecase.GetScrcpyStatusUseCase
 import model.usecase.GetSystemDarkModeFlowUseCase
 import model.usecase.IsSetupCompletedUseCase
 import model.usecase.SaveScreenshotToDesktopUseCase
+import model.usecase.StartAdbServerUseCase
 import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyRecordUseCase
@@ -80,6 +81,10 @@ val appModule = module {
     }
 
     factory {
+        StartAdbServerUseCase(get())
+    }
+
+    factory {
         FetchSettingUseCase(get())
     }
 
@@ -128,7 +133,7 @@ val appModule = module {
     }
 
     factory {
-        DevicesPageViewModel(get(), get(), get(), get(), get(), get(), get(), get())
+        DevicesPageViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
 
     factory { (context: Device.Context) ->
