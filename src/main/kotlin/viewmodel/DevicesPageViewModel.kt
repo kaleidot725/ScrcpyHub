@@ -10,12 +10,14 @@ import model.usecase.FetchDevicesUseCase
 import model.usecase.GetDevicesFlowUseCase
 import model.usecase.GetScrcpyStatusUseCase
 import model.usecase.SaveScreenshotToDesktopUseCase
+import model.usecase.StartAdbServerUseCase
 import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyRecordUseCase
 import model.usecase.StopScrcpyUseCase
 
 class DevicesPageViewModel(
+    private val startAdbServerUseCase: StartAdbServerUseCase,
     private val fetchDevicesUseCase: FetchDevicesUseCase,
     private val getDevicesFlowUseCase: GetDevicesFlowUseCase,
     private val startScrcpyUseCase: StartScrcpyUseCase,
@@ -30,10 +32,8 @@ class DevicesPageViewModel(
 
     override fun onStarted() {
         coroutineScope.launch {
-            fetchStates()
-            getDevicesFlowUseCase.get(coroutineScope).collect {
-                updateStates(it)
-            }
+            startAdbServerUseCase()
+            getDevicesFlowUseCase.get(coroutineScope).collect { updateStates(it) }
         }
     }
 

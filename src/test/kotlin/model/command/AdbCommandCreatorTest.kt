@@ -28,5 +28,16 @@ class AdbCommandCreatorTest : StringSpec(
             val factory = AdbCommandCreator()
             factory.createHelp() shouldBe listOf("adb", "--help")
         }
+        "create_start_server" {
+            val factory = AdbCommandCreator(path = "test/")
+            factory.createHelp() shouldBe listOf("test/adb", "start-server")
+
+            val factoryWhenNoSeparator = AdbCommandCreator(path = "test")
+            factoryWhenNoSeparator.createHelp() shouldBe listOf("test/adb", "start-server")
+        }
+        "create_start_server_when_no_path_specified" {
+            val factory = AdbCommandCreator()
+            factory.createHelp() shouldBe listOf("adb", "start-server")
+        }
     }
 )
