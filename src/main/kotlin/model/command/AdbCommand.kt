@@ -14,7 +14,7 @@ class AdbCommand(private val factory: AdbCommandCreator) {
 
     fun startAdbServer(): Boolean {
         return try {
-            ProcessBuilder(factory.createStartSerfver()).start()
+            ProcessBuilder(factory.createStartServer()).start()
             true
         } catch (e: Exception) {
             false
