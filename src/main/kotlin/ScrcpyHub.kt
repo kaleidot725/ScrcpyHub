@@ -29,11 +29,20 @@ fun main() = application {
     val windowState = rememberWindowState(width = 350.dp, height = 550.dp)
     val viewModel by remember { mutableStateOf(GlobalContext.get().get<MainContentViewModel>()) }
     var isOpen by remember { mutableStateOf(true) }
+    var alwaysOnTop by remember { mutableStateOf(false) }
 
     Tray(state = trayState, icon = painterResource(Images.TRAY), menu = {
-        Item(Strings.TRAY_TOGGLE_SCRCPY_HUB, onClick = { isOpen = !isOpen })
+        CheckboxItem(
+            text = Strings.TRAY_SHOW_SCRCPY_HUB,
+            checked = isOpen,
+            onCheckedChange = { isOpen = it }
+        )
 
-        Item(Strings.TRAY_VERSION, enabled = false, onClick = {})
+        CheckboxItem(
+            text = Strings.TRAY_ENABLE_ALWAYS_TOP,
+            checked = alwaysOnTop,
+            onCheckedChange = { alwaysOnTop = it }
+        )
 
         Separator()
 
@@ -43,8 +52,8 @@ fun main() = application {
     })
 
     if (isOpen) {
-        AppWindow(onCloseRequest = { isOpen = false }, state = windowState) {
-        MainContent(windowScope = this, mainContentViewModel = viewModel)
-    }
+        AppWindow(onCloseRequest = { isOpen = false }, state = windowState, alwaysOnTop = alwaysOnTop) {
+            MainContent(windowScope = this, mainContentViewModel = viewModel)
+        }
     }
 }
