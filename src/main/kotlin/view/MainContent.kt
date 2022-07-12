@@ -48,13 +48,19 @@ import viewmodel.SettingPageViewModel
 import viewmodel.ViewModel
 
 @Composable
-fun AppWindow(onCloseRequest: () -> Unit, state: WindowState, content: @Composable FrameWindowScope.() -> Unit) {
+fun AppWindow(
+    onCloseRequest: () -> Unit,
+    state: WindowState,
+    alwaysOnTop: Boolean,
+    content: @Composable FrameWindowScope.() -> Unit
+) {
     Window(
         onCloseRequest = onCloseRequest,
         state = state,
         resizable = false,
         undecorated = true,
         transparent = true,
+        alwaysOnTop = alwaysOnTop,
         icon = painterResource(Images.DEVICE),
     ) {
         Card(shape = RoundedCornerShape(8.dp)) { content.invoke(this) }

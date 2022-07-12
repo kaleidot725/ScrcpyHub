@@ -2,15 +2,14 @@ package resource
 
 object Strings {
     // COMMON
-    const val APP_VERSION = "1.6.0"
-    const val APP_NAME = "ScrcpyHub"
+    const val APP_VERSION = "1.7.0"
+    const val APP_NAME = "ScrcpyHub $APP_VERSION"
     const val SAVE = "Save"
-    const val SETUP = "Setup"
     const val QUIT = "Quit"
 
     // TRAY
-    const val TRAY_TOGGLE_SCRCPY_HUB = "Toggle ScrcpyHub"
-    const val TRAY_VERSION = "Version v$APP_VERSION"
+    const val TRAY_SHOW_SCRCPY_HUB = "Display Window"
+    const val TRAY_ENABLE_ALWAYS_TOP = "Enable Always on Top"
 
     // Error
     const val NOT_FOUND_ADB_COMMAND = "Not found ADB Command"
