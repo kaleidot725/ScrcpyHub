@@ -91,7 +91,7 @@ fun DeviceList(
                                     ProcessStatus.RECORDING -> {}
                                 }
                             },
-                            modifier = Modifier.padding(8.dp).fillMaxWidth(fraction = 0.90f)
+                            modifier = Modifier.padding(8.dp).weight(0.9f)
                         )
 
                         DeviceDropDownMenu(
@@ -100,7 +100,10 @@ fun DeviceList(
                             onScreenShot = { takeScreenshot?.invoke(deviceStatus.context) },
                             onStartRecording = { startRecording?.invoke(deviceStatus.context) },
                             onStopRecording = { stopRecording?.invoke(deviceStatus.context) },
-                            modifier = Modifier.width(30.dp).align(Alignment.CenterVertically).padding(start = 4.dp)
+                            modifier = Modifier
+                                .width(30.dp)
+                                .align(Alignment.CenterVertically)
+                                .padding(horizontal = 4.dp)
                         )
                     }
                 }
