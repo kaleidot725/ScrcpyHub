@@ -2,10 +2,7 @@ package view.components.pages
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.MaterialTheme
@@ -45,10 +42,11 @@ fun DevicesPage(
 
     DevicesTemplate(header = {
         PageHeader(windowScope = windowScope, title = Strings.APP_NAME, optionContent = {
-            ApplicationDropDownMenu(
-                onSetting = { onNavigateSetting?.invoke() },
-                onQuit = { exitProcess(0) },
-                modifier = Modifier.height(18.dp).width(24.dp)
+            Image(
+                painter = painterResource(Images.SETTING),
+                contentDescription = "",
+                contentScale = ContentScale.FillHeight,
+                modifier = Modifier.height(18.dp).width(24.dp).clickable { onNavigateSetting?.invoke() }
             )
         })
     }, content = {
@@ -69,46 +67,3 @@ fun DevicesPage(
         }
     })
 }
-
-@Composable
-private fun ApplicationDropDownMenu(
-    onSetting: () -> Unit,
-    onQuit: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    var expanded by remember { mutableStateOf(false) }
-
-    Box(modifier = modifier) {
-        Image(
-            painter = painterResource(Images.SETTING),
-            contentDescription = "",
-            contentScale = ContentScale.FillHeight,
-            modifier = Modifier.matchParentSize().clickable { expanded = true }
-        )
-
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            DropdownMenuItem(
-                onClick = {
-                    onSetting()
-                    expanded = false
-                }, modifier = Modifier.height(32.dp)
-                ) {
-                    Text(
-                        text = Strings.DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE, style = MaterialTheme.typography.body2
-                    )
-                }
-
-                DropdownMenuItem(
-                    onClick = {
-                        onQuit()
-                        expanded = false
-                    }, modifier = Modifier.height(32.dp)
-                    ) {
-                        Text(
-                            text = Strings.DEVICES_DROP_DOWN_QUIT_MENU_TITLE, style = MaterialTheme.typography.body2
-                        )
-                    }
-                }
-            }
-        }
-        
