@@ -3,6 +3,7 @@ package resource
 import androidx.compose.ui.graphics.Color
 
 object Colors {
+    val window_border = Color(0x60CCCCCC)
     val md_theme_light_primary = Color(0xFF006399)
     val md_theme_light_onPrimary = Color(0xFFffffff)
     val md_theme_light_secondary = Color(0xFF51606f)
