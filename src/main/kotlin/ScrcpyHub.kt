@@ -53,7 +53,7 @@ fun main() = application {
 
     if (isOpen) {
         AppWindow(onCloseRequest = { isOpen = false }, state = windowState, alwaysOnTop = alwaysOnTop) {
-            MainContent(windowScope = this, mainContentViewModel = viewModel)
-        }
+        MainContent(windowScope = this, mainContentViewModel = viewModel)
+    }
     }
 }
