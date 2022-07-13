@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -36,6 +38,7 @@ import androidx.compose.ui.window.WindowState
 import model.entity.Message
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
+import resource.Colors
 import resource.Images
 import view.components.pages.DevicesPage
 import view.components.pages.Page
@@ -63,7 +66,7 @@ fun AppWindow(
         alwaysOnTop = alwaysOnTop,
         icon = painterResource(Images.DEVICE),
     ) {
-        Card(shape = RoundedCornerShape(8.dp)) { content.invoke(this) }
+        Card(shape = RoundedCornerShape(8.dp), border = BorderStroke(1.dp, Colors.window_border)) { content.invoke(this) }
     }
 }
 
