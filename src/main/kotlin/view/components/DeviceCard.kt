@@ -81,7 +81,6 @@ fun DeviceCard(
     }
 }
 
-
 @Preview
 @Composable
 private fun DeviceCard_Preview_DARK() {
