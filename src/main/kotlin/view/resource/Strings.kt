@@ -1,4 +1,4 @@
-package resource
+package view.resource
 
 object Strings {
     // COMMON

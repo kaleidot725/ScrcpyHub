@@ -15,9 +15,9 @@ import model.usecase.FetchSettingUseCase
 import model.usecase.GetMessageFlowUseCase
 import model.usecase.GetSystemDarkModeFlowUseCase
 import model.usecase.IsSetupCompletedUseCase
-import resource.Strings.NOT_FOUND_ADB_COMMAND
-import resource.Strings.NOT_FOUND_SCRCPY_COMMAND
 import view.navigation.NavState
+import view.resource.Strings.NOT_FOUND_ADB_COMMAND
+import view.resource.Strings.NOT_FOUND_SCRCPY_COMMAND
 
 class MainContentViewModel(
     private val fetchSettingUseCase: FetchSettingUseCase,

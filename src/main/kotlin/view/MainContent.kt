@@ -37,12 +37,12 @@ import androidx.compose.ui.window.WindowState
 import model.entity.Message
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
-import resource.Colors
-import resource.Images
 import view.navigation.NavState
 import view.page.DevicePage
 import view.page.SettingPage
 import view.pages.DevicesPage
+import view.resource.Colors
+import view.resource.Images
 import viewmodel.DevicePageViewModel
 import viewmodel.DevicesPageViewModel
 import viewmodel.MainContentViewModel

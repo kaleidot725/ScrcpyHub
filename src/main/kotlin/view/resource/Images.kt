@@ -1,4 +1,4 @@
-package resource
+package view.resource
 
 object Images {
     const val TRAY = "tray.svg"

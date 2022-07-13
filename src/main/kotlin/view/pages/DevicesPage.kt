@@ -16,11 +16,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Device
-import resource.Images
-import resource.Strings
-import resource.Strings.DEVICES_PAGE_NOT_FOUND_DEVICES
 import view.components.organisms.DeviceList
 import view.parts.Texts
+import view.resource.Images
+import view.resource.Strings
+import view.resource.Strings.DEVICES_PAGE_NOT_FOUND_DEVICES
 import view.tab.PageHeader
 import view.templates.HeaderAndContent
 import viewmodel.DeviceStatus

@@ -13,9 +13,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Theme
-import resource.Images
-import resource.Strings
 import view.components.organisms.AppSetting
+import view.resource.Images
+import view.resource.Strings
 import view.tab.PageHeader
 import view.templates.HeaderAndContent
 import viewmodel.SettingPageViewModel
