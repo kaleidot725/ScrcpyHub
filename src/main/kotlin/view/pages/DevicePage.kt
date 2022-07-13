@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import resource.Images
 import view.components.organisms.DeviceSetting
-import view.components.templates.DeviceTemplate
 import view.tab.PageHeader
+import view.templates.HeaderAndContent
 import viewmodel.DevicePageViewModel
 
 @Composable
@@ -34,7 +34,7 @@ fun DevicePage(
     val bitrate: String by deviceViewModel.bitrate.collectAsState()
     val bitrateError: String by deviceViewModel.bitrateError.collectAsState()
 
-    DeviceTemplate(header = {
+    HeaderAndContent(header = {
         PageHeader(windowScope = windowScope, title = titleName, optionContent = {
             Image(
                 painter = painterResource(Images.CLOSE),

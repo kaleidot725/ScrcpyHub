@@ -20,9 +20,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.entity.Theme
 import resource.Strings
-import view.components.atoms.Texts
 import view.components.molecules.TitleAndRadioButtons
 import view.components.molecules.TitlesAndTextField
+import view.parts.Texts
 
 @Composable
 fun AppSetting(

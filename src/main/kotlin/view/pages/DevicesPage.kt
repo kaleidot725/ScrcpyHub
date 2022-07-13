@@ -1,18 +1,14 @@
-package view.components.pages
+package view.pages
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -23,13 +19,12 @@ import model.entity.Device
 import resource.Images
 import resource.Strings
 import resource.Strings.DEVICES_PAGE_NOT_FOUND_DEVICES
-import view.components.atoms.Texts
 import view.components.organisms.DeviceList
-import view.components.templates.DevicesTemplate
+import view.parts.Texts
 import view.tab.PageHeader
+import view.templates.HeaderAndContent
 import viewmodel.DeviceStatus
 import viewmodel.DevicesPageViewModel
-import kotlin.system.exitProcess
 
 @Composable
 fun DevicesPage(
@@ -40,7 +35,7 @@ fun DevicesPage(
 ) {
     val deviceStatusList: List<DeviceStatus> by devicesPageViewModel.states.collectAsState()
 
-    DevicesTemplate(header = {
+    HeaderAndContent(header = {
         PageHeader(windowScope = windowScope, title = Strings.APP_NAME, optionContent = {
             Image(
                 painter = painterResource(Images.SETTING),

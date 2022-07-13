@@ -8,7 +8,7 @@ import androidx.compose.material.RadioButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import view.components.atoms.Texts
+import view.parts.Texts
 
 @Composable
 fun RadioButtons(

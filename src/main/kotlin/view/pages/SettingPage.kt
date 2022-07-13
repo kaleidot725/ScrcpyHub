@@ -16,8 +16,8 @@ import model.entity.Theme
 import resource.Images
 import resource.Strings
 import view.components.organisms.AppSetting
-import view.components.templates.SettingTemplate
 import view.tab.PageHeader
+import view.templates.HeaderAndContent
 import viewmodel.SettingPageViewModel
 
 @Composable
@@ -32,7 +32,7 @@ fun SettingPage(
     val adbLocation: String by settingPageViewModel.adbLocation.collectAsState()
     val scrcpyLocation: String by settingPageViewModel.scrcpyLocation.collectAsState()
 
-    SettingTemplate(
+    HeaderAndContent(
         header = {
             PageHeader(
                 windowScope = windowScope,
