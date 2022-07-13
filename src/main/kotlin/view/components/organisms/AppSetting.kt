@@ -78,8 +78,8 @@ fun AppSetting(
             }
 
             Button(onClick = { onSave() }, modifier = Modifier.fillMaxWidth()) {
-            Texts.Button(Strings.SAVE)
-        }
+                Texts.Button(Strings.SAVE)
+            }
         }
 
         VerticalScrollbar(
@@ -94,14 +94,6 @@ private fun Theme.toLabel(): String {
         Theme.LIGHT -> Strings.SETTING_THEME_LIGHT
         Theme.DARK -> Strings.SETTING_THEME_DARK
         Theme.SYNC_WITH_OS -> Strings.SETTING_THEME_SYNC_WITH_OS
-    }
-}
-
-private fun String.toTheme(): Theme {
-    return when (this) {
-        Strings.SETTING_THEME_LIGHT -> Theme.LIGHT
-        Strings.SETTING_THEME_DARK -> Theme.DARK
-        else -> Theme.SYNC_WITH_OS
     }
 }
 
