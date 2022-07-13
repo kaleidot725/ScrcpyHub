@@ -12,10 +12,10 @@ import model.di.appModule
 import org.koin.core.context.GlobalContext
 import org.koin.core.context.GlobalContext.getOrNull
 import org.koin.core.context.GlobalContext.startKoin
-import resource.Images
-import resource.Strings
 import view.AppWindow
 import view.MainContent
+import view.resource.Images
+import view.resource.Strings
 import viewmodel.MainContentViewModel
 
 fun main() = application {

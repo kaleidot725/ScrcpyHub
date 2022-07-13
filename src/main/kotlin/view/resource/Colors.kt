@@ -1,4 +1,4 @@
-package resource
+package view.resource
 
 import androidx.compose.ui.graphics.Color
 

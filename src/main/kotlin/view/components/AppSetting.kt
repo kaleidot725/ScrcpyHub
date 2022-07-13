@@ -19,10 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.entity.Theme
-import resource.Strings
 import view.components.molecules.TitleAndRadioButtons
 import view.components.molecules.TitlesAndTextField
 import view.parts.Texts
+import view.resource.Strings
 
 @Composable
 fun AppSetting(

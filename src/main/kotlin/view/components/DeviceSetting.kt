@@ -18,9 +18,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import resource.Strings
 import view.components.molecules.TitlesAndTextField
 import view.parts.Texts
+import view.resource.Strings
 
 @Composable
 fun DeviceSetting(

@@ -17,11 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.entity.Device
 import model.repository.ProcessStatus
-import resource.Images
-import resource.Strings
 import view.MainTheme
 import view.components.atoms.SmallIcon
 import view.components.molecules.TitleAndActionButton
+import view.resource.Images
+import view.resource.Strings
 import viewmodel.DeviceStatus
 
 @Composable

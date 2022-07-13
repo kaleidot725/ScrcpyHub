@@ -19,8 +19,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import model.repository.ProcessStatus
-import resource.Images
-import resource.Strings
+import view.resource.Images
+import view.resource.Strings
 
 @Composable
 fun DeviceDropDownMenu(
