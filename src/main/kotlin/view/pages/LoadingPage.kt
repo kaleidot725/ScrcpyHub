@@ -6,13 +6,16 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import view.components.templates.LoadingTemplate
+import view.templates.HeaderAndContent
 
 @Composable
 fun LoadingPage() {
-    LoadingTemplate {
-        Box(modifier = Modifier.fillMaxSize()) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+    HeaderAndContent(
+        header = {},
+        content = {
+            Box(modifier = Modifier.fillMaxSize()) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
         }
-    }
+    )
 }

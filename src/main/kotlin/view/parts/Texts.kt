@@ -1,4 +1,4 @@
-package view.components.atoms
+package view.parts
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column

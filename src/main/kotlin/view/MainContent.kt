@@ -27,7 +27,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -40,10 +39,10 @@ import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
 import resource.Colors
 import resource.Images
-import view.components.pages.DevicesPage
-import view.components.pages.Page
+import view.navigation.NavState
 import view.page.DevicePage
 import view.page.SettingPage
+import view.pages.DevicesPage
 import viewmodel.DevicePageViewModel
 import viewmodel.DevicesPageViewModel
 import viewmodel.MainContentViewModel
@@ -66,7 +65,10 @@ fun AppWindow(
         alwaysOnTop = alwaysOnTop,
         icon = painterResource(Images.DEVICE),
     ) {
-        Card(shape = RoundedCornerShape(8.dp), border = BorderStroke(1.dp, Colors.window_border)) { content.invoke(this) }
+        Card(
+            shape = RoundedCornerShape(8.dp),
+            border = BorderStroke(1.dp, Colors.window_border)
+        ) { content.invoke(this) }
     }
 }
 
@@ -89,14 +91,14 @@ private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewMod
 
 @Composable
 private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewModel) {
-    val selectedPages: Page by mainViewModel.selectedPages.collectAsState()
+    val navState: NavState by mainViewModel.navState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        when (val page = selectedPages) {
-            Page.LoadingPage -> {
+        when (val page = navState) {
+            NavState.LoadingPage -> {
                 LoadingPage()
             }
-            Page.DevicesPage -> {
+            NavState.DevicesPage -> {
                 val devicesPageViewModel by remember {
                     val viewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
                     mutableStateOf(viewModel)
@@ -106,11 +108,11 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                 DevicesPage(
                     windowScope = windowScope,
                     devicesPageViewModel = devicesPageViewModel,
-                    onNavigateSetting = { mainViewModel.selectPage(Page.SettingPage) },
-                    onNavigateDevice = { mainViewModel.selectPage(Page.DevicePage(it)) }
+                    onNavigateSetting = { mainViewModel.selectPage(NavState.SettingPage) },
+                    onNavigateDevice = { mainViewModel.selectPage(NavState.DevicePage(it)) }
                 )
             }
-            Page.SettingPage -> {
+            NavState.SettingPage -> {
                 val settingPageViewModel by remember {
                     val viewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
                     mutableStateOf(viewModel)
@@ -120,11 +122,11 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                 SettingPage(
                     windowScope = windowScope,
                     settingPageViewModel = settingPageViewModel,
-                    onNavigateDevices = { mainViewModel.selectPage(Page.DevicesPage) },
+                    onNavigateDevices = { mainViewModel.selectPage(NavState.DevicesPage) },
                     onSaved = { mainViewModel.refreshSetting() }
                 )
             }
-            is Page.DevicePage -> {
+            is NavState.DevicePage -> {
                 val devicePageViewModel by remember {
                     val viewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
                         parametersOf(page.context)
@@ -136,7 +138,7 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                 DevicePage(
                     windowScope = windowScope,
                     deviceViewModel = devicePageViewModel,
-                    onNavigateDevices = { mainViewModel.selectPage(Page.DevicesPage) }
+                    onNavigateDevices = { mainViewModel.selectPage(NavState.DevicesPage) }
                 )
             }
         }
