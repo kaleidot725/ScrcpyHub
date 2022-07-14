@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import model.entity.AppSetting
+import model.entity.Setting
 import model.entity.Message
 import model.entity.Theme
 import model.usecase.FetchSettingUseCase
@@ -34,7 +34,7 @@ class MainContentViewModel(
     private val _notifyMessage: MutableStateFlow<Message> = MutableStateFlow(Message.EmptyMessage)
     val notifyMessage: StateFlow<Message> = _notifyMessage
 
-    private val setting: MutableStateFlow<AppSetting?> = MutableStateFlow(null)
+    private val setting: MutableStateFlow<Setting?> = MutableStateFlow(null)
     private val systemDarkMode: MutableStateFlow<Boolean?> = MutableStateFlow(null)
     val isDarkMode: Flow<Boolean?> = setting.combine(systemDarkMode) { setting, systemDarkMode ->
         setting ?: return@combine null
