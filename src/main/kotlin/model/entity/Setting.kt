@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AppSetting(
+data class Setting(
     @SerialName("adbLocation")
     val adbLocation: String = "",
     @SerialName("theme")
