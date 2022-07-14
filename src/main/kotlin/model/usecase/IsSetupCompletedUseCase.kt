@@ -2,8 +2,8 @@ package model.usecase
 
 import model.command.AdbCommand
 import model.command.ScrcpyCommand
-import model.command.creator.AdbCommandCreator
-import model.command.creator.ScrcpyCommandCreator
+import model.command.AdbCommandCreator
+import model.command.ScrcpyCommandCreator
 import model.repository.SettingRepository
 
 class IsSetupCompletedUseCase(

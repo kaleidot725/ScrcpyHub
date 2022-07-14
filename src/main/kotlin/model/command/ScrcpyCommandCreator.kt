@@ -1,4 +1,4 @@
-package model.command.creator
+package model.command
 
 import model.entity.Device
 import java.io.File

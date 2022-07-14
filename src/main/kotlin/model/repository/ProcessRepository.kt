@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
 import model.command.KillCommand
 import model.command.ScrcpyCommand
-import model.command.creator.ScrcpyCommandCreator
+import model.command.ScrcpyCommandCreator
 import model.entity.Device
 
 private data class ProcessState(
