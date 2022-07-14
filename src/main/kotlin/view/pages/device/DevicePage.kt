@@ -1,4 +1,4 @@
-package view.page
+package view.pages.device
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -17,7 +17,6 @@ import view.components.organisms.DeviceSetting
 import view.resource.Images
 import view.tab.PageHeader
 import view.templates.HeaderAndContent
-import view.pages.DevicePageStateHolder
 
 @Composable
 fun DevicePage(

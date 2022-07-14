@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,8 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Snackbar
 import androidx.compose.material.Text
@@ -27,25 +24,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.FrameWindowScope
-import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowScope
-import androidx.compose.ui.window.WindowState
 import model.entity.Message
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
-import view.navigation.NavState
-import view.page.DevicePage
-import view.page.SettingPage
+import view.navigation.Navigation
+import view.pages.device.DevicePage
+import view.pages.setting.SettingPage
 import view.pages.DevicesPage
-import view.resource.Colors
-import view.resource.Images
-import view.pages.DevicePageStateHolder
+import view.pages.device.DevicePageStateHolder
 import view.pages.DevicesPageStateHolder
-import view.pages.SettingPageStateHolder
+import view.pages.setting.SettingPageStateHolder
 
 
 
@@ -69,14 +60,14 @@ fun MainContent(windowScope: WindowScope, mainStateHolder: MainContentStateHolde
 
 @Composable
 private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
-    val navState: NavState by mainStateHolder.navState.collectAsState()
+    val navigation: Navigation by mainStateHolder.navState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        when (val page = navState) {
-            NavState.LoadingPage -> {
+        when (val page = navigation) {
+            Navigation.LoadingPage -> {
                 LoadingPage()
             }
-            NavState.DevicesPage -> {
+            Navigation.DevicesPage -> {
                 val stateHolder by remember {
                     val stateHolder by inject<DevicesPageStateHolder>(clazz = DevicesPageStateHolder::class.java)
                     mutableStateOf(stateHolder)
@@ -84,11 +75,11 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
                 DevicesPage(
                     windowScope = windowScope,
                     stateHolder = stateHolder,
-                    onNavigateSetting = { mainStateHolder.selectPage(NavState.SettingPage) },
-                    onNavigateDevice = { mainStateHolder.selectPage(NavState.DevicePage(it)) }
+                    onNavigateSetting = { mainStateHolder.selectPage(Navigation.SettingPage) },
+                    onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
                 )
             }
-            NavState.SettingPage -> {
+            Navigation.SettingPage -> {
                 val stateHolder by remember {
                     val viewModel by inject<SettingPageStateHolder>(clazz = SettingPageStateHolder::class.java)
                     mutableStateOf(viewModel)
@@ -96,11 +87,11 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
                 SettingPage(
                     windowScope = windowScope,
                     stateHolder = stateHolder,
-                    onNavigateDevices = { mainStateHolder.selectPage(NavState.DevicesPage) },
+                    onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) },
                     onSaved = { mainStateHolder.refreshSetting() }
                 )
             }
-            is NavState.DevicePage -> {
+            is Navigation.DevicePage -> {
                 val devicePageViewModel by remember {
                     val stateHolder by inject<DevicePageStateHolder>(clazz = DevicePageStateHolder::class.java) {
                         parametersOf(page.context)
@@ -110,7 +101,7 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
                 DevicePage(
                     windowScope = windowScope,
                     stateHolder = devicePageViewModel,
-                    onNavigateDevices = { mainStateHolder.selectPage(NavState.DevicesPage) }
+                    onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) }
                 )
             }
         }

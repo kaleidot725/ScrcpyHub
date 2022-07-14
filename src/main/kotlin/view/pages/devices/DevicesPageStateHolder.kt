@@ -15,6 +15,7 @@ import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyRecordUseCase
 import model.usecase.StopScrcpyUseCase
+import view.StateHolder
 
 class DevicesPageStateHolder(
     private val startAdbServerUseCase: StartAdbServerUseCase,

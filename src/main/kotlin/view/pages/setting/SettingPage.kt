@@ -1,4 +1,4 @@
-package view.page
+package view.pages.setting
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -19,7 +19,6 @@ import view.resource.Images
 import view.resource.Strings
 import view.tab.PageHeader
 import view.templates.HeaderAndContent
-import view.pages.SettingPageStateHolder
 
 @Composable
 fun SettingPage(

@@ -1,4 +1,4 @@
-package view.pages
+package view.pages.setting
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -7,6 +7,7 @@ import model.entity.Setting
 import model.entity.Theme
 import model.usecase.FetchSettingUseCase
 import model.usecase.UpdateSettingUseCase
+import view.StateHolder
 
 class SettingPageStateHolder(
     private val fetchSettingUseCase: FetchSettingUseCase,
