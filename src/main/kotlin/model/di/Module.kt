@@ -29,10 +29,10 @@ import model.usecase.StopScrcpyUseCase
 import model.usecase.UpdateDeviceSetting
 import model.usecase.UpdateSettingUseCase
 import org.koin.dsl.module
-import viewmodel.DevicePageViewModel
-import viewmodel.DevicesPageViewModel
-import viewmodel.MainContentViewModel
-import viewmodel.SettingPageViewModel
+import view.pages.DevicePageStateHolder
+import view.pages.DevicesPageStateHolder
+import view.MainContentStateHolder
+import view.pages.SettingPageStateHolder
 
 val appModule = module {
     single {
@@ -135,18 +135,18 @@ val appModule = module {
     }
 
     factory {
-        DevicesPageViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get())
+        DevicesPageStateHolder(get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
 
     factory { (context: Device.Context) ->
-        DevicePageViewModel(context, get())
+        DevicePageStateHolder(context, get())
     }
 
     factory {
-        MainContentViewModel(get(), get(), get(), get())
+        MainContentStateHolder(get(), get(), get(), get())
     }
 
     factory {
-        SettingPageViewModel(get(), get())
+        SettingPageStateHolder(get(), get())
     }
 }

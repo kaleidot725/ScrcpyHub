@@ -24,22 +24,20 @@ import view.resource.Strings
 import view.resource.Strings.DEVICES_PAGE_NOT_FOUND_DEVICES
 import view.tab.PageHeader
 import view.templates.HeaderAndContent
-import viewmodel.DeviceStatus
-import viewmodel.DevicesPageViewModel
 
 @Composable
 fun DevicesPage(
     windowScope: WindowScope,
-    devicesPageViewModel: DevicesPageViewModel,
+    stateHolder: DevicesPageStateHolder,
     onNavigateSetting: (() -> Unit)? = null,
     onNavigateDevice: ((Device.Context) -> Unit)? = null
 ) {
-    val deviceStatusList: List<DeviceStatus> by devicesPageViewModel.states.collectAsState()
+    val deviceStatusList: List<DeviceStatus> by stateHolder.states.collectAsState()
 
-    DisposableEffect(devicesPageViewModel) {
-        devicesPageViewModel.onStarted()
+    DisposableEffect(stateHolder) {
+        stateHolder.onStarted()
         onDispose {
-            devicesPageViewModel.onCleared()
+            stateHolder.onCleared()
         }
     }
 
@@ -60,12 +58,12 @@ fun DevicesPage(
         } else {
             DeviceList(
                 deviceStatusList = deviceStatusList,
-                startScrcpy = { devicesPageViewModel.startScrcpy(it) },
-                stopScrcpy = { devicesPageViewModel.stopScrcpy(it) },
+                startScrcpy = { stateHolder.startScrcpy(it) },
+                stopScrcpy = { stateHolder.stopScrcpy(it) },
                 goToDetail = { onNavigateDevice?.invoke(it) },
-                takeScreenshot = { devicesPageViewModel.saveScreenshotToDesktop(it) },
-                startRecording = { devicesPageViewModel.startScrcpyRecord(it) },
-                stopRecording = { devicesPageViewModel.stopScrcpyRecord(it) },
+                takeScreenshot = { stateHolder.saveScreenshotToDesktop(it) },
+                startRecording = { stateHolder.startScrcpyRecord(it) },
+                stopRecording = { stateHolder.stopScrcpyRecord(it) },
             )
         }
     })

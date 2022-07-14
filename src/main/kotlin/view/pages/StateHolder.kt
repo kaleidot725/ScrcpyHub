@@ -1,11 +1,11 @@
-package viewmodel
+package view.pages
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import org.koin.core.component.KoinComponent
 
-abstract class ViewModel : KoinComponent {
+abstract class StateHolder : KoinComponent {
     val coroutineScope: CoroutineScope = MainScope()
 
     open fun onStarted() {}

@@ -22,7 +22,7 @@ import view.components.atoms.SmallIcon
 import view.components.molecules.TitleAndActionButton
 import view.resource.Images
 import view.resource.Strings
-import viewmodel.DeviceStatus
+import view.pages.DeviceStatus
 
 @Composable
 fun DeviceCard(

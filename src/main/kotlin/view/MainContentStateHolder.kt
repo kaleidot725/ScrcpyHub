@@ -1,4 +1,4 @@
-package viewmodel
+package view
 
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
@@ -16,15 +16,16 @@ import model.usecase.GetMessageFlowUseCase
 import model.usecase.GetSystemDarkModeFlowUseCase
 import model.usecase.IsSetupCompletedUseCase
 import view.navigation.NavState
+import view.pages.StateHolder
 import view.resource.Strings.NOT_FOUND_ADB_COMMAND
 import view.resource.Strings.NOT_FOUND_SCRCPY_COMMAND
 
-class MainContentViewModel(
+class MainContentStateHolder(
     private val fetchSettingUseCase: FetchSettingUseCase,
     private val isSetupCompletedUseCase: IsSetupCompletedUseCase,
     private val getMessageFlowUseCase: GetMessageFlowUseCase,
     private val getSystemDarkModeFlowUseCase: GetSystemDarkModeFlowUseCase
-) : ViewModel() {
+) : StateHolder() {
     private val _navState: MutableStateFlow<NavState> = MutableStateFlow(NavState.LoadingPage)
     val navState: StateFlow<NavState> = _navState
 
