@@ -1,10 +1,11 @@
-package view.pages
+package view.pages.device
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import model.entity.Device
 import model.usecase.UpdateDeviceSetting
+import view.StateHolder
 
 class DevicePageStateHolder(
     private val context: Device.Context,

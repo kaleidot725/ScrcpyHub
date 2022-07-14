@@ -15,8 +15,7 @@ import model.usecase.FetchSettingUseCase
 import model.usecase.GetMessageFlowUseCase
 import model.usecase.GetSystemDarkModeFlowUseCase
 import model.usecase.IsSetupCompletedUseCase
-import view.navigation.NavState
-import view.pages.StateHolder
+import view.navigation.Navigation
 import view.resource.Strings.NOT_FOUND_ADB_COMMAND
 import view.resource.Strings.NOT_FOUND_SCRCPY_COMMAND
 
@@ -26,8 +25,8 @@ class MainContentStateHolder(
     private val getMessageFlowUseCase: GetMessageFlowUseCase,
     private val getSystemDarkModeFlowUseCase: GetSystemDarkModeFlowUseCase
 ) : StateHolder() {
-    private val _navState: MutableStateFlow<NavState> = MutableStateFlow(NavState.LoadingPage)
-    val navState: StateFlow<NavState> = _navState
+    private val _navState: MutableStateFlow<Navigation> = MutableStateFlow(Navigation.LoadingPage)
+    val navState: StateFlow<Navigation> = _navState
 
     private val _errorMessage: MutableStateFlow<String?> = MutableStateFlow(null)
     val errorMessage: StateFlow<String?> = _errorMessage
@@ -53,7 +52,7 @@ class MainContentStateHolder(
         observeSystemDarkMode()
     }
 
-    fun selectPage(page: NavState) {
+    fun selectPage(page: Navigation) {
         _navState.value = page
     }
 
@@ -88,7 +87,7 @@ class MainContentStateHolder(
         coroutineScope.launch(NonCancellable) {
             setting.value = fetchSettingUseCase.execute()
             delay(2000)
-            _navState.value = NavState.DevicesPage
+            _navState.value = Navigation.DevicesPage
         }
     }
 }

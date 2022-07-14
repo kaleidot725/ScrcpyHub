@@ -29,10 +29,10 @@ import model.usecase.StopScrcpyUseCase
 import model.usecase.UpdateDeviceSetting
 import model.usecase.UpdateSettingUseCase
 import org.koin.dsl.module
-import view.pages.DevicePageStateHolder
+import view.pages.device.DevicePageStateHolder
 import view.pages.DevicesPageStateHolder
 import view.MainContentStateHolder
-import view.pages.SettingPageStateHolder
+import view.pages.setting.SettingPageStateHolder
 
 val appModule = module {
     single {
