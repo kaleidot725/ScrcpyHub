@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -33,6 +34,13 @@ fun DevicePage(
     val maxFrameRateError: String by deviceViewModel.maxFrameRateError.collectAsState()
     val bitrate: String by deviceViewModel.bitrate.collectAsState()
     val bitrateError: String by deviceViewModel.bitrateError.collectAsState()
+
+    DisposableEffect(deviceViewModel) {
+        deviceViewModel.onStarted()
+        onDispose {
+            deviceViewModel.onCleared()
+        }
+    }
 
     HeaderAndContent(header = {
         PageHeader(windowScope = windowScope, title = titleName, optionContent = {

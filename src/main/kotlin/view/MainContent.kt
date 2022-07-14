@@ -74,17 +74,18 @@ fun AppWindow(
 
 @Composable
 fun MainContent(windowScope: WindowScope, mainContentViewModel: MainContentViewModel) {
-    onInitialize(mainContentViewModel)
-    onDrawWindow(windowScope, mainContentViewModel)
-}
+    DisposableEffect(mainContentViewModel) {
+        mainContentViewModel.onStarted()
+        onDispose {
+            mainContentViewModel.onCleared()
+        }
+    }
 
-@Composable
-private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewModel) {
-    val isDarkMode: Boolean? by viewModel.isDarkMode.collectAsState(null)
+    val isDarkMode: Boolean? by mainContentViewModel.isDarkMode.collectAsState(null)
     MainTheme(isDarkMode = isDarkMode ?: true) {
         Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background)) {
-            MainPages(windowScope, viewModel)
-            MainSnacks(viewModel)
+            MainPages(windowScope, mainContentViewModel)
+            MainSnacks(mainContentViewModel)
         }
     }
 }
@@ -103,8 +104,6 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                     val viewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
                     mutableStateOf(viewModel)
                 }
-                onInitialize(devicesPageViewModel)
-
                 DevicesPage(
                     windowScope = windowScope,
                     devicesPageViewModel = devicesPageViewModel,
@@ -117,8 +116,6 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                     val viewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
                     mutableStateOf(viewModel)
                 }
-                onInitialize(settingPageViewModel)
-
                 SettingPage(
                     windowScope = windowScope,
                     settingPageViewModel = settingPageViewModel,
@@ -133,8 +130,6 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                     }
                     mutableStateOf(viewModel)
                 }
-                onInitialize(devicePageViewModel)
-
                 DevicePage(
                     windowScope = windowScope,
                     deviceViewModel = devicePageViewModel,
@@ -191,15 +186,5 @@ private fun Message.toStringMessage(): String {
         is Message.StartRecordingMovie -> "Start recording movie on ${this.context.displayName}"
         is Message.StopRecordingMovie -> "Stop recording movie on ${this.context.displayName}"
         is Message.FailedRecordingMovie -> "Failed recording movie on ${this.context.displayName}"
-    }
-}
-
-@Composable
-private fun onInitialize(viewModel: ViewModel) {
-    DisposableEffect(viewModel) {
-        viewModel.onStarted()
-        onDispose {
-            viewModel.onCleared()
-        }
     }
 }
