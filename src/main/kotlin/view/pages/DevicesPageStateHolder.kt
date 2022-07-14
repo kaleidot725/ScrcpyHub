@@ -1,4 +1,4 @@
-package viewmodel
+package view.pages
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +16,7 @@ import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyRecordUseCase
 import model.usecase.StopScrcpyUseCase
 
-class DevicesPageViewModel(
+class DevicesPageStateHolder(
     private val startAdbServerUseCase: StartAdbServerUseCase,
     private val fetchDevicesUseCase: FetchDevicesUseCase,
     private val getDevicesFlowUseCase: GetDevicesFlowUseCase,
@@ -26,7 +26,7 @@ class DevicesPageViewModel(
     private val stopScrcpyRecordUseCase: StopScrcpyRecordUseCase,
     private val getScrcpyProcessStatusUseCase: GetScrcpyStatusUseCase,
     private val saveScreenshotToDesktop: SaveScreenshotToDesktopUseCase
-) : ViewModel() {
+) : StateHolder() {
     private val _states: MutableStateFlow<List<DeviceStatus>> = MutableStateFlow(emptyList())
     val states: StateFlow<List<DeviceStatus>> = _states
 

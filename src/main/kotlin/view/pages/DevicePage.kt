@@ -17,28 +17,28 @@ import view.components.organisms.DeviceSetting
 import view.resource.Images
 import view.tab.PageHeader
 import view.templates.HeaderAndContent
-import viewmodel.DevicePageViewModel
+import view.pages.DevicePageStateHolder
 
 @Composable
 fun DevicePage(
     windowScope: WindowScope,
-    deviceViewModel: DevicePageViewModel,
+    stateHolder: DevicePageStateHolder,
     onNavigateDevices: (() -> Unit)? = null
 ) {
-    val titleName: String by deviceViewModel.titleName.collectAsState()
-    val name: String by deviceViewModel.editName.collectAsState()
-    val maxSize: String by deviceViewModel.maxSize.collectAsState()
-    val maxSizeError: String by deviceViewModel.maxSizeError.collectAsState()
-    val savable: Boolean by deviceViewModel.savable.collectAsState()
-    val maxFrameRate: String by deviceViewModel.maxFrameRate.collectAsState()
-    val maxFrameRateError: String by deviceViewModel.maxFrameRateError.collectAsState()
-    val bitrate: String by deviceViewModel.bitrate.collectAsState()
-    val bitrateError: String by deviceViewModel.bitrateError.collectAsState()
+    val titleName: String by stateHolder.titleName.collectAsState()
+    val name: String by stateHolder.editName.collectAsState()
+    val maxSize: String by stateHolder.maxSize.collectAsState()
+    val maxSizeError: String by stateHolder.maxSizeError.collectAsState()
+    val savable: Boolean by stateHolder.savable.collectAsState()
+    val maxFrameRate: String by stateHolder.maxFrameRate.collectAsState()
+    val maxFrameRateError: String by stateHolder.maxFrameRateError.collectAsState()
+    val bitrate: String by stateHolder.bitrate.collectAsState()
+    val bitrateError: String by stateHolder.bitrateError.collectAsState()
 
-    DisposableEffect(deviceViewModel) {
-        deviceViewModel.onStarted()
+    DisposableEffect(stateHolder) {
+        stateHolder.onStarted()
         onDispose {
-            deviceViewModel.onCleared()
+            stateHolder.onCleared()
         }
     }
 
@@ -54,18 +54,18 @@ fun DevicePage(
     }, content = {
         DeviceSetting(
             name = name,
-            onUpdateName = { deviceViewModel.updateName(it) },
+            onUpdateName = { stateHolder.updateName(it) },
             maxSize = maxSize,
-            onUpdateMaxSize = { deviceViewModel.updateMaxSize(it) },
+            onUpdateMaxSize = { stateHolder.updateMaxSize(it) },
             maxSizeError = maxSizeError,
             maxFrameRate = maxFrameRate,
-            onUpdateFrameRate = { deviceViewModel.updateMaxFrameRate(it) },
+            onUpdateFrameRate = { stateHolder.updateMaxFrameRate(it) },
             maxFrameRateError = maxFrameRateError,
             bitrate = bitrate,
-            onUpdateBitrate = { deviceViewModel.updateBitrate(it) },
+            onUpdateBitrate = { stateHolder.updateBitrate(it) },
             bitrateError = bitrateError,
             savable = savable,
-            onSave = { deviceViewModel.save() }
+            onSave = { stateHolder.save() }
         )
     })
 }

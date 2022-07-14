@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.entity.Device
-import viewmodel.DeviceStatus
+import view.pages.DeviceStatus
 
 @Composable
 fun DeviceList(

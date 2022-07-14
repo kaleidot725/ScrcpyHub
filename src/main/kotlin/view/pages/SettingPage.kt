@@ -19,24 +19,24 @@ import view.resource.Images
 import view.resource.Strings
 import view.tab.PageHeader
 import view.templates.HeaderAndContent
-import viewmodel.SettingPageViewModel
+import view.pages.SettingPageStateHolder
 
 @Composable
 fun SettingPage(
     windowScope: WindowScope,
-    settingPageViewModel: SettingPageViewModel,
+    stateHolder: SettingPageStateHolder,
     onNavigateDevices: (() -> Unit)? = null,
     onSaved: (() -> Unit)? = null
 ) {
-    val theme: Theme by settingPageViewModel.theme.collectAsState()
-    val themes: List<Theme> by settingPageViewModel.themes.collectAsState()
-    val adbLocation: String by settingPageViewModel.adbLocation.collectAsState()
-    val scrcpyLocation: String by settingPageViewModel.scrcpyLocation.collectAsState()
+    val theme: Theme by stateHolder.theme.collectAsState()
+    val themes: List<Theme> by stateHolder.themes.collectAsState()
+    val adbLocation: String by stateHolder.adbLocation.collectAsState()
+    val scrcpyLocation: String by stateHolder.scrcpyLocation.collectAsState()
 
-    DisposableEffect(settingPageViewModel) {
-        settingPageViewModel.onStarted()
+    DisposableEffect(stateHolder) {
+        stateHolder.onStarted()
         onDispose {
-            settingPageViewModel.onCleared()
+            stateHolder.onCleared()
         }
     }
 
@@ -62,12 +62,12 @@ fun SettingPage(
             AppSetting(
                 theme = theme,
                 themes = themes,
-                onUpdateTheme = { settingPageViewModel.updateTheme(it) },
+                onUpdateTheme = { stateHolder.updateTheme(it) },
                 adbLocation = adbLocation,
-                onUpdateAdbLocation = { settingPageViewModel.updateAdbLocation(it) },
+                onUpdateAdbLocation = { stateHolder.updateAdbLocation(it) },
                 scrcpyLocation = scrcpyLocation,
-                onUpdateScrcpyLocation = { settingPageViewModel.updateScrcpyLocation(it) },
-                onSave = { settingPageViewModel.save { onSaved?.invoke() } }
+                onUpdateScrcpyLocation = { stateHolder.updateScrcpyLocation(it) },
+                onSave = { stateHolder.save { onSaved?.invoke() } }
             )
         }
     )

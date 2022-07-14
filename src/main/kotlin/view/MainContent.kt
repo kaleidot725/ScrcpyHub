@@ -43,56 +43,33 @@ import view.page.SettingPage
 import view.pages.DevicesPage
 import view.resource.Colors
 import view.resource.Images
-import viewmodel.DevicePageViewModel
-import viewmodel.DevicesPageViewModel
-import viewmodel.MainContentViewModel
-import viewmodel.SettingPageViewModel
-import viewmodel.ViewModel
+import view.pages.DevicePageStateHolder
+import view.pages.DevicesPageStateHolder
+import view.pages.SettingPageStateHolder
+
+
 
 @Composable
-fun AppWindow(
-    onCloseRequest: () -> Unit,
-    state: WindowState,
-    alwaysOnTop: Boolean,
-    content: @Composable FrameWindowScope.() -> Unit
-) {
-    Window(
-        onCloseRequest = onCloseRequest,
-        state = state,
-        resizable = false,
-        undecorated = true,
-        transparent = true,
-        alwaysOnTop = alwaysOnTop,
-        icon = painterResource(Images.DEVICE),
-    ) {
-        Card(
-            shape = RoundedCornerShape(8.dp),
-            border = BorderStroke(1.dp, Colors.window_border)
-        ) { content.invoke(this) }
-    }
-}
-
-@Composable
-fun MainContent(windowScope: WindowScope, mainContentViewModel: MainContentViewModel) {
-    DisposableEffect(mainContentViewModel) {
-        mainContentViewModel.onStarted()
+fun MainContent(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
+    DisposableEffect(mainStateHolder) {
+        mainStateHolder.onStarted()
         onDispose {
-            mainContentViewModel.onCleared()
+            mainStateHolder.onCleared()
         }
     }
 
-    val isDarkMode: Boolean? by mainContentViewModel.isDarkMode.collectAsState(null)
+    val isDarkMode: Boolean? by mainStateHolder.isDarkMode.collectAsState(null)
     MainTheme(isDarkMode = isDarkMode ?: true) {
         Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background)) {
-            MainPages(windowScope, mainContentViewModel)
-            MainSnacks(mainContentViewModel)
+            MainPages(windowScope, mainStateHolder)
+            MainSnacks(mainStateHolder)
         }
     }
 }
 
 @Composable
-private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewModel) {
-    val navState: NavState by mainViewModel.navState.collectAsState()
+private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
+    val navState: NavState by mainStateHolder.navState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         when (val page = navState) {
@@ -100,40 +77,40 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
                 LoadingPage()
             }
             NavState.DevicesPage -> {
-                val devicesPageViewModel by remember {
-                    val viewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
-                    mutableStateOf(viewModel)
+                val stateHolder by remember {
+                    val stateHolder by inject<DevicesPageStateHolder>(clazz = DevicesPageStateHolder::class.java)
+                    mutableStateOf(stateHolder)
                 }
                 DevicesPage(
                     windowScope = windowScope,
-                    devicesPageViewModel = devicesPageViewModel,
-                    onNavigateSetting = { mainViewModel.selectPage(NavState.SettingPage) },
-                    onNavigateDevice = { mainViewModel.selectPage(NavState.DevicePage(it)) }
+                    stateHolder = stateHolder,
+                    onNavigateSetting = { mainStateHolder.selectPage(NavState.SettingPage) },
+                    onNavigateDevice = { mainStateHolder.selectPage(NavState.DevicePage(it)) }
                 )
             }
             NavState.SettingPage -> {
-                val settingPageViewModel by remember {
-                    val viewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
+                val stateHolder by remember {
+                    val viewModel by inject<SettingPageStateHolder>(clazz = SettingPageStateHolder::class.java)
                     mutableStateOf(viewModel)
                 }
                 SettingPage(
                     windowScope = windowScope,
-                    settingPageViewModel = settingPageViewModel,
-                    onNavigateDevices = { mainViewModel.selectPage(NavState.DevicesPage) },
-                    onSaved = { mainViewModel.refreshSetting() }
+                    stateHolder = stateHolder,
+                    onNavigateDevices = { mainStateHolder.selectPage(NavState.DevicesPage) },
+                    onSaved = { mainStateHolder.refreshSetting() }
                 )
             }
             is NavState.DevicePage -> {
                 val devicePageViewModel by remember {
-                    val viewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
+                    val stateHolder by inject<DevicePageStateHolder>(clazz = DevicePageStateHolder::class.java) {
                         parametersOf(page.context)
                     }
-                    mutableStateOf(viewModel)
+                    mutableStateOf(stateHolder)
                 }
                 DevicePage(
                     windowScope = windowScope,
-                    deviceViewModel = devicePageViewModel,
-                    onNavigateDevices = { mainViewModel.selectPage(NavState.DevicesPage) }
+                    stateHolder = devicePageViewModel,
+                    onNavigateDevices = { mainStateHolder.selectPage(NavState.DevicesPage) }
                 )
             }
         }
@@ -141,7 +118,7 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
 }
 
 @Composable
-private fun MainSnacks(viewModel: MainContentViewModel) {
+private fun MainSnacks(viewModel: MainContentStateHolder) {
     val errorMessage: String? by viewModel.errorMessage.collectAsState()
     val notifyMessage: Message by viewModel.notifyMessage.collectAsState()
 

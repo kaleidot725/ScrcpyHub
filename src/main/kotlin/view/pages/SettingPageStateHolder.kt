@@ -1,4 +1,4 @@
-package viewmodel
+package view.pages
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -8,10 +8,10 @@ import model.entity.Theme
 import model.usecase.FetchSettingUseCase
 import model.usecase.UpdateSettingUseCase
 
-class SettingPageViewModel(
+class SettingPageStateHolder(
     private val fetchSettingUseCase: FetchSettingUseCase,
     private val updateSettingUseCase: UpdateSettingUseCase
-) : ViewModel() {
+) : StateHolder() {
     private val _adbLocation: MutableStateFlow<String> = MutableStateFlow("")
     val adbLocation: StateFlow<String> = _adbLocation
 
@@ -48,7 +48,7 @@ class SettingPageViewModel(
             updateSettingUseCase.execute(
                 Setting(
                     adbLocation = _adbLocation.value,
-                    theme = _theme.value ?: Theme.SYNC_WITH_OS,
+                    theme = _theme.value,
                     scrcpyLocation = _scrcpyLocation.value
                 )
             )

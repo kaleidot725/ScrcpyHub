@@ -1,4 +1,4 @@
-package viewmodel
+package view.pages
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -6,10 +6,10 @@ import kotlinx.coroutines.launch
 import model.entity.Device
 import model.usecase.UpdateDeviceSetting
 
-class DevicePageViewModel(
+class DevicePageStateHolder(
     private val context: Device.Context,
     private val updateDeviceSetting: UpdateDeviceSetting
-) : ViewModel() {
+) : StateHolder() {
     private val _titleName: MutableStateFlow<String> = MutableStateFlow(context.displayName)
     val titleName: StateFlow<String> = _titleName
 
