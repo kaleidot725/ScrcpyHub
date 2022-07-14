@@ -2,9 +2,6 @@ package model.command
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import model.command.creator.KillCommandCreatorForLinux
-import model.command.creator.KillCommandCreatorForMacOS
-import model.command.creator.KillCommandCreatorForWindows
 
 class KillCommandCreatorTest : StringSpec(
     {
