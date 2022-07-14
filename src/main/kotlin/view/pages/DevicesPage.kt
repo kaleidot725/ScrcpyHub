@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -34,6 +35,13 @@ fun DevicesPage(
     onNavigateDevice: ((Device.Context) -> Unit)? = null
 ) {
     val deviceStatusList: List<DeviceStatus> by devicesPageViewModel.states.collectAsState()
+
+    DisposableEffect(devicesPageViewModel) {
+        devicesPageViewModel.onStarted()
+        onDispose {
+            devicesPageViewModel.onCleared()
+        }
+    }
 
     HeaderAndContent(header = {
         PageHeader(windowScope = windowScope, title = Strings.APP_NAME, optionContent = {

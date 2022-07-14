@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -31,6 +32,13 @@ fun SettingPage(
     val themes: List<Theme> by settingPageViewModel.themes.collectAsState()
     val adbLocation: String by settingPageViewModel.adbLocation.collectAsState()
     val scrcpyLocation: String by settingPageViewModel.scrcpyLocation.collectAsState()
+
+    DisposableEffect(settingPageViewModel) {
+        settingPageViewModel.onStarted()
+        onDispose {
+            settingPageViewModel.onCleared()
+        }
+    }
 
     HeaderAndContent(
         header = {
