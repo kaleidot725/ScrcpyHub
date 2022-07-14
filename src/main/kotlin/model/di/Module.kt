@@ -8,8 +8,7 @@ import model.command.creator.KillCommandCreatorForMacOS
 import model.command.creator.KillCommandCreatorForWindows
 import model.command.creator.ScrcpyCommandCreator
 import model.entity.Device
-import model.os.OSContext
-import model.os.OSType
+import model.os.*
 import model.os.factory.OSContextFactory
 import model.repository.DeviceRepository
 import model.repository.MessageRepository
@@ -42,7 +41,11 @@ val appModule = module {
     }
 
     factory {
-        OSContextFactory.create()
+        when (getOSType()) {
+            OSType.MAC_OS -> OSContextForMac()
+            OSType.LINUX -> OSContextForLinux()
+            OSType.WINDOWS -> OSContextForWindows()
+        }
     }
 
     factory {
