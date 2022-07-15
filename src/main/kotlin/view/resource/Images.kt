@@ -1,7 +1,7 @@
 package view.resource
 
 object Images {
-    const val TRAY = "tray.png"
+    const val TRAY = "tray.svg"
     const val DOTS = "dots.svg"
     const val DEVICE = "device.svg"
     const val SETTING = "setting.svg"
