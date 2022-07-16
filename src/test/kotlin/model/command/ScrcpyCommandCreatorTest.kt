@@ -2,7 +2,6 @@ package model.command
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import model.command.creator.ScrcpyCommandCreator
 import model.entity.Device
 
 class ScrcpyCommandCreatorTest : StringSpec({

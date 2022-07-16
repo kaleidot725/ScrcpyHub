@@ -1,7 +1,7 @@
 package model.usecase
 
 import model.command.AdbCommand
-import model.command.creator.AdbCommandCreator
+import model.command.AdbCommandCreator
 import model.repository.SettingRepository
 
 class StartAdbServerUseCase(private val settingRepository: SettingRepository) {
