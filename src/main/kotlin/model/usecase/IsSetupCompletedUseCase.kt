@@ -1,8 +1,8 @@
 package model.usecase
 
 import model.command.AdbCommand
-import model.command.ScrcpyCommand
 import model.command.AdbCommandCreator
+import model.command.ScrcpyCommand
 import model.command.ScrcpyCommandCreator
 import model.repository.SettingRepository
 
