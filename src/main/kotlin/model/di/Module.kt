@@ -2,15 +2,18 @@ package model.di
 
 import kotlinx.coroutines.runBlocking
 import model.command.KillCommand
+import model.command.KillCommandCreatorForLinux
+import model.command.KillCommandCreatorForMacOS
+import model.command.KillCommandCreatorForWindows
 import model.command.ScrcpyCommand
-import model.command.creator.KillCommandCreatorForLinux
-import model.command.creator.KillCommandCreatorForMacOS
-import model.command.creator.KillCommandCreatorForWindows
-import model.command.creator.ScrcpyCommandCreator
+import model.command.ScrcpyCommandCreator
 import model.entity.Device
 import model.os.OSContext
+import model.os.OSContextForLinux
+import model.os.OSContextForMac
+import model.os.OSContextForWindows
 import model.os.OSType
-import model.os.factory.OSContextFactory
+import model.os.getOSType
 import model.repository.DeviceRepository
 import model.repository.MessageRepository
 import model.repository.ProcessRepository
@@ -31,10 +34,10 @@ import model.usecase.StopScrcpyUseCase
 import model.usecase.UpdateDeviceSetting
 import model.usecase.UpdateSettingUseCase
 import org.koin.dsl.module
-import viewmodel.DevicePageViewModel
-import viewmodel.DevicesPageViewModel
-import viewmodel.MainContentViewModel
-import viewmodel.SettingPageViewModel
+import view.MainContentStateHolder
+import view.pages.DevicesPageStateHolder
+import view.pages.device.DevicePageStateHolder
+import view.pages.setting.SettingPageStateHolder
 
 val appModule = module {
     single {
@@ -42,7 +45,11 @@ val appModule = module {
     }
 
     factory {
-        OSContextFactory.create()
+        when (getOSType()) {
+            OSType.MAC_OS -> OSContextForMac()
+            OSType.LINUX -> OSContextForLinux()
+            OSType.WINDOWS -> OSContextForWindows()
+        }
     }
 
     factory {
@@ -133,18 +140,18 @@ val appModule = module {
     }
 
     factory {
-        DevicesPageViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get())
+        DevicesPageStateHolder(get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
 
     factory { (context: Device.Context) ->
-        DevicePageViewModel(context, get())
+        DevicePageStateHolder(context, get())
     }
 
     factory {
-        MainContentViewModel(get(), get(), get(), get())
+        MainContentStateHolder(get(), get(), get(), get())
     }
 
     factory {
-        SettingPageViewModel(get(), get())
+        SettingPageStateHolder(get(), get())
     }
 }

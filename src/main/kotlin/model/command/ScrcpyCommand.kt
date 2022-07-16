@@ -1,6 +1,5 @@
 package model.command
 
-import model.command.creator.ScrcpyCommandCreator
 import model.entity.Device
 import java.io.File
 

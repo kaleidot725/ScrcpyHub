@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Snackbar
 import androidx.compose.material.Text
@@ -26,108 +24,82 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.FrameWindowScope
-import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowScope
-import androidx.compose.ui.window.WindowState
 import model.entity.Message
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
-import resource.Images
-import view.components.pages.DevicesPage
-import view.components.pages.Page
-import view.page.DevicePage
-import view.page.SettingPage
-import viewmodel.DevicePageViewModel
-import viewmodel.DevicesPageViewModel
-import viewmodel.MainContentViewModel
-import viewmodel.SettingPageViewModel
-import viewmodel.ViewModel
+import view.navigation.Navigation
+import view.pages.DevicesPage
+import view.pages.DevicesPageStateHolder
+import view.pages.device.DevicePage
+import view.pages.device.DevicePageStateHolder
+import view.pages.setting.SettingPage
+import view.pages.setting.SettingPageStateHolder
 
 @Composable
-fun AppWindow(onCloseRequest: () -> Unit, state: WindowState, content: @Composable FrameWindowScope.() -> Unit) {
-    Window(
-        onCloseRequest = onCloseRequest,
-        state = state,
-        resizable = false,
-        undecorated = true,
-        transparent = true,
-        icon = painterResource(Images.DEVICE),
-    ) {
-        Card(shape = RoundedCornerShape(8.dp)) { content.invoke(this) }
+fun MainContent(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
+    DisposableEffect(mainStateHolder) {
+        mainStateHolder.onStarted()
+        onDispose {
+            mainStateHolder.onCleared()
+        }
     }
-}
 
-@Composable
-fun MainContent(windowScope: WindowScope, mainContentViewModel: MainContentViewModel) {
-    onInitialize(mainContentViewModel)
-    onDrawWindow(windowScope, mainContentViewModel)
-}
-
-@Composable
-private fun onDrawWindow(windowScope: WindowScope, viewModel: MainContentViewModel) {
-    val isDarkMode: Boolean? by viewModel.isDarkMode.collectAsState(null)
+    val isDarkMode: Boolean? by mainStateHolder.isDarkMode.collectAsState(null)
     MainTheme(isDarkMode = isDarkMode ?: true) {
         Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background)) {
-            MainPages(windowScope, viewModel)
-            MainSnacks(viewModel)
+            MainPages(windowScope, mainStateHolder)
+            MainSnacks(mainStateHolder)
         }
     }
 }
 
 @Composable
-private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewModel) {
-    val selectedPages: Page by mainViewModel.selectedPages.collectAsState()
+private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
+    val navigation: Navigation by mainStateHolder.navState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        when (val page = selectedPages) {
-            Page.LoadingPage -> {
+        when (val page = navigation) {
+            Navigation.LoadingPage -> {
                 LoadingPage()
             }
-            Page.DevicesPage -> {
-                val devicesPageViewModel by remember {
-                    val viewModel by inject<DevicesPageViewModel>(clazz = DevicesPageViewModel::class.java)
-                    mutableStateOf(viewModel)
+            Navigation.DevicesPage -> {
+                val stateHolder by remember {
+                    val stateHolder by inject<DevicesPageStateHolder>(clazz = DevicesPageStateHolder::class.java)
+                    mutableStateOf(stateHolder)
                 }
-                onInitialize(devicesPageViewModel)
-
                 DevicesPage(
                     windowScope = windowScope,
-                    devicesPageViewModel = devicesPageViewModel,
-                    onNavigateSetting = { mainViewModel.selectPage(Page.SettingPage) },
-                    onNavigateDevice = { mainViewModel.selectPage(Page.DevicePage(it)) }
+                    stateHolder = stateHolder,
+                    onNavigateSetting = { mainStateHolder.selectPage(Navigation.SettingPage) },
+                    onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
                 )
             }
-            Page.SettingPage -> {
-                val settingPageViewModel by remember {
-                    val viewModel by inject<SettingPageViewModel>(clazz = SettingPageViewModel::class.java)
+            Navigation.SettingPage -> {
+                val stateHolder by remember {
+                    val viewModel by inject<SettingPageStateHolder>(clazz = SettingPageStateHolder::class.java)
                     mutableStateOf(viewModel)
                 }
-                onInitialize(settingPageViewModel)
-
                 SettingPage(
                     windowScope = windowScope,
-                    settingPageViewModel = settingPageViewModel,
-                    onNavigateDevices = { mainViewModel.selectPage(Page.DevicesPage) },
-                    onSaved = { mainViewModel.refreshSetting() }
+                    stateHolder = stateHolder,
+                    onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) },
+                    onSaved = { mainStateHolder.refreshSetting() }
                 )
             }
-            is Page.DevicePage -> {
+            is Navigation.DevicePage -> {
                 val devicePageViewModel by remember {
-                    val viewModel by inject<DevicePageViewModel>(clazz = DevicePageViewModel::class.java) {
+                    val stateHolder by inject<DevicePageStateHolder>(clazz = DevicePageStateHolder::class.java) {
                         parametersOf(page.context)
                     }
-                    mutableStateOf(viewModel)
+                    mutableStateOf(stateHolder)
                 }
-                onInitialize(devicePageViewModel)
-
                 DevicePage(
                     windowScope = windowScope,
-                    deviceViewModel = devicePageViewModel,
-                    onNavigateDevices = { mainViewModel.selectPage(Page.DevicesPage) }
+                    stateHolder = devicePageViewModel,
+                    onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) }
                 )
             }
         }
@@ -135,7 +107,7 @@ private fun MainPages(windowScope: WindowScope, mainViewModel: MainContentViewMo
 }
 
 @Composable
-private fun MainSnacks(viewModel: MainContentViewModel) {
+private fun MainSnacks(viewModel: MainContentStateHolder) {
     val errorMessage: String? by viewModel.errorMessage.collectAsState()
     val notifyMessage: Message by viewModel.notifyMessage.collectAsState()
 
@@ -180,15 +152,5 @@ private fun Message.toStringMessage(): String {
         is Message.StartRecordingMovie -> "Start recording movie on ${this.context.displayName}"
         is Message.StopRecordingMovie -> "Stop recording movie on ${this.context.displayName}"
         is Message.FailedRecordingMovie -> "Failed recording movie on ${this.context.displayName}"
-    }
-}
-
-@Composable
-private fun onInitialize(viewModel: ViewModel) {
-    DisposableEffect(viewModel) {
-        viewModel.onStarted()
-        onDispose {
-            viewModel.onCleared()
-        }
     }
 }
