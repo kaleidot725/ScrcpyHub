@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import model.entity.Setting
 import model.entity.Message
+import model.entity.Setting
 import model.entity.Theme
 import model.usecase.FetchSettingUseCase
 import model.usecase.GetMessageFlowUseCase

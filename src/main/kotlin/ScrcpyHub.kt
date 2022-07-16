@@ -1,4 +1,7 @@
-import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Tray
@@ -9,11 +12,11 @@ import model.di.appModule
 import org.koin.core.context.GlobalContext
 import org.koin.core.context.GlobalContext.getOrNull
 import org.koin.core.context.GlobalContext.startKoin
-import view.MainWindow
 import view.MainContent
+import view.MainContentStateHolder
+import view.MainWindow
 import view.resource.Images
 import view.resource.Strings
-import view.MainContentStateHolder
 
 fun main() = application {
     if (getOrNull() == null) {
@@ -49,7 +52,8 @@ fun main() = application {
                 Strings.QUIT,
                 onClick = { exitApplication() }
             )
-        })
+        }
+    )
 
     if (isOpen) {
         MainWindow(

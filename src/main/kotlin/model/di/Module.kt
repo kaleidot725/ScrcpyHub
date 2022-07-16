@@ -2,13 +2,18 @@ package model.di
 
 import kotlinx.coroutines.runBlocking
 import model.command.KillCommand
-import model.command.ScrcpyCommand
 import model.command.KillCommandCreatorForLinux
 import model.command.KillCommandCreatorForMacOS
 import model.command.KillCommandCreatorForWindows
+import model.command.ScrcpyCommand
 import model.command.ScrcpyCommandCreator
 import model.entity.Device
-import model.os.*
+import model.os.OSContext
+import model.os.OSContextForLinux
+import model.os.OSContextForMac
+import model.os.OSContextForWindows
+import model.os.OSType
+import model.os.getOSType
 import model.repository.DeviceRepository
 import model.repository.MessageRepository
 import model.repository.ProcessRepository
@@ -29,9 +34,9 @@ import model.usecase.StopScrcpyUseCase
 import model.usecase.UpdateDeviceSetting
 import model.usecase.UpdateSettingUseCase
 import org.koin.dsl.module
-import view.pages.device.DevicePageStateHolder
-import view.pages.DevicesPageStateHolder
 import view.MainContentStateHolder
+import view.pages.DevicesPageStateHolder
+import view.pages.device.DevicePageStateHolder
 import view.pages.setting.SettingPageStateHolder
 
 val appModule = module {

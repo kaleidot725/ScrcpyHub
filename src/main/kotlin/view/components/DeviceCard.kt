@@ -20,9 +20,9 @@ import model.repository.ProcessStatus
 import view.MainTheme
 import view.components.atoms.SmallIcon
 import view.components.molecules.TitleAndActionButton
+import view.pages.DeviceStatus
 import view.resource.Images
 import view.resource.Strings
-import view.pages.DeviceStatus
 
 @Composable
 fun DeviceCard(

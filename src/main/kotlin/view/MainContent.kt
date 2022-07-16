@@ -31,14 +31,12 @@ import model.entity.Message
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
 import view.navigation.Navigation
-import view.pages.device.DevicePage
-import view.pages.setting.SettingPage
 import view.pages.DevicesPage
-import view.pages.device.DevicePageStateHolder
 import view.pages.DevicesPageStateHolder
+import view.pages.device.DevicePage
+import view.pages.device.DevicePageStateHolder
+import view.pages.setting.SettingPage
 import view.pages.setting.SettingPageStateHolder
-
-
 
 @Composable
 fun MainContent(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
