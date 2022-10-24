@@ -11,6 +11,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import view.resource.Colors
 import view.resource.Images
+import view.resource.Strings
 
 @Composable
 fun MainWindow(
@@ -22,6 +23,7 @@ fun MainWindow(
     Window(
         onCloseRequest = onCloseRequest,
         state = state,
+        title = Strings.APP_NAME,
         resizable = false,
         undecorated = true,
         transparent = true,
