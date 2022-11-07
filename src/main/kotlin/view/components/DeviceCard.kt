@@ -1,4 +1,4 @@
-package view.components.organisms
+package view.components
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
@@ -17,10 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.entity.Device
 import model.repository.ProcessStatus
-import view.MainTheme
-import view.components.atoms.SmallIcon
-import view.components.molecules.TitleAndActionButton
-import view.pages.DeviceStatus
+import view.resource.MainTheme
+import view.parts.SmallIcon
+import view.parts.TitleAndActionButton
+import view.pages.devices.DeviceStatus
 import view.resource.Images
 import view.resource.Strings
 

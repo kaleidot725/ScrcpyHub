@@ -1,4 +1,4 @@
-package view.components.organisms
+package view.components
 
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.entity.Device
-import view.pages.DeviceStatus
+import view.pages.devices.DeviceStatus
 
 @Composable
 fun DeviceList(

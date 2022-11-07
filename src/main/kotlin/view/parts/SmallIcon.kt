@@ -1,4 +1,4 @@
-package view.components.atoms
+package view.parts
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

@@ -1,4 +1,4 @@
-package view.tab
+package view.parts
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

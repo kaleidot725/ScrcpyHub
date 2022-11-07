@@ -14,10 +14,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Theme
-import view.components.organisms.AppSetting
+import view.components.AppSetting
 import view.resource.Images
 import view.resource.Strings
-import view.tab.PageHeader
+import view.parts.PageHeader
 import view.templates.HeaderAndContent
 
 @Composable

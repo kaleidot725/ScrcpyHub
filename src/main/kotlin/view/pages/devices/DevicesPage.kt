@@ -1,4 +1,4 @@
-package view.pages
+package view.pages.devices
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -17,12 +17,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Device
-import view.components.organisms.DeviceList
+import view.components.DeviceList
 import view.parts.Texts
 import view.resource.Images
 import view.resource.Strings
 import view.resource.Strings.DEVICES_PAGE_NOT_FOUND_DEVICES
-import view.tab.PageHeader
+import view.parts.PageHeader
 import view.templates.HeaderAndContent
 
 @Composable

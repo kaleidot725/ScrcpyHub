@@ -1,4 +1,4 @@
-package view.pages
+package view.pages.devices
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
