@@ -1,4 +1,4 @@
-package view.components.molecules
+package view.parts
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import view.parts.Texts
 
 @Composable
 fun TitleAndActionButton(
