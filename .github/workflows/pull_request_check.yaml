@@ -5,6 +5,7 @@ on:
 
 jobs:
   check:
+    if: github.repository == 'kaleidot725/ScrcpyHub'
     name: Check pull request
     runs-on: ubuntu-latest
     steps:
