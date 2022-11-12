@@ -1,4 +1,4 @@
-package view
+package view.resource
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors

@@ -1,4 +1,4 @@
-package view.components.organisms
+package view.components
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.VerticalScrollbar
@@ -19,8 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.entity.Theme
-import view.components.molecules.TitleAndRadioButtons
-import view.components.molecules.TitlesAndTextField
+import view.parts.TitleAndRadioButtons
+import view.parts.TitlesAndTextField
 import view.parts.Texts
 import view.resource.Strings
 

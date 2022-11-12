@@ -8,11 +8,11 @@ https://user-images.githubusercontent.com/23740796/179343198-634e852a-602a-4466-
 
 # ✨ Feature
 
-- Support Windows10/11, Linux, macOS. 🖥️
+- Support for Windows 10/11, Linux and macOS. 🖥️
 
-- Support light theme and dark theme. 🖼️
+- Support light theme and dark themes. 🖼️
 
-- Control mirroing (Start / Stop). 🪞
+- Control mirroring (Start / Stop). 🪞
 
 - Mirror multi android devices. 📱
 
@@ -20,7 +20,7 @@ https://user-images.githubusercontent.com/23740796/179343198-634e852a-602a-4466-
 
 - Record movies. 🎥
 
-- Support tary menu. 📥
+- Support tray menu. 📥
   - Display and hide window.
   - Enable always on top.
 

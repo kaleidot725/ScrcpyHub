@@ -35,7 +35,7 @@ import model.usecase.UpdateDeviceSetting
 import model.usecase.UpdateSettingUseCase
 import org.koin.dsl.module
 import view.MainContentStateHolder
-import view.pages.DevicesPageStateHolder
+import view.pages.devices.DevicesPageStateHolder
 import view.pages.device.DevicePageStateHolder
 import view.pages.setting.SettingPageStateHolder
 
