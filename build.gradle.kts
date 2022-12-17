@@ -1,4 +1,3 @@
-import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 group = "jp.kaleidot725"
@@ -20,6 +19,7 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("com.lordcodes.turtle:turtle:0.8.0")
     implementation("io.insert-koin:koin-core:3.2.2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
