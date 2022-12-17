@@ -54,15 +54,17 @@ fun DevicesPage(
             )
         })
     }, content = {
-        Crossfade(state) {
-            when (val state = state) {
-                DevicesPageState.Loading -> {
+        when (val state = state) {
+            DevicesPageState.Loading -> {
+                Crossfade(Unit) {
                     Box(modifier = Modifier.fillMaxSize()) {
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                     }
                 }
+            }
 
-                DevicesPageState.Error -> {
+            DevicesPageState.Error -> {
+                Crossfade(Unit) {
                     Box(modifier = Modifier.fillMaxSize()) {
                         Texts.Subtitle1(
                             DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
@@ -70,25 +72,26 @@ fun DevicesPage(
                         )
                     }
                 }
+            }
 
-                is DevicesPageState.DeviceExist -> {
-                    DeviceList(
-                        deviceStatusList = state.devices,
-                        startScrcpy = { stateHolder.startScrcpy(it) },
-                        stopScrcpy = { stateHolder.stopScrcpy(it) },
-                        goToDetail = { onNavigateDevice?.invoke(it) },
-                        takeScreenshot = { stateHolder.saveScreenshotToDesktop(it) },
-                        startRecording = { stateHolder.startScrcpyRecord(it) },
-                        stopRecording = { stateHolder.stopScrcpyRecord(it) },
-                    )
-                }
+            is DevicesPageState.DeviceExist -> {
+                DeviceList(
+                    deviceStatusList = state.devices,
+                    startScrcpy = { stateHolder.startScrcpy(it) },
+                    stopScrcpy = { stateHolder.stopScrcpy(it) },
+                    goToDetail = { onNavigateDevice?.invoke(it) },
+                    takeScreenshot = { stateHolder.saveScreenshotToDesktop(it) },
+                    startRecording = { stateHolder.startScrcpyRecord(it) },
+                    stopRecording = { stateHolder.stopScrcpyRecord(it) },
+                )
+            }
 
-                DevicesPageState.DeviceIsEmpty -> {
+            DevicesPageState.DeviceIsEmpty -> {
+                Crossfade(Unit) {
                     Box(modifier = Modifier.fillMaxSize()) {
                         Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
                     }
                 }
-
             }
         }
     })
