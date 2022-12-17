@@ -23,7 +23,6 @@ enum class ProcessStatus {
 }
 
 class ProcessRepository(
-    val scrcpyCommand: ScrcpyCommand,
     val killCommand: KillCommand
 ) {
     private val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main + Dispatchers.IO)
