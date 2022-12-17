@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Theme
 import view.components.AppSetting
+import view.parts.PageHeader
 import view.resource.Images
 import view.resource.Strings
-import view.parts.PageHeader
 import view.templates.HeaderAndContent
 
 @Composable
