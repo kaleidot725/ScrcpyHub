@@ -44,55 +44,58 @@ fun DevicesPage(
         }
     }
 
-    HeaderAndContent(header = {
-        PageHeader(windowScope = windowScope, title = Strings.APP_NAME, optionContent = {
-            Image(
-                painter = painterResource(Images.SETTING),
-                contentDescription = "",
-                contentScale = ContentScale.FillHeight,
-                modifier = Modifier.height(18.dp).width(24.dp).clickable { onNavigateSetting?.invoke() }
-            )
-        })
-    }, content = {
-        when (val state = state) {
-            DevicesPageState.Loading -> {
-                Crossfade(Unit) {
-                    Box(modifier = Modifier.fillMaxSize()) {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                    }
-                }
-            }
-
-            DevicesPageState.Error -> {
-                Crossfade(Unit) {
-                    Box(modifier = Modifier.fillMaxSize()) {
-                        Texts.Subtitle1(
-                            DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                    }
-                }
-            }
-
-            is DevicesPageState.DeviceExist -> {
-                DeviceList(
-                    deviceStatusList = state.devices,
-                    startScrcpy = { stateHolder.startScrcpy(it) },
-                    stopScrcpy = { stateHolder.stopScrcpy(it) },
-                    goToDetail = { onNavigateDevice?.invoke(it) },
-                    takeScreenshot = { stateHolder.saveScreenshotToDesktop(it) },
-                    startRecording = { stateHolder.startScrcpyRecord(it) },
-                    stopRecording = { stateHolder.stopScrcpyRecord(it) },
+    HeaderAndContent(
+        header = {
+            PageHeader(windowScope = windowScope, title = Strings.APP_NAME, optionContent = {
+                Image(
+                    painter = painterResource(Images.SETTING),
+                    contentDescription = "",
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier.height(18.dp).width(24.dp).clickable { onNavigateSetting?.invoke() }
                 )
-            }
+            })
+        },
+        content = {
+            when (val state = state) {
+                DevicesPageState.Loading -> {
+                    Crossfade(Unit) {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                        }
+                    }
+                }
 
-            DevicesPageState.DeviceIsEmpty -> {
-                Crossfade(Unit) {
-                    Box(modifier = Modifier.fillMaxSize()) {
-                        Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
+                DevicesPageState.Error -> {
+                    Crossfade(Unit) {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            Texts.Subtitle1(
+                                DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
+                    }
+                }
+
+                is DevicesPageState.DeviceExist -> {
+                    DeviceList(
+                        deviceStatusList = state.devices,
+                        startScrcpy = { stateHolder.startScrcpy(it) },
+                        stopScrcpy = { stateHolder.stopScrcpy(it) },
+                        goToDetail = { onNavigateDevice?.invoke(it) },
+                        takeScreenshot = { stateHolder.saveScreenshotToDesktop(it) },
+                        startRecording = { stateHolder.startScrcpyRecord(it) },
+                        stopRecording = { stateHolder.stopScrcpyRecord(it) },
+                    )
+                }
+
+                DevicesPageState.DeviceIsEmpty -> {
+                    Crossfade(Unit) {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
+                        }
                     }
                 }
             }
         }
-    })
+    )
 }

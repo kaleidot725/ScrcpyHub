@@ -84,7 +84,7 @@ class MainContentStateHolder(
             updateError()
         }
     }
-    
+
     private fun updateError() {
         coroutineScope.launch {
             _errorMessage.value = when (isSetupCompletedUseCase.execute()) {
