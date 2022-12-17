@@ -35,7 +35,6 @@ import view.pages.device.DevicePage
 import view.pages.device.DevicePageStateHolder
 import view.pages.devices.DevicesPage
 import view.pages.devices.DevicesPageStateHolder
-import view.pages.loading.LoadingPage
 import view.pages.setting.SettingPage
 import view.pages.setting.SettingPageStateHolder
 import view.resource.MainTheme
@@ -61,12 +60,8 @@ fun MainContent(windowScope: WindowScope, mainStateHolder: MainContentStateHolde
 @Composable
 private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
     val navigation: Navigation by mainStateHolder.navState.collectAsState()
-
     Box(modifier = Modifier.fillMaxSize()) {
         when (val page = navigation) {
-            Navigation.LoadingPage -> {
-                LoadingPage()
-            }
             Navigation.DevicesPage -> {
                 val stateHolder by remember {
                     val stateHolder by inject<DevicesPageStateHolder>(clazz = DevicesPageStateHolder::class.java)
@@ -79,6 +74,7 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
                     onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
                 )
             }
+
             Navigation.SettingPage -> {
                 val stateHolder by remember {
                     val viewModel by inject<SettingPageStateHolder>(clazz = SettingPageStateHolder::class.java)
@@ -91,6 +87,7 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
                     onSaved = { mainStateHolder.refreshSetting() }
                 )
             }
+
             is Navigation.DevicePage -> {
                 val devicePageViewModel by remember {
                     val stateHolder by inject<DevicePageStateHolder>(clazz = DevicePageStateHolder::class.java) {

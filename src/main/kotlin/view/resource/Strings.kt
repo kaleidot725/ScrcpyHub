@@ -11,16 +11,16 @@ object Strings {
     const val TRAY_ENABLE_ALWAYS_TOP = "Enable Always on Top"
 
     // Error
-    const val NOT_FOUND_ADB_COMMAND = "Not found ADB Command"
-    const val NOT_FOUND_SCRCPY_COMMAND = "Not found Scrcpy Command"
+    const val NOT_FOUND_ADB_COMMAND = "Not found ADB binary"
+    const val NOT_FOUND_SCRCPY_COMMAND = "Not found Scrcpy binary"
 
     // DEVICES PAGE
     const val DEVICES_PAGE_START = "Start"
     const val DEVICES_PAGE_STOP = "Stop"
     const val DEVICES_PAGE_RECORDING = "REC"
     const val DEVICES_PAGE_NOT_FOUND_DEVICES = "Not found devices"
-    const val DEVICES_DROP_DOWN_PREFERENCE_MENU_TITLE = "Preferences"
-    const val DEVICES_DROP_DOWN_QUIT_MENU_TITLE = "Quit"
+    const val DEVICES_PAGE_ERROR_STARTING_ADB_SERVER = "Can't start adb server"
+
     const val DEVICE_DROP_DOWN_PREFERENCE_MENU_TITLE = "Edit Device Setting"
     const val DEVICE_DROP_DOWN_SCREEN_SHOT_MENU_TITLE = "Save Screenshot to Desktop"
     const val DEVICE_DROP_DOWN_START_RECORDING_MENU_TITLE = "Start Recording and Save to Desktop"

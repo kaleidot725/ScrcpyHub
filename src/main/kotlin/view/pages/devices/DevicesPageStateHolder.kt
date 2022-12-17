@@ -1,11 +1,12 @@
 package view.pages.devices
 
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import model.entity.Device
-import model.repository.ProcessStatus
 import model.usecase.FetchDevicesUseCase
 import model.usecase.GetDevicesFlowUseCase
 import model.usecase.GetScrcpyStatusUseCase
@@ -28,13 +29,29 @@ class DevicesPageStateHolder(
     private val getScrcpyProcessStatusUseCase: GetScrcpyStatusUseCase,
     private val saveScreenshotToDesktop: SaveScreenshotToDesktopUseCase
 ) : StateHolder() {
-    private val _states: MutableStateFlow<List<DeviceStatus>> = MutableStateFlow(emptyList())
-    val states: StateFlow<List<DeviceStatus>> = _states
+    private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    private val isStartingAdbServer: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    private val deviceStatusList: MutableStateFlow<List<DeviceStatus>> = MutableStateFlow(emptyList())
+    val states: StateFlow<DevicesPageState> =
+        combine(isLoading, isStartingAdbServer, deviceStatusList) { isLoading, isStartingAdbServer, deviceStatusList ->
+            if (isLoading) return@combine DevicesPageState.Loading
+            if (!isStartingAdbServer) return@combine DevicesPageState.Error
+            return@combine if (deviceStatusList.isNotEmpty()) {
+                DevicesPageState.DeviceExist(deviceStatusList)
+            } else {
+                DevicesPageState.DeviceIsEmpty
+            }
+        }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), DevicesPageState.Loading)
 
     override fun onStarted() {
         coroutineScope.launch {
-            startAdbServerUseCase()
             getDevicesFlowUseCase.get(coroutineScope).collect { updateStates(it) }
+        }
+
+        coroutineScope.launch {
+            isLoading.value = true
+            isStartingAdbServer.value = startAdbServerUseCase()
+            isLoading.value = false
         }
     }
 
@@ -77,10 +94,8 @@ class DevicesPageStateHolder(
     }
 
     private fun updateStates(contextList: List<Device.Context>) {
-        _states.value = contextList.map { context ->
+        deviceStatusList.value = contextList.map { context ->
             DeviceStatus(context, getScrcpyProcessStatusUseCase.execute(context))
         }
     }
 }
-
-data class DeviceStatus(val context: Device.Context, val processStatus: ProcessStatus)

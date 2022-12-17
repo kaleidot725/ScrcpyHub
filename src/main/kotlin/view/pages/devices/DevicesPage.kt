@@ -1,11 +1,13 @@
 package view.pages.devices
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -22,6 +24,7 @@ import view.parts.PageHeader
 import view.parts.Texts
 import view.resource.Images
 import view.resource.Strings
+import view.resource.Strings.DEVICES_PAGE_ERROR_STARTING_ADB_SERVER
 import view.resource.Strings.DEVICES_PAGE_NOT_FOUND_DEVICES
 import view.templates.HeaderAndContent
 
@@ -32,7 +35,7 @@ fun DevicesPage(
     onNavigateSetting: (() -> Unit)? = null,
     onNavigateDevice: ((Device.Context) -> Unit)? = null
 ) {
-    val deviceStatusList: List<DeviceStatus> by stateHolder.states.collectAsState()
+    val state: DevicesPageState by stateHolder.states.collectAsState()
 
     DisposableEffect(stateHolder) {
         stateHolder.onStarted()
@@ -41,30 +44,58 @@ fun DevicesPage(
         }
     }
 
-    HeaderAndContent(header = {
-        PageHeader(windowScope = windowScope, title = Strings.APP_NAME, optionContent = {
-            Image(
-                painter = painterResource(Images.SETTING),
-                contentDescription = "",
-                contentScale = ContentScale.FillHeight,
-                modifier = Modifier.height(18.dp).width(24.dp).clickable { onNavigateSetting?.invoke() }
-            )
-        })
-    }, content = {
-        if (deviceStatusList.isEmpty()) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
+    HeaderAndContent(
+        header = {
+            PageHeader(windowScope = windowScope, title = Strings.APP_NAME, optionContent = {
+                Image(
+                    painter = painterResource(Images.SETTING),
+                    contentDescription = "",
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier.height(18.dp).width(24.dp).clickable { onNavigateSetting?.invoke() }
+                )
+            })
+        },
+        content = {
+            when (val state = state) {
+                DevicesPageState.Loading -> {
+                    Crossfade(Unit) {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                        }
+                    }
+                }
+
+                DevicesPageState.Error -> {
+                    Crossfade(Unit) {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            Texts.Subtitle1(
+                                DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
+                    }
+                }
+
+                is DevicesPageState.DeviceExist -> {
+                    DeviceList(
+                        deviceStatusList = state.devices,
+                        startScrcpy = { stateHolder.startScrcpy(it) },
+                        stopScrcpy = { stateHolder.stopScrcpy(it) },
+                        goToDetail = { onNavigateDevice?.invoke(it) },
+                        takeScreenshot = { stateHolder.saveScreenshotToDesktop(it) },
+                        startRecording = { stateHolder.startScrcpyRecord(it) },
+                        stopRecording = { stateHolder.stopScrcpyRecord(it) },
+                    )
+                }
+
+                DevicesPageState.DeviceIsEmpty -> {
+                    Crossfade(Unit) {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
+                        }
+                    }
+                }
             }
-        } else {
-            DeviceList(
-                deviceStatusList = deviceStatusList,
-                startScrcpy = { stateHolder.startScrcpy(it) },
-                stopScrcpy = { stateHolder.stopScrcpy(it) },
-                goToDetail = { onNavigateDevice?.invoke(it) },
-                takeScreenshot = { stateHolder.saveScreenshotToDesktop(it) },
-                startRecording = { stateHolder.startScrcpyRecord(it) },
-                stopRecording = { stateHolder.stopScrcpyRecord(it) },
-            )
         }
-    })
+    )
 }

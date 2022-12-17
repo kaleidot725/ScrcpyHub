@@ -18,19 +18,19 @@ class ScrcpyCommandCreatorTest : StringSpec({
             Device(id = "DEVICE2", name = "NAME"), maxSize = 1000, maxFrameRate = 60, bitrate = 2
         )
         factory.create(device2) shouldBe
-                listOf(
-                    "test${fileSeparator}scrcpy",
-                    "-s",
-                    "DEVICE2",
-                    "-m",
-                    "1000",
-                    "--max-fps",
-                    "60",
-                    "-b",
-                    "2M",
-                    "--window-title",
-                    "NAME"
-                )
+            listOf(
+                "test${fileSeparator}scrcpy",
+                "-s",
+                "DEVICE2",
+                "-m",
+                "1000",
+                "--max-fps",
+                "60",
+                "-b",
+                "2M",
+                "--window-title",
+                "NAME"
+            )
     }
     "create_when_no_path_specified" {
         val factory = ScrcpyCommandCreator()
