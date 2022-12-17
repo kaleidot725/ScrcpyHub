@@ -2,7 +2,7 @@ package model.repository
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
@@ -26,7 +26,7 @@ class ProcessRepository(
     val scrcpyCommand: ScrcpyCommand,
     val killCommand: KillCommand
 ) {
-    private val scope: CoroutineScope = MainScope()
+    private val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main + Dispatchers.IO)
 
     fun addMirroringProcess(context: Device.Context, scrcpyLocation: String, onDestroy: (suspend () -> Unit)? = null) {
         val process = ScrcpyCommand(ScrcpyCommandCreator(scrcpyLocation)).run(context)
