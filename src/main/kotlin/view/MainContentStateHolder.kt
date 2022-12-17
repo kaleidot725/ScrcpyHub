@@ -5,7 +5,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import model.entity.Message
@@ -25,7 +24,7 @@ class MainContentStateHolder(
     private val getMessageFlowUseCase: GetMessageFlowUseCase,
     private val getSystemDarkModeFlowUseCase: GetSystemDarkModeFlowUseCase
 ) : StateHolder() {
-    private val _navState: MutableStateFlow<Navigation> = MutableStateFlow(Navigation.LoadingPage)
+    private val _navState: MutableStateFlow<Navigation> = MutableStateFlow(Navigation.DevicesPage)
     val navState: StateFlow<Navigation> = _navState
 
     private val _errorMessage: MutableStateFlow<String?> = MutableStateFlow(null)
