@@ -19,9 +19,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.entity.Theme
+import view.parts.Texts
 import view.parts.TitleAndRadioButtons
 import view.parts.TitlesAndTextField
-import view.parts.Texts
 import view.resource.Strings
 
 @Composable
@@ -78,8 +78,8 @@ fun AppSetting(
             }
 
             Button(onClick = { onSave() }, modifier = Modifier.fillMaxWidth()) {
-            Texts.Button(Strings.SAVE)
-        }
+                Texts.Button(Strings.SAVE)
+            }
         }
 
         VerticalScrollbar(

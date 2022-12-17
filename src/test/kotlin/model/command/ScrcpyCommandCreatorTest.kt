@@ -169,7 +169,7 @@ class ScrcpyCommandCreatorTest : StringSpec({
         )
     }
     "create_help" {
-        val factory = ScrcpyCommandCreator(path = "test${fileSeparator}")
+        val factory = ScrcpyCommandCreator(path = "test$fileSeparator")
         val factoryWhenNoSeparator = ScrcpyCommandCreator(path = "test")
 
         factory.createHelp() shouldBe listOf("test${fileSeparator}scrcpy", "-h")
