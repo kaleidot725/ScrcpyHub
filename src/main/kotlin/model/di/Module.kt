@@ -35,8 +35,8 @@ import model.usecase.UpdateDeviceSetting
 import model.usecase.UpdateSettingUseCase
 import org.koin.dsl.module
 import view.MainContentStateHolder
-import view.pages.devices.DevicesPageStateHolder
 import view.pages.device.DevicePageStateHolder
+import view.pages.devices.DevicesPageStateHolder
 import view.pages.setting.SettingPageStateHolder
 
 val appModule = module {
@@ -68,7 +68,7 @@ val appModule = module {
     }
 
     factory {
-        ProcessRepository(get(), get())
+        ProcessRepository(get())
     }
 
     factory {
