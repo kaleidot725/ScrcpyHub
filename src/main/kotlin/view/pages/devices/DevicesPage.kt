@@ -88,6 +88,7 @@ fun DevicesPage(
                         Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
                     }
                 }
+
             }
         }
     })

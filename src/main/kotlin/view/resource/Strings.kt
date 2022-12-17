@@ -11,8 +11,8 @@ object Strings {
     const val TRAY_ENABLE_ALWAYS_TOP = "Enable Always on Top"
 
     // Error
-    const val NOT_FOUND_ADB_COMMAND = "Not found ADB Command"
-    const val NOT_FOUND_SCRCPY_COMMAND = "Not found Scrcpy Command"
+    const val NOT_FOUND_ADB_COMMAND = "Not found ADB binary"
+    const val NOT_FOUND_SCRCPY_COMMAND = "Not found Scrcpy binary"
 
     // DEVICES PAGE
     const val DEVICES_PAGE_START = "Start"
