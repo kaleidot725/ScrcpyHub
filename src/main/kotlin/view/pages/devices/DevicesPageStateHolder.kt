@@ -47,12 +47,11 @@ class DevicesPageStateHolder(
         coroutineScope.launch {
             getDevicesFlowUseCase.get(coroutineScope).collect { updateStates(it) }
         }
-        
+
         coroutineScope.launch {
             isLoading.value = true
             isStartingAdbServer.value = startAdbServerUseCase()
             isLoading.value = false
-
         }
     }
 
@@ -100,4 +99,3 @@ class DevicesPageStateHolder(
         }
     }
 }
-
