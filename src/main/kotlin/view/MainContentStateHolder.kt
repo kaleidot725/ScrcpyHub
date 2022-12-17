@@ -58,11 +58,7 @@ class MainContentStateHolder(
     fun refreshSetting() {
         coroutineScope.launch {
             setting.value = fetchSettingUseCase.execute()
-            _errorMessage.value = when (isSetupCompletedUseCase.execute()) {
-                IsSetupCompletedUseCase.Result.NOT_FOUND_SCRCPY_COMMAND -> NOT_FOUND_SCRCPY_COMMAND
-                IsSetupCompletedUseCase.Result.NOT_FOUND_ADB_COMMAND -> NOT_FOUND_ADB_COMMAND
-                else -> null
-            }
+            updateError()
         }
     }
 
@@ -85,8 +81,17 @@ class MainContentStateHolder(
     private fun initSetting() {
         coroutineScope.launch(NonCancellable) {
             setting.value = fetchSettingUseCase.execute()
-            delay(2000)
-            _navState.value = Navigation.DevicesPage
+            updateError()
+        }
+    }
+    
+    private fun updateError() {
+        coroutineScope.launch {
+            _errorMessage.value = when (isSetupCompletedUseCase.execute()) {
+                IsSetupCompletedUseCase.Result.NOT_FOUND_SCRCPY_COMMAND -> NOT_FOUND_SCRCPY_COMMAND
+                IsSetupCompletedUseCase.Result.NOT_FOUND_ADB_COMMAND -> NOT_FOUND_ADB_COMMAND
+                else -> null
+            }
         }
     }
 }
