@@ -5,7 +5,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import model.entity.Message
@@ -25,7 +24,7 @@ class MainContentStateHolder(
     private val getMessageFlowUseCase: GetMessageFlowUseCase,
     private val getSystemDarkModeFlowUseCase: GetSystemDarkModeFlowUseCase
 ) : StateHolder() {
-    private val _navState: MutableStateFlow<Navigation> = MutableStateFlow(Navigation.LoadingPage)
+    private val _navState: MutableStateFlow<Navigation> = MutableStateFlow(Navigation.DevicesPage)
     val navState: StateFlow<Navigation> = _navState
 
     private val _errorMessage: MutableStateFlow<String?> = MutableStateFlow(null)
@@ -59,11 +58,7 @@ class MainContentStateHolder(
     fun refreshSetting() {
         coroutineScope.launch {
             setting.value = fetchSettingUseCase.execute()
-            _errorMessage.value = when (isSetupCompletedUseCase.execute()) {
-                IsSetupCompletedUseCase.Result.NOT_FOUND_SCRCPY_COMMAND -> NOT_FOUND_SCRCPY_COMMAND
-                IsSetupCompletedUseCase.Result.NOT_FOUND_ADB_COMMAND -> NOT_FOUND_ADB_COMMAND
-                else -> null
-            }
+            updateError()
         }
     }
 
@@ -86,8 +81,17 @@ class MainContentStateHolder(
     private fun initSetting() {
         coroutineScope.launch(NonCancellable) {
             setting.value = fetchSettingUseCase.execute()
-            delay(2000)
-            _navState.value = Navigation.DevicesPage
+            updateError()
+        }
+    }
+
+    private fun updateError() {
+        coroutineScope.launch {
+            _errorMessage.value = when (isSetupCompletedUseCase.execute()) {
+                IsSetupCompletedUseCase.Result.NOT_FOUND_SCRCPY_COMMAND -> NOT_FOUND_SCRCPY_COMMAND
+                IsSetupCompletedUseCase.Result.NOT_FOUND_ADB_COMMAND -> NOT_FOUND_ADB_COMMAND
+                else -> null
+            }
         }
     }
 }
