@@ -7,14 +7,14 @@ class ScrcpyCommand(private val factory: ScrcpyCommandCreator) {
     fun run(context: Device.Context): Process {
         val command = factory.create(context)
         return ProcessBuilder(command).apply {
-            setupCommandPath(factory.path)
+            setupCommandPath(factory.scrcpyBinaryPath)
         }.start()
     }
 
     fun record(context: Device.Context, fileName: String): Process {
         val command = factory.createRecord(context, fileName)
         return ProcessBuilder(command).apply {
-            setupCommandPath(factory.path)
+            setupCommandPath(factory.scrcpyBinaryPath)
         }.start()
     }
 

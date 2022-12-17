@@ -7,33 +7,24 @@ import java.io.File.separator as fileSeparator
 class AdbCommandCreatorTest : StringSpec(
     {
         "create" {
-            val factory = AdbCommandCreator(path = "test$fileSeparator")
+            val factory = AdbCommandCreator(adbBinaryPath = "test${fileSeparator}adb")
             factory.create() shouldBe listOf("test${fileSeparator}adb")
-
-            val factoryWhenNoSeparator = AdbCommandCreator(path = "test")
-            factoryWhenNoSeparator.create() shouldBe listOf("test${fileSeparator}adb")
         }
         "create_when_no_path_specified" {
             val factory = AdbCommandCreator()
             factory.create() shouldBe listOf("adb")
         }
         "create_help" {
-            val factory = AdbCommandCreator(path = "test$fileSeparator")
+            val factory = AdbCommandCreator(adbBinaryPath = "test${fileSeparator}adb")
             factory.createHelp() shouldBe listOf("test${fileSeparator}adb", "--help")
-
-            val factoryWhenNoSeparator = AdbCommandCreator(path = "test")
-            factoryWhenNoSeparator.createHelp() shouldBe listOf("test${fileSeparator}adb", "--help")
         }
         "create_help_when_no_path_specified" {
             val factory = AdbCommandCreator()
             factory.createHelp() shouldBe listOf("adb", "--help")
         }
         "create_start_server" {
-            val factory = AdbCommandCreator(path = "test$fileSeparator")
+            val factory = AdbCommandCreator(adbBinaryPath = "test${fileSeparator}adb")
             factory.createStartServer() shouldBe listOf("test${fileSeparator}adb", "start-server")
-
-            val factoryWhenNoSeparator = AdbCommandCreator(path = "test")
-            factoryWhenNoSeparator.createStartServer() shouldBe listOf("test${fileSeparator}adb", "start-server")
         }
         "create_start_server_when_no_path_specified" {
             val factory = AdbCommandCreator()
