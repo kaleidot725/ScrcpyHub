@@ -1,15 +1,13 @@
-import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
-group = "me.kaleidot725"
-version = "1.7.1"
+group = "jp.kaleidot725"
+version = "1.8.0"
 
 plugins {
-    kotlin("jvm") version "1.6.10"
-    kotlin("plugin.serialization") version "1.6.10"
-
-    id("org.jetbrains.compose") version "1.0.1"
-    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
+    kotlin("jvm") version "1.7.20"
+    kotlin("plugin.serialization") version "1.7.20"
+    id("org.jetbrains.compose") version "1.2.2"
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
 repositories {
@@ -21,15 +19,17 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    implementation("com.lordcodes.turtle:turtle:0.6.0")
-    implementation("io.insert-koin:koin-core:3.1.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
-    implementation("com.malinskiy.adam:adam:0.4.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("com.lordcodes.turtle:turtle:0.8.0")
+    implementation("io.insert-koin:koin-core:3.2.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    implementation("com.malinskiy.adam:adam:0.4.8")
     implementation("com.github.Dansoftowner:jSystemThemeDetector:3.6")
 
     testImplementation(kotlin("test-junit5"))
-    testImplementation("io.mockk:mockk:1.12.3")
-    testImplementation("io.kotest:kotest-runner-junit5:5.1.0")
+    testImplementation("io.mockk:mockk:1.13.2")
+    testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
+    implementation(kotlin("script-runtime"))
 }
 
 tasks.test {

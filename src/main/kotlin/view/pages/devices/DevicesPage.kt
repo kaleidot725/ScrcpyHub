@@ -18,11 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Device
 import view.components.DeviceList
+import view.parts.PageHeader
 import view.parts.Texts
 import view.resource.Images
 import view.resource.Strings
 import view.resource.Strings.DEVICES_PAGE_NOT_FOUND_DEVICES
-import view.parts.PageHeader
 import view.templates.HeaderAndContent
 
 @Composable

@@ -14,8 +14,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import view.components.DeviceSetting
-import view.resource.Images
 import view.parts.PageHeader
+import view.resource.Images
 import view.templates.HeaderAndContent
 
 @Composable
