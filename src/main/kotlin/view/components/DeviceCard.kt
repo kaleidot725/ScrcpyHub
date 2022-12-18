@@ -99,7 +99,7 @@ fun DeviceCard(
                     modifier = Modifier
                         .weight(0.2f)
                         .fillMaxHeight()
-                        .clickable(enabled = (deviceStatus.processStatus == ProcessStatus.IDLE)) {
+                        .clickable {
                             startRecording?.invoke(deviceStatus.context)
                         }
                 )
@@ -115,7 +115,7 @@ fun DeviceCard(
                     modifier = Modifier
                         .weight(0.2f)
                         .fillMaxHeight()
-                        .clickable(enabled = (deviceStatus.processStatus == ProcessStatus.IDLE)) {
+                        .clickable {
                             startScrcpy?.invoke(deviceStatus.context)
                         }
                 )
