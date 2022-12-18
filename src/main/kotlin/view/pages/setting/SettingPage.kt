@@ -66,7 +66,10 @@ fun SettingPage(
                 onUpdateAdbLocation = { stateHolder.updateAdbLocation(it) },
                 scrcpyLocation = scrcpyLocation,
                 onUpdateScrcpyLocation = { stateHolder.updateScrcpyLocation(it) },
-                onSave = { stateHolder.save { onSaved?.invoke() } }
+                onSave = {
+                    stateHolder.save { onSaved?.invoke() }
+                    onNavigateDevices?.invoke()
+                }
             )
         }
     )
