@@ -3,7 +3,7 @@ package model.entity
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Device(val id: String = "", val name: String = "") {
+data class Device(val id: String = "") {
     @Serializable
     data class Context(
         val device: Device,
@@ -12,6 +12,6 @@ data class Device(val id: String = "", val name: String = "") {
         val maxFrameRate: Int? = null,
         val bitrate: Int? = null
     ) {
-        val displayName get() = customName ?: device.name
+        val displayName get() = if (customName.isNullOrEmpty()) device.id else customName
     }
 }

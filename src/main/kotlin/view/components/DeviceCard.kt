@@ -1,16 +1,30 @@
+@file:JvmName("DeviceCardKt")
+
 package view.components
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.ButtonDefaults
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Radio
+import androidx.compose.material.icons.filled.Screenshot
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Stop
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,11 +32,9 @@ import androidx.compose.ui.unit.dp
 import model.entity.Device
 import model.repository.ProcessStatus
 import view.pages.devices.DeviceStatus
-import view.parts.SmallIcon
-import view.parts.TitleAndActionButton
-import view.resource.Images
+import view.parts.Texts
+import view.parts.TitleAndIcon
 import view.resource.MainTheme
-import view.resource.Strings
 
 @Composable
 fun DeviceCard(
@@ -36,47 +48,101 @@ fun DeviceCard(
     modifier: Modifier = Modifier
 ) {
     Card(elevation = 4.dp, modifier = modifier) {
-        Row(modifier = Modifier.wrapContentHeight().fillMaxWidth()) {
-            SmallIcon(
-                filePath = Images.DEVICE,
-                description = Images.DEVICE,
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp)
+        ) {
+            Row(modifier = Modifier.padding(horizontal = 4.dp)) {
+                Texts.Subtitle1(
+                    text = deviceStatus.context.displayName,
+                    maxLines = 1,
+                    modifier = Modifier.weight(1.0f, true).align(Alignment.CenterVertically)
+                )
+                Icon(
+                    imageVector = Icons.Default.Settings,
+                    contentDescription = "Setting",
+                    modifier = Modifier
+                        .size(16.dp)
+                        .clickable { goToDetail?.invoke(deviceStatus.context) }
+                        .align(Alignment.CenterVertically)
+                )
+            }
 
-            TitleAndActionButton(
-                subtitle1 = deviceStatus.context.displayName,
-                subtitle2 = deviceStatus.context.device.id,
-                actionButtonText = when (deviceStatus.processStatus) {
-                    ProcessStatus.IDLE -> Strings.DEVICES_PAGE_START
-                    ProcessStatus.RUNNING -> Strings.DEVICES_PAGE_STOP
-                    ProcessStatus.RECORDING -> Strings.DEVICES_PAGE_RECORDING
-                },
-                actionButtonColors = when (deviceStatus.processStatus) {
-                    ProcessStatus.IDLE -> ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
-                    ProcessStatus.RUNNING -> ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
-                    ProcessStatus.RECORDING -> ButtonDefaults.buttonColors(MaterialTheme.colors.error)
-                },
-                onClickActionButton = {
-                    when (deviceStatus.processStatus) {
-                        ProcessStatus.IDLE -> startScrcpy?.invoke(deviceStatus.context)
-                        ProcessStatus.RUNNING -> stopScrcpy?.invoke(deviceStatus.context)
-                        ProcessStatus.RECORDING -> {}
-                    }
-                },
-                modifier = Modifier.weight(0.9f)
-            )
-
-            DeviceDropDownMenu(
-                processStatus = deviceStatus.processStatus,
-                onSetting = { goToDetail?.invoke(deviceStatus.context) },
-                onScreenShot = { takeScreenshot?.invoke(deviceStatus.context) },
-                onStartRecording = { startRecording?.invoke(deviceStatus.context) },
-                onStopRecording = { stopRecording?.invoke(deviceStatus.context) },
+            Row(
                 modifier = Modifier
-                    .width(30.dp)
-                    .align(Alignment.CenterVertically)
-                    .padding(horizontal = 4.dp)
-            )
+                    .height(30.dp)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
+                        shape = RoundedCornerShape(4.dp)
+                    )
+            ) {
+                TitleAndIcon(
+                    title = "Capture",
+                    iconVector = Icons.Default.Screenshot,
+                    modifier = Modifier
+                        .weight(0.2f)
+                        .fillMaxHeight()
+                        .clickable {
+                            takeScreenshot?.invoke(deviceStatus.context)
+                        }
+                )
+
+                Box(
+                    modifier = Modifier.fillMaxHeight().width(1.dp)
+                        .background(MaterialTheme.colors.onSurface.copy(alpha = 0.12f))
+                )
+
+                TitleAndIcon(
+                    title = "Record",
+                    iconVector = Icons.Default.Radio,
+                    modifier = Modifier
+                        .weight(0.2f)
+                        .fillMaxHeight()
+                        .clickable(enabled = (deviceStatus.processStatus == ProcessStatus.IDLE)) {
+                            startRecording?.invoke(deviceStatus.context)
+                        }
+                )
+
+                Box(
+                    modifier = Modifier.fillMaxHeight().width(1.dp)
+                        .background(MaterialTheme.colors.onSurface.copy(alpha = 0.12f))
+                )
+
+                TitleAndIcon(
+                    title = "Start",
+                    iconVector = Icons.Default.PlayArrow,
+                    modifier = Modifier
+                        .weight(0.2f)
+                        .fillMaxHeight()
+                        .clickable(enabled = (deviceStatus.processStatus == ProcessStatus.IDLE)) {
+                            startScrcpy?.invoke(deviceStatus.context)
+                        }
+                )
+
+                Box(
+                    modifier = Modifier.fillMaxHeight().width(1.dp)
+                        .background(MaterialTheme.colors.onSurface.copy(alpha = 0.12f))
+                )
+
+                TitleAndIcon(
+                    title = "Stop",
+                    iconVector = Icons.Default.Stop,
+                    modifier = Modifier
+                        .weight(0.2f)
+                        .fillMaxHeight()
+                        .clickable {
+                            if (deviceStatus.processStatus == ProcessStatus.RECORDING) {
+                                stopRecording?.invoke(deviceStatus.context)
+                                return@clickable
+                            }
+                            if (deviceStatus.processStatus == ProcessStatus.RUNNING) {
+                                stopScrcpy?.invoke(deviceStatus.context)
+                                return@clickable
+                            }
+                        }
+                )
+            }
         }
     }
 }
@@ -84,7 +150,7 @@ fun DeviceCard(
 @Preview
 @Composable
 private fun DeviceCard_Preview_DARK() {
-    val device = Device("00001", "DEFAULT_NAME")
+    val device = Device("00001")
     val context1 = Device.Context(device)
     val context2 = Device.Context(device, "CUSTOM_NAME1")
     val context3 = Device.Context(device, "CUSTOM_NAME2")
@@ -109,7 +175,7 @@ private fun DeviceCard_Preview_DARK() {
 @Preview
 @Composable
 private fun DeviceCard_Preview_Light() {
-    val device = Device("00001", "DEFAULT_NAME")
+    val device = Device("00001")
     val context1 = Device.Context(device)
     val context2 = Device.Context(device, "CUSTOM_NAME1")
     val context3 = Device.Context(device, "CUSTOM_NAME2")
