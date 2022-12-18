@@ -14,7 +14,7 @@ class DevicePageStateHolder(
     private val _titleName: MutableStateFlow<String> = MutableStateFlow(context.displayName)
     val titleName: StateFlow<String> = _titleName
 
-    private val _editName: MutableStateFlow<String> = MutableStateFlow(context.displayName)
+    private val _editName: MutableStateFlow<String> = MutableStateFlow(context.customName ?: "")
     val editName: StateFlow<String> = _editName
 
     private val _maxSize: MutableStateFlow<String> = MutableStateFlow(context.maxSize?.toString() ?: "")
