@@ -1,48 +1,71 @@
 package view.parts
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TitlesAndTextField(
-    subtitle1: String,
-    subtitle2: String,
+fun TextFieldAndError(
+    label: String,
+    placeHolder: String,
     inputText: String,
     onUpdateInputText: (String) -> Unit,
     error: String = "",
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Texts.Subtitle1(subtitle1)
-        Texts.Subtitle2(subtitle2)
-
+    Column(modifier = modifier) {
         TextField(
             value = inputText,
-            modifier = Modifier.fillMaxWidth(),
             onValueChange = { onUpdateInputText(it) },
-            maxLines = 1
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 1,
+            label = { Text(label) },
+            placeholder = { Text(placeHolder) },
+            isError = error.isNotEmpty()
         )
 
         if (error.isNotEmpty()) {
-            Texts.Caption(error)
+            Text(
+                text = error,
+                color = MaterialTheme.colors.error,
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp),
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.caption,
+            )
         }
     }
 }
 
 @Preview
 @Composable
-private fun TitlesAndTextField_Preview() {
-    TitlesAndTextField(
-        subtitle1 = "SUBTITLE1",
-        subtitle2 = "SUBTITLE2",
+private fun TextFieldAndError_Preview() {
+    TextFieldAndError(
+        label = "LABEL",
+        placeHolder = "PLACEHOLDER",
         inputText = "INPUT TEXT",
         onUpdateInputText = {},
         modifier = Modifier
     )
 }
+
+@Preview
+@Composable
+private fun TextFieldAndError_HAS_ERROR_Preview() {
+    TextFieldAndError(
+        label = "LABEL",
+        placeHolder = "PLACEHOLDER",
+        inputText = "INPUT TEXT",
+        error = "ERROR MEASSAGE",
+        onUpdateInputText = {},
+        modifier = Modifier
+    )
+}
+
