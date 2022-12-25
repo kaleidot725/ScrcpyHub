@@ -1,22 +1,13 @@
 package view.pages.setting
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Theme
 import view.components.AppSetting
-import view.parts.PageHeader
-import view.resource.Images
+import view.parts.SubPageHeader
 import view.resource.Strings
 import view.templates.HeaderAndContent
 
@@ -41,20 +32,10 @@ fun SettingPage(
 
     HeaderAndContent(
         header = {
-            PageHeader(
+            SubPageHeader(
                 windowScope = windowScope,
                 title = Strings.SETTING_PAGE_TITLE,
-                optionContent = {
-                    Image(
-                        painter = painterResource(Images.CLOSE),
-                        contentDescription = "",
-                        contentScale = ContentScale.FillHeight,
-                        modifier = Modifier
-                            .wrapContentWidth()
-                            .height(18.dp)
-                            .clickable { onNavigateDevices?.invoke() }
-                    )
-                }
+                onBack = { onNavigateDevices?.invoke() },
             )
         },
         content = {

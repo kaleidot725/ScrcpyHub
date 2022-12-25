@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 
 @Composable
-fun PageHeader(windowScope: WindowScope, title: String, optionContent: @Composable () -> Unit) {
+fun TopPageHeader(windowScope: WindowScope, title: String, optionContent: @Composable () -> Unit) {
     windowScope.WindowDraggableArea {
         Row(
             modifier = Modifier
