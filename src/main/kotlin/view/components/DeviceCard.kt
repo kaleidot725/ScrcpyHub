@@ -14,8 +14,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ModeEdit
 import androidx.compose.material.icons.filled.PhotoCamera
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -61,8 +61,8 @@ fun DeviceCard(
                         .align(Alignment.CenterVertically)
                 )
                 Icon(
-                    imageVector = Icons.Default.Settings,
-                    contentDescription = "Setting",
+                    imageVector = Icons.Default.ModeEdit,
+                    contentDescription = "ModeEdit",
                     modifier = Modifier
                         .size(20.dp)
                         .clickable { goToDetail.invoke(deviceStatus.context) }
