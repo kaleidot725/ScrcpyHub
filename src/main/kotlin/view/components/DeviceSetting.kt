@@ -14,12 +14,16 @@ import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import view.parts.TextFieldAndError
 import view.parts.Texts
-import view.parts.TitlesAndTextField
 import view.resource.Strings
 
 @Composable
@@ -50,46 +54,62 @@ fun DeviceSetting(
                 .verticalScroll(scrollState)
         ) {
             Card(elevation = 4.dp) {
-                TitlesAndTextField(
-                    subtitle1 = Strings.DEVICE_PAGE_EDIT_NAME_TITLE,
-                    subtitle2 = Strings.DEVICE_PAGE_EDIT_NAME_DETAILS,
-                    inputText = name,
-                    onUpdateInputText = { onUpdateName(it) },
-                    modifier = Modifier.padding(8.dp)
-                )
+                Column {
+                    Text(
+                        text = Strings.DEVICE_PAGE_EDIT_DEVICE_TITLE,
+                        modifier = Modifier.fillMaxWidth().padding(8.dp),
+                        fontWeight = FontWeight.Bold,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.subtitle1
+                    )
+
+                    TextFieldAndError(
+                        label = Strings.DEVICE_PAGE_EDIT_NAME_TITLE,
+                        placeHolder = Strings.DEVICE_PAGE_EDIT_NAME_DETAILS,
+                        inputText = name,
+                        onUpdateInputText = { onUpdateName(it) },
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
             }
 
             Card(elevation = 4.dp) {
-                TitlesAndTextField(
-                    subtitle1 = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_TITLE,
-                    subtitle2 = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS,
-                    inputText = maxSize,
-                    onUpdateInputText = { onUpdateMaxSize(it) },
-                    error = maxSizeError,
-                    modifier = Modifier.padding(8.dp)
-                )
-            }
+                Column {
+                    Text(
+                        text = Strings.DEVICE_PAGE_EDIT_VIDEO_TITLE,
+                        modifier = Modifier.fillMaxWidth().padding(8.dp),
+                        fontWeight = FontWeight.Bold,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.subtitle1
+                    )
 
-            Card(elevation = 4.dp) {
-                TitlesAndTextField(
-                    subtitle1 = Strings.DEVICE_PAGE_EDIT_MAX_FRAME_RATE_TITLE,
-                    subtitle2 = Strings.DEVICE_PAGE_EDIT_MAX_FRAME_RATE_DETAILS,
-                    inputText = maxFrameRate,
-                    onUpdateInputText = { onUpdateFrameRate(it) },
-                    error = maxFrameRateError,
-                    modifier = Modifier.padding(8.dp)
-                )
-            }
+                    TextFieldAndError(
+                        label = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_TITLE,
+                        placeHolder = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS,
+                        inputText = maxSize,
+                        onUpdateInputText = { onUpdateMaxSize(it) },
+                        error = maxSizeError,
+                        modifier = Modifier.padding(8.dp)
+                    )
 
-            Card(elevation = 4.dp) {
-                TitlesAndTextField(
-                    subtitle1 = Strings.DEVICE_PAGE_EDIT_MAX_BITRATE_TITLE,
-                    subtitle2 = Strings.DEVICE_PAGE_EDIT_MAX_BITRATE_DETAILS,
-                    inputText = bitrate,
-                    onUpdateInputText = { onUpdateBitrate(it) },
-                    error = bitrateError,
-                    modifier = Modifier.padding(8.dp)
-                )
+                    TextFieldAndError(
+                        label = Strings.DEVICE_PAGE_EDIT_MAX_FRAME_RATE_TITLE,
+                        placeHolder = Strings.DEVICE_PAGE_EDIT_MAX_FRAME_RATE_DETAILS,
+                        inputText = maxFrameRate,
+                        onUpdateInputText = { onUpdateFrameRate(it) },
+                        error = maxFrameRateError,
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    TextFieldAndError(
+                        label = Strings.DEVICE_PAGE_EDIT_MAX_BITRATE_TITLE,
+                        placeHolder = Strings.DEVICE_PAGE_EDIT_MAX_BITRATE_DETAILS,
+                        inputText = bitrate,
+                        onUpdateInputText = { onUpdateBitrate(it) },
+                        error = bitrateError,
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
             }
 
             Button(
