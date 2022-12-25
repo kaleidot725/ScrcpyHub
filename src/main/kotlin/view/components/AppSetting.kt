@@ -14,14 +14,18 @@ import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.entity.Theme
+import view.parts.TextFieldAndError
 import view.parts.Texts
 import view.parts.TitleAndRadioButtons
-import view.parts.TitlesAndTextField
 import view.resource.Strings
 
 @Composable
@@ -48,8 +52,7 @@ fun AppSetting(
         ) {
             Card(elevation = 4.dp) {
                 TitleAndRadioButtons(
-                    subtitle1 = Strings.SETTING_PAGE_EDIT_THEME_TITLE,
-                    subtitle2 = Strings.SETTING_PAGE_EDIT_THEME_DETAILS,
+                    title = Strings.SETTING_PAGE_EDIT_THEME_TITLE,
                     selectedItem = theme.toLabel(),
                     items = themes.map { it.toLabel() },
                     onSelect = { label -> onUpdateTheme(themes.first { it.toLabel() == label }) },
@@ -58,23 +61,31 @@ fun AppSetting(
             }
 
             Card(elevation = 4.dp) {
-                TitlesAndTextField(
-                    subtitle1 = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_TITLE,
-                    subtitle2 = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS,
-                    inputText = adbLocation,
-                    onUpdateInputText = { onUpdateAdbLocation(it) },
-                    modifier = Modifier.padding(8.dp)
-                )
-            }
+                Column {
+                    Text(
+                        text = Strings.SETTING_PAGE_EDIT_BINARY_TITLE,
+                        modifier = Modifier.fillMaxWidth().padding(8.dp),
+                        fontWeight = FontWeight.Bold,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.subtitle1
+                    )
 
-            Card(elevation = 4.dp) {
-                TitlesAndTextField(
-                    subtitle1 = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE,
-                    subtitle2 = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS,
-                    inputText = scrcpyLocation,
-                    onUpdateInputText = { onUpdateScrcpyLocation(it) },
-                    modifier = Modifier.padding(8.dp)
-                )
+                    TextFieldAndError(
+                        label = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_TITLE,
+                        placeHolder = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS,
+                        inputText = adbLocation,
+                        onUpdateInputText = { onUpdateAdbLocation(it) },
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    TextFieldAndError(
+                        label = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE,
+                        placeHolder = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS,
+                        inputText = scrcpyLocation,
+                        onUpdateInputText = { onUpdateScrcpyLocation(it) },
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
             }
 
             Button(onClick = { onSave() }, modifier = Modifier.fillMaxWidth()) {

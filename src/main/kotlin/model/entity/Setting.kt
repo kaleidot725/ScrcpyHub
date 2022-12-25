@@ -11,4 +11,8 @@ data class Setting(
     val theme: Theme = Theme.SYNC_WITH_OS,
     @SerialName("scrcpyLocation")
     val scrcpyLocation: String = "",
+    @SerialName("screenshotDirectory")
+    val screenshotDirectory: String = "",
+    @SerialName("screencaptureDirectory")
+    val screenrecaptureDirectory: String = ""
 )
