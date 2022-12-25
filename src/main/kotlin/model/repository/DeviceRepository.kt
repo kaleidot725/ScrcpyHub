@@ -107,6 +107,6 @@ class DeviceRepository(private val osContext: OSContext) {
     }
 
     private fun com.malinskiy.adam.request.device.Device.toDevice(): Device {
-        return Device(id = serial, name = "Device")
+        return Device(id = serial)
     }
 }

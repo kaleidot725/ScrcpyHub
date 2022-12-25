@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Snackbar
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -60,7 +61,7 @@ fun MainContent(windowScope: WindowScope, mainStateHolder: MainContentStateHolde
 @Composable
 private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
     val navigation: Navigation by mainStateHolder.navState.collectAsState()
-    Box(modifier = Modifier.fillMaxSize()) {
+    Surface(modifier = Modifier.fillMaxSize()) {
         when (val page = navigation) {
             Navigation.DevicesPage -> {
                 val stateHolder by remember {

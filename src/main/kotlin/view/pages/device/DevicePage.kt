@@ -64,7 +64,10 @@ fun DevicePage(
             onUpdateBitrate = { stateHolder.updateBitrate(it) },
             bitrateError = bitrateError,
             savable = savable,
-            onSave = { stateHolder.save() }
+            onSave = {
+                stateHolder.save()
+                onNavigateDevices?.invoke()
+            }
         )
     })
 }
