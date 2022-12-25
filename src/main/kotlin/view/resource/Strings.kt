@@ -15,16 +15,12 @@ object Strings {
     const val NOT_FOUND_SCRCPY_COMMAND = "Not found Scrcpy binary"
 
     // DEVICES PAGE
-    const val DEVICES_PAGE_START = "Start"
+    const val DEVICES_PAGE_START = "Start Mirroring"
     const val DEVICES_PAGE_STOP = "Stop"
-    const val DEVICES_PAGE_RECORDING = "REC"
+    const val DEVICES_PAGE_RECORDING = "Start Recording"
+    const val DEVICES_PAGE_CAPTURE = "Capture"
     const val DEVICES_PAGE_NOT_FOUND_DEVICES = "Not found devices"
     const val DEVICES_PAGE_ERROR_STARTING_ADB_SERVER = "Can't start adb server"
-
-    const val DEVICE_DROP_DOWN_PREFERENCE_MENU_TITLE = "Edit Device Setting"
-    const val DEVICE_DROP_DOWN_SCREEN_SHOT_MENU_TITLE = "Save Screenshot to Desktop"
-    const val DEVICE_DROP_DOWN_START_RECORDING_MENU_TITLE = "Start Recording and Save to Desktop"
-    const val DEVICE_DROP_DOWN_STOP_RECORDING_MENU_TITLE = "Stop Recording"
 
     // Device Page
     const val DEVICE_PAGE_EDIT_NAME_TITLE = "Device Name"

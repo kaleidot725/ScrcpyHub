@@ -20,12 +20,12 @@ import view.pages.devices.DeviceStatus
 @Composable
 fun DeviceList(
     deviceStatusList: List<DeviceStatus>,
-    startScrcpy: ((Device.Context) -> Unit)? = null,
-    stopScrcpy: ((Device.Context) -> Unit)? = null,
-    goToDetail: ((Device.Context) -> Unit)? = null,
-    takeScreenshot: ((Device.Context) -> Unit)? = null,
-    startRecording: ((Device.Context) -> Unit)? = null,
-    stopRecording: ((Device.Context) -> Unit)? = null,
+    startScrcpy: ((Device.Context) -> Unit),
+    stopScrcpy: ((Device.Context) -> Unit),
+    goToDetail: ((Device.Context) -> Unit),
+    takeScreenshot: ((Device.Context) -> Unit),
+    startRecording: ((Device.Context) -> Unit),
+    stopRecording: ((Device.Context) -> Unit),
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         val scrollState = rememberScrollState()
