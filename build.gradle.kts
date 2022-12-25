@@ -19,6 +19,8 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
+    implementation(compose.material)
+    implementation(compose.materialIconsExtended)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("com.lordcodes.turtle:turtle:0.8.0")
     implementation("io.insert-koin:koin-core:3.2.2")

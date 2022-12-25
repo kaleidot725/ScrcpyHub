@@ -32,7 +32,7 @@ fun MainWindow(
     ) {
         Card(
             shape = RoundedCornerShape(8.dp),
-            border = BorderStroke(1.dp, Colors.window_border)
+            border = BorderStroke(1.dp, Colors.WINDOW_BORDER)
         ) { content.invoke(this) }
     }
 }
