@@ -32,7 +32,10 @@ fun ScrcpyButtons(
     Card {
         Row(modifier = Modifier.height(30.dp).fillMaxWidth()) {
             MenuButton(
-                text = if (deviceStatus.processStatus == ProcessStatus.RECORDING) "Stop Recording" else Strings.DEVICES_PAGE_RECORDING,
+                text = if (deviceStatus.processStatus == ProcessStatus.RECORDING)
+                    Strings.DEVICES_PAGE_STOP_RECORDING
+                else
+                    Strings.DEVICES_PAGE_START_RECORDING,
                 style = MaterialTheme.typography.subtitle2,
                 status = RecordingButtonStatus(deviceStatus.processStatus),
                 colors = RecordingButtonColors(),
@@ -49,7 +52,10 @@ fun ScrcpyButtons(
             )
 
             MenuButton(
-                text = if (deviceStatus.processStatus == ProcessStatus.RUNNING) "Stop Mirroring" else Strings.DEVICES_PAGE_START,
+                text = if (deviceStatus.processStatus == ProcessStatus.RUNNING)
+                    Strings.DEVICES_PAGE_STOP_MIRRORING
+                else
+                    Strings.DEVICES_PAGE_START_MIRRORING,
                 style = MaterialTheme.typography.subtitle2,
                 status = StartButtonStatus(deviceStatus.processStatus),
                 colors = StartButtonColors(),
