@@ -1,21 +1,12 @@
 package view.pages.device
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import view.components.DeviceSetting
-import view.parts.PageHeader
-import view.resource.Images
+import view.parts.SubPageHeader
 import view.templates.HeaderAndContent
 
 @Composable
@@ -42,14 +33,11 @@ fun DevicePage(
     }
 
     HeaderAndContent(header = {
-        PageHeader(windowScope = windowScope, title = titleName, optionContent = {
-            Image(
-                painter = painterResource(Images.CLOSE),
-                contentDescription = "",
-                contentScale = ContentScale.FillHeight,
-                modifier = Modifier.wrapContentWidth().height(18.dp).clickable { onNavigateDevices?.invoke() }
-            )
-        })
+        SubPageHeader(
+            windowScope = windowScope,
+            title = titleName,
+            onBack = { onNavigateDevices?.invoke() },
+        )
     }, content = {
         DeviceSetting(
             name = name,

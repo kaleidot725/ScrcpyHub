@@ -1,6 +1,5 @@
 package view.pages.devices
 
-import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -20,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Device
 import view.components.DeviceList
-import view.parts.PageHeader
 import view.parts.Texts
+import view.parts.TopPageHeader
 import view.resource.Images
 import view.resource.Strings
 import view.resource.Strings.DEVICES_PAGE_ERROR_STARTING_ADB_SERVER
@@ -46,7 +45,7 @@ fun DevicesPage(
 
     HeaderAndContent(
         header = {
-            PageHeader(windowScope = windowScope, title = Strings.APP_NAME, optionContent = {
+            TopPageHeader(windowScope = windowScope, title = Strings.APP_NAME, optionContent = {
                 Image(
                     painter = painterResource(Images.SETTING),
                     contentDescription = "",
@@ -58,21 +57,17 @@ fun DevicesPage(
         content = {
             when (val state = state) {
                 DevicesPageState.Loading -> {
-                    Crossfade(Unit) {
-                        Box(modifier = Modifier.fillMaxSize()) {
-                            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                        }
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                     }
                 }
 
                 DevicesPageState.Error -> {
-                    Crossfade(Unit) {
-                        Box(modifier = Modifier.fillMaxSize()) {
-                            Texts.Subtitle1(
-                                DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
-                                modifier = Modifier.align(Alignment.Center)
-                            )
-                        }
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Texts.Subtitle1(
+                            DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
+                            modifier = Modifier.align(Alignment.Center)
+                        )
                     }
                 }
 
@@ -89,10 +84,8 @@ fun DevicesPage(
                 }
 
                 DevicesPageState.DeviceIsEmpty -> {
-                    Crossfade(Unit) {
-                        Box(modifier = Modifier.fillMaxSize()) {
-                            Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
-                        }
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
                     }
                 }
             }
