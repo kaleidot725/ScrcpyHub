@@ -32,7 +32,7 @@ fun ScrcpyButtons(
     Card {
         Row(modifier = Modifier.height(30.dp).fillMaxWidth()) {
             MenuButton(
-                text = if (deviceStatus.processStatus == ProcessStatus.RECORDING)
+                text = if (deviceStatus.processStatus is ProcessStatus.Recording)
                     Strings.DEVICES_PAGE_STOP_RECORDING
                 else
                     Strings.DEVICES_PAGE_START_RECORDING,
@@ -52,7 +52,7 @@ fun ScrcpyButtons(
             )
 
             MenuButton(
-                text = if (deviceStatus.processStatus == ProcessStatus.RUNNING)
+                text = if (deviceStatus.processStatus is ProcessStatus.Running)
                     Strings.DEVICES_PAGE_STOP_MIRRORING
                 else
                     Strings.DEVICES_PAGE_START_MIRRORING,
@@ -88,9 +88,9 @@ private fun CaptureButtonColors(): MenuButtonColors {
 @Composable
 private fun RecordingButtonStatus(processStatus: ProcessStatus): MenuButtonStatus {
     return when (processStatus) {
-        ProcessStatus.RECORDING -> MenuButtonStatus.ACTIVE
-        ProcessStatus.IDLE -> MenuButtonStatus.ENABLE
-        ProcessStatus.RUNNING -> MenuButtonStatus.DISABLE
+        is ProcessStatus.Recording -> MenuButtonStatus.ACTIVE
+        ProcessStatus.Idle -> MenuButtonStatus.ENABLE
+        is ProcessStatus.Running -> MenuButtonStatus.DISABLE
     }
 }
 
@@ -108,9 +108,9 @@ private fun RecordingButtonColors(): MenuButtonColors {
 @Composable
 private fun StartButtonStatus(processStatus: ProcessStatus): MenuButtonStatus {
     return when (processStatus) {
-        ProcessStatus.RECORDING -> MenuButtonStatus.DISABLE
-        ProcessStatus.IDLE -> MenuButtonStatus.ENABLE
-        ProcessStatus.RUNNING -> MenuButtonStatus.ACTIVE
+        is ProcessStatus.Recording -> MenuButtonStatus.DISABLE
+        ProcessStatus.Idle -> MenuButtonStatus.ENABLE
+        is ProcessStatus.Running -> MenuButtonStatus.ACTIVE
     }
 }
 
@@ -128,9 +128,9 @@ private fun StartButtonColors(): MenuButtonColors {
 @Composable
 private fun StopButtonStatus(processStatus: ProcessStatus): MenuButtonStatus {
     return when (processStatus) {
-        ProcessStatus.RECORDING -> MenuButtonStatus.ENABLE
-        ProcessStatus.IDLE -> MenuButtonStatus.DISABLE
-        ProcessStatus.RUNNING -> MenuButtonStatus.ENABLE
+        is ProcessStatus.Recording -> MenuButtonStatus.ENABLE
+        is ProcessStatus.Idle -> MenuButtonStatus.DISABLE
+        is ProcessStatus.Running -> MenuButtonStatus.ENABLE
     }
 }
 

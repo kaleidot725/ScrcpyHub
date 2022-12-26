@@ -18,7 +18,7 @@ class StartScrcpyRecordUseCase(
 ) {
     suspend fun execute(context: Device.Context, onDestroy: suspend () -> Unit): Boolean {
         val lastState = processRepository.getStatus(context.device.id)
-        if (lastState != ProcessStatus.IDLE) {
+        if (lastState != ProcessStatus.Idle) {
             return false
         }
 
@@ -54,7 +54,7 @@ class StartScrcpyRecordUseCase(
         }
     }
 
-    private suspend fun createRecordPath(directory: String, context: Device.Context): String {
+    private fun createRecordPath(directory: String, context: Device.Context): String {
         val date = ZonedDateTime
             .now(ZoneId.systemDefault())
             .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
