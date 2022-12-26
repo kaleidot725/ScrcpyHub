@@ -106,11 +106,19 @@ private fun EventMessageList(messages: List<Message>) {
     ) {
         items(messages, key = { it.uuid }) {
             val backgroundColor = when (it) {
-                is Message.Error -> MaterialTheme.colors.error
+                is Message.Error,
+                is Message.Notify.FailedMirroring,
+                is Message.Notify.FailedRecordingMovie,
+                is Message.Notify.FailedToSaveScreenshot -> MaterialTheme.colors.error
+
                 else -> MaterialTheme.colors.primary
             }
             val textColor = when (it) {
-                is Message.Error -> MaterialTheme.colors.onError
+                is Message.Error,
+                is Message.Notify.FailedMirroring,
+                is Message.Notify.FailedRecordingMovie,
+                is Message.Notify.FailedToSaveScreenshot -> MaterialTheme.colors.onError
+
                 else -> MaterialTheme.colors.onPrimary
             }
             Card(backgroundColor = backgroundColor) {
