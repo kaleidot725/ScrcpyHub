@@ -7,7 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.window.WindowScope
 import view.components.DeviceSetting
 import view.parts.SubPageHeader
-import view.templates.HeaderAndContent
+import view.templates.MainLayout
 
 @Composable
 fun DevicePage(
@@ -32,7 +32,7 @@ fun DevicePage(
         }
     }
 
-    HeaderAndContent(header = {
+    MainLayout(header = {
         SubPageHeader(
             windowScope = windowScope,
             title = titleName,
