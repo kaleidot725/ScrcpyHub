@@ -41,7 +41,7 @@ class SaveScreenshotUseCase(
             if (screenshotDirectory.endsWith("/")) {
                 screenshotDirectory
             } else {
-                "${screenshotDirectory}/"
+                "$screenshotDirectory/"
             }
         }
     }

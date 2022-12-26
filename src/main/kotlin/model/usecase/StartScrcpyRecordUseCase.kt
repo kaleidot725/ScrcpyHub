@@ -49,7 +49,7 @@ class StartScrcpyRecordUseCase(
             if (screenRecordDirectory.endsWith("/")) {
                 screenRecordDirectory
             } else {
-                "${screenRecordDirectory}/"
+                "$screenRecordDirectory/"
             }
         }
     }

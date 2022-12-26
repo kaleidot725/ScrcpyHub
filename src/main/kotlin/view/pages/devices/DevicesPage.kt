@@ -98,7 +98,6 @@ fun DevicesPage(
     )
 }
 
-
 @Composable
 private fun EventMessageList(messages: List<Message>) {
     LazyColumn(

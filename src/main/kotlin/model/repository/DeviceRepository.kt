@@ -51,7 +51,7 @@ class DeviceRepository(private val osContext: OSContext) {
             ImageIO.write(image, "png", File(filePath))
         }
     }
-    
+
     private fun writeCache(deviceContext: Device.Context) {
         try {
             File(osContext.settingPath + deviceContext.device.id).outputStream().apply {
