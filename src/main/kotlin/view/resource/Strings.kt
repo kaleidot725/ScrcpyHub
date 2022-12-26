@@ -15,10 +15,10 @@ object Strings {
     const val NOT_FOUND_SCRCPY_COMMAND = "Not found Scrcpy binary"
 
     // DEVICES PAGE
-    const val DEVICES_PAGE_START_MIRRORING = "Start mirroring"
-    const val DEVICES_PAGE_STOP_MIRRORING = "Stop mirroring"
-    const val DEVICES_PAGE_START_RECORDING = "Start recording"
-    const val DEVICES_PAGE_STOP_RECORDING = "Stop recording"
+    const val DEVICES_PAGE_START_MIRRORING = "Start Mirroring"
+    const val DEVICES_PAGE_STOP_MIRRORING = "Stop Mirroring"
+    const val DEVICES_PAGE_START_RECORDING = "Start Recording"
+    const val DEVICES_PAGE_STOP_RECORDING = "Stop Recording"
     const val DEVICES_PAGE_NOT_FOUND_DEVICES = "Not found devices"
     const val DEVICES_PAGE_ERROR_STARTING_ADB_SERVER = "Can't start adb server"
 
