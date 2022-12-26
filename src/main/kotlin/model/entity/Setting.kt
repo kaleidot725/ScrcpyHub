@@ -12,7 +12,7 @@ data class Setting(
     @SerialName("scrcpyLocation")
     val scrcpyLocation: String = "",
     @SerialName("screenshotDirectory")
-    val screenshotDirectory: String = "",
+    val screenRecordDirectory: String = "",
     @SerialName("screencaptureDirectory")
-    val screenrecaptureDirectory: String = ""
+    val screenshotDirectory: String = ""
 )

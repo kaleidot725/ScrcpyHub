@@ -26,7 +26,7 @@ import model.usecase.GetErrorMessageFlowUseCase
 import model.usecase.GetNotifyMessageFlowUseCase
 import model.usecase.GetScrcpyStatusUseCase
 import model.usecase.GetSystemDarkModeFlowUseCase
-import model.usecase.SaveScreenshotToDesktopUseCase
+import model.usecase.SaveScreenshotUseCase
 import model.usecase.StartAdbServerUseCase
 import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
@@ -110,7 +110,7 @@ val appModule = module {
     }
 
     factory {
-        SaveScreenshotToDesktopUseCase(get(), get())
+        SaveScreenshotUseCase(get(), get(), get())
     }
 
     factory {
@@ -134,7 +134,7 @@ val appModule = module {
     }
 
     factory {
-        StartScrcpyRecordUseCase(get(), get(), get(), get())
+        StartScrcpyRecordUseCase(get(), get(), get())
     }
 
     factory {
@@ -160,6 +160,8 @@ val appModule = module {
             get(),
             get(),
             get(),
+            get(),
+            get(),
             get()
         )
     }
@@ -169,7 +171,7 @@ val appModule = module {
     }
 
     factory {
-        MainContentStateHolder(get(), get(), get(), get(), get())
+        MainContentStateHolder(get(), get(), get())
     }
 
     factory {

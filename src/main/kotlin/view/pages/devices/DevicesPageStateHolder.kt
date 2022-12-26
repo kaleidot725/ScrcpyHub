@@ -1,6 +1,7 @@
 package view.pages.devices
 
 import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -8,10 +9,13 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import model.entity.Device
+import model.entity.Message
 import model.usecase.FetchDevicesUseCase
 import model.usecase.GetDevicesFlowUseCase
+import model.usecase.GetErrorMessageFlowUseCase
+import model.usecase.GetNotifyMessageFlowUseCase
 import model.usecase.GetScrcpyStatusUseCase
-import model.usecase.SaveScreenshotToDesktopUseCase
+import model.usecase.SaveScreenshotUseCase
 import model.usecase.StartAdbServerUseCase
 import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
@@ -30,7 +34,9 @@ class DevicesPageStateHolder(
     private val startScrcpyRecordUseCase: StartScrcpyRecordUseCase,
     private val stopScrcpyRecordUseCase: StopScrcpyRecordUseCase,
     private val getScrcpyProcessStatusUseCase: GetScrcpyStatusUseCase,
-    private val saveScreenshotToDesktop: SaveScreenshotToDesktopUseCase
+    private val saveScreenshotToDesktop: SaveScreenshotUseCase,
+    private val getNotifyMessageFlowUseCase: GetNotifyMessageFlowUseCase,
+    private val getErrorMessageFlowUseCase: GetErrorMessageFlowUseCase
 ) : StateHolder() {
     private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     private val isStartingAdbServer: MutableStateFlow<Boolean> = MutableStateFlow(false)
@@ -46,7 +52,19 @@ class DevicesPageStateHolder(
             }
         }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), DevicesPageState.Loading)
 
+    private val notifyMessage: MutableStateFlow<List<Message.Notify>> = MutableStateFlow(emptyList())
+    private val errorMessage: StateFlow<Set<Message.Error>> = getErrorMessageFlowUseCase().stateIn(
+        coroutineScope,
+        SharingStarted.WhileSubscribed(),
+        emptySet()
+    )
+    val messages: StateFlow<List<Message>> = combine(errorMessage, notifyMessage) { error, notify ->
+        notify + error
+    }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), emptyList())
+
     override fun onStarted() {
+        observeNotifyMessage()
+
         coroutineScope.launch {
             isLoading.value = true
             isStartingAdbServer.value = startAdbServerUseCase()
@@ -103,6 +121,18 @@ class DevicesPageStateHolder(
     fun saveScreenshotToDesktop(context: Device.Context) {
         coroutineScope.launch {
             saveScreenshotToDesktop.execute(context)
+        }
+    }
+
+    private fun observeNotifyMessage() {
+        coroutineScope.launch {
+            getNotifyMessageFlowUseCase().collect { newNotifyMessage ->
+                coroutineScope.launch {
+                    notifyMessage.value = notifyMessage.value.toMutableList().apply { add(newNotifyMessage) }
+                    delay(2000)
+                    notifyMessage.value = notifyMessage.value.toMutableList().apply { remove(newNotifyMessage) }
+                }
+            }
         }
     }
 
