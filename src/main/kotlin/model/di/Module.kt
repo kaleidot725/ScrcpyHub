@@ -96,7 +96,7 @@ val appModule = module {
     factory {
         StopAdbServerUseCase(get())
     }
-    
+
     factory {
         FetchSettingUseCase(get())
     }
