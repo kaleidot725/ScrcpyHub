@@ -29,10 +29,12 @@ class MainContentStateHolder(
     private val _navState: MutableStateFlow<Navigation> = MutableStateFlow(Navigation.DevicesPage)
     val navState: StateFlow<Navigation> = _navState
 
-    private val setting: MutableStateFlow<Setting?> = MutableStateFlow(null)
+    private val _setting: MutableStateFlow<Setting> = MutableStateFlow(Setting())
+    val setting: StateFlow<Setting> = _setting
+
     private val systemDarkMode: StateFlow<Boolean?> = getSystemDarkModeFlowUseCase()
         .stateIn(coroutineScope, SharingStarted.WhileSubscribed(), null)
-    val isDarkMode: Flow<Boolean?> = setting.combine(systemDarkMode) { setting, systemDarkMode ->
+    val isDarkMode: Flow<Boolean?> = _setting.combine(systemDarkMode) { setting, systemDarkMode ->
         setting ?: return@combine null
         systemDarkMode ?: return@combine null
         when (setting.theme) {
@@ -79,7 +81,7 @@ class MainContentStateHolder(
 
     private fun updateSetting() {
         coroutineScope.launch(NonCancellable) {
-            setting.value = fetchSettingUseCase.execute()
+            _setting.value = fetchSettingUseCase.execute()
             checkSetupStatusUseCase()
         }
     }
