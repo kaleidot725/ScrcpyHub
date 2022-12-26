@@ -1,16 +1,13 @@
 package model.usecase
 
-import com.malinskiy.adam.interactor.StopAdbInteractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import model.repository.SettingRepository
-import java.io.File
+import model.service.AdbServerService
 
-class StopAdbServerUseCase(private val settingRepository: SettingRepository) {
+class StopAdbServerUseCase {
     suspend operator fun invoke(): Boolean {
         return withContext(Dispatchers.IO) {
-            val setting = settingRepository.get()
-            return@withContext StopAdbInteractor().execute(adbBinary = File(setting.adbLocation))
+            return@withContext AdbServerService.stopAdbServer()
         }
     }
 }

@@ -1,15 +1,10 @@
 package model.repository
 
 import com.malinskiy.adam.AndroidDebugBridgeClientFactory
-import com.malinskiy.adam.request.device.AsyncDeviceMonitorRequest
 import com.malinskiy.adam.request.device.ListDevicesRequest
 import com.malinskiy.adam.request.framebuffer.RawImageScreenCaptureAdapter
 import com.malinskiy.adam.request.framebuffer.ScreenCaptureRequest
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -28,11 +23,6 @@ class DeviceRepository(private val osContext: OSContext) {
             val devices: List<Device> = adb.execute(request = ListDevicesRequest()).toDeviceList()
             loadCaches(devices)
         }
-    }
-
-    fun getAllFlow(scope: CoroutineScope): Flow<List<Device.Context>> {
-        val allFlow = adb.execute(request = AsyncDeviceMonitorRequest(), scope = scope).receiveAsFlow()
-        return allFlow.map { loadCaches(it.toDeviceList()) }
     }
 
     suspend fun saveDeviceSetting(context: Device.Context) {

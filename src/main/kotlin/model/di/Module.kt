@@ -21,7 +21,6 @@ import model.repository.SettingRepository
 import model.usecase.CheckSetupStatusUseCase
 import model.usecase.FetchDevicesUseCase
 import model.usecase.FetchSettingUseCase
-import model.usecase.GetDevicesFlowUseCase
 import model.usecase.GetErrorMessageFlowUseCase
 import model.usecase.GetNotifyMessageFlowUseCase
 import model.usecase.GetScrcpyStatusUseCase
@@ -86,15 +85,11 @@ val appModule = module {
     }
 
     factory {
-        GetDevicesFlowUseCase(get())
-    }
-
-    factory {
         StartAdbServerUseCase(get())
     }
 
     factory {
-        StopAdbServerUseCase(get())
+        StopAdbServerUseCase()
     }
 
     factory {
@@ -159,9 +154,6 @@ val appModule = module {
             get(),
             get(),
             get(),
-            get(),
-            get(),
-            get(),
             get()
         )
     }
@@ -171,7 +163,7 @@ val appModule = module {
     }
 
     factory {
-        MainContentStateHolder(get(), get(), get())
+        MainContentStateHolder(get(), get(), get(), get(), get())
     }
 
     factory {
