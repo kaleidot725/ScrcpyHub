@@ -1,7 +1,9 @@
 package model.repository
 
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import model.entity.Message
 
 class MessageRepository {
@@ -9,8 +11,8 @@ class MessageRepository {
     val notifyMessage: SharedFlow<Message.Notify> = _notifyMessage
 
     private var latestErrorMessages: Set<Message.Error> = setOf()
-    private val _errorMessages: MutableSharedFlow<Set<Message.Error>> = MutableSharedFlow(replay = 0)
-    val errorMessages: SharedFlow<Set<Message.Error>> = _errorMessages
+    private val _errorMessages: MutableStateFlow<Set<Message.Error>> = MutableStateFlow(emptySet())
+    val errorMessages: StateFlow<Set<Message.Error>> = _errorMessages
 
     suspend fun notify(message: Message.Notify) {
         _notifyMessage.emit(message)

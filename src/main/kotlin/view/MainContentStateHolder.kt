@@ -1,6 +1,5 @@
 package view
 
-import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,7 +34,6 @@ class MainContentStateHolder(
     private val systemDarkMode: StateFlow<Boolean?> = getSystemDarkModeFlowUseCase()
         .stateIn(coroutineScope, SharingStarted.WhileSubscribed(), null)
     val isDarkMode: Flow<Boolean?> = _setting.combine(systemDarkMode) { setting, systemDarkMode ->
-        setting ?: return@combine null
         systemDarkMode ?: return@combine null
         when (setting.theme) {
             Theme.LIGHT -> false
@@ -80,7 +78,7 @@ class MainContentStateHolder(
     }
 
     private fun updateSetting() {
-        coroutineScope.launch(NonCancellable) {
+        coroutineScope.launch {
             _setting.value = fetchSettingUseCase.execute()
             checkSetupStatusUseCase()
         }

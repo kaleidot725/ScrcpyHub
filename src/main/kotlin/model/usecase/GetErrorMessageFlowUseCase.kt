@@ -1,13 +1,13 @@
 package model.usecase
 
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import model.entity.Message
 import model.repository.MessageRepository
 
 class GetErrorMessageFlowUseCase(
     private val messageRepository: MessageRepository
 ) {
-    operator fun invoke(): SharedFlow<Set<Message.Error>> {
+    operator fun invoke(): StateFlow<Set<Message.Error>> {
         return messageRepository.errorMessages
     }
 }
