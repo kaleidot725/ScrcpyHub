@@ -10,9 +10,11 @@ import model.command.KillCommand
 import model.command.ScrcpyCommand
 import model.command.ScrcpyCommandCreator
 import model.entity.Device
+import java.util.Date
 
 private data class ProcessState(
     val value: Process,
+    val startTime: Date,
     val status: ProcessStatus
 )
 
@@ -29,7 +31,7 @@ class ProcessRepository(
 
     fun addMirroringProcess(context: Device.Context, scrcpyLocation: String, onDestroy: (suspend () -> Unit)? = null) {
         val process = ScrcpyCommand(ScrcpyCommandCreator(scrcpyLocation)).run(context)
-        processList[context.device.id] = ProcessState(process, ProcessStatus.RUNNING)
+        processList[context.device.id] = ProcessState(process, Date(), ProcessStatus.RUNNING)
         scope.launch(Dispatchers.IO) {
             process.waitForRunning(MONITORING_DELAY)
             process.monitor(MONITORING_INTERVAL) {
@@ -46,7 +48,7 @@ class ProcessRepository(
         onDestroy: (suspend () -> Unit)? = null
     ) {
         val process = ScrcpyCommand(ScrcpyCommandCreator(commandLocation)).record(context, fileName)
-        processList[context.device.id] = ProcessState(process, ProcessStatus.RECORDING)
+        processList[context.device.id] = ProcessState(process, Date(), ProcessStatus.RECORDING)
         scope.launch(Dispatchers.IO) {
             process.waitForRunning(MONITORING_DELAY)
             process.monitor(MONITORING_INTERVAL) {
