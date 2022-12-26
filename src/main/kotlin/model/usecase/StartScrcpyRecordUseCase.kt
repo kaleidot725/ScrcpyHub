@@ -23,11 +23,13 @@ class StartScrcpyRecordUseCase(
         return try {
             val fileName = deviceRepository.createRecordPathForDesktop(context)
             val scrcpyLocation = settingRepository.get().scrcpyLocation
-            processRepository.addRecordingProcess(context, fileName, scrcpyLocation) { onDestroy.invoke() }
-            messageRepository.push(Message.StartRecordingMovie(context))
+            processRepository.addRecordingProcess(context, fileName, scrcpyLocation) {
+                onDestroy.invoke()
+            }
+            messageRepository.notify(Message.Notify.StartRecordingMovie(context))
             true
         } catch (e: Exception) {
-            messageRepository.push(Message.FailedRecordingMovie(context))
+            messageRepository.notify(Message.Notify.FailedRecordingMovie(context))
             false
         }
     }

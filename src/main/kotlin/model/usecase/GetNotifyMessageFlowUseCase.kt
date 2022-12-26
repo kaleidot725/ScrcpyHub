@@ -4,10 +4,10 @@ import kotlinx.coroutines.flow.SharedFlow
 import model.entity.Message
 import model.repository.MessageRepository
 
-class GetMessageFlowUseCase(
+class GetNotifyMessageFlowUseCase(
     private val messageRepository: MessageRepository
 ) {
-    fun execute(): SharedFlow<Message> {
-        return messageRepository.message
+    operator fun invoke(): SharedFlow<Message.Notify> {
+        return messageRepository.notifyMessage
     }
 }
