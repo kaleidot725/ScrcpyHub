@@ -9,7 +9,7 @@ import model.entity.Theme
 import view.components.AppSetting
 import view.parts.SubPageHeader
 import view.resource.Strings
-import view.templates.HeaderAndContent
+import view.templates.MainLayout
 
 @Composable
 fun SettingPage(
@@ -22,6 +22,8 @@ fun SettingPage(
     val themes: List<Theme> by stateHolder.themes.collectAsState()
     val adbLocation: String by stateHolder.adbLocation.collectAsState()
     val scrcpyLocation: String by stateHolder.scrcpyLocation.collectAsState()
+    val screenshotDirectory: String by stateHolder.screenshotDirectory.collectAsState()
+    val screenRecordDirectory: String by stateHolder.screenRecordDirectory.collectAsState()
 
     DisposableEffect(stateHolder) {
         stateHolder.onStarted()
@@ -30,7 +32,7 @@ fun SettingPage(
         }
     }
 
-    HeaderAndContent(
+    MainLayout(
         header = {
             SubPageHeader(
                 windowScope = windowScope,
@@ -42,11 +44,15 @@ fun SettingPage(
             AppSetting(
                 theme = theme,
                 themes = themes,
-                onUpdateTheme = { stateHolder.updateTheme(it) },
+                onUpdateTheme = stateHolder::updateTheme,
                 adbLocation = adbLocation,
-                onUpdateAdbLocation = { stateHolder.updateAdbLocation(it) },
+                onUpdateAdbLocation = stateHolder::updateAdbLocation,
                 scrcpyLocation = scrcpyLocation,
-                onUpdateScrcpyLocation = { stateHolder.updateScrcpyLocation(it) },
+                onUpdateScrcpyLocation = stateHolder::updateScrcpyLocation,
+                screenRecordDirectory = screenRecordDirectory,
+                onUpdateScreenRecordDirectory = stateHolder::updateScreenRecordDirectory,
+                screenshotDirectory = screenshotDirectory,
+                onUpdateScreenshotDirectory = stateHolder::updateScreenshotDirectory,
                 onSave = {
                     stateHolder.save { onSaved?.invoke() }
                     onNavigateDevices?.invoke()
