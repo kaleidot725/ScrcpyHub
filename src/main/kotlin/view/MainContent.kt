@@ -4,6 +4,8 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -62,46 +64,55 @@ fun MainContent(windowScope: WindowScope, mainStateHolder: MainContentStateHolde
 private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
     val navigation: Navigation by mainStateHolder.navState.collectAsState()
     Surface(modifier = Modifier.fillMaxSize()) {
-        when (val page = navigation) {
-            Navigation.DevicesPage -> {
-                val stateHolder by remember {
-                    val stateHolder by inject<DevicesPageStateHolder>(clazz = DevicesPageStateHolder::class.java)
-                    mutableStateOf(stateHolder)
-                }
-                DevicesPage(
-                    windowScope = windowScope,
-                    stateHolder = stateHolder,
-                    onNavigateSetting = { mainStateHolder.selectPage(Navigation.SettingPage) },
-                    onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
-                )
+        val stateHolder by remember {
+            val stateHolder by inject<DevicesPageStateHolder>(clazz = DevicesPageStateHolder::class.java)
+            mutableStateOf(stateHolder)
+        }
+
+        DevicesPage(
+            windowScope = windowScope,
+            stateHolder = stateHolder,
+            onNavigateSetting = { mainStateHolder.selectPage(Navigation.SettingPage) },
+            onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
+        )
+
+        val settingPage = navigation as? Navigation.SettingPage
+        AnimatedVisibility(
+            visible = settingPage != null,
+            enter = slideInHorizontally(initialOffsetX = { return@slideInHorizontally windowScope.window.width }),
+            exit = slideOutHorizontally(targetOffsetX = { return@slideOutHorizontally windowScope.window.width })
+        ) {
+            val stateHolder by remember {
+                val viewModel by inject<SettingPageStateHolder>(clazz = SettingPageStateHolder::class.java)
+                mutableStateOf(viewModel)
             }
 
-            Navigation.SettingPage -> {
-                val stateHolder by remember {
-                    val viewModel by inject<SettingPageStateHolder>(clazz = SettingPageStateHolder::class.java)
-                    mutableStateOf(viewModel)
+            SettingPage(
+                windowScope = windowScope,
+                stateHolder = stateHolder,
+                onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) },
+                onSaved = { mainStateHolder.refreshSetting() }
+            )
+        }
+
+        val devicePage = navigation as? Navigation.DevicePage
+        AnimatedVisibility(
+            visible = devicePage != null,
+            enter = slideInHorizontally(initialOffsetX = { return@slideInHorizontally windowScope.window.width }),
+            exit = slideOutHorizontally(targetOffsetX = { return@slideOutHorizontally windowScope.window.width })
+        ) {
+            val devicePageViewModel by remember {
+                val stateHolder by inject<DevicePageStateHolder>(clazz = DevicePageStateHolder::class.java) {
+                    parametersOf(devicePage!!.context)
                 }
-                SettingPage(
-                    windowScope = windowScope,
-                    stateHolder = stateHolder,
-                    onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) },
-                    onSaved = { mainStateHolder.refreshSetting() }
-                )
+                mutableStateOf(stateHolder)
             }
 
-            is Navigation.DevicePage -> {
-                val devicePageViewModel by remember {
-                    val stateHolder by inject<DevicePageStateHolder>(clazz = DevicePageStateHolder::class.java) {
-                        parametersOf(page.context)
-                    }
-                    mutableStateOf(stateHolder)
-                }
-                DevicePage(
-                    windowScope = windowScope,
-                    stateHolder = devicePageViewModel,
-                    onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) }
-                )
-            }
+            DevicePage(
+                windowScope = windowScope,
+                stateHolder = devicePageViewModel,
+                onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) }
+            )
         }
     }
 }
