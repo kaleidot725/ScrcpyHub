@@ -62,7 +62,6 @@ class DevicesPageStateHolder(
         notify + error
     }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), emptyList())
 
-
     override fun onStarted() {
         observeNotifyMessage()
 
