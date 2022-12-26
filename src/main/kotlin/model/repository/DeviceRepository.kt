@@ -17,9 +17,6 @@ import kotlinx.serialization.json.Json
 import model.entity.Device
 import model.os.OSContext
 import java.io.File
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import javax.imageio.ImageIO
 
 class DeviceRepository(private val osContext: OSContext) {
@@ -54,21 +51,7 @@ class DeviceRepository(private val osContext: OSContext) {
             ImageIO.write(image, "png", File(filePath))
         }
     }
-
-    fun createScreenshotPathForDesktop(context: Device.Context): String {
-        val date = ZonedDateTime
-            .now(ZoneId.systemDefault())
-            .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
-        return "${System.getProperty("user.home")}/Desktop/${context.displayName}-$date.png"
-    }
-
-    fun createRecordPathForDesktop(context: Device.Context): String {
-        val date = ZonedDateTime
-            .now(ZoneId.systemDefault())
-            .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
-        return "${System.getProperty("user.home")}/Desktop/${context.displayName}-$date.mp4"
-    }
-
+    
     private fun writeCache(deviceContext: Device.Context) {
         try {
             File(osContext.settingPath + deviceContext.device.id).outputStream().apply {

@@ -37,6 +37,10 @@ fun AppSetting(
     onUpdateAdbLocation: (String) -> Unit,
     scrcpyLocation: String,
     onUpdateScrcpyLocation: (String) -> Unit,
+    screenshotDirectory: String,
+    onUpdateScreenshotDirectory: (String) -> Unit,
+    screenRecordDirectory: String,
+    onUpdateScreenRecordDirectory: (String) -> Unit,
     onSave: () -> Unit
 ) {
     Box {
@@ -88,6 +92,34 @@ fun AppSetting(
                 }
             }
 
+            Card(elevation = 4.dp) {
+                Column {
+                    Text(
+                        text = Strings.SETTING_PAGE_EDIT_CAPTURE_AND_RECORD_TITLE,
+                        modifier = Modifier.fillMaxWidth().padding(8.dp),
+                        fontWeight = FontWeight.Bold,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.subtitle1
+                    )
+
+                    TextFieldAndError(
+                        label = Strings.SETTING_PAGE_EDIT_SCREEN_SHOT_TITLE,
+                        placeHolder = Strings.SETTING_PAGE_EDIT_SCREEN_SHOT_DETAILS,
+                        inputText = screenRecordDirectory,
+                        onUpdateInputText = { onUpdateScreenRecordDirectory(it) },
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    TextFieldAndError(
+                        label = Strings.SETTING_PAGE_EDIT_SCREEN_RECORD_TITLE,
+                        placeHolder = Strings.SETTING_PAGE_EDIT_SCREEN_RECORD_DETAILS,
+                        inputText = screenshotDirectory,
+                        onUpdateInputText = { onUpdateScreenshotDirectory(it) },
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
+            }
+
             Button(onClick = { onSave() }, modifier = Modifier.fillMaxWidth()) {
                 Texts.Button(Strings.SAVE)
             }
@@ -119,6 +151,10 @@ private fun AppSetting_Preview() {
         onUpdateAdbLocation = {},
         scrcpyLocation = "CUSTOM SCRCPY LOCATION",
         onUpdateScrcpyLocation = {},
+        screenshotDirectory = "CUSTOM SCREENSHOT DIRECTORY",
+        onUpdateScreenshotDirectory = {},
+        screenRecordDirectory = "CUSTOM SCREENRECORD DIRECTORY",
+        onUpdateScreenRecordDirectory = {},
         onSave = {}
     )
 }

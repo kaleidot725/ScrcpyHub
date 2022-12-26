@@ -42,6 +42,11 @@ object Strings {
     const val SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS = "If it is empty, use an environment variable"
     const val SETTING_PAGE_EDIT_SCRCPY_LOCATION_TITLE = "Scrcpy Location"
     const val SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS = "If it is empty, use an environment variable"
+    const val SETTING_PAGE_EDIT_CAPTURE_AND_RECORD_TITLE = "Capture & Recording"
+    const val SETTING_PAGE_EDIT_SCREEN_SHOT_TITLE = "Capture Directory"
+    const val SETTING_PAGE_EDIT_SCREEN_SHOT_DETAILS = "If it is empty, save file to desktop"
+    const val SETTING_PAGE_EDIT_SCREEN_RECORD_TITLE = "Recording Directory"
+    const val SETTING_PAGE_EDIT_SCREEN_RECORD_DETAILS = "If it is empty, save file to desktop"
 
     const val SETTING_THEME_LIGHT = "Light"
     const val SETTING_THEME_DARK = "Dark"
