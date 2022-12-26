@@ -1,6 +1,6 @@
 package model.entity
 
-import java.util.*
+import java.util.UUID
 
 sealed class Message(val uuid: UUID = UUID.randomUUID()) {
     sealed class Notify : Message() {
