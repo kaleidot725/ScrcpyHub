@@ -13,11 +13,11 @@ class SaveScreenshotToDesktopUseCase(
         val filePath = deviceRepository.createScreenshotPathForDesktop(context)
         return deviceRepository.saveScreenshot(context.device, filePath).apply {
             val message = if (this) {
-                Message.SuccessToSaveScreenshot(context, filePath)
+                Message.Notify.SuccessToSaveScreenshot(context, filePath)
             } else {
-                Message.FailedToSaveScreenshot(context)
+                Message.Notify.FailedToSaveScreenshot(context)
             }
-            messageRepository.push(message)
+            messageRepository.notify(message)
         }
     }
 }

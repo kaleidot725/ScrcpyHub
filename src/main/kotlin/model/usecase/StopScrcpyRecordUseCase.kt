@@ -11,7 +11,7 @@ class StopScrcpyRecordUseCase(
 ) {
     suspend fun execute(context: Device.Context): Boolean {
         processRepository.delete(context.device.id)
-        messageRepository.push(Message.StopRecordingMovie(context))
+        messageRepository.notify(Message.Notify.StopRecordingMovie(context))
         return true
     }
 }
