@@ -18,13 +18,14 @@ import model.repository.DeviceRepository
 import model.repository.MessageRepository
 import model.repository.ProcessRepository
 import model.repository.SettingRepository
+import model.usecase.CheckSetupStatusUseCase
 import model.usecase.FetchDevicesUseCase
 import model.usecase.FetchSettingUseCase
 import model.usecase.GetDevicesFlowUseCase
-import model.usecase.GetMessageFlowUseCase
+import model.usecase.GetErrorMessageFlowUseCase
+import model.usecase.GetNotifyMessageFlowUseCase
 import model.usecase.GetScrcpyStatusUseCase
 import model.usecase.GetSystemDarkModeFlowUseCase
-import model.usecase.IsSetupCompletedUseCase
 import model.usecase.SaveScreenshotToDesktopUseCase
 import model.usecase.StartAdbServerUseCase
 import model.usecase.StartScrcpyRecordUseCase
@@ -112,7 +113,7 @@ val appModule = module {
     }
 
     factory {
-        IsSetupCompletedUseCase(get())
+        CheckSetupStatusUseCase(get(), get())
     }
 
     factory {
@@ -124,7 +125,7 @@ val appModule = module {
     }
 
     factory {
-        GetMessageFlowUseCase(get())
+        GetNotifyMessageFlowUseCase(get())
     }
 
     factory {
@@ -140,6 +141,10 @@ val appModule = module {
     }
 
     factory {
+        GetErrorMessageFlowUseCase(get())
+    }
+
+    factory {
         DevicesPageStateHolder(get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
 
@@ -148,7 +153,7 @@ val appModule = module {
     }
 
     factory {
-        MainContentStateHolder(get(), get(), get(), get())
+        MainContentStateHolder(get(), get(), get(), get(), get())
     }
 
     factory {

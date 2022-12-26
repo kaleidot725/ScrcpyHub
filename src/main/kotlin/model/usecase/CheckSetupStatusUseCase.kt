@@ -4,30 +4,29 @@ import model.command.AdbCommand
 import model.command.AdbCommandCreator
 import model.command.ScrcpyCommand
 import model.command.ScrcpyCommandCreator
+import model.entity.Message
+import model.repository.MessageRepository
 import model.repository.SettingRepository
 
-class IsSetupCompletedUseCase(
+class CheckSetupStatusUseCase(
+    private val messageRepository: MessageRepository,
     private val settingRepository: SettingRepository
 ) {
-    suspend fun execute(): Result {
+    suspend operator fun invoke() {
         val setting = settingRepository.get()
 
         val adbCommand = AdbCommand(AdbCommandCreator(setting.adbLocation))
         if (!adbCommand.isInstalled()) {
-            return Result.NOT_FOUND_ADB_COMMAND
+            messageRepository.pushError(Message.Error.NotFoundAdbBinary)
+        } else {
+            messageRepository.popError(Message.Error.NotFoundAdbBinary)
         }
 
         val scrcpyCommand = ScrcpyCommand(ScrcpyCommandCreator(setting.scrcpyLocation))
         if (!scrcpyCommand.isInstalled()) {
-            return Result.NOT_FOUND_SCRCPY_COMMAND
+            messageRepository.pushError(Message.Error.NotFoundScrcpyBinary)
+        } else {
+            messageRepository.popError(Message.Error.NotFoundScrcpyBinary)
         }
-
-        return Result.OK
-    }
-
-    enum class Result {
-        OK,
-        NOT_FOUND_ADB_COMMAND,
-        NOT_FOUND_SCRCPY_COMMAND
     }
 }

@@ -11,6 +11,8 @@ abstract class StateHolder : KoinComponent {
 
     open fun onStarted() {}
 
+    open fun onRefresh() {}
+
     open fun onCleared() {
         coroutineScope.cancel("coroutine Canceled")
     }
