@@ -1,20 +1,17 @@
 package view
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.MutableTransitionState
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Snackbar
 import androidx.compose.material.Surface
@@ -27,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
@@ -91,7 +89,7 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
                 windowScope = windowScope,
                 stateHolder = stateHolder,
                 onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) },
-                onSaved = { mainStateHolder.refreshSetting() }
+                onSaved = { mainStateHolder.onRefresh() }
             )
         }
 
@@ -118,50 +116,21 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
 }
 
 @Composable
-private fun MainSnacks(viewModel: MainContentStateHolder) {
-    val errorMessage: String? by viewModel.errorMessage.collectAsState()
-    val notifyMessage: Message by viewModel.notifyMessage.collectAsState()
+private fun BoxScope.MainSnacks(viewModel: MainContentStateHolder) {
+    val messages: List<Message> by viewModel.messages.collectAsState()
 
-    val notifyMessageState = remember { MutableTransitionState(false) }
-    val errorMessageState = remember { MutableTransitionState(false) }
-
-    notifyMessageState.targetState = notifyMessage != Message.EmptyMessage
-    errorMessageState.targetState = errorMessage != null
-
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.align(Alignment.BottomCenter)) {
-            AnimatedVisibility(notifyMessageState, enter = fadeIn(), exit = fadeOut()) {
-                Snackbar(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
-                    Box(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
-                        Row(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
-                            Text(notifyMessage.toStringMessage(), style = MaterialTheme.typography.button)
-                        }
-                    }
-                }
-            }
-            AnimatedVisibility(errorMessageState, enter = fadeIn(), exit = fadeOut()) {
-                if (errorMessage != null) {
-                    Snackbar(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
-                        Text(
-                            errorMessage!!,
-                            style = MaterialTheme.typography.button,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth().wrapContentHeight()
-                        )
-                    }
-                }
+    LazyColumn(
+        modifier = Modifier.padding(8.dp).background(Color.Red).align(Alignment.BottomCenter)
+    ) {
+        items(messages) {
+            Snackbar {
+                Text(
+                    text = it.toString(),
+                    style = MaterialTheme.typography.button,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().wrapContentHeight()
+                )
             }
         }
-    }
-}
-
-private fun Message.toStringMessage(): String {
-    return when (this) {
-        Message.EmptyMessage -> ""
-        is Message.SuccessToSaveScreenshot -> "Success to save ${this.context.displayName} Screenshot!"
-        is Message.FailedToSaveScreenshot -> "Failed to save ${this.context.displayName} Screenshot!"
-        is Message.StartRecordingMovie -> "Start recording movie on ${this.context.displayName}"
-        is Message.StopRecordingMovie -> "Stop recording movie on ${this.context.displayName}"
-        is Message.FailedRecordingMovie -> "Failed recording movie on ${this.context.displayName}"
     }
 }
