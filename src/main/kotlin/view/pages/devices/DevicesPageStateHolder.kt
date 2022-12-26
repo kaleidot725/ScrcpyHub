@@ -1,5 +1,6 @@
 package view.pages.devices
 
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -14,12 +15,14 @@ import model.usecase.SaveScreenshotToDesktopUseCase
 import model.usecase.StartAdbServerUseCase
 import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
+import model.usecase.StopAdbServerUseCase
 import model.usecase.StopScrcpyRecordUseCase
 import model.usecase.StopScrcpyUseCase
 import view.StateHolder
 
 class DevicesPageStateHolder(
     private val startAdbServerUseCase: StartAdbServerUseCase,
+    private val stopAdbServerUseCase: StopAdbServerUseCase,
     private val fetchDevicesUseCase: FetchDevicesUseCase,
     private val getDevicesFlowUseCase: GetDevicesFlowUseCase,
     private val startScrcpyUseCase: StartScrcpyUseCase,
@@ -45,13 +48,27 @@ class DevicesPageStateHolder(
 
     override fun onStarted() {
         coroutineScope.launch {
-            getDevicesFlowUseCase.get(coroutineScope).collect { updateStates(it) }
-        }
-
-        coroutineScope.launch {
             isLoading.value = true
             isStartingAdbServer.value = startAdbServerUseCase()
             isLoading.value = false
+            getDevicesFlowUseCase.get(coroutineScope).collect { updateStates(it) }
+        }
+    }
+
+    override fun onRefresh() {
+        coroutineScope.launch {
+            stopAdbServerUseCase()
+            isLoading.value = true
+            isStartingAdbServer.value = startAdbServerUseCase()
+            isLoading.value = false
+            getDevicesFlowUseCase.get(coroutineScope).collect { updateStates(it) }
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        coroutineScope.launch(NonCancellable) {
+            stopAdbServerUseCase()
         }
     }
 

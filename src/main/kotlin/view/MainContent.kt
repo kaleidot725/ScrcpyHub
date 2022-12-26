@@ -30,7 +30,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Message
-import model.entity.Setting
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
 import view.navigation.Navigation
@@ -62,18 +61,17 @@ fun MainContent(windowScope: WindowScope, mainStateHolder: MainContentStateHolde
 
 @Composable
 private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
-    val setting: Setting by mainStateHolder.setting.collectAsState()
     val navigation: Navigation by mainStateHolder.navState.collectAsState()
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        val stateHolder by remember(setting) {
+        val devicePageStateHolder by remember {
             val stateHolder by inject<DevicesPageStateHolder>(clazz = DevicesPageStateHolder::class.java)
             mutableStateOf(stateHolder)
         }
 
         DevicesPage(
             windowScope = windowScope,
-            stateHolder = stateHolder,
+            stateHolder = devicePageStateHolder,
             onNavigateSetting = { mainStateHolder.selectPage(Navigation.SettingPage) },
             onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
         )
@@ -93,7 +91,10 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
                 windowScope = windowScope,
                 stateHolder = stateHolder,
                 onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) },
-                onSaved = { mainStateHolder.onRefresh() }
+                onSaved = {
+                    devicePageStateHolder.onRefresh()
+                    mainStateHolder.onRefresh()
+                }
             )
         }
 

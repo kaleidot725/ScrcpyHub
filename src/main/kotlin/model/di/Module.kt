@@ -30,6 +30,7 @@ import model.usecase.SaveScreenshotToDesktopUseCase
 import model.usecase.StartAdbServerUseCase
 import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
+import model.usecase.StopAdbServerUseCase
 import model.usecase.StopScrcpyRecordUseCase
 import model.usecase.StopScrcpyUseCase
 import model.usecase.UpdateDeviceSetting
@@ -93,6 +94,10 @@ val appModule = module {
     }
 
     factory {
+        StopAdbServerUseCase(get())
+    }
+    
+    factory {
         FetchSettingUseCase(get())
     }
 
@@ -145,7 +150,18 @@ val appModule = module {
     }
 
     factory {
-        DevicesPageStateHolder(get(), get(), get(), get(), get(), get(), get(), get(), get())
+        DevicesPageStateHolder(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
     }
 
     factory { (context: Device.Context) ->
