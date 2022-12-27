@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -17,15 +18,22 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ModeEdit
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import model.entity.Device
 import model.repository.ProcessStatus
+import view.common.ElapsedTimeCalculator
 import view.pages.devices.DeviceStatus
 import view.resource.MainTheme
+import java.util.Date
 
 @Composable
 fun DeviceCard(
@@ -38,6 +46,35 @@ fun DeviceCard(
     stopRecording: ((Device.Context) -> Unit),
     modifier: Modifier = Modifier
 ) {
+    val (currentTime, setCurrentTime) = remember { mutableStateOf("") }
+    LaunchedEffect(deviceStatus.processStatus) {
+        when (val processStatus = deviceStatus.processStatus) {
+            is ProcessStatus.Recording -> {
+                coroutineScope {
+                    while (true) {
+                        val elapsedTime = ElapsedTimeCalculator.calc(processStatus.startDate, Date())
+                        setCurrentTime(elapsedTime)
+                        delay(1000)
+                    }
+                }
+            }
+
+            is ProcessStatus.Running -> {
+                coroutineScope {
+                    while (true) {
+                        val elapsedTime = ElapsedTimeCalculator.calc(processStatus.startDate, Date())
+                        setCurrentTime(elapsedTime)
+                        delay(1000)
+                    }
+                }
+            }
+
+            else -> {
+                setCurrentTime("")
+            }
+        }
+    }
+
     Card(elevation = 4.dp, modifier = modifier) {
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -52,6 +89,16 @@ fun DeviceCard(
                     style = MaterialTheme.typography.subtitle1,
                     modifier = Modifier.weight(1.0f, true).align(Alignment.CenterVertically)
                 )
+
+                Text(
+                    text = currentTime,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.subtitle1,
+                    modifier = Modifier.wrapContentWidth().align(Alignment.CenterVertically)
+                )
+
                 Icon(
                     imageVector = Icons.Default.PhotoCamera,
                     contentDescription = "Screenshot",
@@ -92,7 +139,7 @@ private fun DeviceCard_Preview_DARK() {
     MainTheme(isDarkMode = true) {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             DeviceCard(
-                deviceStatus = DeviceStatus(context1, ProcessStatus.IDLE),
+                deviceStatus = DeviceStatus(context1, ProcessStatus.Idle),
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},
@@ -103,7 +150,7 @@ private fun DeviceCard_Preview_DARK() {
             )
 
             DeviceCard(
-                deviceStatus = DeviceStatus(context2, ProcessStatus.RUNNING),
+                deviceStatus = DeviceStatus(context2, ProcessStatus.Running()),
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},
@@ -114,7 +161,7 @@ private fun DeviceCard_Preview_DARK() {
             )
 
             DeviceCard(
-                deviceStatus = DeviceStatus(context3, ProcessStatus.RECORDING),
+                deviceStatus = DeviceStatus(context3, ProcessStatus.Recording()),
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},
@@ -138,7 +185,7 @@ private fun DeviceCard_Preview_Light() {
     MainTheme(isDarkMode = false) {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             DeviceCard(
-                deviceStatus = DeviceStatus(context1, ProcessStatus.IDLE),
+                deviceStatus = DeviceStatus(context1, ProcessStatus.Idle),
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},
@@ -149,7 +196,7 @@ private fun DeviceCard_Preview_Light() {
             )
 
             DeviceCard(
-                deviceStatus = DeviceStatus(context2, ProcessStatus.RUNNING),
+                deviceStatus = DeviceStatus(context2, ProcessStatus.Running()),
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},
@@ -160,7 +207,7 @@ private fun DeviceCard_Preview_Light() {
             )
 
             DeviceCard(
-                deviceStatus = DeviceStatus(context3, ProcessStatus.RECORDING),
+                deviceStatus = DeviceStatus(context3, ProcessStatus.Recording()),
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},

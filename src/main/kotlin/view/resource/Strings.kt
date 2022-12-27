@@ -7,8 +7,8 @@ object Strings {
     const val QUIT = "Quit"
 
     // TRAY
-    const val TRAY_SHOW_SCRCPY_HUB = "Show window"
-    const val TRAY_ENABLE_ALWAYS_TOP = "Enable always on top"
+    const val TRAY_SHOW_SCRCPY_HUB = "Show Window"
+    const val TRAY_ENABLE_ALWAYS_TOP = "Enable Always on Top"
 
     // Error
     const val NOT_FOUND_ADB_COMMAND = "Not found ADB binary"

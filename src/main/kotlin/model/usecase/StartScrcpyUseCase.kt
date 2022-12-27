@@ -14,7 +14,7 @@ class StartScrcpyUseCase(
 ) {
     suspend fun execute(context: Device.Context, onDestroy: suspend () -> Unit): Boolean {
         val lastState = processRepository.getStatus(context.device.id)
-        if (lastState != ProcessStatus.IDLE) {
+        if (lastState != ProcessStatus.Idle) {
             return false
         }
 

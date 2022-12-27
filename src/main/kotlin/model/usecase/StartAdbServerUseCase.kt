@@ -1,16 +1,15 @@
 package model.usecase
 
-import com.malinskiy.adam.interactor.StartAdbInteractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import model.repository.SettingRepository
-import java.io.File
+import model.service.AdbServerService
 
 class StartAdbServerUseCase(private val settingRepository: SettingRepository) {
     suspend operator fun invoke(): Boolean {
         return withContext(Dispatchers.IO) {
             val setting = settingRepository.get()
-            return@withContext StartAdbInteractor().execute(adbBinary = File(setting.adbLocation))
+            return@withContext AdbServerService.startAdbServer(setting.adbLocation)
         }
     }
 }
