@@ -30,10 +30,10 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import model.entity.Device
 import model.repository.ProcessStatus
+import view.common.ElapsedTimeCalculator
 import view.pages.devices.DeviceStatus
 import view.resource.MainTheme
 import java.util.Date
-import java.util.concurrent.TimeUnit
 
 @Composable
 fun DeviceCard(
@@ -52,7 +52,7 @@ fun DeviceCard(
             is ProcessStatus.Recording -> {
                 coroutineScope {
                     while (true) {
-                        val elapsedTime = createElapsedTime(processStatus.startDate, Date())
+                        val elapsedTime = ElapsedTimeCalculator.calc(processStatus.startDate, Date())
                         setCurrentTime(elapsedTime)
                         delay(1000)
                     }
@@ -62,7 +62,7 @@ fun DeviceCard(
             is ProcessStatus.Running -> {
                 coroutineScope {
                     while (true) {
-                        val elapsedTime = createElapsedTime(processStatus.startDate, Date())
+                        val elapsedTime = ElapsedTimeCalculator.calc(processStatus.startDate, Date())
                         setCurrentTime(elapsedTime)
                         delay(1000)
                     }
@@ -172,17 +172,6 @@ private fun DeviceCard_Preview_DARK() {
             )
         }
     }
-}
-
-private fun createElapsedTime(startDate: Date, currentTime: Date): String {
-    val totalMillis = currentTime.time - startDate.time
-    val hour = TimeUnit.MILLISECONDS.toHours(totalMillis)
-    val minute = TimeUnit.MILLISECONDS.toMinutes(totalMillis) % 60
-    val second = TimeUnit.MILLISECONDS.toSeconds(totalMillis) % 60 % 60
-    val hourString = hour.toString().padStart(2, '0')
-    val minuteString = minute.toString().padStart(2, '0')
-    val secondString = second.toString().padStart(2, '0')
-    return "$hourString:$minuteString:$secondString"
 }
 
 @Preview
