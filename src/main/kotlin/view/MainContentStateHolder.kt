@@ -12,12 +12,16 @@ import model.entity.Theme
 import model.usecase.CheckSetupStatusUseCase
 import model.usecase.FetchSettingUseCase
 import model.usecase.GetSystemDarkModeFlowUseCase
+import model.usecase.StartAdbServerUseCase
+import model.usecase.StopAdbServerUseCase
 import view.navigation.Navigation
 
 class MainContentStateHolder(
     private val fetchSettingUseCase: FetchSettingUseCase,
     private val checkSetupStatusUseCase: CheckSetupStatusUseCase,
     private val getSystemDarkModeFlowUseCase: GetSystemDarkModeFlowUseCase,
+    private val startAdbServerUseCase: StartAdbServerUseCase,
+    private val stopAdbServerUseCase: StopAdbServerUseCase
 ) : StateHolder() {
     private val _navState: MutableStateFlow<Navigation> = MutableStateFlow(Navigation.DevicesPage)
     val navState: StateFlow<Navigation> = _navState
@@ -38,19 +42,40 @@ class MainContentStateHolder(
 
     override fun onStarted() {
         updateSetting()
+        checkSetupStatus()
+        restartAdbServer()
     }
 
     override fun onRefresh() {
         updateSetting()
+        checkSetupStatus()
+        restartAdbServer()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        coroutineScope.launch { stopAdbServerUseCase() }
     }
 
     fun selectPage(page: Navigation) {
         _navState.value = page
     }
 
+    private fun restartAdbServer() {
+        coroutineScope.launch {
+            stopAdbServerUseCase()
+            startAdbServerUseCase()
+        }
+    }
+
     private fun updateSetting() {
         coroutineScope.launch {
             _setting.value = fetchSettingUseCase.execute()
+        }
+    }
+
+    private fun checkSetupStatus() {
+        coroutineScope.launch {
             checkSetupStatusUseCase()
         }
     }

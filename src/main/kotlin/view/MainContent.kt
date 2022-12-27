@@ -44,14 +44,14 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
     val navigation: Navigation by mainStateHolder.navState.collectAsState()
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        val devicePageStateHolder by remember {
+        val devicesPageStateHolder by remember {
             val stateHolder by inject<DevicesPageStateHolder>(clazz = DevicesPageStateHolder::class.java)
             mutableStateOf(stateHolder)
         }
 
         DevicesPage(
             windowScope = windowScope,
-            stateHolder = devicePageStateHolder,
+            stateHolder = devicesPageStateHolder,
             onNavigateSetting = { mainStateHolder.selectPage(Navigation.SettingPage) },
             onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
         )
@@ -72,7 +72,6 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
                 stateHolder = stateHolder,
                 onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) },
                 onSaved = {
-                    devicePageStateHolder.onRefresh()
                     mainStateHolder.onRefresh()
                 }
             )
@@ -94,7 +93,10 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
             DevicePage(
                 windowScope = windowScope,
                 stateHolder = devicePageViewModel,
-                onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) }
+                onNavigateDevices = {
+                    mainStateHolder.selectPage(Navigation.DevicesPage)
+                    devicesPageStateHolder.onRefresh()
+                }
             )
         }
     }

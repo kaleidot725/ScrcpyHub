@@ -10,16 +10,17 @@ import model.command.KillCommand
 import model.command.ScrcpyCommand
 import model.command.ScrcpyCommandCreator
 import model.entity.Device
+import java.util.Date
 
 private data class ProcessState(
     val value: Process,
     val status: ProcessStatus
 )
 
-enum class ProcessStatus {
-    IDLE,
-    RUNNING,
-    RECORDING
+sealed class ProcessStatus {
+    object Idle : ProcessStatus()
+    data class Running(val startDate: Date = Date()) : ProcessStatus()
+    data class Recording(val startDate: Date = Date()) : ProcessStatus()
 }
 
 class ProcessRepository(
@@ -29,7 +30,7 @@ class ProcessRepository(
 
     fun addMirroringProcess(context: Device.Context, scrcpyLocation: String, onDestroy: (suspend () -> Unit)? = null) {
         val process = ScrcpyCommand(ScrcpyCommandCreator(scrcpyLocation)).run(context)
-        processList[context.device.id] = ProcessState(process, ProcessStatus.RUNNING)
+        processList[context.device.id] = ProcessState(process, ProcessStatus.Running())
         scope.launch(Dispatchers.IO) {
             process.waitForRunning(MONITORING_DELAY)
             process.monitor(MONITORING_INTERVAL) {
@@ -46,7 +47,7 @@ class ProcessRepository(
         onDestroy: (suspend () -> Unit)? = null
     ) {
         val process = ScrcpyCommand(ScrcpyCommandCreator(commandLocation)).record(context, fileName)
-        processList[context.device.id] = ProcessState(process, ProcessStatus.RECORDING)
+        processList[context.device.id] = ProcessState(process, ProcessStatus.Recording())
         scope.launch(Dispatchers.IO) {
             process.waitForRunning(MONITORING_DELAY)
             process.monitor(MONITORING_INTERVAL) {
@@ -64,7 +65,7 @@ class ProcessRepository(
     }
 
     fun getStatus(key: String): ProcessStatus {
-        return processList[key]?.status ?: ProcessStatus.IDLE
+        return processList[key]?.status ?: ProcessStatus.Idle
     }
 
     private suspend fun Process.waitForRunning(interval: Long) {
