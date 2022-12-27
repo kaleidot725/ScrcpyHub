@@ -52,11 +52,8 @@ fun DeviceCard(
             is ProcessStatus.Recording -> {
                 coroutineScope {
                     while (true) {
-                        val time = (Date().time - processStatus.startTime.time)
-                        val hour = TimeUnit.MILLISECONDS.toHours(time).toString().padStart(2, '0')
-                        val minute = TimeUnit.MILLISECONDS.toMinutes(time).toString().padStart(2, '0')
-                        val second = TimeUnit.MILLISECONDS.toSeconds(time).toString().padStart(2, '0')
-                        setCurrentTime("${hour}:${minute}:${second}")
+                        val elapsedTime = createElapsedTime(processStatus.startDate, Date())
+                        setCurrentTime(elapsedTime)
                         delay(1000)
                     }
                 }
@@ -65,11 +62,8 @@ fun DeviceCard(
             is ProcessStatus.Running -> {
                 coroutineScope {
                     while (true) {
-                        val time = (Date().time - processStatus.startTime.time)
-                        val hour = TimeUnit.MILLISECONDS.toHours(time).toString().padStart(2, '0')
-                        val minute = TimeUnit.MILLISECONDS.toMinutes(time).toString().padStart(2, '0')
-                        val second = TimeUnit.MILLISECONDS.toSeconds(time).toString().padStart(2, '0')
-                        setCurrentTime("${hour}:${minute}:${second}")
+                        val elapsedTime = createElapsedTime(processStatus.startDate, Date())
+                        setCurrentTime(elapsedTime)
                         delay(1000)
                     }
                 }
@@ -178,6 +172,17 @@ private fun DeviceCard_Preview_DARK() {
             )
         }
     }
+}
+
+private fun createElapsedTime(startDate: Date, currentTime: Date): String {
+    val totalMillis = currentTime.time - startDate.time
+    val hour = TimeUnit.MILLISECONDS.toHours(totalMillis)
+    val minute = TimeUnit.MILLISECONDS.toMinutes(totalMillis) % 60
+    val second = TimeUnit.MILLISECONDS.toSeconds(totalMillis) % 60 % 60
+    val hourString = hour.toString().padStart(2, '0')
+    val minuteString = minute.toString().padStart(2, '0')
+    val secondString = second.toString().padStart(2, '0')
+    return "$hourString:$minuteString:$secondString"
 }
 
 @Preview

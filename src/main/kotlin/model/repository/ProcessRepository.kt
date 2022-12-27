@@ -19,8 +19,8 @@ private data class ProcessState(
 
 sealed class ProcessStatus {
     object Idle : ProcessStatus()
-    data class Running(val startTime: Date = Date()) : ProcessStatus()
-    data class Recording(val startTime: Date = Date()) : ProcessStatus()
+    data class Running(val startDate: Date = Date()) : ProcessStatus()
+    data class Recording(val startDate: Date = Date()) : ProcessStatus()
 }
 
 class ProcessRepository(
