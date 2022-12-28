@@ -56,7 +56,7 @@ fun main() = application {
 
     if (isOpen) {
         val stateHolder by remember { mutableStateOf(GlobalContext.get().get<MainContentStateHolder>()) }
-        
+
         MainWindow(
             onCloseRequest = { isOpen = false },
             state = windowState,
