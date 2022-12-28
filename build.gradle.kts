@@ -4,10 +4,11 @@ group = "jp.kaleidot725"
 version = "1.8.0"
 
 plugins {
-    kotlin("jvm") version "1.7.20"
-    kotlin("plugin.serialization") version "1.7.20"
-    id("org.jetbrains.compose") version "1.2.2"
-    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    kotlin("jvm")
+    kotlin("plugin.serialization")
+    id("org.jetbrains.compose")
+    id("org.jlleitschuh.gradle.ktlint")
+    id("dev.hydraulic.conveyor")
 }
 
 repositories {
@@ -21,27 +22,15 @@ dependencies {
     implementation(compose.desktop.currentOs)
     implementation(compose.material)
     implementation(compose.materialIconsExtended)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("com.lordcodes.turtle:turtle:0.8.0")
-    implementation("io.insert-koin:koin-core:3.2.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
-    implementation("com.malinskiy.adam:adam:0.4.8")
-    implementation("com.github.Dansoftowner:jSystemThemeDetector:3.6")
-
-    testImplementation(kotlin("test-junit5"))
-    testImplementation("io.mockk:mockk:1.13.2")
-    testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
-    implementation(kotlin("script-runtime"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
-    reporters {
-        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
-    }
+    implementation(libs.kotlin.coroutines)
+    implementation(libs.turtle)
+    implementation(libs.koin)
+    implementation(libs.kotlin.serialization)
+    implementation(libs.adam)
+    implementation(libs.jSystemThemeDetector)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotest)
 }
 
 compose.desktop {
@@ -66,5 +55,41 @@ compose.desktop {
                 iconFile.set(project.file("icon.ico"))
             }
         }
+    }
+}
+
+dependencies {
+    linuxAmd64(compose.desktop.linux_x64)
+    macAmd64(compose.desktop.macos_x64)
+    macAarch64(compose.desktop.macos_arm64)
+    windowsAmd64(compose.desktop.windows_x64)
+}
+
+// region Work around temporary Compose bugs.
+configurations.all {
+    attributes {
+        // https://github.com/JetBrains/compose-jb/issues/1404#issuecomment-1146894731
+        attribute(Attribute.of("ui", String::class.java), "awt")
+    }
+}
+
+// Force override the Kotlin stdlib version used by Compose to 1.7, as otherwise we can end up with a mix of 1.6 and 1.7 on our classpath.
+dependencies {
+    val v = "1.7.10"
+    for (m in setOf("linuxAmd64", "macAmd64", "macAarch64", "windowsAmd64")) {
+        m("org.jetbrains.kotlin:kotlin-stdlib:$v")
+        m("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$v")
+        m("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$v")
+    }
+}
+// endregion
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
     }
 }
