@@ -1,5 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-
 group = "jp.kaleidot725"
 version = "1.8.0"
 
@@ -37,23 +35,7 @@ compose.desktop {
     application {
         mainClass = "ScrcpyHubKt"
         nativeDistributions {
-            packageName = "ScrcpyHub"
             modules("jdk.management")
-
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-
-            macOS {
-                bundleID = "jp.kaleidot725.scrcpyhub"
-                iconFile.set(project.file("icon.icns"))
-            }
-
-            windows {
-                iconFile.set(project.file("icon.ico"))
-            }
-
-            linux {
-                iconFile.set(project.file("icon.ico"))
-            }
         }
     }
 }
