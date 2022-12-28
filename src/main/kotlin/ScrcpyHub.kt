@@ -27,7 +27,6 @@ fun main() = application {
 
     val trayState = rememberTrayState()
     val windowState = rememberWindowState(width = 350.dp, height = 550.dp)
-    val stateHolder by remember { mutableStateOf(GlobalContext.get().get<MainContentStateHolder>()) }
     var isOpen by remember { mutableStateOf(true) }
     var alwaysOnTop by remember { mutableStateOf(false) }
 
@@ -56,6 +55,8 @@ fun main() = application {
     )
 
     if (isOpen) {
+        val stateHolder by remember { mutableStateOf(GlobalContext.get().get<MainContentStateHolder>()) }
+
         MainWindow(
             onCloseRequest = { isOpen = false },
             state = windowState,
