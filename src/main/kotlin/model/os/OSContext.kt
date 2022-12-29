@@ -22,6 +22,6 @@ class OSContextForLinux : OSContext {
 
 class OSContextForWindows : OSContext {
     override val type: OSType = OSType.WINDOWS
-    override val settingPath: String = "./"
+    override val settingPath: String = System.getProperty("user.home") + "/ScrcpyHub/"
     override val desktopPath: String = System.getProperty("user.home") + "/Desktop/"
 }
