@@ -52,11 +52,6 @@ class MainContentStateHolder(
         restartAdbServer()
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        coroutineScope.launch { stopAdbServerUseCase() }
-    }
-
     fun selectPage(page: Navigation) {
         _navState.value = page
     }
