@@ -36,6 +36,15 @@ compose.desktop {
         mainClass = "ScrcpyHubKt"
         nativeDistributions {
             modules("jdk.management")
+            macOS {
+                bundleID = "jp.kaleidot725.scrcpyhub"
+                signing {
+                    sign.set(false)
+                }
+            }
+            windows {
+
+            }
         }
     }
 }
@@ -57,7 +66,7 @@ configurations.all {
 
 // Force override the Kotlin stdlib version used by Compose to 1.7, as otherwise we can end up with a mix of 1.6 and 1.7 on our classpath.
 dependencies {
-    val v = "1.7.10"
+    val v = "1.7.20"
     for (m in setOf("linuxAmd64", "macAmd64", "macAarch64", "windowsAmd64")) {
         m("org.jetbrains.kotlin:kotlin-stdlib:$v")
         m("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$v")
