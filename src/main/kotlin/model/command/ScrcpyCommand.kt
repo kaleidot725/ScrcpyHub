@@ -27,9 +27,9 @@ class ScrcpyCommand(private val factory: ScrcpyCommandCreator) {
         }
     }
 
-    private fun ProcessBuilder.setupCommandPath(path: String?) {
-        environment()["PATH"] = if (path != null) {
-            path + File.pathSeparator + System.getenv("PATH")
+    private fun ProcessBuilder.setupCommandPath(binaryFile: String?) {
+        environment()["PATH"] = if (binaryFile != null) {
+            File(binaryFile).parent + File.pathSeparator + System.getenv("PATH")
         } else {
             System.getenv("PATH")
         }
