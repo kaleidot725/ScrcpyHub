@@ -1,13 +1,11 @@
 package model.usecase
 
 import com.jthemedetecor.OsThemeDetector
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
 class GetSystemDarkModeFlowUseCase() {
-    @OptIn(ExperimentalCoroutinesApi::class)
     operator fun invoke(): Flow<Boolean> {
         return callbackFlow {
             val detector: OsThemeDetector = OsThemeDetector.getDetector()

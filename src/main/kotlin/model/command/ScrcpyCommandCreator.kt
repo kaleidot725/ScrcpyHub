@@ -1,21 +1,11 @@
 package model.command
 
 import model.entity.Device
-import java.io.File
 
-class ScrcpyCommandCreator(val path: String? = null) {
+class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
     fun create(context: Device.Context): List<String> {
         return buildList {
-            if (path != null) {
-                if (path.endsWith(File.separator)) {
-                    add("$path$COMMAND_NAME")
-                } else {
-                    add("$path${File.separator}$COMMAND_NAME")
-                }
-            } else {
-                add(COMMAND_NAME)
-            }
-
+            add(resolveScrcpyBinaryPath())
             add(DEVICE_OPTION_NAME)
             add(context.device.id)
 
@@ -52,17 +42,13 @@ class ScrcpyCommandCreator(val path: String? = null) {
 
     fun createHelp(): List<String> {
         return buildList {
-            if (path != null) {
-                if (path.endsWith(File.separator)) {
-                    add("$path$COMMAND_NAME")
-                } else {
-                    add("$path${File.separator}$COMMAND_NAME")
-                }
-            } else {
-                add(COMMAND_NAME)
-            }
+            add(resolveScrcpyBinaryPath())
             add(HELP_OPTION_NAME)
         }
+    }
+
+    private fun resolveScrcpyBinaryPath(): String {
+        return scrcpyBinaryPath ?: COMMAND_NAME
     }
 
     companion object {

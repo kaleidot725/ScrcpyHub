@@ -18,15 +18,15 @@ import model.repository.DeviceRepository
 import model.repository.MessageRepository
 import model.repository.ProcessRepository
 import model.repository.SettingRepository
+import model.usecase.CheckSetupStatusUseCase
 import model.usecase.FetchDevicesUseCase
 import model.usecase.FetchSettingUseCase
-import model.usecase.GetDevicesFlowUseCase
-import model.usecase.GetMessageFlowUseCase
+import model.usecase.GetErrorMessageFlowUseCase
+import model.usecase.GetNotifyMessageFlowUseCase
 import model.usecase.GetScrcpyStatusUseCase
 import model.usecase.GetSystemDarkModeFlowUseCase
-import model.usecase.IsSetupCompletedUseCase
-import model.usecase.SaveScreenshotToDesktopUseCase
-import model.usecase.StartAdbServerUseCase
+import model.usecase.RestartAdbServerUseCase
+import model.usecase.SaveScreenshotUseCase
 import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
 import model.usecase.StopScrcpyRecordUseCase
@@ -35,8 +35,8 @@ import model.usecase.UpdateDeviceSetting
 import model.usecase.UpdateSettingUseCase
 import org.koin.dsl.module
 import view.MainContentStateHolder
-import view.pages.devices.DevicesPageStateHolder
 import view.pages.device.DevicePageStateHolder
+import view.pages.devices.DevicesPageStateHolder
 import view.pages.setting.SettingPageStateHolder
 
 val appModule = module {
@@ -68,7 +68,7 @@ val appModule = module {
     }
 
     factory {
-        ProcessRepository(get(), get())
+        ProcessRepository(get())
     }
 
     factory {
@@ -84,11 +84,7 @@ val appModule = module {
     }
 
     factory {
-        GetDevicesFlowUseCase(get())
-    }
-
-    factory {
-        StartAdbServerUseCase(get())
+        RestartAdbServerUseCase(get())
     }
 
     factory {
@@ -100,19 +96,19 @@ val appModule = module {
     }
 
     factory {
-        StartScrcpyUseCase(get(), get())
+        StartScrcpyUseCase(get(), get(), get())
     }
 
     factory {
-        SaveScreenshotToDesktopUseCase(get(), get())
+        SaveScreenshotUseCase(get(), get(), get())
     }
 
     factory {
-        StopScrcpyUseCase(get())
+        StopScrcpyUseCase(get(), get())
     }
 
     factory {
-        IsSetupCompletedUseCase(get())
+        CheckSetupStatusUseCase(get(), get())
     }
 
     factory {
@@ -124,11 +120,11 @@ val appModule = module {
     }
 
     factory {
-        GetMessageFlowUseCase(get())
+        GetNotifyMessageFlowUseCase(get())
     }
 
     factory {
-        StartScrcpyRecordUseCase(get(), get(), get(), get())
+        StartScrcpyRecordUseCase(get(), get(), get())
     }
 
     factory {
@@ -140,7 +136,21 @@ val appModule = module {
     }
 
     factory {
-        DevicesPageStateHolder(get(), get(), get(), get(), get(), get(), get(), get(), get())
+        GetErrorMessageFlowUseCase(get())
+    }
+
+    factory {
+        DevicesPageStateHolder(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
     }
 
     factory { (context: Device.Context) ->

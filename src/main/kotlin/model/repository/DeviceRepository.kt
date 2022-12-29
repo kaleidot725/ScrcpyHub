@@ -1,15 +1,10 @@
 package model.repository
 
 import com.malinskiy.adam.AndroidDebugBridgeClientFactory
-import com.malinskiy.adam.request.device.AsyncDeviceMonitorRequest
 import com.malinskiy.adam.request.device.ListDevicesRequest
 import com.malinskiy.adam.request.framebuffer.RawImageScreenCaptureAdapter
 import com.malinskiy.adam.request.framebuffer.ScreenCaptureRequest
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -17,9 +12,6 @@ import kotlinx.serialization.json.Json
 import model.entity.Device
 import model.os.OSContext
 import java.io.File
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import javax.imageio.ImageIO
 
 class DeviceRepository(private val osContext: OSContext) {
@@ -31,11 +23,6 @@ class DeviceRepository(private val osContext: OSContext) {
             val devices: List<Device> = adb.execute(request = ListDevicesRequest()).toDeviceList()
             loadCaches(devices)
         }
-    }
-
-    fun getAllFlow(scope: CoroutineScope): Flow<List<Device.Context>> {
-        val allFlow = adb.execute(request = AsyncDeviceMonitorRequest(), scope = scope).receiveAsFlow()
-        return allFlow.map { loadCaches(it.toDeviceList()) }
     }
 
     suspend fun saveDeviceSetting(context: Device.Context) {
@@ -53,20 +40,6 @@ class DeviceRepository(private val osContext: OSContext) {
             ).toBufferedImage()
             ImageIO.write(image, "png", File(filePath))
         }
-    }
-
-    fun createScreenshotPathForDesktop(context: Device.Context): String {
-        val date = ZonedDateTime
-            .now(ZoneId.systemDefault())
-            .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
-        return "${System.getProperty("user.home")}/Desktop/${context.displayName}-$date.png"
-    }
-
-    fun createRecordPathForDesktop(context: Device.Context): String {
-        val date = ZonedDateTime
-            .now(ZoneId.systemDefault())
-            .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
-        return "${System.getProperty("user.home")}/Desktop/${context.displayName}-$date.mp4"
     }
 
     private fun writeCache(deviceContext: Device.Context) {
@@ -107,6 +80,6 @@ class DeviceRepository(private val osContext: OSContext) {
     }
 
     private fun com.malinskiy.adam.request.device.Device.toDevice(): Device {
-        return Device(id = serial, name = "Device")
+        return Device(id = serial)
     }
 }

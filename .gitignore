@@ -24,3 +24,4 @@ gradle-app.setting
 src/setting.json
 src/gradle.properties
 src/gradle.properties
+output
