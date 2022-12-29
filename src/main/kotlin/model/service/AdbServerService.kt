@@ -9,18 +9,21 @@ object AdbServerService {
 
     val isRunning get() = latestBinaryPath != null
 
-    suspend fun startAdbServer(path: String): Boolean {
+    suspend fun restartAdbServer(path: String): Boolean {
         if (latestBinaryPath == path) return true
-        if (isRunning) return false
+        stopAdbServer()
+        return startAdbServer(path)
+    }
 
+    private suspend fun startAdbServer(path: String): Boolean {
         val result = StartAdbInteractor().execute(adbBinary = File(path))
         if (result) latestBinaryPath = path
         return result
     }
 
-    suspend fun stopAdbServer(): Boolean {
-        if (!isRunning) return false
-        val result = StopAdbInteractor().execute(adbBinary = File(latestBinaryPath))
+    private suspend fun stopAdbServer(): Boolean {
+        val path = latestBinaryPath ?: return true
+        val result = StopAdbInteractor().execute(File(path))
         if (result) latestBinaryPath = null
         return result
     }

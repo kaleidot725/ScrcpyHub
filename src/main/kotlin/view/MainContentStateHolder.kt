@@ -12,16 +12,14 @@ import model.entity.Theme
 import model.usecase.CheckSetupStatusUseCase
 import model.usecase.FetchSettingUseCase
 import model.usecase.GetSystemDarkModeFlowUseCase
-import model.usecase.StartAdbServerUseCase
-import model.usecase.StopAdbServerUseCase
+import model.usecase.RestartAdbServerUseCase
 import view.navigation.Navigation
 
 class MainContentStateHolder(
     private val fetchSettingUseCase: FetchSettingUseCase,
     private val checkSetupStatusUseCase: CheckSetupStatusUseCase,
     private val getSystemDarkModeFlowUseCase: GetSystemDarkModeFlowUseCase,
-    private val startAdbServerUseCase: StartAdbServerUseCase,
-    private val stopAdbServerUseCase: StopAdbServerUseCase
+    private val restartAdbServerUseCase: RestartAdbServerUseCase
 ) : StateHolder() {
     private val _navState: MutableStateFlow<Navigation> = MutableStateFlow(Navigation.DevicesPage)
     val navState: StateFlow<Navigation> = _navState
@@ -58,8 +56,7 @@ class MainContentStateHolder(
 
     private fun restartAdbServer() {
         coroutineScope.launch {
-            stopAdbServerUseCase()
-            startAdbServerUseCase()
+            restartAdbServerUseCase()
         }
     }
 

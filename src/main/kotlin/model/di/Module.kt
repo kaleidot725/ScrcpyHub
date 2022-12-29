@@ -25,11 +25,10 @@ import model.usecase.GetErrorMessageFlowUseCase
 import model.usecase.GetNotifyMessageFlowUseCase
 import model.usecase.GetScrcpyStatusUseCase
 import model.usecase.GetSystemDarkModeFlowUseCase
+import model.usecase.RestartAdbServerUseCase
 import model.usecase.SaveScreenshotUseCase
-import model.usecase.StartAdbServerUseCase
 import model.usecase.StartScrcpyRecordUseCase
 import model.usecase.StartScrcpyUseCase
-import model.usecase.StopAdbServerUseCase
 import model.usecase.StopScrcpyRecordUseCase
 import model.usecase.StopScrcpyUseCase
 import model.usecase.UpdateDeviceSetting
@@ -85,11 +84,7 @@ val appModule = module {
     }
 
     factory {
-        StartAdbServerUseCase(get())
-    }
-
-    factory {
-        StopAdbServerUseCase()
+        RestartAdbServerUseCase(get())
     }
 
     factory {
@@ -163,7 +158,7 @@ val appModule = module {
     }
 
     factory {
-        MainContentStateHolder(get(), get(), get(), get(), get())
+        MainContentStateHolder(get(), get(), get(), get())
     }
 
     factory {
