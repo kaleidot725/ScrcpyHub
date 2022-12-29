@@ -4,7 +4,7 @@ ScrcpyHub is a GUI application to mirror android screens.
 ScrcpyHub uses [scrcpy](https://github.com/Genymobile/scrcpy). [scrcpy](https://github.com/Genymobile/scrcpy) is a
 mirroring android command tool.
 
-https://user-images.githubusercontent.com/23740796/179343198-634e852a-602a-4466-8496-55f6dcd78add.mp4
+https://user-images.githubusercontent.com/23740796/209917460-982786d1-9c09-4408-96b1-3bd0896fe47a.mp4
 
 # ✨ Feature
 
@@ -31,7 +31,7 @@ Install adb and scrcpy, ScrcpyHub.
 ## 💻 Windows 10/11
 
 1. Download [here](https://github.com/Genymobile/scrcpy#windows) and install scrcpy somewhere.
-2. Download [here](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.7.1) and launch ScrcpyHub.
+2. Download [here](https://scrcpyhub.netlify.app/) and launch ScrcpyHub.
 3. Open ScrcpyHub Preferences.
 4. Input adb and scrcpy location, save settings.
 
@@ -42,18 +42,8 @@ ScrcpyHub doesn't work mirroring start and stop if you install scrcpy through Ch
 ## 💻 Linux(Ubuntu)
 
 1. Download [here](https://github.com/Genymobile/scrcpy#windows) and install scrcpy somewhere.
-2. Download [here](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.7.1) and install ScrcpHub.
-
-```
-sudo dpkg -i scrcpyhub_1.7.0-1_amd64.deb
-```
-
+2. Download [here](https://scrcpyhub.netlify.app/) and install ScrcpHub.
 3. Launch ScrcpyHub, open Preferences.
-
-```
-/opt/scrcpyhub/bin/ScrcpyHub
-```
-
 4. Input adb and scrcpy location, save settings.
 
 ## 💻 macOS
@@ -65,7 +55,7 @@ brew install android-platform-tools
 brew install scrcpy
 ```
 
-2. Download [here](https://github.com/kaleidot725/scrcpy-hub/releases/tag/v1.7.1) and launch ScrcpyHub.
+2. Download [here](https://scrcpyhub.netlify.app/) and launch ScrcpyHub.
 3. Open ScrcpyHub Preferences.
 4. Input adb and scrcpy location, save settings.
 

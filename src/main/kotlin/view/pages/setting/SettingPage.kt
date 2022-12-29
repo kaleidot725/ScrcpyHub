@@ -1,24 +1,15 @@
 package view.pages.setting
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import model.entity.Theme
 import view.components.AppSetting
-import view.resource.Images
+import view.parts.SubPageHeader
 import view.resource.Strings
-import view.parts.PageHeader
-import view.templates.HeaderAndContent
+import view.templates.MainLayout
 
 @Composable
 fun SettingPage(
@@ -31,6 +22,8 @@ fun SettingPage(
     val themes: List<Theme> by stateHolder.themes.collectAsState()
     val adbLocation: String by stateHolder.adbLocation.collectAsState()
     val scrcpyLocation: String by stateHolder.scrcpyLocation.collectAsState()
+    val screenshotDirectory: String by stateHolder.screenshotDirectory.collectAsState()
+    val screenRecordDirectory: String by stateHolder.screenRecordDirectory.collectAsState()
 
     DisposableEffect(stateHolder) {
         stateHolder.onStarted()
@@ -39,34 +32,31 @@ fun SettingPage(
         }
     }
 
-    HeaderAndContent(
+    MainLayout(
         header = {
-            PageHeader(
+            SubPageHeader(
                 windowScope = windowScope,
                 title = Strings.SETTING_PAGE_TITLE,
-                optionContent = {
-                    Image(
-                        painter = painterResource(Images.CLOSE),
-                        contentDescription = "",
-                        contentScale = ContentScale.FillHeight,
-                        modifier = Modifier
-                            .wrapContentWidth()
-                            .height(18.dp)
-                            .clickable { onNavigateDevices?.invoke() }
-                    )
-                }
+                onBack = { onNavigateDevices?.invoke() },
             )
         },
         content = {
             AppSetting(
                 theme = theme,
                 themes = themes,
-                onUpdateTheme = { stateHolder.updateTheme(it) },
+                onUpdateTheme = stateHolder::updateTheme,
                 adbLocation = adbLocation,
-                onUpdateAdbLocation = { stateHolder.updateAdbLocation(it) },
+                onUpdateAdbLocation = stateHolder::updateAdbLocation,
                 scrcpyLocation = scrcpyLocation,
-                onUpdateScrcpyLocation = { stateHolder.updateScrcpyLocation(it) },
-                onSave = { stateHolder.save { onSaved?.invoke() } }
+                onUpdateScrcpyLocation = stateHolder::updateScrcpyLocation,
+                screenRecordDirectory = screenRecordDirectory,
+                onUpdateScreenRecordDirectory = stateHolder::updateScreenRecordDirectory,
+                screenshotDirectory = screenshotDirectory,
+                onUpdateScreenshotDirectory = stateHolder::updateScreenshotDirectory,
+                onSave = {
+                    stateHolder.save { onSaved?.invoke() }
+                    onNavigateDevices?.invoke()
+                }
             )
         }
     )
