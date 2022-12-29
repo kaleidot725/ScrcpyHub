@@ -57,7 +57,7 @@ class DevicesPageStateHolder(
         coroutineScope.launch {
             while (true) {
                 fetchStates()
-                delay(2000)
+                delay(500)
             }
         }
     }
