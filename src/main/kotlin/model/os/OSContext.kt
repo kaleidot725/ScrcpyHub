@@ -16,12 +16,12 @@ class OSContextForMac : OSContext {
 
 class OSContextForLinux : OSContext {
     override val type: OSType = OSType.LINUX
-    override val settingPath: String = System.getProperty("user.home") + "/.scrcpyhub/"
+    override val settingPath: String = System.getProperty("user.home") + "/AppData/ScrcpyHub"
     override val desktopPath: String = System.getProperty("user.home") + "/Desktop/"
 }
 
 class OSContextForWindows : OSContext {
     override val type: OSType = OSType.WINDOWS
-    override val settingPath: String = System.getProperty("user.home") + "/ScrcpyHub/"
+    override val settingPath: String = System.getProperty("user.home") + "/.config/ScrcpyHub/"
     override val desktopPath: String = System.getProperty("user.home") + "/Desktop/"
 }
