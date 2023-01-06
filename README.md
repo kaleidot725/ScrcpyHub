@@ -28,7 +28,7 @@ https://user-images.githubusercontent.com/23740796/209917460-982786d1-9c09-4408-
 
 Install adb and scrcpy, ScrcpyHub.
 
-## 💻 Windows 10/11
+## Windows 10/11
 
 1. Download [here](https://github.com/Genymobile/scrcpy#windows) and install scrcpy somewhere.
 2. Download [here](https://scrcpyhub.netlify.app/) and launch ScrcpyHub.
@@ -39,14 +39,14 @@ Install adb and scrcpy, ScrcpyHub.
 
 ScrcpyHub doesn't work mirroring start and stop if you install scrcpy through Chocolately.
 
-## 💻 Linux(Ubuntu)
+## Linux(Ubuntu)
 
 1. Download [here](https://github.com/Genymobile/scrcpy#windows) and install scrcpy somewhere.
 2. Download [here](https://scrcpyhub.netlify.app/) and install ScrcpHub.
 3. Launch ScrcpyHub, open Preferences.
 4. Input adb and scrcpy location, save settings.
 
-## 💻 macOS
+## macOS
 
 1. Install android-platform-tools and scrcpy.
 
