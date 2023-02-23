@@ -1,5 +1,5 @@
 group = "jp.kaleidot725"
-version = "1.8.1"
+version = "1.9.0"
 
 plugins {
     kotlin("jvm")
@@ -43,7 +43,6 @@ compose.desktop {
                 }
             }
             windows {
-
             }
         }
     }
