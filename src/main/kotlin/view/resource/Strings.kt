@@ -48,6 +48,10 @@ object Strings {
     const val DEVICE_PAGE_EDIT_FULLSCREEN_TITLE = "Fullscreen"
     const val DEVICE_PAGE_EDIT_FULLSCREEN_DETAILS = "The app may be started directly in fullscreen"
     const val DEVICE_PAGE_EDIT_ROTATION_TITLE = "Rotation (Don't Affect Recording)"
+    const val DEVICE_PAGE_EDIT_ROTATION_NONE = "None"
+    const val DEVICE_PAGE_EDIT_ROTATION_COUNTER_CLOCK_WISE_90 = "90° Counter Clock Wise"
+    const val DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_180 = "180°"
+    const val DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_90 = "90° Clock Wise"
 
     // Setting Page
     const val SETTING_PAGE_TITLE = "Preferences"

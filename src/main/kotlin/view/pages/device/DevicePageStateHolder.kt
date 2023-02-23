@@ -26,6 +26,13 @@ class DevicePageStateHolder(
         Device.Context.LockOrientation.values().firstOrNull { it.value == context.lockOrientation }
             ?: Device.Context.LockOrientation.NONE
     )
+    private val enableBorderless: MutableStateFlow<Boolean> = MutableStateFlow(context.enableBorderless)
+    private val enableAlwaysOnTop: MutableStateFlow<Boolean> = MutableStateFlow(context.enableAlwaysOnTop)
+    private val enableFullscreen: MutableStateFlow<Boolean> = MutableStateFlow(context.enableFullScreen)
+    private val rotation: MutableStateFlow<Device.Context.Rotation> = MutableStateFlow(
+        Device.Context.Rotation.values().firstOrNull { it.value == context.rotation }
+            ?: Device.Context.Rotation.NONE
+    )
 
     val state: StateFlow<DevicePageState> =
         combine(
@@ -37,7 +44,11 @@ class DevicePageStateHolder(
             maxFrameRateError,
             bitrate,
             bitrateError,
-            lockOrientation
+            lockOrientation,
+            enableBorderless,
+            enableAlwaysOnTop,
+            enableFullscreen,
+            rotation,
         ) {
             DevicePageState(
                 titleName = it[0] as String,
@@ -49,6 +60,10 @@ class DevicePageStateHolder(
                 bitrate = it[6] as String,
                 bitrateError = it[7] as String,
                 lockOrientation = it[8] as Device.Context.LockOrientation,
+                enableBorderless = it[9] as Boolean,
+                enableAlwaysOnTop = it[10] as Boolean,
+                enableFullScreen = it[11] as Boolean,
+                rotation = it[12] as Device.Context.Rotation,
                 savable = isValid()
             )
         }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), DevicePageState())
@@ -57,35 +72,54 @@ class DevicePageStateHolder(
         override fun updateName(name: String) {
             coroutineScope.launch {
                 editName.emit(name)
-                isValid()
             }
         }
 
         override fun updateMaxSize(maxSize: String) {
             coroutineScope.launch {
                 this@DevicePageStateHolder.maxSize.emit(maxSize)
-                isValid()
             }
         }
 
         override fun updateMaxFrameRate(maxFrameRate: String) {
             coroutineScope.launch {
                 this@DevicePageStateHolder.maxFrameRate.emit(maxFrameRate)
-                isValid()
             }
         }
 
         override fun updateBitrate(bitrate: String) {
             coroutineScope.launch {
                 this@DevicePageStateHolder.bitrate.emit(bitrate)
-                isValid()
             }
         }
 
         override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {
             coroutineScope.launch {
                 this@DevicePageStateHolder.lockOrientation.emit(lockOrientation)
-                isValid()
+            }
+        }
+
+        override fun updateBorderless(enabled: Boolean) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.enableBorderless.emit(enabled)
+            }
+        }
+
+        override fun updateAlwaysOnTop(enabled: Boolean) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.enableAlwaysOnTop.emit(enabled)
+            }
+        }
+
+        override fun updateFullscreen(enabled: Boolean) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.enableFullscreen.emit(enabled)
+            }
+        }
+
+        override fun updateRotation(rotation: Device.Context.Rotation) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.rotation.emit(rotation)
             }
         }
 
@@ -98,6 +132,10 @@ class DevicePageStateHolder(
                     maxFrameRate = maxFrameRate.value.toIntOrNull(),
                     bitrate = bitrate.value.toIntOrNull(),
                     lockOrientation = lockOrientation.value.value,
+                    enableBorderless = enableBorderless.value,
+                    enableAlwaysOnTop = enableAlwaysOnTop.value,
+                    enableFullScreen = enableFullscreen.value,
+                    rotation = rotation.value.value
                 )
 
                 updateDeviceSetting.execute(newContext)

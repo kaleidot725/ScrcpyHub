@@ -34,6 +34,23 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
             if (lockOrientation != null) {
                 add("$LOCK_ORIENTATION_OPTION_NAME$EQUAL$lockOrientation")
             }
+
+            if (context.enableBorderless) {
+                add(BORDERLESS_OPTION_NAME)
+            }
+
+            if (context.enableAlwaysOnTop) {
+                add(ALWAYS_ON_TOP_OPTION_NAME)
+            }
+
+            if (context.enableFullScreen) {
+                add(FULLSCREEN_OPTION_NAME)
+            }
+
+            val rotation = context.rotation
+            if (rotation != null) {
+                add("$ROTATION_OPTION_NAME$EQUAL$rotation")
+            }
         }
     }
 
@@ -67,5 +84,9 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
         private const val BITRATE_OPTION_NAME = "-b"
         private const val WINDOW_TITLE_OPTION_NAME = "--window-title"
         private const val LOCK_ORIENTATION_OPTION_NAME = "--lock-video-orientation"
+        private const val BORDERLESS_OPTION_NAME = "--window-borderless"
+        private const val ALWAYS_ON_TOP_OPTION_NAME = "--always-on-top"
+        private const val FULLSCREEN_OPTION_NAME = "--fullscreen"
+        private const val ROTATION_OPTION_NAME = "--rotation"
     }
 }

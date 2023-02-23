@@ -8,5 +8,9 @@ interface DevicePageAction {
     fun updateMaxFrameRate(maxFrameRate: String)
     fun updateBitrate(bitrate: String)
     fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation)
+    fun updateBorderless(enabled: Boolean)
+    fun updateAlwaysOnTop(enabled: Boolean)
+    fun updateFullscreen(enabled: Boolean)
+    fun updateRotation(rotation: Device.Context.Rotation)
     fun save()
 }

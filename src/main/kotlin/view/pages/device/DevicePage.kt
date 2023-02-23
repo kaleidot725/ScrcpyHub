@@ -5,7 +5,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.window.WindowScope
-import view.components.DeviceSetting
 import view.parts.SubPageHeader
 import view.templates.MainLayout
 
@@ -36,21 +35,6 @@ fun DevicePage(
             savable = state.savable,
         )
     }, content = {
-        DeviceSetting(
-            name = state.editName,
-            onUpdateName = { stateHolder.viewAction.updateName(it) },
-            maxSize = state.maxSize,
-            onUpdateMaxSize = { stateHolder.viewAction.updateMaxSize(it) },
-            maxSizeError = state.maxSizeError,
-            maxFrameRate = state.maxFrameRate,
-            onUpdateFrameRate = { stateHolder.viewAction.updateMaxFrameRate(it) },
-            maxFrameRateError = state.maxFrameRateError,
-            bitrate = state.bitrate,
-            onUpdateBitrate = { stateHolder.viewAction.updateBitrate(it) },
-            bitrateError = state.bitrateError,
-            lockOrientation = state.lockOrientation,
-            lockOrientations = state.lockOrientations,
-            onUpdateLockOrientation = { stateHolder.viewAction.updateLockOrientation(it) }
-        )
+        DeviceSetting(state, stateHolder.viewAction)
     })
 }
