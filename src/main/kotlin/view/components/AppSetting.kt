@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -24,7 +23,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.entity.Theme
 import view.parts.TextFieldAndError
-import view.parts.Texts
 import view.parts.TitleAndRadioButtons
 import view.resource.Strings
 
@@ -40,8 +38,7 @@ fun AppSetting(
     screenshotDirectory: String,
     onUpdateScreenshotDirectory: (String) -> Unit,
     screenRecordDirectory: String,
-    onUpdateScreenRecordDirectory: (String) -> Unit,
-    onSave: () -> Unit
+    onUpdateScreenRecordDirectory: (String) -> Unit
 ) {
     Box {
         val scrollState = rememberScrollState()
@@ -119,10 +116,6 @@ fun AppSetting(
                     )
                 }
             }
-
-            Button(onClick = { onSave() }, modifier = Modifier.fillMaxWidth()) {
-                Texts.Button(Strings.SAVE)
-            }
         }
 
         VerticalScrollbar(
@@ -155,6 +148,5 @@ private fun AppSetting_Preview() {
         onUpdateScreenshotDirectory = {},
         screenRecordDirectory = "CUSTOM SCREENRECORD DIRECTORY",
         onUpdateScreenRecordDirectory = {},
-        onSave = {}
     )
 }

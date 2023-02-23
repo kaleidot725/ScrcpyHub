@@ -2,8 +2,9 @@ package view.resource
 
 object Strings {
     // COMMON
-    const val APP_NAME = "ScrcpyHub"
+    const val APP_NAME = "ScrcpyHub | v1.9.0"
     const val SAVE = "Save"
+    const val CANCEL = "Cancel"
     const val QUIT = "Quit"
 
     // TRAY
