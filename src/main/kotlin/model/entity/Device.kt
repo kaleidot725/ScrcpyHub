@@ -10,6 +10,7 @@ data class Device(val id: String = "") {
         val customName: String? = null,
         val maxSize: Int? = null,
         val maxFrameRate: Int? = null,
+        val lockOrientation: Int? = null,
         val bitrate: Int? = null
     ) {
         val displayName get() = if (customName.isNullOrEmpty()) device.id else customName
