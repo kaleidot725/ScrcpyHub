@@ -17,6 +17,10 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -25,13 +29,21 @@ import androidx.compose.ui.unit.dp
 import model.entity.Device
 import view.parts.DropDownSelector
 import view.parts.TextFieldAndError
+import view.parts.TitleAndCheckButton
 import view.resource.Strings
+import view.resource.Strings.DEVICE_PAGE_EDIT_ALWAYS_ON_TOP_DETAILS
+import view.resource.Strings.DEVICE_PAGE_EDIT_ALWAYS_ON_TOP_TITLE
+import view.resource.Strings.DEVICE_PAGE_EDIT_BORDERLESS_DETAILS
+import view.resource.Strings.DEVICE_PAGE_EDIT_BORDERLESS_TITLE
+import view.resource.Strings.DEVICE_PAGE_EDIT_FULLSCREEN_DETAILS
+import view.resource.Strings.DEVICE_PAGE_EDIT_FULLSCREEN_TITLE
 import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_180
 import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_90
 import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90
 import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_NATURAL
 import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_NONE
 import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_TITLE
+import view.resource.Strings.DEVICE_PAGE_EDIT_ROTATION_TITLE
 
 @Composable
 fun DeviceSetting(
@@ -120,6 +132,56 @@ fun DeviceSetting(
 
                     DropDownSelector(
                         label = DEVICE_PAGE_EDIT_ORIENTATION_TITLE,
+                        selectedItem = lockOrientation.toTitle(),
+                        items = lockOrientations.map { it.toTitle() },
+                        onSelect = { title ->
+                            val item = lockOrientations.firstOrNull { it.toTitle() == title } ?: return@DropDownSelector
+                            onUpdateLockOrientation(item)
+                        },
+                        modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp)
+                    )
+                }
+            }
+
+            Card(elevation = 4.dp) {
+                Column {
+                    Text(
+                        text = Strings.DEVICE_PAGE_EDIT_WINDOW_TITLE,
+                        modifier = Modifier.fillMaxWidth().padding(8.dp),
+                        fontWeight = FontWeight.Bold,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.subtitle1
+                    )
+
+                    var borderless by remember { mutableStateOf(false) }
+                    TitleAndCheckButton(
+                        title = DEVICE_PAGE_EDIT_BORDERLESS_TITLE,
+                        subTitle = DEVICE_PAGE_EDIT_BORDERLESS_DETAILS,
+                        value = borderless,
+                        onSelect = { borderless = it },
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    var alwaysOnTop by remember { mutableStateOf(false) }
+                    TitleAndCheckButton(
+                        title = DEVICE_PAGE_EDIT_ALWAYS_ON_TOP_TITLE,
+                        subTitle = DEVICE_PAGE_EDIT_ALWAYS_ON_TOP_DETAILS,
+                        value = alwaysOnTop,
+                        onSelect = { alwaysOnTop = it },
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    var fullScreen by remember { mutableStateOf(false) }
+                    TitleAndCheckButton(
+                        title = DEVICE_PAGE_EDIT_FULLSCREEN_TITLE,
+                        subTitle = DEVICE_PAGE_EDIT_FULLSCREEN_DETAILS,
+                        value = fullScreen,
+                        onSelect = { fullScreen = it },
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    DropDownSelector(
+                        label = DEVICE_PAGE_EDIT_ROTATION_TITLE,
                         selectedItem = lockOrientation.toTitle(),
                         items = lockOrientations.map { it.toTitle() },
                         onSelect = { title ->
