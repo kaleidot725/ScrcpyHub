@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun DropDownButton(
+fun DropDownSelector(
     label: String,
     selectedItem: String,
     items: List<String>,

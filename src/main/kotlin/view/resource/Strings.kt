@@ -34,6 +34,12 @@ object Strings {
     const val DEVICE_PAGE_EDIT_MAX_FRAME_RATE_DETAILS = "Set video fps limit."
     const val DEVICE_PAGE_EDIT_MAX_BITRATE_TITLE = "Bitrate Limit (Mbps)"
     const val DEVICE_PAGE_EDIT_MAX_BITRATE_DETAILS = "Set video bitrate limit."
+    const val DEVICE_PAGE_EDIT_ORIENTATION_TITLE = "Orientation"
+    const val DEVICE_PAGE_EDIT_ORIENTATION_NONE = "None"
+    const val DEVICE_PAGE_EDIT_ORIENTATION_NATURAL = "Natural"
+    const val DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90 = "90° Counter Clock Wise"
+    const val DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_180 = "180°"
+    const val DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_90 = "90° Clock Wise"
 
     // Setting Page
     const val SETTING_PAGE_TITLE = "Preferences"

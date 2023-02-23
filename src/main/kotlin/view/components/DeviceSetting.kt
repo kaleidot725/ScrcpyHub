@@ -23,9 +23,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import model.entity.Device
-import view.parts.DropDownButton
+import view.parts.DropDownSelector
 import view.parts.TextFieldAndError
 import view.resource.Strings
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_180
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_90
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_NATURAL
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_NONE
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_TITLE
 
 @Composable
 fun DeviceSetting(
@@ -112,12 +118,12 @@ fun DeviceSetting(
                         modifier = Modifier.padding(8.dp)
                     )
 
-                    DropDownButton(
-                        label = "Orientation",
-                        selectedItem = lockOrientation.title,
-                        items = lockOrientations.map { it.title },
+                    DropDownSelector(
+                        label = DEVICE_PAGE_EDIT_ORIENTATION_TITLE,
+                        selectedItem = lockOrientation.toTitle(),
+                        items = lockOrientations.map { it.toTitle() },
                         onSelect = { title ->
-                            val item = lockOrientations.firstOrNull { it.title == title } ?: return@DropDownButton
+                            val item = lockOrientations.firstOrNull { it.toTitle() == title } ?: return@DropDownSelector
                             onUpdateLockOrientation(item)
                         },
                         modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp)
@@ -130,6 +136,16 @@ fun DeviceSetting(
             adapter = rememberScrollbarAdapter(scrollState),
             modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight()
         )
+    }
+}
+
+private fun Device.Context.LockOrientation.toTitle(): String {
+    return when (this) {
+        Device.Context.LockOrientation.NONE -> DEVICE_PAGE_EDIT_ORIENTATION_NONE
+        Device.Context.LockOrientation.NATURAL -> DEVICE_PAGE_EDIT_ORIENTATION_NATURAL
+        Device.Context.LockOrientation.COUNTER_CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90
+        Device.Context.LockOrientation.CLOCK_WISE_180 -> DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_180
+        Device.Context.LockOrientation.CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_90
     }
 }
 
