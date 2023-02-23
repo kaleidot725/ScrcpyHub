@@ -36,7 +36,12 @@ fun DevicePage(
         SubPageHeader(
             windowScope = windowScope,
             title = titleName,
-            onBack = { onNavigateDevices?.invoke() },
+            onCancel = { onNavigateDevices?.invoke() },
+            onSave = {
+                stateHolder.save()
+                onNavigateDevices?.invoke()
+            },
+            savable = savable,
         )
     }, content = {
         DeviceSetting(
@@ -51,11 +56,6 @@ fun DevicePage(
             bitrate = bitrate,
             onUpdateBitrate = { stateHolder.updateBitrate(it) },
             bitrateError = bitrateError,
-            savable = savable,
-            onSave = {
-                stateHolder.save()
-                onNavigateDevices?.invoke()
-            }
         )
     })
 }

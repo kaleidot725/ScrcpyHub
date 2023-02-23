@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -23,7 +22,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import view.parts.TextFieldAndError
-import view.parts.Texts
 import view.resource.Strings
 
 @Composable
@@ -39,8 +37,6 @@ fun DeviceSetting(
     bitrate: String,
     onUpdateBitrate: (String) -> Unit,
     bitrateError: String,
-    savable: Boolean,
-    onSave: () -> Unit
 ) {
     val scrollState = rememberScrollState()
 
@@ -111,14 +107,6 @@ fun DeviceSetting(
                     )
                 }
             }
-
-            Button(
-                enabled = savable,
-                onClick = { onSave() },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Texts.Button(Strings.SAVE)
-            }
         }
 
         VerticalScrollbar(
@@ -143,8 +131,6 @@ private fun DeviceSetting_Savable_True_Preview() {
         bitrate = "1000",
         onUpdateBitrate = {},
         bitrateError = "",
-        savable = true,
-        onSave = {}
     )
 }
 
@@ -163,7 +149,5 @@ private fun DeviceSetting_Savable_False_Preview() {
         bitrate = "ERROR VALUE",
         onUpdateBitrate = {},
         bitrateError = "INVALID MAX SIZE",
-        savable = false,
-        onSave = {}
     )
 }
