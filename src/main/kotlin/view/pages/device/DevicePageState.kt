@@ -12,7 +12,12 @@ data class DevicePageState(
     val bitrate: String = "",
     val bitrateError: String = "",
     val lockOrientation: Device.Context.LockOrientation = Device.Context.LockOrientation.NONE,
+    val enableBorderless: Boolean = false,
+    val enableAlwaysOnTop: Boolean = false,
+    val enableFullScreen: Boolean = false,
+    val rotation: Device.Context.Rotation = Device.Context.Rotation.NONE,
     val savable: Boolean = false,
 ) {
     val lockOrientations: List<Device.Context.LockOrientation> = Device.Context.LockOrientation.values().toList()
+    val rotations: List<Device.Context.Rotation> = Device.Context.Rotation.values().toList()
 }
