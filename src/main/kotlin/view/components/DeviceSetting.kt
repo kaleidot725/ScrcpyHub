@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.verticalScroll
@@ -21,6 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import model.entity.Device
+import view.parts.DropDownButton
 import view.parts.TextFieldAndError
 import view.resource.Strings
 
@@ -37,6 +40,9 @@ fun DeviceSetting(
     bitrate: String,
     onUpdateBitrate: (String) -> Unit,
     bitrateError: String,
+    lockOrientation: Device.Context.LockOrientation,
+    lockOrientations: List<Device.Context.LockOrientation>,
+    onUpdateLockOrientation: (Device.Context.LockOrientation) -> Unit,
 ) {
     val scrollState = rememberScrollState()
 
@@ -105,6 +111,17 @@ fun DeviceSetting(
                         error = bitrateError,
                         modifier = Modifier.padding(8.dp)
                     )
+
+                    DropDownButton(
+                        label = "Orientation",
+                        selectedItem = lockOrientation.title,
+                        items = lockOrientations.map { it.title },
+                        onSelect = { title ->
+                            val item = lockOrientations.firstOrNull { it.title == title } ?: return@DropDownButton
+                            onUpdateLockOrientation(item)
+                        },
+                        modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp)
+                    )
                 }
             }
         }
@@ -131,6 +148,9 @@ private fun DeviceSetting_Savable_True_Preview() {
         bitrate = "1000",
         onUpdateBitrate = {},
         bitrateError = "",
+        lockOrientation = Device.Context.LockOrientation.NONE,
+        lockOrientations = Device.Context.LockOrientation.values().toList(),
+        onUpdateLockOrientation = {}
     )
 }
 
@@ -149,5 +169,8 @@ private fun DeviceSetting_Savable_False_Preview() {
         bitrate = "ERROR VALUE",
         onUpdateBitrate = {},
         bitrateError = "INVALID MAX SIZE",
+        lockOrientation = Device.Context.LockOrientation.NONE,
+        lockOrientations = Device.Context.LockOrientation.values().toList(),
+        onUpdateLockOrientation = {}
     )
 }
