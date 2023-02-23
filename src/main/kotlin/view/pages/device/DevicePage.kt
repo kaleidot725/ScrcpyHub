@@ -15,15 +15,7 @@ fun DevicePage(
     stateHolder: DevicePageStateHolder,
     onNavigateDevices: (() -> Unit)? = null
 ) {
-    val titleName: String by stateHolder.titleName.collectAsState()
-    val name: String by stateHolder.editName.collectAsState()
-    val maxSize: String by stateHolder.maxSize.collectAsState()
-    val maxSizeError: String by stateHolder.maxSizeError.collectAsState()
-    val savable: Boolean by stateHolder.savable.collectAsState()
-    val maxFrameRate: String by stateHolder.maxFrameRate.collectAsState()
-    val maxFrameRateError: String by stateHolder.maxFrameRateError.collectAsState()
-    val bitrate: String by stateHolder.bitrate.collectAsState()
-    val bitrateError: String by stateHolder.bitrateError.collectAsState()
+    val state by stateHolder.state.collectAsState()
 
     DisposableEffect(stateHolder) {
         stateHolder.onStarted()
@@ -35,27 +27,30 @@ fun DevicePage(
     MainLayout(header = {
         SubPageHeader(
             windowScope = windowScope,
-            title = titleName,
+            title = state.titleName,
             onCancel = { onNavigateDevices?.invoke() },
             onSave = {
-                stateHolder.save()
+                stateHolder.viewAction.save()
                 onNavigateDevices?.invoke()
             },
-            savable = savable,
+            savable = state.savable,
         )
     }, content = {
         DeviceSetting(
-            name = name,
-            onUpdateName = { stateHolder.updateName(it) },
-            maxSize = maxSize,
-            onUpdateMaxSize = { stateHolder.updateMaxSize(it) },
-            maxSizeError = maxSizeError,
-            maxFrameRate = maxFrameRate,
-            onUpdateFrameRate = { stateHolder.updateMaxFrameRate(it) },
-            maxFrameRateError = maxFrameRateError,
-            bitrate = bitrate,
-            onUpdateBitrate = { stateHolder.updateBitrate(it) },
-            bitrateError = bitrateError,
+            name = state.editName,
+            onUpdateName = { stateHolder.viewAction.updateName(it) },
+            maxSize = state.maxSize,
+            onUpdateMaxSize = { stateHolder.viewAction.updateMaxSize(it) },
+            maxSizeError = state.maxSizeError,
+            maxFrameRate = state.maxFrameRate,
+            onUpdateFrameRate = { stateHolder.viewAction.updateMaxFrameRate(it) },
+            maxFrameRateError = state.maxFrameRateError,
+            bitrate = state.bitrate,
+            onUpdateBitrate = { stateHolder.viewAction.updateBitrate(it) },
+            bitrateError = state.bitrateError,
+            lockOrientation = state.lockOrientation,
+            lockOrientations = state.lockOrientations,
+            onUpdateLockOrientation = { stateHolder.viewAction.updateLockOrientation(it) }
         )
     })
 }
