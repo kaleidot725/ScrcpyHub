@@ -1,8 +1,8 @@
 package view
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -59,8 +59,8 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
         val settingPage = navigation as? Navigation.SettingPage
         AnimatedVisibility(
             visible = settingPage != null,
-            enter = slideInHorizontally(initialOffsetX = { return@slideInHorizontally windowScope.window.width }),
-            exit = slideOutHorizontally(targetOffsetX = { return@slideOutHorizontally windowScope.window.width })
+            enter = slideInVertically(initialOffsetY = { return@slideInVertically windowScope.window.height }),
+            exit = slideOutVertically(targetOffsetY = { return@slideOutVertically windowScope.window.height * 2 })
         ) {
             val stateHolder by remember {
                 val viewModel by inject<SettingPageStateHolder>(clazz = SettingPageStateHolder::class.java)
@@ -80,8 +80,8 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
         val devicePage = navigation as? Navigation.DevicePage
         AnimatedVisibility(
             visible = devicePage != null,
-            enter = slideInHorizontally(initialOffsetX = { return@slideInHorizontally windowScope.window.width }),
-            exit = slideOutHorizontally(targetOffsetX = { return@slideOutHorizontally windowScope.window.width })
+            enter = slideInVertically(initialOffsetY = { return@slideInVertically windowScope.window.height }),
+            exit = slideOutVertically(targetOffsetY = { return@slideOutVertically windowScope.window.height * 2 })
         ) {
             val devicePageViewModel by remember {
                 val stateHolder by inject<DevicePageStateHolder>(clazz = DevicePageStateHolder::class.java) {
