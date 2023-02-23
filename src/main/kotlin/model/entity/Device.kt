@@ -15,12 +15,12 @@ data class Device(val id: String = "") {
     ) {
         val displayName get() = if (customName.isNullOrEmpty()) device.id else customName
 
-        enum class LockOrientation(val title: String, val value: Int?) {
-            NONE("None", null),
-            NATURAL("Natural", 0),
-            COUNTER_CLOCK_WISE_90("90° Counter Clock Wise", 1),
-            CLOCK_WISE_180("180°", 2),
-            CLOCK_WISE_90("90° Clock Wise", 3),
+        enum class LockOrientation(val value: Int?) {
+            NONE(null),
+            NATURAL(0),
+            COUNTER_CLOCK_WISE_90(1),
+            CLOCK_WISE_180(2),
+            CLOCK_WISE_90(3),
         }
     }
 }
