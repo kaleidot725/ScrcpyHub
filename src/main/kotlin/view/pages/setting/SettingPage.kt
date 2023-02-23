@@ -37,7 +37,12 @@ fun SettingPage(
             SubPageHeader(
                 windowScope = windowScope,
                 title = Strings.SETTING_PAGE_TITLE,
-                onBack = { onNavigateDevices?.invoke() },
+                onCancel = { onNavigateDevices?.invoke() },
+                onSave = {
+                    stateHolder.save { onSaved?.invoke() }
+                    onNavigateDevices?.invoke()
+                },
+                savable = true
             )
         },
         content = {
@@ -53,10 +58,6 @@ fun SettingPage(
                 onUpdateScreenRecordDirectory = stateHolder::updateScreenRecordDirectory,
                 screenshotDirectory = screenshotDirectory,
                 onUpdateScreenshotDirectory = stateHolder::updateScreenshotDirectory,
-                onSave = {
-                    stateHolder.save { onSaved?.invoke() }
-                    onNavigateDevices?.invoke()
-                }
             )
         }
     )
