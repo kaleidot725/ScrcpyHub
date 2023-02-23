@@ -1,4 +1,4 @@
-package view.components
+package view.pages.device
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.VerticalScrollbar
@@ -17,10 +17,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -43,24 +39,16 @@ import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90
 import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_NATURAL
 import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_NONE
 import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_TITLE
+import view.resource.Strings.DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_180
+import view.resource.Strings.DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_90
+import view.resource.Strings.DEVICE_PAGE_EDIT_ROTATION_COUNTER_CLOCK_WISE_90
+import view.resource.Strings.DEVICE_PAGE_EDIT_ROTATION_NONE
 import view.resource.Strings.DEVICE_PAGE_EDIT_ROTATION_TITLE
 
 @Composable
 fun DeviceSetting(
-    name: String,
-    onUpdateName: (String) -> Unit,
-    maxSize: String,
-    onUpdateMaxSize: (String) -> Unit,
-    maxSizeError: String,
-    maxFrameRate: String,
-    onUpdateFrameRate: (String) -> Unit,
-    maxFrameRateError: String,
-    bitrate: String,
-    onUpdateBitrate: (String) -> Unit,
-    bitrateError: String,
-    lockOrientation: Device.Context.LockOrientation,
-    lockOrientations: List<Device.Context.LockOrientation>,
-    onUpdateLockOrientation: (Device.Context.LockOrientation) -> Unit,
+    state: DevicePageState,
+    action: DevicePageAction,
 ) {
     val scrollState = rememberScrollState()
 
@@ -86,8 +74,8 @@ fun DeviceSetting(
                     TextFieldAndError(
                         label = Strings.DEVICE_PAGE_EDIT_NAME_TITLE,
                         placeHolder = Strings.DEVICE_PAGE_EDIT_NAME_DETAILS,
-                        inputText = name,
-                        onUpdateInputText = { onUpdateName(it) },
+                        inputText = state.editName,
+                        onUpdateInputText = { action.updateName(it) },
                         modifier = Modifier.padding(8.dp)
                     )
                 }
@@ -106,37 +94,39 @@ fun DeviceSetting(
                     TextFieldAndError(
                         label = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_TITLE,
                         placeHolder = Strings.DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS,
-                        inputText = maxSize,
-                        onUpdateInputText = { onUpdateMaxSize(it) },
-                        error = maxSizeError,
+                        inputText = state.maxSize,
+                        onUpdateInputText = { action.updateMaxSize(it) },
+                        error = state.maxSizeError,
                         modifier = Modifier.padding(8.dp)
                     )
 
                     TextFieldAndError(
                         label = Strings.DEVICE_PAGE_EDIT_MAX_FRAME_RATE_TITLE,
                         placeHolder = Strings.DEVICE_PAGE_EDIT_MAX_FRAME_RATE_DETAILS,
-                        inputText = maxFrameRate,
-                        onUpdateInputText = { onUpdateFrameRate(it) },
-                        error = maxFrameRateError,
+                        inputText = state.maxFrameRate,
+                        onUpdateInputText = { action.updateMaxFrameRate(it) },
+                        error = state.maxFrameRateError,
                         modifier = Modifier.padding(8.dp)
                     )
 
                     TextFieldAndError(
                         label = Strings.DEVICE_PAGE_EDIT_MAX_BITRATE_TITLE,
                         placeHolder = Strings.DEVICE_PAGE_EDIT_MAX_BITRATE_DETAILS,
-                        inputText = bitrate,
-                        onUpdateInputText = { onUpdateBitrate(it) },
-                        error = bitrateError,
+                        inputText = state.bitrate,
+                        onUpdateInputText = { action.updateBitrate(it) },
+                        error = state.bitrateError,
                         modifier = Modifier.padding(8.dp)
                     )
 
                     DropDownSelector(
                         label = DEVICE_PAGE_EDIT_ORIENTATION_TITLE,
-                        selectedItem = lockOrientation.toTitle(),
-                        items = lockOrientations.map { it.toTitle() },
+                        selectedItem = state.lockOrientation.toTitle(),
+                        items = state.lockOrientations.map { it.toTitle() },
                         onSelect = { title ->
-                            val item = lockOrientations.firstOrNull { it.toTitle() == title } ?: return@DropDownSelector
-                            onUpdateLockOrientation(item)
+                            val item = state.lockOrientations.firstOrNull {
+                                it.toTitle() == title
+                            } ?: return@DropDownSelector
+                            action.updateLockOrientation(item)
                         },
                         modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp)
                     )
@@ -153,40 +143,39 @@ fun DeviceSetting(
                         style = MaterialTheme.typography.subtitle1
                     )
 
-                    var borderless by remember { mutableStateOf(false) }
                     TitleAndCheckButton(
                         title = DEVICE_PAGE_EDIT_BORDERLESS_TITLE,
                         subTitle = DEVICE_PAGE_EDIT_BORDERLESS_DETAILS,
-                        value = borderless,
-                        onSelect = { borderless = it },
+                        value = state.enableBorderless,
+                        onSelect = { action.updateBorderless(it) },
                         modifier = Modifier.padding(8.dp)
                     )
 
-                    var alwaysOnTop by remember { mutableStateOf(false) }
                     TitleAndCheckButton(
                         title = DEVICE_PAGE_EDIT_ALWAYS_ON_TOP_TITLE,
                         subTitle = DEVICE_PAGE_EDIT_ALWAYS_ON_TOP_DETAILS,
-                        value = alwaysOnTop,
-                        onSelect = { alwaysOnTop = it },
+                        value = state.enableAlwaysOnTop,
+                        onSelect = { action.updateAlwaysOnTop(it) },
                         modifier = Modifier.padding(8.dp)
                     )
 
-                    var fullScreen by remember { mutableStateOf(false) }
                     TitleAndCheckButton(
                         title = DEVICE_PAGE_EDIT_FULLSCREEN_TITLE,
                         subTitle = DEVICE_PAGE_EDIT_FULLSCREEN_DETAILS,
-                        value = fullScreen,
-                        onSelect = { fullScreen = it },
+                        value = state.enableFullScreen,
+                        onSelect = { action.updateFullscreen(it) },
                         modifier = Modifier.padding(8.dp)
                     )
 
                     DropDownSelector(
                         label = DEVICE_PAGE_EDIT_ROTATION_TITLE,
-                        selectedItem = lockOrientation.toTitle(),
-                        items = lockOrientations.map { it.toTitle() },
+                        selectedItem = state.rotation.toTitle(),
+                        items = state.rotations.map { it.toTitle() },
                         onSelect = { title ->
-                            val item = lockOrientations.firstOrNull { it.toTitle() == title } ?: return@DropDownSelector
-                            onUpdateLockOrientation(item)
+                            val item = state.rotations.firstOrNull {
+                                it.toTitle() == title
+                            } ?: return@DropDownSelector
+                            action.updateRotation(item)
                         },
                         modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp)
                     )
@@ -211,24 +200,32 @@ private fun Device.Context.LockOrientation.toTitle(): String {
     }
 }
 
+private fun Device.Context.Rotation.toTitle(): String {
+    return when (this) {
+        Device.Context.Rotation.NONE -> DEVICE_PAGE_EDIT_ROTATION_NONE
+        Device.Context.Rotation.COUNTER_CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ROTATION_COUNTER_CLOCK_WISE_90
+        Device.Context.Rotation.CLOCK_WISE_180 -> DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_180
+        Device.Context.Rotation.CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_90
+    }
+}
+
 @Preview
 @Composable
 private fun DeviceSetting_Savable_True_Preview() {
     DeviceSetting(
-        name = "CUSTOM NAME",
-        onUpdateName = {},
-        maxSize = "1200",
-        onUpdateMaxSize = {},
-        maxSizeError = "",
-        maxFrameRate = "60",
-        onUpdateFrameRate = {},
-        maxFrameRateError = "",
-        bitrate = "1000",
-        onUpdateBitrate = {},
-        bitrateError = "",
-        lockOrientation = Device.Context.LockOrientation.NONE,
-        lockOrientations = Device.Context.LockOrientation.values().toList(),
-        onUpdateLockOrientation = {}
+        state = DevicePageState(savable = true),
+        action = object : DevicePageAction {
+            override fun updateName(name: String) {}
+            override fun updateMaxSize(maxSize: String) {}
+            override fun updateMaxFrameRate(maxFrameRate: String) {}
+            override fun updateBitrate(bitrate: String) {}
+            override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
+            override fun updateBorderless(enabled: Boolean) {}
+            override fun updateAlwaysOnTop(enabled: Boolean) {}
+            override fun updateFullscreen(enabled: Boolean) {}
+            override fun updateRotation(rotation: Device.Context.Rotation) {}
+            override fun save() {}
+        },
     )
 }
 
@@ -236,19 +233,18 @@ private fun DeviceSetting_Savable_True_Preview() {
 @Composable
 private fun DeviceSetting_Savable_False_Preview() {
     DeviceSetting(
-        name = "CUSTOM NAME",
-        onUpdateName = {},
-        maxSize = "ERROR VALUE",
-        onUpdateMaxSize = {},
-        maxSizeError = "INVALID MAX SIZE",
-        maxFrameRate = "ERROR VALUE",
-        onUpdateFrameRate = {},
-        maxFrameRateError = "INVALID MAX FRAME RATE",
-        bitrate = "ERROR VALUE",
-        onUpdateBitrate = {},
-        bitrateError = "INVALID MAX SIZE",
-        lockOrientation = Device.Context.LockOrientation.NONE,
-        lockOrientations = Device.Context.LockOrientation.values().toList(),
-        onUpdateLockOrientation = {}
+        state = DevicePageState(savable = false),
+        action = object : DevicePageAction {
+            override fun updateName(name: String) {}
+            override fun updateMaxSize(maxSize: String) {}
+            override fun updateMaxFrameRate(maxFrameRate: String) {}
+            override fun updateBitrate(bitrate: String) {}
+            override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
+            override fun updateBorderless(enabled: Boolean) {}
+            override fun updateAlwaysOnTop(enabled: Boolean) {}
+            override fun updateFullscreen(enabled: Boolean) {}
+            override fun updateRotation(rotation: Device.Context.Rotation) {}
+            override fun save() {}
+        },
     )
 }
