@@ -43,7 +43,6 @@ compose.desktop {
                 }
             }
             windows {
-
             }
         }
     }

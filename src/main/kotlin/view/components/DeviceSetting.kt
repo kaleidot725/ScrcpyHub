@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.verticalScroll
@@ -21,8 +22,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import model.entity.Device
+import view.parts.DropDownSelector
 import view.parts.TextFieldAndError
 import view.resource.Strings
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_180
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_90
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_NATURAL
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_NONE
+import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_TITLE
 
 @Composable
 fun DeviceSetting(
@@ -37,6 +46,9 @@ fun DeviceSetting(
     bitrate: String,
     onUpdateBitrate: (String) -> Unit,
     bitrateError: String,
+    lockOrientation: Device.Context.LockOrientation,
+    lockOrientations: List<Device.Context.LockOrientation>,
+    onUpdateLockOrientation: (Device.Context.LockOrientation) -> Unit,
 ) {
     val scrollState = rememberScrollState()
 
@@ -105,6 +117,17 @@ fun DeviceSetting(
                         error = bitrateError,
                         modifier = Modifier.padding(8.dp)
                     )
+
+                    DropDownSelector(
+                        label = DEVICE_PAGE_EDIT_ORIENTATION_TITLE,
+                        selectedItem = lockOrientation.toTitle(),
+                        items = lockOrientations.map { it.toTitle() },
+                        onSelect = { title ->
+                            val item = lockOrientations.firstOrNull { it.toTitle() == title } ?: return@DropDownSelector
+                            onUpdateLockOrientation(item)
+                        },
+                        modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp)
+                    )
                 }
             }
         }
@@ -113,6 +136,16 @@ fun DeviceSetting(
             adapter = rememberScrollbarAdapter(scrollState),
             modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight()
         )
+    }
+}
+
+private fun Device.Context.LockOrientation.toTitle(): String {
+    return when (this) {
+        Device.Context.LockOrientation.NONE -> DEVICE_PAGE_EDIT_ORIENTATION_NONE
+        Device.Context.LockOrientation.NATURAL -> DEVICE_PAGE_EDIT_ORIENTATION_NATURAL
+        Device.Context.LockOrientation.COUNTER_CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90
+        Device.Context.LockOrientation.CLOCK_WISE_180 -> DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_180
+        Device.Context.LockOrientation.CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_90
     }
 }
 
@@ -131,6 +164,9 @@ private fun DeviceSetting_Savable_True_Preview() {
         bitrate = "1000",
         onUpdateBitrate = {},
         bitrateError = "",
+        lockOrientation = Device.Context.LockOrientation.NONE,
+        lockOrientations = Device.Context.LockOrientation.values().toList(),
+        onUpdateLockOrientation = {}
     )
 }
 
@@ -149,5 +185,8 @@ private fun DeviceSetting_Savable_False_Preview() {
         bitrate = "ERROR VALUE",
         onUpdateBitrate = {},
         bitrateError = "INVALID MAX SIZE",
+        lockOrientation = Device.Context.LockOrientation.NONE,
+        lockOrientations = Device.Context.LockOrientation.values().toList(),
+        onUpdateLockOrientation = {}
     )
 }
