@@ -43,7 +43,7 @@ ScrcpyHub doesn't work mirroring start and stop if you install scrcpy through Ch
 ## Linux(Ubuntu)
 
 1. Download [here](https://github.com/Genymobile/scrcpy#windows) and install scrcpy somewhere.
-2. Download [here](https://github.com/kaleidot725/ScrcpyHub/releases/tag/v1.9.0) and install ScrcpHub.
+2. Build this project and install ScrcpHub.
 3. Launch ScrcpyHub, open Preferences.
 4. Input adb and scrcpy location, save settings.
 
