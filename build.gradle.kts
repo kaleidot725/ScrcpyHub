@@ -1,3 +1,5 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+
 group = "jp.kaleidot725"
 version = "1.9.0"
 
@@ -6,7 +8,6 @@ plugins {
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
     id("org.jlleitschuh.gradle.ktlint")
-    id("dev.hydraulic.conveyor")
 }
 
 repositories {
@@ -31,49 +32,6 @@ dependencies {
     testImplementation(libs.kotest)
 }
 
-compose.desktop {
-    application {
-        mainClass = "ScrcpyHubKt"
-        nativeDistributions {
-            modules("jdk.management")
-            macOS {
-                bundleID = "jp.kaleidot725.scrcpyhub"
-                signing {
-                    sign.set(false)
-                }
-            }
-            windows {
-            }
-        }
-    }
-}
-
-dependencies {
-    linuxAmd64(compose.desktop.linux_x64)
-    macAmd64(compose.desktop.macos_x64)
-    macAarch64(compose.desktop.macos_arm64)
-    windowsAmd64(compose.desktop.windows_x64)
-}
-
-// region Work around temporary Compose bugs.
-configurations.all {
-    attributes {
-        // https://github.com/JetBrains/compose-jb/issues/1404#issuecomment-1146894731
-        attribute(Attribute.of("ui", String::class.java), "awt")
-    }
-}
-
-// Force override the Kotlin stdlib version used by Compose to 1.7, as otherwise we can end up with a mix of 1.6 and 1.7 on our classpath.
-dependencies {
-    val v = "1.7.20"
-    for (m in setOf("linuxAmd64", "macAmd64", "macAarch64", "windowsAmd64")) {
-        m("org.jetbrains.kotlin:kotlin-stdlib:$v")
-        m("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$v")
-        m("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$v")
-    }
-}
-// endregion
-
 tasks.test {
     useJUnitPlatform()
 }
@@ -83,3 +41,29 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
     }
 }
+
+compose.desktop {
+    application {
+        mainClass = "ScrcpyHubKt"
+        nativeDistributions {
+            packageName = "ScrcpyHub"
+            modules("jdk.management")
+
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+
+            macOS {
+                bundleID = "jp.kaleidot725.scrcpyhub"
+                iconFile.set(project.file("icon.icns"))
+            }
+
+            windows {
+                iconFile.set(project.file("icon.ico"))
+            }
+
+            linux {
+                iconFile.set(project.file("icon.ico"))
+            }
+        }
+    }
+}
+
