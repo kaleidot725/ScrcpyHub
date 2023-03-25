@@ -2,7 +2,8 @@ package view.resource
 
 object Strings {
     // COMMON
-    const val APP_NAME = "ScrcpyHub | v1.9.0"
+    const val APP_NAME = "ScrcpyHub"
+    const val VERSION = "v2.0.0"
     const val SAVE = "Save"
     const val CANCEL = "Cancel"
     const val QUIT = "Quit"
@@ -10,10 +11,18 @@ object Strings {
     // TRAY
     const val TRAY_SHOW_SCRCPY_HUB = "Show Window"
     const val TRAY_ENABLE_ALWAYS_TOP = "Enable Always on Top"
+    const val TRAY_ABOUT_SCRCPYHUB = "About ScrcpyHub"
+    const val TRAY_ABOUT_LICENSE = "About License"
 
     // Error
     const val NOT_FOUND_ADB_COMMAND = "Not found ADB binary"
     const val NOT_FOUND_SCRCPY_COMMAND = "Not found Scrcpy binary"
+
+    // Info Dialog
+    const val INFO_TITLE = "About ScrcpyHub"
+
+    // License Dialog
+    const val LICENSE_TITLE = "About Libraries"
 
     // DEVICES PAGE
     const val DEVICES_PAGE_START_MIRRORING = "Start Mirroring"
@@ -26,20 +35,40 @@ object Strings {
     // Device Page
     const val DEVICE_PAGE_EDIT_DEVICE_TITLE = "Device"
     const val DEVICE_PAGE_EDIT_NAME_TITLE = "Custom Name"
-    const val DEVICE_PAGE_EDIT_NAME_DETAILS = "To customize your device name."
+    const val DEVICE_PAGE_EDIT_NAME_DETAILS = "Customize your device name."
+    const val DEVICE_PAGE_EDIT_STAY_AWAKE_TITLE = "Stay awake"
+    const val DEVICE_PAGE_EDIT_STAY_AWAKE_DETAILS = "To prevent the device from sleeping"
+    const val DEVICE_PAGE_EDIT_SHOW_TOUCHES_TITLE = "Show touches"
+    const val DEVICE_PAGE_EDIT_SHOW_TOUCHES_DETAILS = "To show physical touches"
+    const val DEVICE_PAGE_EDIT_POWER_OFF_ON_CLOSE_TITLE = "Enable power off on stop"
+    const val DEVICE_PAGE_EDIT_POWER_OFF_ON_CLOSE_DETAILS = "To turn the device screen off on Stop"
+    const val DEVICE_PAGE_EDIT_POWER_ON_ON_START_TITLE = "Disable power on on start"
+    const val DEVICE_PAGE_EDIT_POWER_ON_ON_START_DETAILS = "To prevent the screen on on Start"
+
     const val DEVICE_PAGE_EDIT_VIDEO_TITLE = "Video"
     const val DEVICE_PAGE_EDIT_MAX_SIZE_TITLE = "Reduce size"
     const val DEVICE_PAGE_EDIT_MAX_SIZE_DETAILS = "To limit both the width and height."
     const val DEVICE_PAGE_EDIT_MAX_FRAME_RATE_TITLE = "Limit frame rate"
     const val DEVICE_PAGE_EDIT_MAX_FRAME_RATE_DETAILS = "The capture frame rate can be limited."
-    const val DEVICE_PAGE_EDIT_MAX_BITRATE_TITLE = "Change bit-rate (Mbps)"
+    const val DEVICE_PAGE_EDIT_MAX_BITRATE_TITLE = "BitRate (Mbps)"
     const val DEVICE_PAGE_EDIT_MAX_BITRATE_DETAILS = "To change the video bitrate."
+    const val DEVICE_PAGE_EDIT_BUFFERING_TITLE = "Buffering (ms)"
+    const val DEVICE_PAGE_EDIT_BUFFERING_DETAILS = "To change the buffering."
     const val DEVICE_PAGE_EDIT_ORIENTATION_TITLE = "Lock Orientation (Affect Recording)"
     const val DEVICE_PAGE_EDIT_ORIENTATION_NONE = "None"
     const val DEVICE_PAGE_EDIT_ORIENTATION_NATURAL = "Natural"
     const val DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90 = "90° Counter Clock Wise"
     const val DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_180 = "180°"
     const val DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_90 = "90° Clock Wise"
+
+    const val DEVICE_PAGE_EDIT_AUDIO_TITLE = "Audio"
+    const val DEVICE_PAGE_EDIT_AUDIO_NO_AUDIO_TITLE = "No Audio"
+    const val DEVICE_PAGE_EDIT_AUDIO_NO_AUDIO_DETAILS = "To disable audio."
+    const val DEVICE_PAGE_EDIT_AUDIO_BITRATE_TITLE = "BitRate (Kbsp)"
+    const val DEVICE_PAGE_EDIT_AUDIO_BITRATE_DETAILS = "To change the audio bitrate."
+    const val DEVICE_PAGE_EDIT_AUDIO_BUFFERING_TITLE = "Buffering(ms)"
+    const val DEVICE_PAGE_EDIT_AUDIO_BUFFERING_DETAILS = "To change the buffering."
+
     const val DEVICE_PAGE_EDIT_WINDOW_TITLE = "Window"
     const val DEVICE_PAGE_EDIT_BORDERLESS_TITLE = "Borderless"
     const val DEVICE_PAGE_EDIT_BORDERLESS_DETAILS = "To disable window decorations"
@@ -52,6 +81,12 @@ object Strings {
     const val DEVICE_PAGE_EDIT_ROTATION_COUNTER_CLOCK_WISE_90 = "90° Counter Clock Wise"
     const val DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_180 = "180°"
     const val DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_90 = "90° Clock Wise"
+
+    const val DEVICE_PAGE_EDIT_HID_TITLE = "HID"
+    const val DEVICE_PAGE_EDIT_HID_KEYBOARD_TITLE = "Keyboard Simulation"
+    const val DEVICE_PAGE_EDIT_HID_KEYBOARD_DETAILS = "To enable hid keyboard simulation"
+    const val DEVICE_PAGE_EDIT_HID_MOUSE_TITLE = "Mouse Simulation"
+    const val DEVICE_PAGE_EDIT_HID_MOUSE_DETAILS = "To enable hid mouse simulation"
 
     // Setting Page
     const val SETTING_PAGE_TITLE = "Preferences"
