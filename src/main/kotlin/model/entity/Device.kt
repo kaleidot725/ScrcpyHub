@@ -12,6 +12,7 @@ data class Device(val id: String = "") {
         val maxFrameRate: Int? = null,
         val lockOrientation: Int? = null,
         val bitrate: Int? = null,
+        val buffering: Int? = null,
         val enableBorderless: Boolean = false,
         val enableAlwaysOnTop: Boolean = false,
         val enableFullScreen: Boolean = false,
