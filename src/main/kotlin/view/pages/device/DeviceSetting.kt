@@ -108,8 +108,8 @@ fun DeviceSetting(
                     TitleAndCheckButton(
                         title = Strings.DEVICE_PAGE_EDIT_POWER_ON_ON_START_TITLE,
                         subTitle = Strings.DEVICE_PAGE_EDIT_POWER_ON_ON_START_DETAILS,
-                        value = state.enablePowerOnOnStart,
-                        onSelect = { action.updateEnablePowerOnOnStart(it) },
+                        value = state.disablePowerOnOnStart,
+                        onSelect = { action.updateDisablePowerOnOnStart(it) },
                         modifier = Modifier.padding(8.dp)
                     )
                 }
@@ -328,7 +328,7 @@ private fun DeviceSetting_Savable_True_Preview() {
             override fun updateEnableStayAwake(enable: Boolean) {}
             override fun updateEnableShowTouches(enable: Boolean) {}
             override fun updateEnablePowerOffOnClose(enable: Boolean) {}
-            override fun updateEnablePowerOnOnStart(enable: Boolean) {}
+            override fun updateDisablePowerOnOnStart(disable: Boolean) {}
             override fun updateMaxSize(maxSize: String) {}
             override fun updateMaxFrameRate(maxFrameRate: String) {}
             override fun updateBitrate(bitrate: String) {}
@@ -358,7 +358,7 @@ private fun DeviceSetting_Savable_False_Preview() {
             override fun updateEnableStayAwake(enable: Boolean) {}
             override fun updateEnableShowTouches(enable: Boolean) {}
             override fun updateEnablePowerOffOnClose(enable: Boolean) {}
-            override fun updateEnablePowerOnOnStart(enable: Boolean) {}
+            override fun updateDisablePowerOnOnStart(disable: Boolean) {}
             override fun updateMaxSize(maxSize: String) {}
             override fun updateMaxFrameRate(maxFrameRate: String) {}
             override fun updateBitrate(bitrate: String) {}
