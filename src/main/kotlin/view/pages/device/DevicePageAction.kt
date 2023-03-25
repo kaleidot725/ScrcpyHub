@@ -11,7 +11,7 @@ interface DevicePageAction {
     fun updateEnableStayAwake(enable: Boolean)
     fun updateEnableShowTouches(enable: Boolean)
     fun updateEnablePowerOffOnClose(enable: Boolean)
-    fun updateEnablePowerOnOnStart(enable: Boolean)
+    fun updateDisablePowerOnOnStart(disable: Boolean)
 
     fun updateNoAudio(noAudio: Boolean)
     fun updateAudioBuffering(buffering: String)

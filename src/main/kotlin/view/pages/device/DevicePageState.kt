@@ -8,7 +8,7 @@ data class DevicePageState(
     val enableStayAwake: Boolean = false,
     val enableShowTouches: Boolean = false,
     val enablePowerOffOnClose: Boolean = false,
-    val enablePowerOnOnStart: Boolean = true,
+    val disablePowerOnOnStart: Boolean = false,
     val maxSize: String = "",
     val maxSizeError: String = "",
     val maxFrameRate: String = "",

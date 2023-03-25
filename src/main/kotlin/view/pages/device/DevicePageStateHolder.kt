@@ -17,9 +17,9 @@ class DevicePageStateHolder(
     private val titleName: MutableStateFlow<String> = MutableStateFlow(context.displayName)
     private val editName: MutableStateFlow<String> = MutableStateFlow(context.customName ?: "")
     private val enableStayAwake: MutableStateFlow<Boolean> = MutableStateFlow(context.enableStayAwake)
-    private val enableShowTouches: MutableStateFlow<Boolean> = MutableStateFlow(context.enableStayAwake)
-    private val enablePowerOffOnClose: MutableStateFlow<Boolean> = MutableStateFlow(context.enableStayAwake)
-    private val enablePowerOnOnStart: MutableStateFlow<Boolean> = MutableStateFlow(context.enableStayAwake)
+    private val enableShowTouches: MutableStateFlow<Boolean> = MutableStateFlow(context.enableShowTouches)
+    private val enablePowerOffOnClose: MutableStateFlow<Boolean> = MutableStateFlow(context.enablePowerOffOnClose)
+    private val disablePowerOnOnStart: MutableStateFlow<Boolean> = MutableStateFlow(context.disablePowerOnOnStart)
 
     private val maxSize: MutableStateFlow<String> = MutableStateFlow(context.maxSize?.toString() ?: "")
     private val maxSizeError: MutableStateFlow<String> = MutableStateFlow("")
@@ -77,7 +77,7 @@ class DevicePageStateHolder(
             enableStayAwake,
             enableShowTouches,
             enablePowerOffOnClose,
-            enablePowerOnOnStart,
+            disablePowerOnOnStart,
         ) {
             DevicePageState(
                 titleName = it[0] as String,
@@ -105,7 +105,7 @@ class DevicePageStateHolder(
                 enableStayAwake = it[22] as Boolean,
                 enableShowTouches = it[23] as Boolean,
                 enablePowerOffOnClose = it[24] as Boolean,
-                enablePowerOnOnStart = it[25] as Boolean,
+                disablePowerOnOnStart = it[25] as Boolean,
                 savable = isValid()
             )
         }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), DevicePageState())
@@ -135,9 +135,9 @@ class DevicePageStateHolder(
             }
         }
 
-        override fun updateEnablePowerOnOnStart(enable: Boolean) {
+        override fun updateDisablePowerOnOnStart(disable: Boolean) {
             coroutineScope.launch {
-                enablePowerOnOnStart.emit(enable)
+                disablePowerOnOnStart.emit(disable)
             }
         }
 
@@ -247,7 +247,7 @@ class DevicePageStateHolder(
                     enableStayAwake = enableStayAwake.value,
                     enableShowTouches = enableShowTouches.value,
                     enablePowerOffOnClose = enablePowerOffOnClose.value,
-                    enablePowerOnOnStart = enablePowerOnOnStart.value,
+                    disablePowerOnOnStart = disablePowerOnOnStart.value,
                 )
                 updateDeviceSetting.execute(newContext)
                 titleName.value = editName.value
