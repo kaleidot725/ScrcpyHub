@@ -80,6 +80,38 @@ fun DeviceSetting(
                         onUpdateInputText = { action.updateName(it) },
                         modifier = Modifier.padding(8.dp)
                     )
+
+                    TitleAndCheckButton(
+                        title = Strings.DEVICE_PAGE_EDIT_STAY_AWAKE_TITLE,
+                        subTitle = Strings.DEVICE_PAGE_EDIT_STAY_AWAKE_DETAILS,
+                        value = state.enableShowTouches,
+                        onSelect = { action.updateEnableStayAwake(it) },
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    TitleAndCheckButton(
+                        title = Strings.DEVICE_PAGE_EDIT_SHOW_TOUCHES_TITLE,
+                        subTitle = Strings.DEVICE_PAGE_EDIT_SHOW_TOUCHES_DETAILS,
+                        value = state.enableShowTouches,
+                        onSelect = { action.updateEnableShowTouches(it) },
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    TitleAndCheckButton(
+                        title = Strings.DEVICE_PAGE_EDIT_POWER_OFF_ON_CLOSE_TITLE,
+                        subTitle = Strings.DEVICE_PAGE_EDIT_POWER_OFF_ON_CLOSE_DETAILS,
+                        value = state.enablePowerOffOnClose,
+                        onSelect = { action.updateEnablePowerOffOnClose(it) },
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    TitleAndCheckButton(
+                        title = Strings.DEVICE_PAGE_EDIT_POWER_ON_ON_START_TITLE,
+                        subTitle = Strings.DEVICE_PAGE_EDIT_POWER_ON_ON_START_DETAILS,
+                        value = state.enablePowerOnOnStart,
+                        onSelect = { action.updateEnablePowerOnOnStart(it) },
+                        modifier = Modifier.padding(8.dp)
+                    )
                 }
             }
 
@@ -293,6 +325,10 @@ private fun DeviceSetting_Savable_True_Preview() {
         state = DevicePageState(savable = true),
         action = object : DevicePageAction {
             override fun updateName(name: String) {}
+            override fun updateEnableStayAwake(enable: Boolean) {}
+            override fun updateEnableShowTouches(enable: Boolean) {}
+            override fun updateEnablePowerOffOnClose(enable: Boolean) {}
+            override fun updateEnablePowerOnOnStart(enable: Boolean) {}
             override fun updateMaxSize(maxSize: String) {}
             override fun updateMaxFrameRate(maxFrameRate: String) {}
             override fun updateBitrate(bitrate: String) {}
@@ -319,6 +355,10 @@ private fun DeviceSetting_Savable_False_Preview() {
         state = DevicePageState(savable = false),
         action = object : DevicePageAction {
             override fun updateName(name: String) {}
+            override fun updateEnableStayAwake(enable: Boolean) {}
+            override fun updateEnableShowTouches(enable: Boolean) {}
+            override fun updateEnablePowerOffOnClose(enable: Boolean) {}
+            override fun updateEnablePowerOnOnStart(enable: Boolean) {}
             override fun updateMaxSize(maxSize: String) {}
             override fun updateMaxFrameRate(maxFrameRate: String) {}
             override fun updateBitrate(bitrate: String) {}
