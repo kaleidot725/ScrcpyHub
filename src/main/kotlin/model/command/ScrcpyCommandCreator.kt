@@ -70,6 +70,14 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
             if (rotation != null) {
                 add("$ROTATION_OPTION_NAME$EQUAL$rotation")
             }
+
+            if (context.enableHidKeyboard) {
+                add(HID_KEYBOARD_OPTION)
+            }
+
+            if (context.enableHidMouse) {
+                add(HID_MOUSE_OPTION)
+            }
         }
     }
 
@@ -112,5 +120,8 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
         private const val NO_AUDIO_OPTION = "--no-audio"
         private const val AUDIO_BITRATE_OPTION = "--audio-bit-rate"
         private const val AUDIO_BUFFERING_OPTION = "--audio-buffer"
+
+        private const val HID_KEYBOARD_OPTION = "--hid-keyboard"
+        private const val HID_MOUSE_OPTION = "--hid-mouse"
     }
 }

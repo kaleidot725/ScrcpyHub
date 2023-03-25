@@ -36,7 +36,9 @@ class ScrcpyCommandCreatorTest : StringSpec({
         enableBorderless = true,
         enableAlwaysOnTop = true,
         enableFullScreen = true,
-        rotation = 1
+        rotation = 1,
+        enableHidKeyboard = true,
+        enableHidMouse = true,
     )
 
     "create" {
@@ -69,6 +71,8 @@ class ScrcpyCommandCreatorTest : StringSpec({
             "--always-on-top",
             "--fullscreen",
             "--rotation=1",
+            "--hid-keyboard",
+            "--hid-mouse"
         )
     }
     "create_when_no_path_specified" {
@@ -95,6 +99,8 @@ class ScrcpyCommandCreatorTest : StringSpec({
             "--always-on-top",
             "--fullscreen",
             "--rotation=1",
+            "--hid-keyboard",
+            "--hid-mouse"
         )
     }
     "create_record" {
@@ -123,6 +129,8 @@ class ScrcpyCommandCreatorTest : StringSpec({
             "--always-on-top",
             "--fullscreen",
             "--rotation=1",
+            "--hid-keyboard",
+            "--hid-mouse",
             "-r",
             "fileName2",
         )
@@ -153,6 +161,8 @@ class ScrcpyCommandCreatorTest : StringSpec({
             "--always-on-top",
             "--fullscreen",
             "--rotation=1",
+            "--hid-keyboard",
+            "--hid-mouse",
             "-r",
             "fileName2",
         )
