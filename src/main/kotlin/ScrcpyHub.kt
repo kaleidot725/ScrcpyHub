@@ -1,3 +1,4 @@
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -15,6 +16,7 @@ import org.koin.core.context.GlobalContext.startKoin
 import view.MainContent
 import view.MainContentStateHolder
 import view.MainWindow
+import view.pages.license.LicenseDialog
 import view.resource.Images
 import view.resource.Strings
 
@@ -28,6 +30,7 @@ fun main() = application {
     val trayState = rememberTrayState()
     val windowState = rememberWindowState(width = 350.dp, height = 550.dp)
     var isOpen by remember { mutableStateOf(true) }
+    var showLicense by remember { mutableStateOf(false) }
     var alwaysOnTop by remember { mutableStateOf(false) }
 
     Tray(
@@ -43,6 +46,14 @@ fun main() = application {
                 text = Strings.TRAY_ENABLE_ALWAYS_TOP,
                 checked = alwaysOnTop,
                 onCheckedChange = { alwaysOnTop = it }
+            )
+
+            Separator()
+
+            CheckboxItem(
+                text = Strings.TRAY_ABOUT_LICENSE,
+                checked = showLicense,
+                onCheckedChange = { showLicense = it }
             )
 
             Separator()
@@ -65,6 +76,14 @@ fun main() = application {
             MainContent(
                 windowScope = this,
                 mainStateHolder = stateHolder
+            )
+        }
+
+        if (showLicense) {
+            val isDarkMode: Boolean? by stateHolder.isDarkMode.collectAsState(null)
+            LicenseDialog(
+                isDark = isDarkMode ?: false,
+                onClose = { showLicense = false },
             )
         }
     }

@@ -1,13 +1,14 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 group = "jp.kaleidot725"
-version = "1.9.0"
+version = "2.0.0"
 
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
     id("org.jlleitschuh.gradle.ktlint")
+    id("com.mikepenz.aboutlibraries.plugin")
 }
 
 repositories {
@@ -27,6 +28,8 @@ dependencies {
     implementation(libs.kotlin.serialization)
     implementation(libs.adam)
     implementation(libs.jSystemThemeDetector)
+    implementation(libs.aboutlibraries.core)
+    implementation(libs.aboutlibraries.compose)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.kotest)
@@ -67,3 +70,7 @@ compose.desktop {
     }
 }
 
+aboutLibraries {
+    registerAndroidTasks = false
+    prettyPrint = true
+}
