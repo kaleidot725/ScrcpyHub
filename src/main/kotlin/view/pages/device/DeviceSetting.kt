@@ -157,26 +157,26 @@ fun DeviceSetting(
                     TitleAndCheckButton(
                         title = Strings.DEVICE_PAGE_EDIT_AUDIO_NO_AUDIO_TITLE,
                         subTitle = Strings.DEVICE_PAGE_EDIT_AUDIO_NO_AUDIO_DETAILS,
-                        value = true, // TODO
-                        onSelect = { /** TODO */ },
+                        value = state.noAudio,
+                        onSelect = { action.updateNoAudio(it) },
                         modifier = Modifier.padding(8.dp)
                     )
 
                     TextFieldAndError(
                         label = Strings.DEVICE_PAGE_EDIT_AUDIO_BITRATE_TITLE,
                         placeHolder = Strings.DEVICE_PAGE_EDIT_AUDIO_BITRATE_DETAILS,
-                        inputText = "", // TODO
-                        onUpdateInputText = { /** TODO */ },
-                        error = "", // TODO
+                        inputText = state.audioBitrate,
+                        onUpdateInputText = { action.updateAudioBitrate(it) },
+                        error = state.audioBitrateError,
                         modifier = Modifier.padding(8.dp)
                     )
 
                     TextFieldAndError(
                         label = Strings.DEVICE_PAGE_EDIT_AUDIO_BUFFERING_TITLE,
                         placeHolder = Strings.DEVICE_PAGE_EDIT_AUDIO_BUFFERING_DETAILS,
-                        inputText = "", // TODO
-                        onUpdateInputText = { /** TODO */ },
-                        error = "", // TODO
+                        inputText = state.audioBuffering,
+                        onUpdateInputText = { action.updateAudioBuffering(it) },
+                        error = state.audioBufferingError,
                         modifier = Modifier.padding(8.dp)
                     )
                 }
@@ -269,6 +269,9 @@ private fun DeviceSetting_Savable_True_Preview() {
             override fun updateMaxFrameRate(maxFrameRate: String) {}
             override fun updateBitrate(bitrate: String) {}
             override fun updateBuffering(buffering: String) {}
+            override fun updateNoAudio(noAudio: Boolean) {}
+            override fun updateAudioBitrate(bitrate: String) {}
+            override fun updateAudioBuffering(buffering: String) {}
             override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
             override fun updateBorderless(enabled: Boolean) {}
             override fun updateAlwaysOnTop(enabled: Boolean) {}
@@ -290,6 +293,9 @@ private fun DeviceSetting_Savable_False_Preview() {
             override fun updateMaxFrameRate(maxFrameRate: String) {}
             override fun updateBitrate(bitrate: String) {}
             override fun updateBuffering(buffering: String) {}
+            override fun updateNoAudio(noAudio: Boolean) {}
+            override fun updateAudioBitrate(bitrate: String) {}
+            override fun updateAudioBuffering(buffering: String) {}
             override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
             override fun updateBorderless(enabled: Boolean) {}
             override fun updateAlwaysOnTop(enabled: Boolean) {}
