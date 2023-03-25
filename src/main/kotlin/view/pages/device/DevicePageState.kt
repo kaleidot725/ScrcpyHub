@@ -5,6 +5,10 @@ import model.entity.Device
 data class DevicePageState(
     val titleName: String = "",
     val editName: String = "",
+    val enableStayAwake: Boolean = false,
+    val enableShowTouches: Boolean = false,
+    val enablePowerOffOnClose: Boolean = false,
+    val disablePowerOnOnStart: Boolean = false,
     val maxSize: String = "",
     val maxSizeError: String = "",
     val maxFrameRate: String = "",

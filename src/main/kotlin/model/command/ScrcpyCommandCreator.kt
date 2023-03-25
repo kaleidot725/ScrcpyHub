@@ -9,6 +9,22 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
             add(DEVICE_OPTION_NAME)
             add(context.device.id)
 
+            if (context.enableStayAwake) {
+                add(STAY_AWAKE_OPTION)
+            }
+
+            if (context.enableShowTouches) {
+                add(SHOW_TOUCHES_OPTION)
+            }
+
+            if (context.enablePowerOffOnClose) {
+                add(POWER_OFF_ON_CLOSE)
+            }
+
+            if (context.disablePowerOnOnStart) {
+                add(DISABLE_POWER_ON_ON_START)
+            }
+
             val maxSize = context.maxSize
             if (maxSize != null) {
                 add(MAX_SIZE_OPTION_NAME)
@@ -123,5 +139,10 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
 
         private const val HID_KEYBOARD_OPTION = "--hid-keyboard"
         private const val HID_MOUSE_OPTION = "--hid-mouse"
+
+        private const val STAY_AWAKE_OPTION = "--stay-awake"
+        private const val SHOW_TOUCHES_OPTION = "--show-touches"
+        private const val POWER_OFF_ON_CLOSE = "--power-off-on-close"
+        private const val DISABLE_POWER_ON_ON_START = "--no-power-on"
     }
 }
