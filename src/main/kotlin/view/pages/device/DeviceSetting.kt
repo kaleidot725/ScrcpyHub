@@ -31,6 +31,8 @@ import view.resource.Strings.DEVICE_PAGE_EDIT_ALWAYS_ON_TOP_DETAILS
 import view.resource.Strings.DEVICE_PAGE_EDIT_ALWAYS_ON_TOP_TITLE
 import view.resource.Strings.DEVICE_PAGE_EDIT_BORDERLESS_DETAILS
 import view.resource.Strings.DEVICE_PAGE_EDIT_BORDERLESS_TITLE
+import view.resource.Strings.DEVICE_PAGE_EDIT_BUFFERING_DETAILS
+import view.resource.Strings.DEVICE_PAGE_EDIT_BUFFERING_TITLE
 import view.resource.Strings.DEVICE_PAGE_EDIT_FULLSCREEN_DETAILS
 import view.resource.Strings.DEVICE_PAGE_EDIT_FULLSCREEN_TITLE
 import view.resource.Strings.DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_180
@@ -115,6 +117,15 @@ fun DeviceSetting(
                         inputText = state.bitrate,
                         onUpdateInputText = { action.updateBitrate(it) },
                         error = state.bitrateError,
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    TextFieldAndError(
+                        label = DEVICE_PAGE_EDIT_BUFFERING_TITLE,
+                        placeHolder = DEVICE_PAGE_EDIT_BUFFERING_DETAILS,
+                        inputText = state.buffering,
+                        onUpdateInputText = { action.updateBuffering(it) },
+                        error = state.bufferingError,
                         modifier = Modifier.padding(8.dp)
                     )
 
@@ -219,6 +230,7 @@ private fun DeviceSetting_Savable_True_Preview() {
             override fun updateMaxSize(maxSize: String) {}
             override fun updateMaxFrameRate(maxFrameRate: String) {}
             override fun updateBitrate(bitrate: String) {}
+            override fun updateBuffering(buffering: String) {}
             override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
             override fun updateBorderless(enabled: Boolean) {}
             override fun updateAlwaysOnTop(enabled: Boolean) {}
@@ -239,6 +251,7 @@ private fun DeviceSetting_Savable_False_Preview() {
             override fun updateMaxSize(maxSize: String) {}
             override fun updateMaxFrameRate(maxFrameRate: String) {}
             override fun updateBitrate(bitrate: String) {}
+            override fun updateBuffering(buffering: String) {}
             override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
             override fun updateBorderless(enabled: Boolean) {}
             override fun updateAlwaysOnTop(enabled: Boolean) {}
