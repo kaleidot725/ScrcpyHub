@@ -18,8 +18,8 @@ object Strings {
 
     // License Dialog
     const val LICENSE_TITLE = "About Libraries"
-    
-    // DEVICES PAGE
+
+// DEVICES PAGE
     const val DEVICES_PAGE_START_MIRRORING = "Start Mirroring"
     const val DEVICES_PAGE_STOP_MIRRORING = "Stop Mirroring"
     const val DEVICES_PAGE_START_RECORDING = "Start Recording"
