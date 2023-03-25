@@ -16,6 +16,7 @@ import org.koin.core.context.GlobalContext.startKoin
 import view.MainContent
 import view.MainContentStateHolder
 import view.MainWindow
+import view.pages.info.InfoDialog
 import view.pages.license.LicenseDialog
 import view.resource.Images
 import view.resource.Strings
@@ -31,6 +32,7 @@ fun main() = application {
     val windowState = rememberWindowState(width = 350.dp, height = 550.dp)
     var isOpen by remember { mutableStateOf(true) }
     var showLicense by remember { mutableStateOf(false) }
+    var showInfo by remember { mutableStateOf(false) }
     var alwaysOnTop by remember { mutableStateOf(false) }
 
     Tray(
@@ -56,6 +58,12 @@ fun main() = application {
                 onCheckedChange = { showLicense = it }
             )
 
+            CheckboxItem(
+                text = Strings.TRAY_ABOUT_SCRCPYHUB,
+                checked = showInfo,
+                onCheckedChange = { showInfo = it }
+            )
+
             Separator()
 
             Item(
@@ -67,6 +75,7 @@ fun main() = application {
 
     if (isOpen) {
         val stateHolder by remember { mutableStateOf(GlobalContext.get().get<MainContentStateHolder>()) }
+        val isDarkMode: Boolean? by stateHolder.isDarkMode.collectAsState(null)
 
         MainWindow(
             onCloseRequest = { isOpen = false },
@@ -80,10 +89,16 @@ fun main() = application {
         }
 
         if (showLicense) {
-            val isDarkMode: Boolean? by stateHolder.isDarkMode.collectAsState(null)
             LicenseDialog(
                 isDark = isDarkMode ?: false,
                 onClose = { showLicense = false },
+            )
+        }
+
+        if (showInfo) {
+            InfoDialog(
+                isDark = isDarkMode ?: false,
+                onClose = { showInfo = false },
             )
         }
     }
