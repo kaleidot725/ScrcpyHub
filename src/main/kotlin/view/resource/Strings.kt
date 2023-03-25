@@ -68,6 +68,12 @@ object Strings {
     const val DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_180 = "180°"
     const val DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_90 = "90° Clock Wise"
 
+    const val DEVICE_PAGE_EDIT_HID_TITLE = "HID"
+    const val DEVICE_PAGE_EDIT_HID_KEYBOARD_TITLE = "Keyboard Emulation"
+    const val DEVICE_PAGE_EDIT_HID_KEYBOARD_DETAILS = "To enable hid keyboard emulation"
+    const val DEVICE_PAGE_EDIT_HID_MOUSE_TITLE = "Mouse Emulation"
+    const val DEVICE_PAGE_EDIT_HID_MOUSE_DETAILS = "To enable hid mouse emulation"
+
     // Setting Page
     const val SETTING_PAGE_TITLE = "Preferences"
     const val SETTING_PAGE_EDIT_THEME_TITLE = "Theme"

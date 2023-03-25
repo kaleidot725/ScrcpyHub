@@ -39,6 +39,8 @@ class DevicePageStateHolder(
     private val enableBorderless: MutableStateFlow<Boolean> = MutableStateFlow(context.enableBorderless)
     private val enableAlwaysOnTop: MutableStateFlow<Boolean> = MutableStateFlow(context.enableAlwaysOnTop)
     private val enableFullscreen: MutableStateFlow<Boolean> = MutableStateFlow(context.enableFullScreen)
+    private val enableHidKeyboard: MutableStateFlow<Boolean> = MutableStateFlow(context.enableHidKeyboard)
+    private val enableHidMouse: MutableStateFlow<Boolean> = MutableStateFlow(context.enableHidMouse)
     private val rotation: MutableStateFlow<Device.Context.Rotation> = MutableStateFlow(
         Device.Context.Rotation.values().firstOrNull { it.value == context.rotation }
             ?: Device.Context.Rotation.NONE
@@ -66,6 +68,8 @@ class DevicePageStateHolder(
             enableAlwaysOnTop,
             enableFullscreen,
             rotation,
+            enableHidKeyboard,
+            enableHidMouse,
         ) {
             DevicePageState(
                 titleName = it[0] as String,
@@ -88,6 +92,8 @@ class DevicePageStateHolder(
                 enableAlwaysOnTop = it[17] as Boolean,
                 enableFullScreen = it[18] as Boolean,
                 rotation = it[19] as Device.Context.Rotation,
+                enableHidKeyboard = it[20] as Boolean,
+                enableHidMouse = it[21] as Boolean,
                 savable = isValid()
             )
         }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), DevicePageState())
@@ -171,6 +177,18 @@ class DevicePageStateHolder(
             }
         }
 
+        override fun updateEnableHidKeyboard(enabled: Boolean) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.enableHidKeyboard.emit(enabled)
+            }
+        }
+
+        override fun updateEnableHidMouse(enabled: Boolean) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.enableHidMouse.emit(enabled)
+            }
+        }
+
         override fun save() {
             coroutineScope.launch {
                 val newContext = Device.Context(
@@ -187,9 +205,10 @@ class DevicePageStateHolder(
                     enableBorderless = enableBorderless.value,
                     enableAlwaysOnTop = enableAlwaysOnTop.value,
                     enableFullScreen = enableFullscreen.value,
-                    rotation = rotation.value.value
+                    rotation = rotation.value.value,
+                    enableHidKeyboard = enableHidKeyboard.value,
+                    enableHidMouse = enableHidMouse.value,
                 )
-
                 updateDeviceSetting.execute(newContext)
                 titleName.value = editName.value
             }

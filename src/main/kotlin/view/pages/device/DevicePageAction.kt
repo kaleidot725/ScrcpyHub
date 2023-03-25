@@ -18,5 +18,9 @@ interface DevicePageAction {
     fun updateAlwaysOnTop(enabled: Boolean)
     fun updateFullscreen(enabled: Boolean)
     fun updateRotation(rotation: Device.Context.Rotation)
+
+    fun updateEnableHidKeyboard(enabled: Boolean)
+    fun updateEnableHidMouse(enabled: Boolean)
+    
     fun save()
 }

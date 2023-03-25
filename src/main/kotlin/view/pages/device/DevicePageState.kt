@@ -23,6 +23,8 @@ data class DevicePageState(
     val enableAlwaysOnTop: Boolean = false,
     val enableFullScreen: Boolean = false,
     val rotation: Device.Context.Rotation = Device.Context.Rotation.NONE,
+    val enableHidKeyboard: Boolean = false,
+    val enableHidMouse: Boolean = false,
     val savable: Boolean = false,
 ) {
     val lockOrientations: List<Device.Context.LockOrientation> = Device.Context.LockOrientation.values().toList()
