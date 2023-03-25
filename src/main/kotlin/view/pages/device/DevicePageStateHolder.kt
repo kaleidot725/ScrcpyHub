@@ -16,6 +16,7 @@ class DevicePageStateHolder(
 ) : StateHolder() {
     private val titleName: MutableStateFlow<String> = MutableStateFlow(context.displayName)
     private val editName: MutableStateFlow<String> = MutableStateFlow(context.customName ?: "")
+
     private val maxSize: MutableStateFlow<String> = MutableStateFlow(context.maxSize?.toString() ?: "")
     private val maxSizeError: MutableStateFlow<String> = MutableStateFlow("")
     private val maxFrameRate: MutableStateFlow<String> = MutableStateFlow(context.maxFrameRate?.toString() ?: "")
@@ -24,6 +25,13 @@ class DevicePageStateHolder(
     private val bitrateError: MutableStateFlow<String> = MutableStateFlow("")
     private val buffering: MutableStateFlow<String> = MutableStateFlow(context.buffering?.toString() ?: "")
     private val bufferingError: MutableStateFlow<String> = MutableStateFlow("")
+
+    private val noAudio: MutableStateFlow<Boolean> = MutableStateFlow(context.noAudio)
+    private val audioBitrate: MutableStateFlow<String> = MutableStateFlow(context.audioBitrate?.toString() ?: "")
+    private val audioBitrateError: MutableStateFlow<String> = MutableStateFlow("")
+    private val audioBuffering: MutableStateFlow<String> = MutableStateFlow(context.audioBuffering?.toString() ?: "")
+    private val audioBufferingError: MutableStateFlow<String> = MutableStateFlow("")
+
     private val lockOrientation: MutableStateFlow<Device.Context.LockOrientation> = MutableStateFlow(
         Device.Context.LockOrientation.values().firstOrNull { it.value == context.lockOrientation }
             ?: Device.Context.LockOrientation.NONE
@@ -48,6 +56,11 @@ class DevicePageStateHolder(
             bitrateError,
             buffering,
             bufferingError,
+            noAudio,
+            audioBuffering,
+            audioBufferingError,
+            audioBitrate,
+            audioBitrateError,
             lockOrientation,
             enableBorderless,
             enableAlwaysOnTop,
@@ -65,11 +78,16 @@ class DevicePageStateHolder(
                 bitrateError = it[7] as String,
                 buffering = it[8] as String,
                 bufferingError = it[9] as String,
-                lockOrientation = it[10] as Device.Context.LockOrientation,
-                enableBorderless = it[11] as Boolean,
-                enableAlwaysOnTop = it[12] as Boolean,
-                enableFullScreen = it[13] as Boolean,
-                rotation = it[14] as Device.Context.Rotation,
+                noAudio = it[10] as Boolean,
+                audioBuffering = it[11] as String,
+                audioBufferingError = it[12] as String,
+                audioBitrate = it[13] as String,
+                audioBitrateError = it[14] as String,
+                lockOrientation = it[15] as Device.Context.LockOrientation,
+                enableBorderless = it[16] as Boolean,
+                enableAlwaysOnTop = it[17] as Boolean,
+                enableFullScreen = it[18] as Boolean,
+                rotation = it[19] as Device.Context.Rotation,
                 savable = isValid()
             )
         }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), DevicePageState())
@@ -102,6 +120,24 @@ class DevicePageStateHolder(
         override fun updateBuffering(buffering: String) {
             coroutineScope.launch {
                 this@DevicePageStateHolder.buffering.emit(buffering)
+            }
+        }
+
+        override fun updateNoAudio(noAudio: Boolean) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.noAudio.emit(noAudio)
+            }
+        }
+
+        override fun updateAudioBitrate(bitrate: String) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.audioBitrate.emit(bitrate)
+            }
+        }
+
+        override fun updateAudioBuffering(buffering: String) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.audioBuffering.emit(buffering)
             }
         }
 
@@ -144,6 +180,9 @@ class DevicePageStateHolder(
                     maxFrameRate = maxFrameRate.value.toIntOrNull(),
                     bitrate = bitrate.value.toIntOrNull(),
                     buffering = buffering.value.toIntOrNull(),
+                    noAudio = noAudio.value,
+                    audioBitrate = audioBitrate.value.toIntOrNull(),
+                    audioBuffering = audioBuffering.value.toIntOrNull(),
                     lockOrientation = lockOrientation.value.value,
                     enableBorderless = enableBorderless.value,
                     enableAlwaysOnTop = enableAlwaysOnTop.value,
@@ -174,6 +213,16 @@ class DevicePageStateHolder(
         val bufferingErrorMessage = if (bufferingError) "Please input a number" else ""
         this.bitrateError.emit(bufferingErrorMessage)
 
-        return !(maxSizeError || maxFrameRateError || bitrateError)
+        val audioBitrateError = audioBitrate.value.isNotEmpty() && audioBitrate.value.toIntOrNull() == null
+        val audioBitrateErrorMessage = if (audioBitrateError) "Please input a number" else ""
+        this.audioBitrateError.emit(audioBitrateErrorMessage)
+
+        val audioBufferingError = audioBuffering.value.isNotEmpty() && audioBuffering.value.toIntOrNull() == null
+        val audioBufferingErrorMessage = if (audioBufferingError) "Please input a number" else ""
+        this.audioBufferingError.emit(audioBufferingErrorMessage)
+
+        val videoError = maxSizeError || maxFrameRateError || bitrateError || bufferingError
+        val audioError = audioBitrateError || audioBufferingError
+        return !(videoError || audioError)
     }
 }
