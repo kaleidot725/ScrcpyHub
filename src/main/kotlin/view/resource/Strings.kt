@@ -2,7 +2,7 @@ package view.resource
 
 object Strings {
     // COMMON
-    const val APP_NAME = "ScrcpyHub | v1.9.0"
+    const val APP_NAME = "ScrcpyHub | v2.0.0"
     const val SAVE = "Save"
     const val CANCEL = "Cancel"
     const val QUIT = "Quit"
@@ -10,12 +10,16 @@ object Strings {
     // TRAY
     const val TRAY_SHOW_SCRCPY_HUB = "Show Window"
     const val TRAY_ENABLE_ALWAYS_TOP = "Enable Always on Top"
+    const val TRAY_ABOUT_LICENSE = "About License"
 
     // Error
     const val NOT_FOUND_ADB_COMMAND = "Not found ADB binary"
     const val NOT_FOUND_SCRCPY_COMMAND = "Not found Scrcpy binary"
 
-    // DEVICES PAGE
+    // License Dialog
+    const val LICENSE_TITLE = "About Libraries"
+
+// DEVICES PAGE
     const val DEVICES_PAGE_START_MIRRORING = "Start Mirroring"
     const val DEVICES_PAGE_STOP_MIRRORING = "Stop Mirroring"
     const val DEVICES_PAGE_START_RECORDING = "Start Recording"

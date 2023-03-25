@@ -8,9 +8,9 @@ pluginManagement {
     plugins {
         kotlin("jvm").version("1.7.20")
         kotlin("plugin.serialization").version("1.7.20")
-        id("org.jetbrains.compose").version("1.2.2")
+        id("org.jetbrains.compose").version("1.3.1")
         id("org.jlleitschuh.gradle.ktlint").version("11.0.0")
-        id("dev.hydraulic.conveyor").version("1.3")
+        id("com.mikepenz.aboutlibraries.plugin").version("10.6.1")
     }
 }
 
@@ -32,6 +32,8 @@ dependencyResolutionManagement {
             library("junit", "org.junit.jupiter:junit-jupiter:5.9.0")
             library("mockk", "io.mockk:mockk:1.13.2")
             library("kotest", "io.kotest:kotest-runner-junit5:5.5.4")
+            library("aboutlibraries-core", "com.mikepenz:aboutlibraries-core:10.6.1")
+            library("aboutlibraries-compose", "com.mikepenz:aboutlibraries-compose:10.6.1")
         }
     }
 }
