@@ -35,10 +35,10 @@ object Strings {
     const val DEVICE_PAGE_EDIT_STAY_AWAKE_DETAILS = "To prevent the device from sleeping"
     const val DEVICE_PAGE_EDIT_SHOW_TOUCHES_TITLE = "Show touches"
     const val DEVICE_PAGE_EDIT_SHOW_TOUCHES_DETAILS = "To show physical touches"
-    const val DEVICE_PAGE_EDIT_POWER_OFF_ON_CLOSE_TITLE = "Power off on stop"
+    const val DEVICE_PAGE_EDIT_POWER_OFF_ON_CLOSE_TITLE = "Enable power off on stop"
     const val DEVICE_PAGE_EDIT_POWER_OFF_ON_CLOSE_DETAILS = "To turn the device screen off on Stop"
-    const val DEVICE_PAGE_EDIT_POWER_ON_ON_START_TITLE = "Power on on start"
-    const val DEVICE_PAGE_EDIT_POWER_ON_ON_START_DETAILS = "To prevent the device screen on on Start"
+    const val DEVICE_PAGE_EDIT_POWER_ON_ON_START_TITLE = "Disable power on on start"
+    const val DEVICE_PAGE_EDIT_POWER_ON_ON_START_DETAILS = "To prevent the screen on on Start"
 
     const val DEVICE_PAGE_EDIT_VIDEO_TITLE = "Video"
     const val DEVICE_PAGE_EDIT_MAX_SIZE_TITLE = "Reduce size"

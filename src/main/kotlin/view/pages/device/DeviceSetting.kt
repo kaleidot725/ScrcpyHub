@@ -84,7 +84,7 @@ fun DeviceSetting(
                     TitleAndCheckButton(
                         title = Strings.DEVICE_PAGE_EDIT_STAY_AWAKE_TITLE,
                         subTitle = Strings.DEVICE_PAGE_EDIT_STAY_AWAKE_DETAILS,
-                        value = state.enableShowTouches,
+                        value = state.enableStayAwake,
                         onSelect = { action.updateEnableStayAwake(it) },
                         modifier = Modifier.padding(8.dp)
                     )
