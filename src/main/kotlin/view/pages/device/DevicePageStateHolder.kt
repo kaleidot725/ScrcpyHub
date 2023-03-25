@@ -16,12 +16,26 @@ class DevicePageStateHolder(
 ) : StateHolder() {
     private val titleName: MutableStateFlow<String> = MutableStateFlow(context.displayName)
     private val editName: MutableStateFlow<String> = MutableStateFlow(context.customName ?: "")
+    private val enableStayAwake: MutableStateFlow<Boolean> = MutableStateFlow(context.enableStayAwake)
+    private val enableShowTouches: MutableStateFlow<Boolean> = MutableStateFlow(context.enableShowTouches)
+    private val enablePowerOffOnClose: MutableStateFlow<Boolean> = MutableStateFlow(context.enablePowerOffOnClose)
+    private val disablePowerOnOnStart: MutableStateFlow<Boolean> = MutableStateFlow(context.disablePowerOnOnStart)
+
     private val maxSize: MutableStateFlow<String> = MutableStateFlow(context.maxSize?.toString() ?: "")
     private val maxSizeError: MutableStateFlow<String> = MutableStateFlow("")
     private val maxFrameRate: MutableStateFlow<String> = MutableStateFlow(context.maxFrameRate?.toString() ?: "")
     private val maxFrameRateError: MutableStateFlow<String> = MutableStateFlow("")
     private val bitrate: MutableStateFlow<String> = MutableStateFlow(context.bitrate?.toString() ?: "")
     private val bitrateError: MutableStateFlow<String> = MutableStateFlow("")
+    private val buffering: MutableStateFlow<String> = MutableStateFlow(context.buffering?.toString() ?: "")
+    private val bufferingError: MutableStateFlow<String> = MutableStateFlow("")
+
+    private val noAudio: MutableStateFlow<Boolean> = MutableStateFlow(context.noAudio)
+    private val audioBitrate: MutableStateFlow<String> = MutableStateFlow(context.audioBitrate?.toString() ?: "")
+    private val audioBitrateError: MutableStateFlow<String> = MutableStateFlow("")
+    private val audioBuffering: MutableStateFlow<String> = MutableStateFlow(context.audioBuffering?.toString() ?: "")
+    private val audioBufferingError: MutableStateFlow<String> = MutableStateFlow("")
+
     private val lockOrientation: MutableStateFlow<Device.Context.LockOrientation> = MutableStateFlow(
         Device.Context.LockOrientation.values().firstOrNull { it.value == context.lockOrientation }
             ?: Device.Context.LockOrientation.NONE
@@ -29,6 +43,8 @@ class DevicePageStateHolder(
     private val enableBorderless: MutableStateFlow<Boolean> = MutableStateFlow(context.enableBorderless)
     private val enableAlwaysOnTop: MutableStateFlow<Boolean> = MutableStateFlow(context.enableAlwaysOnTop)
     private val enableFullscreen: MutableStateFlow<Boolean> = MutableStateFlow(context.enableFullScreen)
+    private val enableHidKeyboard: MutableStateFlow<Boolean> = MutableStateFlow(context.enableHidKeyboard)
+    private val enableHidMouse: MutableStateFlow<Boolean> = MutableStateFlow(context.enableHidMouse)
     private val rotation: MutableStateFlow<Device.Context.Rotation> = MutableStateFlow(
         Device.Context.Rotation.values().firstOrNull { it.value == context.rotation }
             ?: Device.Context.Rotation.NONE
@@ -44,11 +60,24 @@ class DevicePageStateHolder(
             maxFrameRateError,
             bitrate,
             bitrateError,
+            buffering,
+            bufferingError,
+            noAudio,
+            audioBuffering,
+            audioBufferingError,
+            audioBitrate,
+            audioBitrateError,
             lockOrientation,
             enableBorderless,
             enableAlwaysOnTop,
             enableFullscreen,
             rotation,
+            enableHidKeyboard,
+            enableHidMouse,
+            enableStayAwake,
+            enableShowTouches,
+            enablePowerOffOnClose,
+            disablePowerOnOnStart,
         ) {
             DevicePageState(
                 titleName = it[0] as String,
@@ -59,11 +88,24 @@ class DevicePageStateHolder(
                 maxFrameRateError = it[5] as String,
                 bitrate = it[6] as String,
                 bitrateError = it[7] as String,
-                lockOrientation = it[8] as Device.Context.LockOrientation,
-                enableBorderless = it[9] as Boolean,
-                enableAlwaysOnTop = it[10] as Boolean,
-                enableFullScreen = it[11] as Boolean,
-                rotation = it[12] as Device.Context.Rotation,
+                buffering = it[8] as String,
+                bufferingError = it[9] as String,
+                noAudio = it[10] as Boolean,
+                audioBuffering = it[11] as String,
+                audioBufferingError = it[12] as String,
+                audioBitrate = it[13] as String,
+                audioBitrateError = it[14] as String,
+                lockOrientation = it[15] as Device.Context.LockOrientation,
+                enableBorderless = it[16] as Boolean,
+                enableAlwaysOnTop = it[17] as Boolean,
+                enableFullScreen = it[18] as Boolean,
+                rotation = it[19] as Device.Context.Rotation,
+                enableHidKeyboard = it[20] as Boolean,
+                enableHidMouse = it[21] as Boolean,
+                enableStayAwake = it[22] as Boolean,
+                enableShowTouches = it[23] as Boolean,
+                enablePowerOffOnClose = it[24] as Boolean,
+                disablePowerOnOnStart = it[25] as Boolean,
                 savable = isValid()
             )
         }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), DevicePageState())
@@ -72,6 +114,30 @@ class DevicePageStateHolder(
         override fun updateName(name: String) {
             coroutineScope.launch {
                 editName.emit(name)
+            }
+        }
+
+        override fun updateEnableStayAwake(enable: Boolean) {
+            coroutineScope.launch {
+                enableStayAwake.emit(enable)
+            }
+        }
+
+        override fun updateEnableShowTouches(enable: Boolean) {
+            coroutineScope.launch {
+                enableShowTouches.emit(enable)
+            }
+        }
+
+        override fun updateEnablePowerOffOnClose(enable: Boolean) {
+            coroutineScope.launch {
+                enablePowerOffOnClose.emit(enable)
+            }
+        }
+
+        override fun updateDisablePowerOnOnStart(disable: Boolean) {
+            coroutineScope.launch {
+                disablePowerOnOnStart.emit(disable)
             }
         }
 
@@ -90,6 +156,30 @@ class DevicePageStateHolder(
         override fun updateBitrate(bitrate: String) {
             coroutineScope.launch {
                 this@DevicePageStateHolder.bitrate.emit(bitrate)
+            }
+        }
+
+        override fun updateBuffering(buffering: String) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.buffering.emit(buffering)
+            }
+        }
+
+        override fun updateNoAudio(noAudio: Boolean) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.noAudio.emit(noAudio)
+            }
+        }
+
+        override fun updateAudioBitrate(bitrate: String) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.audioBitrate.emit(bitrate)
+            }
+        }
+
+        override fun updateAudioBuffering(buffering: String) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.audioBuffering.emit(buffering)
             }
         }
 
@@ -123,6 +213,18 @@ class DevicePageStateHolder(
             }
         }
 
+        override fun updateEnableHidKeyboard(enabled: Boolean) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.enableHidKeyboard.emit(enabled)
+            }
+        }
+
+        override fun updateEnableHidMouse(enabled: Boolean) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.enableHidMouse.emit(enabled)
+            }
+        }
+
         override fun save() {
             coroutineScope.launch {
                 val newContext = Device.Context(
@@ -131,13 +233,22 @@ class DevicePageStateHolder(
                     maxSize = maxSize.value.toIntOrNull(),
                     maxFrameRate = maxFrameRate.value.toIntOrNull(),
                     bitrate = bitrate.value.toIntOrNull(),
+                    buffering = buffering.value.toIntOrNull(),
+                    noAudio = noAudio.value,
+                    audioBitrate = audioBitrate.value.toIntOrNull(),
+                    audioBuffering = audioBuffering.value.toIntOrNull(),
                     lockOrientation = lockOrientation.value.value,
                     enableBorderless = enableBorderless.value,
                     enableAlwaysOnTop = enableAlwaysOnTop.value,
                     enableFullScreen = enableFullscreen.value,
-                    rotation = rotation.value.value
+                    rotation = rotation.value.value,
+                    enableHidKeyboard = enableHidKeyboard.value,
+                    enableHidMouse = enableHidMouse.value,
+                    enableStayAwake = enableStayAwake.value,
+                    enableShowTouches = enableShowTouches.value,
+                    enablePowerOffOnClose = enablePowerOffOnClose.value,
+                    disablePowerOnOnStart = disablePowerOnOnStart.value,
                 )
-
                 updateDeviceSetting.execute(newContext)
                 titleName.value = editName.value
             }
@@ -157,6 +268,20 @@ class DevicePageStateHolder(
         val bitrateErrorMessage = if (bitrateError) "Please input a number" else ""
         this.bitrateError.emit(bitrateErrorMessage)
 
-        return !(maxSizeError || maxFrameRateError || bitrateError)
+        val bufferingError = buffering.value.isNotEmpty() && buffering.value.toIntOrNull() == null
+        val bufferingErrorMessage = if (bufferingError) "Please input a number" else ""
+        this.bitrateError.emit(bufferingErrorMessage)
+
+        val audioBitrateError = audioBitrate.value.isNotEmpty() && audioBitrate.value.toIntOrNull() == null
+        val audioBitrateErrorMessage = if (audioBitrateError) "Please input a number" else ""
+        this.audioBitrateError.emit(audioBitrateErrorMessage)
+
+        val audioBufferingError = audioBuffering.value.isNotEmpty() && audioBuffering.value.toIntOrNull() == null
+        val audioBufferingErrorMessage = if (audioBufferingError) "Please input a number" else ""
+        this.audioBufferingError.emit(audioBufferingErrorMessage)
+
+        val videoError = maxSizeError || maxFrameRateError || bitrateError || bufferingError
+        val audioError = audioBitrateError || audioBufferingError
+        return !(videoError || audioError)
     }
 }
