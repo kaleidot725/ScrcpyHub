@@ -1,0 +1,2066 @@
+{
+    "metadata": {
+        "generated": "2023-03-25T04:41:22.095Z"
+    },
+    "libraries": [
+        {
+            "uniqueId": "org.jetbrains.compose.desktop:desktop-jvm",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Jetpack Compose desktop implementation",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Jetpack Compose desktop implementation",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.material:material-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose Material Design Components library",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Material Components",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.material:material-ripple-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Material ripple used to build interactive components",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Material Ripple",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.foundation:foundation-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Higher level abstractions of the Compose UI primitives. This library is design system agnostic, providing the high-level building blocks for both application and design-system developers",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Foundation",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.animation:animation-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose animation library",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Animation",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.animation:animation-core-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Animation engine and animation primitives that are the building blocks of the Compose animation library",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Animation Core",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "JetBrains Team"
+                }
+            ],
+            "artifactVersion": "1.6.4",
+            "description": "Coroutines support libraries for Kotlin",
+            "scm": {
+                "url": "https://github.com/Kotlin/kotlinx.coroutines"
+            },
+            "name": "kotlinx-coroutines-core",
+            "website": "https://github.com/Kotlin/kotlinx.coroutines",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Kotlin Team"
+                }
+            ],
+            "artifactVersion": "1.8.0",
+            "description": "Kotlin Standard Library JDK 8 extension",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/kotlin.git",
+                "url": "https://github.com/JetBrains/kotlin",
+                "developerConnection": "scm:git:https://github.com/JetBrains/kotlin.git"
+            },
+            "name": "Kotlin Stdlib Jdk8",
+            "website": "https://kotlinlang.org/",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.kotlin:kotlin-stdlib-jdk7",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Kotlin Team"
+                }
+            ],
+            "artifactVersion": "1.8.0",
+            "description": "Kotlin Standard Library JDK 7 extension",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/kotlin.git",
+                "url": "https://github.com/JetBrains/kotlin",
+                "developerConnection": "scm:git:https://github.com/JetBrains/kotlin.git"
+            },
+            "name": "Kotlin Stdlib Jdk7",
+            "website": "https://kotlinlang.org/",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.kotlin:kotlin-stdlib",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Kotlin Team"
+                }
+            ],
+            "artifactVersion": "1.8.0",
+            "description": "Kotlin Standard Library for JVM",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/kotlin.git",
+                "url": "https://github.com/JetBrains/kotlin",
+                "developerConnection": "scm:git:https://github.com/JetBrains/kotlin.git"
+            },
+            "name": "Kotlin Stdlib",
+            "website": "https://kotlinlang.org/",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.kotlin:kotlin-stdlib-common",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Kotlin Team"
+                }
+            ],
+            "artifactVersion": "1.8.0",
+            "description": "Kotlin Common Standard Library",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/kotlin.git",
+                "url": "https://github.com/JetBrains/kotlin",
+                "developerConnection": "scm:git:https://github.com/JetBrains/kotlin.git"
+            },
+            "name": "Kotlin Stdlib Common",
+            "website": "https://kotlinlang.org/",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains:annotations",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "http://www.jetbrains.com",
+                    "name": "JetBrains Team"
+                }
+            ],
+            "artifactVersion": "13.0",
+            "description": "A set of annotations used for code inspection support and code documentation.",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/intellij-community.git",
+                "url": "https://github.com/JetBrains/intellij-community"
+            },
+            "name": "IntelliJ IDEA Annotations",
+            "website": "http://www.jetbrains.org",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.foundation:foundation-layout-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose layout implementations",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Layouts",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.ui:ui-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose UI primitives. This library contains the primitives that form the Compose UI Toolkit, such as drawing, measurement and layout.",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose UI primitives",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.runtime:runtime-saveable-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose components that allow saving and restoring the local ui state",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Saveable",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.runtime:runtime-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Tree composition support for code generated by the Compose compiler plugin and corresponding public API",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Runtime",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.ui:ui-text-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose Text primitives and utilities",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose UI Text",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.ui:ui-graphics-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose graphics",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Graphics",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.skiko:skiko-awt",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "0.7.54",
+            "description": "Kotlin Skia bindings",
+            "scm": {
+                "connection": "scm:git:https://www.github.com/JetBrains/skiko.git",
+                "url": "https://www.github.com/JetBrains/skiko",
+                "developerConnection": "scm:git:https://www.github.com/JetBrains/skiko.git"
+            },
+            "name": "Skiko Awt",
+            "website": "https://www.github.com/JetBrains/skiko",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.ui:ui-unit-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose classes for simple units",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Unit",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.ui:ui-geometry-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose classes related to dimensions without units",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Geometry",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.material:material-icons-core-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose Material Design core icons. This module contains the most commonly used set of Material icons.",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Material Icons Core",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.ui:ui-tooling-preview-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose tooling library API. This library provides the API required to declare @Preview composables in user apps.",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Tooling API",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.material:material-icons-extended-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Compose Material Design extended icons. This module contains all Material icons. It is a very large dependency and should not be included directly.",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Material Icons Extended",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "io.insert-koin:koin-core-jvm",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Arnaud Giuliani"
+                }
+            ],
+            "artifactVersion": "3.2.2",
+            "description": "KOIN - Kotlin simple Dependency Injection Framework",
+            "scm": {
+                "connection": "scm:git:git://github.com/InsertKoinIO/koin.git",
+                "url": "https://github.com/InsertKoinIO/koin",
+                "developerConnection": "scm:git:git://github.com/InsertKoinIO/koin.git"
+            },
+            "name": "koin-core",
+            "website": "https://insert-koin.io/",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "JetBrains Team"
+                }
+            ],
+            "artifactVersion": "1.4.1",
+            "description": "Kotlin multiplatform serialization runtime library",
+            "scm": {
+                "url": "https://github.com/Kotlin/kotlinx.serialization"
+            },
+            "name": "kotlinx-serialization-json",
+            "website": "https://github.com/Kotlin/kotlinx.serialization",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "JetBrains Team"
+                }
+            ],
+            "artifactVersion": "1.4.1",
+            "description": "Kotlin multiplatform serialization runtime library",
+            "scm": {
+                "url": "https://github.com/Kotlin/kotlinx.serialization"
+            },
+            "name": "kotlinx-serialization-core",
+            "website": "https://github.com/Kotlin/kotlinx.serialization",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.mikepenz:aboutlibraries-compose-jvm",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Mike Penz"
+                }
+            ],
+            "artifactVersion": "10.6.1",
+            "description": "AboutLibraries automatically detects all dependencies of a project and collects their information including the license. Optionally visualising it via the provided ui components.",
+            "scm": {
+                "connection": "scm:git@github.com:mikepenz/AboutLibraries.git",
+                "url": "https://github.com/mikepenz/AboutLibraries",
+                "developerConnection": "scm:git@github.com:mikepenz/AboutLibraries.git"
+            },
+            "name": "AboutLibraries Library",
+            "website": "https://github.com/mikepenz/AboutLibraries",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.mikepenz:aboutlibraries-core-jvm",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Mike Penz"
+                }
+            ],
+            "artifactVersion": "10.6.1",
+            "description": "AboutLibraries automatically detects all dependencies of a project and collects their information including the license. Optionally visualising it via the provided ui components.",
+            "scm": {
+                "connection": "scm:git@github.com:mikepenz/AboutLibraries.git",
+                "url": "https://github.com/mikepenz/AboutLibraries",
+                "developerConnection": "scm:git@github.com:mikepenz/AboutLibraries.git"
+            },
+            "name": "AboutLibraries Library",
+            "website": "https://github.com/mikepenz/AboutLibraries",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.lordcodes.turtle:turtle",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Andrew Lord"
+                }
+            ],
+            "artifactVersion": "0.8.0",
+            "description": "Run shell commands from a Kotlin script or application with ease \u00f0\u009f\u0090\u00a2",
+            "scm": {
+                "connection": "scm:git:git://github.com/lordcodes/turtle.git",
+                "url": "https://github.com/lordcodes/turtle/",
+                "developerConnection": "scm:git:ssh://git@github.com:lordcodes/turtle.git"
+            },
+            "name": "Turtle",
+            "website": "https://github.com/lordcodes/turtle/",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.malinskiy.adam:adam",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Anton Malinskiy"
+                }
+            ],
+            "artifactVersion": "0.4.8",
+            "description": "Android Debug Bridge helper",
+            "scm": {
+                "connection": "scm:git:ssh://github.com/Malinskiy/adam",
+                "url": "https://github.com/Malinskiy/adam.git",
+                "developerConnection": "scm:git:ssh://github.com/Malinskiy/adam"
+            },
+            "name": "adam",
+            "website": "https://github.com/Malinskiy/adam",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "io.grpc:grpc-protobuf-lite",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.google.com",
+                    "name": "gRPC Contributors"
+                }
+            ],
+            "artifactVersion": "1.49.0",
+            "description": "gRPC: Protobuf Lite",
+            "scm": {
+                "connection": "scm:git:https://github.com/grpc/grpc-java.git",
+                "url": "https://github.com/grpc/grpc-java",
+                "developerConnection": "scm:git:git@github.com:grpc/grpc-java.git"
+            },
+            "name": "io.grpc:grpc-protobuf-lite",
+            "website": "https://github.com/grpc/grpc-java",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.google.protobuf:protobuf-javalite",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "3.21.5",
+            "description": "Lite version of Protocol Buffers library. This version is optimized for code size, but does\n    not guarantee API/ABI stability.",
+            "scm": {
+                "connection": "scm:git:https://github.com/protocolbuffers/protobuf.git",
+                "url": "https://github.com/protocolbuffers/protobuf"
+            },
+            "name": "Protocol Buffers [Lite]",
+            "website": "https://developers.google.com/protocol-buffers/",
+            "licenses": [
+                "BSD-3-Clause"
+            ]
+        },
+        {
+            "uniqueId": "io.grpc:grpc-api",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.google.com",
+                    "name": "gRPC Contributors"
+                }
+            ],
+            "artifactVersion": "1.49.0",
+            "description": "gRPC: API",
+            "scm": {
+                "connection": "scm:git:https://github.com/grpc/grpc-java.git",
+                "url": "https://github.com/grpc/grpc-java",
+                "developerConnection": "scm:git:git@github.com:grpc/grpc-java.git"
+            },
+            "name": "io.grpc:grpc-api",
+            "website": "https://github.com/grpc/grpc-java",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "io.grpc:grpc-context",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.google.com",
+                    "name": "gRPC Contributors"
+                }
+            ],
+            "artifactVersion": "1.49.0",
+            "description": "gRPC: Context",
+            "scm": {
+                "connection": "scm:git:https://github.com/grpc/grpc-java.git",
+                "url": "https://github.com/grpc/grpc-java",
+                "developerConnection": "scm:git:git@github.com:grpc/grpc-java.git"
+            },
+            "name": "io.grpc:grpc-context",
+            "website": "https://github.com/grpc/grpc-java",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.google.code.findbugs:jsr305",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "3.0.2",
+            "description": "JSR305 Annotations for Findbugs",
+            "scm": {
+                "connection": "scm:git:https://code.google.com/p/jsr-305/",
+                "url": "https://code.google.com/p/jsr-305/",
+                "developerConnection": "scm:git:https://code.google.com/p/jsr-305/"
+            },
+            "name": "FindBugs-jsr305",
+            "website": "http://findbugs.sourceforge.net/",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.google.errorprone:error_prone_annotations",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "2.14.0",
+            "description": "Error Prone is a static analysis tool for Java that catches common programming mistakes at compile-time.",
+            "scm": {
+                "connection": "scm:git:https://github.com/google/error-prone.git",
+                "url": "https://github.com/google/error-prone",
+                "developerConnection": "scm:git:git@github.com:google/error-prone.git"
+            },
+            "name": "error-prone annotations",
+            "website": "https://errorprone.info",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "http://www.google.com",
+                "name": "Google LLC"
+            }
+        },
+        {
+            "uniqueId": "io.grpc:grpc-kotlin-stub",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.google.com",
+                    "name": "gRPC Contributors"
+                }
+            ],
+            "artifactVersion": "1.3.0",
+            "description": "Kotlin-based stubs for gRPC services",
+            "scm": {
+                "connection": "scm:git:https://github.com/grpc/grpc-kotlin.git",
+                "url": "https://github.com/grpc/grpc-kotlin",
+                "developerConnection": "scm:git:git@github.com:grpc/grpc-kotlin.git"
+            },
+            "name": "gRPC Kotlin Stub",
+            "website": "https://github.com/grpc/grpc-kotlin",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "io.grpc:grpc-stub",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.google.com",
+                    "name": "gRPC Contributors"
+                }
+            ],
+            "artifactVersion": "1.49.0",
+            "description": "gRPC: Stub",
+            "scm": {
+                "connection": "scm:git:https://github.com/grpc/grpc-java.git",
+                "url": "https://github.com/grpc/grpc-java",
+                "developerConnection": "scm:git:git@github.com:grpc/grpc-java.git"
+            },
+            "name": "io.grpc:grpc-stub",
+            "website": "https://github.com/grpc/grpc-java",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.google.guava:guava",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "31.1-android",
+            "description": "Guava is a suite of core and expanded libraries that include\n    utility classes, Google's collections, I/O classes, and\n    much more.",
+            "scm": {
+                "connection": "scm:git:https://github.com/google/guava.git",
+                "url": "https://github.com/google/guava",
+                "developerConnection": "scm:git:git@github.com:google/guava.git"
+            },
+            "name": "Guava: Google Core Libraries for Java",
+            "website": "https://github.com/google/guava",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.google.guava:failureaccess",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "1.0.1",
+            "description": "Contains\n    com.google.common.util.concurrent.internal.InternalFutureFailureAccess and\n    InternalFutures. Most users will never need to use this artifact. Its\n    classes is conceptually a part of Guava, but they're in this separate\n    artifact so that Android libraries can use them without pulling in all of\n    Guava (just as they can use ListenableFuture by depending on the\n    listenablefuture artifact).",
+            "scm": {
+                "connection": "scm:git:https://github.com/google/guava.git",
+                "url": "https://github.com/google/guava",
+                "developerConnection": "scm:git:git@github.com:google/guava.git"
+            },
+            "name": "Guava InternalFutureFailureAccess and InternalFutures",
+            "website": "https://github.com/google/guava",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.google.guava:listenablefuture",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "9999.0-empty-to-avoid-conflict-with-guava",
+            "description": "An empty artifact that Guava depends on to signal that it is providing\n    ListenableFuture -- but is also available in a second \"version\" that\n    contains com.google.common.util.concurrent.ListenableFuture class, without\n    any other Guava classes. The idea is:\n\n    - If users want only ListenableFuture, they depend on listenablefuture-1.0.\n\n    - If users want all of Guava, they depend on guava, which, as of Guava\n    27.0, depends on\n    listenablefuture-9999.0-empty-to-avoid-conflict-with-guava. The 9999.0-...\n    version number is enough for some build systems (notably, Gradle) to select\n    that empty artifact over the \"real\" listenablefuture-1.0 -- avoiding a\n    conflict with the copy of ListenableFuture in guava itself. If users are\n    using an older version of Guava or a build system other than Gradle, they\n    may see class conflicts. If so, they can solve them by manually excluding\n    the listenablefuture artifact or manually forcing their build systems to\n    use 9999.0-....",
+            "scm": {
+                "connection": "scm:git:https://github.com/google/guava.git",
+                "url": "https://github.com/google/guava",
+                "developerConnection": "scm:git:git@github.com:google/guava.git"
+            },
+            "name": "Guava ListenableFuture only",
+            "website": "https://github.com/google/guava",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.checkerframework:checker-qual",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.cs.washington.edu/",
+                    "name": "Michael Ernst"
+                },
+                {
+                    "organisationUrl": "https://www.cs.washington.edu/",
+                    "name": "Suzanne Millstein"
+                }
+            ],
+            "artifactVersion": "3.12.0",
+            "description": "checker-qual contains annotations (type qualifiers) that a programmer\nwrites to specify Java code for type-checking by the Checker Framework.",
+            "scm": {
+                "connection": "scm:git:git://github.com/typetools/checker-framework.git",
+                "url": "https://github.com/typetools/checker-framework.git",
+                "developerConnection": "scm:git:ssh://git@github.com/typetools/checker-framework.git"
+            },
+            "name": "Checker Qual",
+            "website": "https://checkerframework.org",
+            "licenses": [
+                "MIT"
+            ]
+        },
+        {
+            "uniqueId": "com.google.j2objc:j2objc-annotations",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "1.3",
+            "description": "A set of annotations that provide additional information to the J2ObjC\n    translator to modify the result of translation.",
+            "scm": {
+                "connection": "scm:svn:http://svn.sonatype.org/spice/tags/oss-parent-7",
+                "url": "http://svn.sonatype.org/spice/tags/oss-parent-7",
+                "developerConnection": "scm:svn:https://svn.sonatype.org/spice/tags/oss-parent-7"
+            },
+            "name": "J2ObjC Annotations",
+            "website": "https://github.com/google/j2objc/",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "javax.annotation:javax.annotation-api",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Linda De Michiel"
+                }
+            ],
+            "artifactVersion": "1.3.2",
+            "description": "Common Annotations for the JavaTM Platform API",
+            "scm": {
+                "connection": "scm:git:https://github.com/javaee/javax.annotation.git",
+                "url": "https://github.com/javaee/javax.annotation",
+                "developerConnection": "scm:git:git@github.com:javaee/javax.annotation.git"
+            },
+            "name": "${extension.name} API",
+            "website": "http://jcp.org/en/jsr/detail?id=250",
+            "licenses": [
+                "9be0c4d7964ad9a68deb2e9706266b8c"
+            ],
+            "organization": {
+                "url": "https://javaee.github.io/glassfish",
+                "name": "GlassFish Community"
+            }
+        },
+        {
+            "uniqueId": "io.grpc:grpc-okhttp",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.google.com",
+                    "name": "gRPC Contributors"
+                }
+            ],
+            "artifactVersion": "1.49.0",
+            "description": "gRPC: OkHttp",
+            "scm": {
+                "connection": "scm:git:https://github.com/grpc/grpc-java.git",
+                "url": "https://github.com/grpc/grpc-java",
+                "developerConnection": "scm:git:git@github.com:grpc/grpc-java.git"
+            },
+            "name": "io.grpc:grpc-okhttp",
+            "website": "https://github.com/grpc/grpc-java",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "io.grpc:grpc-core",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.google.com",
+                    "name": "gRPC Contributors"
+                }
+            ],
+            "artifactVersion": "1.49.0",
+            "description": "gRPC: Core",
+            "scm": {
+                "connection": "scm:git:https://github.com/grpc/grpc-java.git",
+                "url": "https://github.com/grpc/grpc-java",
+                "developerConnection": "scm:git:git@github.com:grpc/grpc-java.git"
+            },
+            "name": "io.grpc:grpc-core",
+            "website": "https://github.com/grpc/grpc-java",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.github.Dansoftowner:jSystemThemeDetector",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Daniel Gyoerffy"
+                }
+            ],
+            "artifactVersion": "3.6",
+            "description": "Java library for detecting that the (desktop) operating system uses dark UI theme or not",
+            "scm": {
+                "connection": "scm:git://github.com/Dansoftowner/jSystemThemeDetector.git",
+                "url": "git://github.com/Dansoftowner/jSystemThemeDetector.git",
+                "developerConnection": "scm:git://github.com/Dansoftowner/jSystemThemeDetector.git"
+            },
+            "name": "Dansoftowner/jSystemThemeDetector",
+            "website": "https://github.com/Dansoftowner/jSystemThemeDetector",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.kotlinx:kotlinx-coroutines-bom",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "JetBrains Team"
+                }
+            ],
+            "artifactVersion": "1.6.4",
+            "description": "Coroutines support libraries for Kotlin",
+            "scm": {
+                "url": "https://github.com/Kotlin/kotlinx.coroutines"
+            },
+            "name": "kotlinx-coroutines-bom",
+            "website": "https://github.com/Kotlin/kotlinx.coroutines",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "io.vertx:vertx-lang-kotlin-coroutines",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.3.3",
+            "description": "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
+            "scm": {
+                "connection": "scm:git:git@github.com:vert-x3/vert-parent.git",
+                "url": "git@github.com:vert-x3/vert-parent.git",
+                "developerConnection": "scm:git:git@github.com:vert-x3/vert-parent.git"
+            },
+            "name": "Vert.x Parent pom",
+            "website": "http://nexus.sonatype.org/oss-repository-hosting.html",
+            "licenses": [
+                "Apache-2.0",
+                "2b23c125667f46b665a726b2b35b3a9a"
+            ],
+            "organization": {
+                "name": "Eclipse"
+            }
+        },
+        {
+            "uniqueId": "io.vertx:vertx-core",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.3.3",
+            "description": "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
+            "scm": {
+                "connection": "scm:git:git@github.com:eclipse/vert.x.git",
+                "url": "git@github.com:eclipse/vert.x.git",
+                "developerConnection": "scm:git:git@github.com:eclipse/vert.x.git"
+            },
+            "name": "Vert.x Core",
+            "website": "http://nexus.sonatype.org/oss-repository-hosting.html",
+            "licenses": [
+                "Apache-2.0",
+                "bfc1c03343e0ab6681fcc45b8398f51d"
+            ],
+            "organization": {
+                "name": "Eclipse"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-handler-proxy",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Handler/Proxy",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-codec-http",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Codec/HTTP",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-handler",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Handler",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-transport-native-unix-common",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Static library which contains common unix utilities.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Transport/Native/Unix/Common",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-transport",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Transport",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-buffer",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Buffer",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-common",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Common",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-resolver",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Resolver",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-codec",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Codec",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-codec-socks",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Codec/Socks",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-codec-http2",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Codec/HTTP2",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-resolver-dns",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Resolver/DNS",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "io.netty:netty-codec-dns",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.1.78.Final",
+            "description": "Netty is an asynchronous event-driven network application framework for\n    rapid development of maintainable high performance protocol servers and\n    clients.",
+            "scm": {
+                "connection": "scm:git:git://github.com/netty/netty.git",
+                "url": "https://github.com/netty/netty",
+                "developerConnection": "scm:git:ssh://git@github.com/netty/netty.git"
+            },
+            "name": "Netty/Codec/DNS",
+            "website": "https://netty.io/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://netty.io/",
+                "name": "The Netty Project"
+            }
+        },
+        {
+            "uniqueId": "com.fasterxml.jackson.core:jackson-core",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "2.13.2",
+            "description": "Core Jackson processing abstractions (aka Streaming API), implementation for JSON",
+            "scm": {
+                "connection": "scm:git:git@github.com:FasterXML/jackson-core.git",
+                "url": "http://github.com/FasterXML/jackson-core",
+                "developerConnection": "scm:git:git@github.com:FasterXML/jackson-core.git"
+            },
+            "name": "Jackson-core",
+            "website": "https://github.com/FasterXML/jackson-core",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "http://fasterxml.com/",
+                "name": "FasterXML"
+            }
+        },
+        {
+            "uniqueId": "io.vertx:vertx-lang-kotlin",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "4.3.3",
+            "description": "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
+            "scm": {
+                "connection": "scm:git:git@github.com:vert-x3/vert-parent.git",
+                "url": "git@github.com:vert-x3/vert-parent.git",
+                "developerConnection": "scm:git:git@github.com:vert-x3/vert-parent.git"
+            },
+            "name": "Vert.x Parent pom",
+            "website": "http://nexus.sonatype.org/oss-repository-hosting.html",
+            "licenses": [
+                "Apache-2.0",
+                "2b23c125667f46b665a726b2b35b3a9a"
+            ],
+            "organization": {
+                "name": "Eclipse"
+            }
+        },
+        {
+            "uniqueId": "io.github.microutils:kotlin-logging-jvm",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.github.com",
+                    "name": "Ohad Shai"
+                }
+            ],
+            "artifactVersion": "2.1.23",
+            "description": "kotlin-logging 2.1.23 - Lightweight logging framework for Kotlin",
+            "scm": {
+                "connection": "scm:git:git://github.com/MicroUtils/kotlin-logging.git",
+                "url": "https://github.com/MicroUtils/kotlin-logging/tree/master",
+                "developerConnection": "scm:git:ssh://github.com:MicroUtils/kotlin-logging.git"
+            },
+            "name": "kotlin-logging",
+            "website": "https://github.com/MicroUtils/kotlin-logging",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.slf4j:slf4j-api",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "1.7.32",
+            "description": "The slf4j API",
+            "scm": {
+                "connection": "git@github.com:qos-ch/slf4j.git",
+                "url": "https://github.com/qos-ch/slf4j"
+            },
+            "name": "SLF4J API Module",
+            "website": "http://www.slf4j.org",
+            "licenses": [
+                "MIT"
+            ],
+            "organization": {
+                "url": "http://www.qos.ch",
+                "name": "QOS.ch"
+            }
+        },
+        {
+            "uniqueId": "org.apache.commons:commons-pool2",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Morgan Delagrange"
+                },
+                {
+                    "name": "Geir Magnusson"
+                },
+                {
+                    "name": "Craig McClanahan"
+                },
+                {
+                    "name": "Rodney Waldhoff"
+                },
+                {
+                    "name": "David Weinrich"
+                },
+                {
+                    "name": "Dirk Verbeeck"
+                },
+                {
+                    "name": "Robert Burrell Donkin"
+                },
+                {
+                    "name": "Sandy McArthur"
+                },
+                {
+                    "name": "Simone Tripodi"
+                },
+                {
+                    "organisationUrl": "https://www.apache.org/",
+                    "name": "Gary Gregory"
+                },
+                {
+                    "name": "Matt Sicker"
+                }
+            ],
+            "artifactVersion": "2.11.1",
+            "description": "The Apache Commons Object Pooling Library.",
+            "scm": {
+                "connection": "scm:git:https://gitbox.apache.org/repos/asf/commons-pool.git",
+                "url": "https://gitbox.apache.org/repos/asf?p=commons-pool.git",
+                "developerConnection": "scm:git:https://gitbox.apache.org/repos/asf/commons-pool.git"
+            },
+            "name": "Apache Commons Pool",
+            "website": "https://commons.apache.org/proper/commons-pool/",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "https://www.apache.org/",
+                "name": "The Apache Software Foundation"
+            }
+        },
+        {
+            "uniqueId": "io.perfmark:perfmark-api",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Carl Mastrangelo"
+                }
+            ],
+            "artifactVersion": "0.25.0",
+            "description": "PerfMark API",
+            "scm": {
+                "connection": "scm:git:https://github.com/perfmark/perfmark.git",
+                "url": "https://github.com/perfmark/perfmark",
+                "developerConnection": "scm:git@github.com:perfmark/perfmark.git"
+            },
+            "name": "perfmark:perfmark-api",
+            "website": "https://github.com/perfmark/perfmark",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.google.code.gson:gson",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "2.9.0",
+            "description": "Gson JSON library",
+            "scm": {
+                "connection": "scm:git:https://github.com/google/gson.git",
+                "url": "https://github.com/google/gson/",
+                "developerConnection": "scm:git:git@github.com:google/gson.git"
+            },
+            "name": "Gson",
+            "website": "https://github.com/google/gson",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.google.android:annotations",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "The Android Open Source Projects"
+                }
+            ],
+            "artifactVersion": "4.1.1.4",
+            "description": "A library jar that provides annotations for the Google Android Platform.",
+            "scm": {
+                "connection": "git://android.git.kernel.org/platform/manifest.git",
+                "url": "https://android.git.kernel.org/"
+            },
+            "name": "Google Android Annotations Library",
+            "website": "http://source.android.com/",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.codehaus.mojo:animal-sniffer-annotations",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "1.21",
+            "description": "Animal Sniffer Parent POM.",
+            "scm": {
+                "connection": "scm:git:https://github.com/mojohaus/animal-sniffer.git",
+                "url": "https://github.com/mojohaus/animal-sniffer",
+                "developerConnection": "scm:git:ssh://git@github.com/mojohaus/animal-sniffer.git"
+            },
+            "name": "Animal Sniffer Annotations",
+            "website": "https://www.mojohaus.org/animal-sniffer",
+            "licenses": [
+                "MIT"
+            ],
+            "organization": {
+                "url": "https://www.mojohaus.org",
+                "name": "MojoHaus"
+            }
+        },
+        {
+            "uniqueId": "com.squareup.okio:okio",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "1.17.5",
+            "description": "A modern I/O API for Java",
+            "scm": {
+                "connection": "scm:git:https://github.com/square/okio.git",
+                "url": "https://github.com/square/okio/",
+                "developerConnection": "scm:git:git@github.com:square/okio.git"
+            },
+            "name": "Okio",
+            "website": "https://github.com/square/okio",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.kotlinx:atomicfu-jvm",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "JetBrains Team"
+                }
+            ],
+            "artifactVersion": "0.17.2",
+            "description": "AtomicFU utilities",
+            "scm": {
+                "url": "https://github.com/Kotlin/kotlinx.atomicfu"
+            },
+            "name": "atomicfu",
+            "website": "https://github.com/Kotlin/kotlinx.atomicfu",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.compose.ui:ui-util-desktop",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "1.3.1",
+            "description": "Internal Compose utilities used by other modules",
+            "scm": {
+                "connection": "scm:git:https://github.com/JetBrains/compose-jb.git",
+                "url": "https://github.com/JetBrains/compose-jb",
+                "developerConnection": "scm:git:https://github.com/JetBrains/compose-jb.git"
+            },
+            "name": "Compose Util",
+            "website": "https://github.com/JetBrains/compose-jb",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "org.jetbrains.skiko:skiko-awt-runtime-macos-arm64",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "organisationUrl": "https://www.jetbrains.com",
+                    "name": "Compose Multiplatform Team"
+                }
+            ],
+            "artifactVersion": "0.7.54",
+            "description": "Kotlin Skia bindings",
+            "scm": {
+                "connection": "scm:git:https://www.github.com/JetBrains/skiko.git",
+                "url": "https://www.github.com/JetBrains/skiko",
+                "developerConnection": "scm:git:https://www.github.com/JetBrains/skiko.git"
+            },
+            "name": "Skiko JVM Runtime for MacOS Arm64",
+            "website": "https://www.github.com/JetBrains/skiko",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.github.oshi:oshi-core",
+            "funding": [
+                
+            ],
+            "developers": [
+                
+            ],
+            "artifactVersion": "5.7.1",
+            "description": "A JNA-based (native) operating system information library for Java that aims to provide a cross-platform implementation to retrieve system information, such as version, memory, CPU, disk, battery, etc.",
+            "scm": {
+                "connection": "scm:git:git@github.com:oshi/oshi.git",
+                "url": "https://github.com/oshi/oshi.git",
+                "developerConnection": "scm:git:git@github.com:oshi/oshi.git"
+            },
+            "name": "oshi-core",
+            "website": "https://github.com/oshi/oshi",
+            "licenses": [
+                "MIT"
+            ],
+            "organization": {
+                "url": "https://github.com/oshi/",
+                "name": "oshi"
+            }
+        },
+        {
+            "uniqueId": "net.java.dev.jna:jna-platform",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Timothy Wall"
+                },
+                {
+                    "name": "Matthias Bl\u00e4sing"
+                }
+            ],
+            "artifactVersion": "5.8.0",
+            "description": "Java Native Access Platform",
+            "scm": {
+                "connection": "scm:git:https://github.com/java-native-access/jna",
+                "url": "https://github.com/java-native-access/jna",
+                "developerConnection": "scm:git:ssh://git@github.com/java-native-access/jna.git"
+            },
+            "name": "Java Native Access Platform",
+            "website": "https://github.com/java-native-access/jna",
+            "licenses": [
+                "48d7a92a0b7ac1fd27dc766fabb16670",
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "net.java.dev.jna:jna",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Timothy Wall"
+                },
+                {
+                    "name": "Matthias Bl\u00e4sing"
+                }
+            ],
+            "artifactVersion": "5.8.0",
+            "description": "Java Native Access",
+            "scm": {
+                "connection": "scm:git:https://github.com/java-native-access/jna",
+                "url": "https://github.com/java-native-access/jna",
+                "developerConnection": "scm:git:ssh://git@github.com/java-native-access/jna.git"
+            },
+            "name": "Java Native Access",
+            "website": "https://github.com/java-native-access/jna",
+            "licenses": [
+                "48d7a92a0b7ac1fd27dc766fabb16670",
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "de.jangassen:jfa",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Jan Gassen"
+                }
+            ],
+            "artifactVersion": "1.1.9",
+            "description": "Java Foundation Access",
+            "scm": {
+                "url": "https://github.com/0x4a616e/jfa"
+            },
+            "name": "JFA",
+            "website": "https://github.com/0x4a616e/jfa",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "io.github.g00fy2:versioncompare",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Thomas Wirth"
+                }
+            ],
+            "artifactVersion": "1.4.1",
+            "description": "Lightweight library to compare version strings.",
+            "scm": {
+                "connection": "https://github.com/G00fY2/version-compare.git",
+                "url": "https://github.com/G00fY2/version-compare",
+                "developerConnection": "https://github.com/G00fY2/version-compare.git"
+            },
+            "name": "versioncompare",
+            "website": "https://github.com/G00fY2/version-compare",
+            "licenses": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "uniqueId": "com.fasterxml.jackson:jackson-bom",
+            "funding": [
+                
+            ],
+            "developers": [
+                {
+                    "name": "Tatu Saloranta"
+                }
+            ],
+            "artifactVersion": "2.13.2",
+            "description": "Bill of Materials pom for getting full, complete set of compatible versions\nof Jackson components maintained by FasterXML.com",
+            "scm": {
+                "connection": "scm:git:git@github.com:FasterXML/jackson-bom.git",
+                "url": "https://github.com/FasterXML/jackson-bom",
+                "developerConnection": "scm:git:git@github.com:FasterXML/jackson-bom.git"
+            },
+            "name": "Jackson BOM",
+            "website": "https://github.com/FasterXML/jackson-bom",
+            "licenses": [
+                "Apache-2.0"
+            ],
+            "organization": {
+                "url": "http://fasterxml.com/",
+                "name": "FasterXML"
+            }
+        }
+    ],
+    "licenses": {
+        "48d7a92a0b7ac1fd27dc766fabb16670": {
+            "hash": "48d7a92a0b7ac1fd27dc766fabb16670",
+            "url": "http://www.gnu.org/licenses/licenses.html",
+            "name": "LGPL, version 2.1"
+        },
+        "bfc1c03343e0ab6681fcc45b8398f51d": {
+            "hash": "bfc1c03343e0ab6681fcc45b8398f51d",
+            "url": "http://www.eclipse.org/legal/epl-v20.html",
+            "name": "Eclipse Public License - v 2.0"
+        },
+        "BSD-3-Clause": {
+            "content": "Copyright (c) <<var;name=copyright;original= <year> <owner>;match=.+>>. All rights reserved. \n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. \n\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. \n\n3. Neither the name of <<var;name=organizationClause3;original=the copyright holder;match=.+>> nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY <<var;name=copyrightHolderAsIs;original=THE COPYRIGHT HOLDERS AND CONTRIBUTORS;match=.+>> \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <<var;name=copyrightHolderLiability;original=THE COPYRIGHT HOLDER OR CONTRIBUTORS;match=.+>> BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. ",
+            "hash": "BSD-3-Clause",
+            "internalHash": "BSD-3-Clause",
+            "url": "https://spdx.org/licenses/BSD-3-Clause.html",
+            "spdxId": "BSD-3-Clause",
+            "name": "BSD 3-Clause \"New\" or \"Revised\" License"
+        },
+        "Apache-2.0": {
+            "content": "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\n\n     (a) You must give any other recipients of the Work or Derivative Works a copy of this License; and\n\n     (b) You must cause any modified files to carry prominent notices stating that You changed the files; and\n\n     (c) You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\n\n     (d) If the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\n\n     You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\nTo apply the Apache License to your work, attach the following boilerplate notice, with the fields enclosed by brackets \"[]\" replaced with your own identifying information. (Don't include the brackets!)  The text should be enclosed in the appropriate comment syntax for the file format. We also recommend that a file or class name and description of purpose be included on the same \"printed page\" as the copyright notice for easier identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.",
+            "hash": "Apache-2.0",
+            "internalHash": "Apache-2.0",
+            "url": "https://spdx.org/licenses/Apache-2.0.html",
+            "spdxId": "Apache-2.0",
+            "name": "Apache License 2.0"
+        },
+        "MIT": {
+            "content": "MIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+            "hash": "MIT",
+            "internalHash": "MIT",
+            "url": "https://spdx.org/licenses/MIT.html",
+            "spdxId": "MIT",
+            "name": "MIT License"
+        },
+        "2b23c125667f46b665a726b2b35b3a9a": {
+            "hash": "2b23c125667f46b665a726b2b35b3a9a",
+            "url": "http://www.eclipse.org/legal/epl-v10.html",
+            "name": "Eclipse Public License - v 1.0"
+        },
+        "9be0c4d7964ad9a68deb2e9706266b8c": {
+            "hash": "9be0c4d7964ad9a68deb2e9706266b8c",
+            "url": "https://github.com/javaee/javax.annotation/blob/master/LICENSE",
+            "name": "CDDL + GPLv2 with classpath exception"
+        }
+    }
+}
