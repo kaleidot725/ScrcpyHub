@@ -46,6 +46,15 @@ object Strings {
     const val DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90 = "90° Counter Clock Wise"
     const val DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_180 = "180°"
     const val DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_90 = "90° Clock Wise"
+
+    const val DEVICE_PAGE_EDIT_AUDIO_TITLE = "Audio"
+    const val DEVICE_PAGE_EDIT_AUDIO_NO_AUDIO_TITLE = "No Audio"
+    const val DEVICE_PAGE_EDIT_AUDIO_NO_AUDIO_DETAILS = "To disable audio."
+    const val DEVICE_PAGE_EDIT_AUDIO_BITRATE_TITLE = "BitRate (Kbsp)"
+    const val DEVICE_PAGE_EDIT_AUDIO_BITRATE_DETAILS = "To change the audio bitrate."
+    const val DEVICE_PAGE_EDIT_AUDIO_BUFFERING_TITLE = "Buffering(ms)"
+    const val DEVICE_PAGE_EDIT_AUDIO_BUFFERING_DETAILS = "To change the buffering."
+
     const val DEVICE_PAGE_EDIT_WINDOW_TITLE = "Window"
     const val DEVICE_PAGE_EDIT_BORDERLESS_TITLE = "Borderless"
     const val DEVICE_PAGE_EDIT_BORDERLESS_DETAILS = "To disable window decorations"
