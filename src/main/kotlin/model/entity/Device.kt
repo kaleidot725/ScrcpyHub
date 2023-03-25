@@ -19,6 +19,8 @@ data class Device(val id: String = "") {
         val enableBorderless: Boolean = false,
         val enableAlwaysOnTop: Boolean = false,
         val enableFullScreen: Boolean = false,
+        val enableHidKeyboard: Boolean = false,
+        val enableHidMouse: Boolean = false,
         val rotation: Int? = null,
     ) {
         val displayName get() = if (customName.isNullOrEmpty()) device.id else customName

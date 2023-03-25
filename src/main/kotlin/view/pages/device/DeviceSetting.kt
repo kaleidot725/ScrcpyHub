@@ -230,6 +230,34 @@ fun DeviceSetting(
                     )
                 }
             }
+
+            Card(elevation = 4.dp) {
+                Column {
+                    Text(
+                        text = Strings.DEVICE_PAGE_EDIT_HID_TITLE,
+                        modifier = Modifier.fillMaxWidth().padding(8.dp),
+                        fontWeight = FontWeight.Bold,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.subtitle1
+                    )
+
+                    TitleAndCheckButton(
+                        title = Strings.DEVICE_PAGE_EDIT_HID_KEYBOARD_TITLE,
+                        subTitle = Strings.DEVICE_PAGE_EDIT_HID_KEYBOARD_DETAILS,
+                        value = state.enableHidKeyboard,
+                        onSelect = { action.updateEnableHidKeyboard(it) },
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    TitleAndCheckButton(
+                        title = Strings.DEVICE_PAGE_EDIT_HID_MOUSE_TITLE,
+                        subTitle = Strings.DEVICE_PAGE_EDIT_HID_MOUSE_DETAILS,
+                        value = state.enableHidMouse,
+                        onSelect = { action.updateEnableHidMouse(it) },
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
+            }
         }
 
         VerticalScrollbar(
@@ -277,6 +305,8 @@ private fun DeviceSetting_Savable_True_Preview() {
             override fun updateAlwaysOnTop(enabled: Boolean) {}
             override fun updateFullscreen(enabled: Boolean) {}
             override fun updateRotation(rotation: Device.Context.Rotation) {}
+            override fun updateEnableHidKeyboard(enabled: Boolean) {}
+            override fun updateEnableHidMouse(enabled: Boolean) {}
             override fun save() {}
         },
     )
@@ -301,6 +331,8 @@ private fun DeviceSetting_Savable_False_Preview() {
             override fun updateAlwaysOnTop(enabled: Boolean) {}
             override fun updateFullscreen(enabled: Boolean) {}
             override fun updateRotation(rotation: Device.Context.Rotation) {}
+            override fun updateEnableHidKeyboard(enabled: Boolean) {}
+            override fun updateEnableHidMouse(enabled: Boolean) {}
             override fun save() {}
         },
     )
