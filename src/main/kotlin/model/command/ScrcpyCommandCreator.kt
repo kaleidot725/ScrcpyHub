@@ -29,7 +29,21 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
 
             val buffering = context.buffering
             if (buffering != null) {
-                add("$DISPLAY_BUFFERING_OPTION_NAME=$buffering")
+                add("$DISPLAY_BUFFERING_OPTION_NAME$EQUAL$buffering")
+            }
+
+            if (context.noAudio) {
+                add(NO_AUDIO_OPTION)
+            }
+
+            val audioBitrate = context.audioBitrate
+            if (audioBitrate != null) {
+                add("$AUDIO_BITRATE_OPTION$EQUAL${audioBitrate}K")
+            }
+
+            val audioBuffering = context.audioBuffering
+            if (audioBuffering != null) {
+                add("$AUDIO_BUFFERING_OPTION$EQUAL$audioBuffering")
             }
 
             add(WINDOW_TITLE_OPTION_NAME)
@@ -94,5 +108,9 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
         private const val FULLSCREEN_OPTION_NAME = "--fullscreen"
         private const val ROTATION_OPTION_NAME = "--rotation"
         private const val DISPLAY_BUFFERING_OPTION_NAME = "--display-buffer"
+
+        private const val NO_AUDIO_OPTION = "--no-audio"
+        private const val AUDIO_BITRATE_OPTION = "--audio-bit-rate"
+        private const val AUDIO_BUFFERING_OPTION = "--audio-buffer"
     }
 }
