@@ -147,6 +147,44 @@ fun DeviceSetting(
             Card(elevation = 4.dp) {
                 Column {
                     Text(
+                        text = Strings.DEVICE_PAGE_EDIT_AUDIO_TITLE,
+                        modifier = Modifier.fillMaxWidth().padding(8.dp),
+                        fontWeight = FontWeight.Bold,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.subtitle1
+                    )
+
+                    TitleAndCheckButton(
+                        title = Strings.DEVICE_PAGE_EDIT_AUDIO_NO_AUDIO_TITLE,
+                        subTitle = Strings.DEVICE_PAGE_EDIT_AUDIO_NO_AUDIO_DETAILS,
+                        value = true, // TODO
+                        onSelect = { /** TODO */ },
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    TextFieldAndError(
+                        label = Strings.DEVICE_PAGE_EDIT_AUDIO_BITRATE_TITLE,
+                        placeHolder = Strings.DEVICE_PAGE_EDIT_AUDIO_BITRATE_DETAILS,
+                        inputText = "", // TODO
+                        onUpdateInputText = { /** TODO */ },
+                        error = "", // TODO
+                        modifier = Modifier.padding(8.dp)
+                    )
+
+                    TextFieldAndError(
+                        label = Strings.DEVICE_PAGE_EDIT_AUDIO_BUFFERING_TITLE,
+                        placeHolder = Strings.DEVICE_PAGE_EDIT_AUDIO_BUFFERING_DETAILS,
+                        inputText = "", // TODO
+                        onUpdateInputText = { /** TODO */ },
+                        error = "", // TODO
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
+            }
+
+            Card(elevation = 4.dp) {
+                Column {
+                    Text(
                         text = Strings.DEVICE_PAGE_EDIT_WINDOW_TITLE,
                         modifier = Modifier.fillMaxWidth().padding(8.dp),
                         fontWeight = FontWeight.Bold,
