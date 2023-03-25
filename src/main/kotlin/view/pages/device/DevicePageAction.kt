@@ -21,6 +21,6 @@ interface DevicePageAction {
 
     fun updateEnableHidKeyboard(enabled: Boolean)
     fun updateEnableHidMouse(enabled: Boolean)
-    
+
     fun save()
 }
