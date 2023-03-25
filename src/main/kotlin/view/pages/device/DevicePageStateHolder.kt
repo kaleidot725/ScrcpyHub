@@ -22,7 +22,7 @@ class DevicePageStateHolder(
     private val maxFrameRateError: MutableStateFlow<String> = MutableStateFlow("")
     private val bitrate: MutableStateFlow<String> = MutableStateFlow(context.bitrate?.toString() ?: "")
     private val bitrateError: MutableStateFlow<String> = MutableStateFlow("")
-    private val buffering: MutableStateFlow<String> = MutableStateFlow(context.bitrate?.toString() ?: "")
+    private val buffering: MutableStateFlow<String> = MutableStateFlow(context.buffering?.toString() ?: "")
     private val bufferingError: MutableStateFlow<String> = MutableStateFlow("")
     private val lockOrientation: MutableStateFlow<Device.Context.LockOrientation> = MutableStateFlow(
         Device.Context.LockOrientation.values().firstOrNull { it.value == context.lockOrientation }

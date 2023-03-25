@@ -27,6 +27,11 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
                 add(bitrate.toString() + "M")
             }
 
+            val buffering = context.buffering
+            if (buffering != null) {
+                add("$DISPLAY_BUFFERING_OPTION_NAME=$buffering")
+            }
+
             add(WINDOW_TITLE_OPTION_NAME)
             add(context.displayName)
 
@@ -88,5 +93,6 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
         private const val ALWAYS_ON_TOP_OPTION_NAME = "--always-on-top"
         private const val FULLSCREEN_OPTION_NAME = "--fullscreen"
         private const val ROTATION_OPTION_NAME = "--rotation"
+        private const val DISPLAY_BUFFERING_OPTION_NAME = "--display-buffer"
     }
 }
