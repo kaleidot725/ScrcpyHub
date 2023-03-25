@@ -8,6 +8,10 @@ interface DevicePageAction {
     fun updateMaxFrameRate(maxFrameRate: String)
     fun updateBitrate(bitrate: String)
     fun updateBuffering(buffering: String)
+    fun updateEnableStayAwake(enable: Boolean)
+    fun updateEnableShowTouches(enable: Boolean)
+    fun updateEnablePowerOffOnClose(enable: Boolean)
+    fun updateEnablePowerOnOnStart(enable: Boolean)
 
     fun updateNoAudio(noAudio: Boolean)
     fun updateAudioBuffering(buffering: String)

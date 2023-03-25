@@ -8,6 +8,10 @@ data class Device(val id: String = "") {
     data class Context(
         val device: Device,
         val customName: String? = null,
+        val enableStayAwake: Boolean = false,
+        val enableShowTouches: Boolean = false,
+        val enablePowerOffOnClose: Boolean = false,
+        val enablePowerOnOnStart: Boolean = true,
         val maxSize: Int? = null,
         val maxFrameRate: Int? = null,
         val lockOrientation: Int? = null,
