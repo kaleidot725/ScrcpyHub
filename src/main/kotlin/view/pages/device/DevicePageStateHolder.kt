@@ -22,6 +22,8 @@ class DevicePageStateHolder(
     private val maxFrameRateError: MutableStateFlow<String> = MutableStateFlow("")
     private val bitrate: MutableStateFlow<String> = MutableStateFlow(context.bitrate?.toString() ?: "")
     private val bitrateError: MutableStateFlow<String> = MutableStateFlow("")
+    private val buffering: MutableStateFlow<String> = MutableStateFlow(context.bitrate?.toString() ?: "")
+    private val bufferingError: MutableStateFlow<String> = MutableStateFlow("")
     private val lockOrientation: MutableStateFlow<Device.Context.LockOrientation> = MutableStateFlow(
         Device.Context.LockOrientation.values().firstOrNull { it.value == context.lockOrientation }
             ?: Device.Context.LockOrientation.NONE
@@ -44,6 +46,8 @@ class DevicePageStateHolder(
             maxFrameRateError,
             bitrate,
             bitrateError,
+            buffering,
+            bufferingError,
             lockOrientation,
             enableBorderless,
             enableAlwaysOnTop,
@@ -59,11 +63,13 @@ class DevicePageStateHolder(
                 maxFrameRateError = it[5] as String,
                 bitrate = it[6] as String,
                 bitrateError = it[7] as String,
-                lockOrientation = it[8] as Device.Context.LockOrientation,
-                enableBorderless = it[9] as Boolean,
-                enableAlwaysOnTop = it[10] as Boolean,
-                enableFullScreen = it[11] as Boolean,
-                rotation = it[12] as Device.Context.Rotation,
+                buffering = it[8] as String,
+                bufferingError = it[9] as String,
+                lockOrientation = it[10] as Device.Context.LockOrientation,
+                enableBorderless = it[11] as Boolean,
+                enableAlwaysOnTop = it[12] as Boolean,
+                enableFullScreen = it[13] as Boolean,
+                rotation = it[14] as Device.Context.Rotation,
                 savable = isValid()
             )
         }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), DevicePageState())
@@ -90,6 +96,12 @@ class DevicePageStateHolder(
         override fun updateBitrate(bitrate: String) {
             coroutineScope.launch {
                 this@DevicePageStateHolder.bitrate.emit(bitrate)
+            }
+        }
+
+        override fun updateBuffering(buffering: String) {
+            coroutineScope.launch {
+                this@DevicePageStateHolder.buffering.emit(buffering)
             }
         }
 
@@ -131,6 +143,7 @@ class DevicePageStateHolder(
                     maxSize = maxSize.value.toIntOrNull(),
                     maxFrameRate = maxFrameRate.value.toIntOrNull(),
                     bitrate = bitrate.value.toIntOrNull(),
+                    buffering = buffering.value.toIntOrNull(),
                     lockOrientation = lockOrientation.value.value,
                     enableBorderless = enableBorderless.value,
                     enableAlwaysOnTop = enableAlwaysOnTop.value,
@@ -156,6 +169,10 @@ class DevicePageStateHolder(
         val bitrateError = bitrate.value.isNotEmpty() && bitrate.value.toIntOrNull() == null
         val bitrateErrorMessage = if (bitrateError) "Please input a number" else ""
         this.bitrateError.emit(bitrateErrorMessage)
+
+        val bufferingError = buffering.value.isNotEmpty() && buffering.value.toIntOrNull() == null
+        val bufferingErrorMessage = if (bufferingError) "Please input a number" else ""
+        this.bitrateError.emit(bufferingErrorMessage)
 
         return !(maxSizeError || maxFrameRateError || bitrateError)
     }

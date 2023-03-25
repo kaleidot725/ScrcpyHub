@@ -11,6 +11,8 @@ data class DevicePageState(
     val maxFrameRateError: String = "",
     val bitrate: String = "",
     val bitrateError: String = "",
+    val buffering: String = "",
+    val bufferingError: String = "",
     val lockOrientation: Device.Context.LockOrientation = Device.Context.LockOrientation.NONE,
     val enableBorderless: Boolean = false,
     val enableAlwaysOnTop: Boolean = false,
