@@ -28,7 +28,7 @@ fun MainWindow(
         undecorated = true,
         transparent = true,
         alwaysOnTop = alwaysOnTop,
-        icon = painterResource(Images.DEVICE),
+        icon = painterResource(Images.TRAY),
     ) {
         Card(
             shape = RoundedCornerShape(8.dp),

@@ -17,9 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.loadImageBitmap
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.useResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import view.resource.Images
 import view.resource.MainTheme
 import view.resource.Strings
 import view.resource.Strings.INFO_TITLE
@@ -30,6 +32,7 @@ fun InfoDialog(isDark: Boolean, onClose: () -> Unit) {
         Dialog(
             onCloseRequest = onClose,
             title = INFO_TITLE,
+            icon = painterResource(Images.TRAY),
         ) {
             Surface {
                 InfoContent(modifier = Modifier.fillMaxSize())
