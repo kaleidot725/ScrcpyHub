@@ -57,6 +57,7 @@ compose.desktop {
             macOS {
                 bundleID = "jp.kaleidot725.scrcpyhub"
                 iconFile.set(project.file("icon.icns"))
+                entitlementsFile.set(project.file("default.entitlements"))
             }
 
             windows {
