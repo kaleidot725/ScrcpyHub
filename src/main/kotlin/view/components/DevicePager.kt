@@ -7,9 +7,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -36,43 +40,53 @@ fun DevicePager(
     startRecording: ((Device.Context) -> Unit),
     stopRecording: ((Device.Context) -> Unit),
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        val pageCount = deviceStatusList.count()
-        val pagerState = rememberPagerState()
-        val coroutineScope = rememberCoroutineScope()
-
-        HorizontalPager(
-            pageCount = pageCount,
-            state = pagerState
-        ) { page ->
-            DeviceCard(
-                deviceStatusList[page],
-                false,
-                startScrcpy,
-                stopScrcpy,
-                goToDetail,
-                takeScreenshot,
-                startRecording,
-                stopRecording,
-                modifier = Modifier.wrapContentSize().padding(8.dp)
-            )
-        }
-
-        Row(
-            Modifier.wrapContentSize().align(Alignment.CenterHorizontally),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .align(Alignment.Center)
+                .padding(8.dp)
         ) {
-            repeat(pageCount) { iteration ->
-                val color = if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
-                Box(
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .background(color)
-                        .size(12.dp)
-                        .clickable { coroutineScope.launch { pagerState.animateScrollToPage(iteration) } }
+            val pageCount = deviceStatusList.count()
+            val pagerState = rememberPagerState()
+            val coroutineScope = rememberCoroutineScope()
+
+            HorizontalPager(
+                pageCount = pageCount,
+                state = pagerState
+            ) { page ->
+                DeviceCard(
+                    deviceStatusList[page],
+                    false,
+                    startScrcpy,
+                    stopScrcpy,
+                    goToDetail,
+                    takeScreenshot,
+                    startRecording,
+                    stopRecording,
+                    modifier = Modifier.wrapContentSize()
                 )
+            }
+
+            if (1 < deviceStatusList.count()) {
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Row(
+                    Modifier.wrapContentSize().align(Alignment.CenterHorizontally),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    repeat(pageCount) { iteration ->
+                        val color = if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
+                        Box(
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .background(color)
+                                .size(12.dp)
+                                .clickable { coroutineScope.launch { pagerState.animateScrollToPage(iteration) } }
+                        )
+                    }
+                }
             }
         }
     }
