@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -38,6 +39,7 @@ import java.util.Date
 @Composable
 fun DeviceCard(
     deviceStatus: DeviceStatus,
+    enableGoToDetail: Boolean,
     startScrcpy: ((Device.Context) -> Unit),
     stopScrcpy: ((Device.Context) -> Unit),
     goToDetail: ((Device.Context) -> Unit),
@@ -87,7 +89,7 @@ fun DeviceCard(
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.subtitle1,
-                    modifier = Modifier.weight(1.0f, true).align(Alignment.CenterVertically)
+                    modifier = Modifier.weight(1.0f, true).align(Alignment.CenterVertically).height(24.dp)
                 )
 
                 Text(
@@ -107,14 +109,17 @@ fun DeviceCard(
                         .clickable { takeScreenshot.invoke(deviceStatus.context) }
                         .align(Alignment.CenterVertically)
                 )
-                Icon(
-                    imageVector = Icons.Default.ModeEdit,
-                    contentDescription = "ModeEdit",
-                    modifier = Modifier
-                        .size(20.dp)
-                        .clickable { goToDetail.invoke(deviceStatus.context) }
-                        .align(Alignment.CenterVertically)
-                )
+
+                if (enableGoToDetail) {
+                    Icon(
+                        imageVector = Icons.Default.ModeEdit,
+                        contentDescription = "ModeEdit",
+                        modifier = Modifier
+                            .size(20.dp)
+                            .clickable { goToDetail.invoke(deviceStatus.context) }
+                            .align(Alignment.CenterVertically)
+                    )
+                }
             }
 
             ScrcpyButtons(
@@ -140,6 +145,7 @@ private fun DeviceCard_Preview_DARK() {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             DeviceCard(
                 deviceStatus = DeviceStatus(context1, ProcessStatus.Idle),
+                enableGoToDetail = false,
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},
@@ -151,6 +157,7 @@ private fun DeviceCard_Preview_DARK() {
 
             DeviceCard(
                 deviceStatus = DeviceStatus(context2, ProcessStatus.Running()),
+                enableGoToDetail = true,
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},
@@ -162,6 +169,7 @@ private fun DeviceCard_Preview_DARK() {
 
             DeviceCard(
                 deviceStatus = DeviceStatus(context3, ProcessStatus.Recording()),
+                enableGoToDetail = false,
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},
@@ -186,6 +194,7 @@ private fun DeviceCard_Preview_Light() {
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             DeviceCard(
                 deviceStatus = DeviceStatus(context1, ProcessStatus.Idle),
+                enableGoToDetail = false,
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},
@@ -197,6 +206,7 @@ private fun DeviceCard_Preview_Light() {
 
             DeviceCard(
                 deviceStatus = DeviceStatus(context2, ProcessStatus.Running()),
+                enableGoToDetail = true,
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},
@@ -208,6 +218,7 @@ private fun DeviceCard_Preview_Light() {
 
             DeviceCard(
                 deviceStatus = DeviceStatus(context3, ProcessStatus.Recording()),
+                enableGoToDetail = false,
                 startScrcpy = {},
                 stopScrcpy = {},
                 goToDetail = {},
