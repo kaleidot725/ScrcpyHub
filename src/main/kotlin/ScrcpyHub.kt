@@ -96,8 +96,7 @@ fun main() = application {
                     mainStateHolder = stateHolder
                 )
             }
-        }
-        else {
+        } else {
             val windowState = rememberWindowState(width = 350.dp, height = 550.dp)
             MainWindow(
                 onCloseRequest = { isOpen = false },

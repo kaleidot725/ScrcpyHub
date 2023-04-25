@@ -11,10 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.WindowScope
 import model.entity.Device
-import view.components.DeviceList
 import view.components.DevicePager
 import view.parts.Texts
-import view.parts.TopPageHeader
 import view.parts.TopPageMiniHeader
 import view.resource.Strings
 import view.resource.Strings.DEVICES_PAGE_ERROR_STARTING_ADB_SERVER
