@@ -3,7 +3,7 @@ package view.resource
 object Strings {
     // COMMON
     const val APP_NAME = "ScrcpyHub"
-    const val VERSION = "v2.0.0"
+    const val VERSION = "v2.1.0"
     const val SAVE = "Save"
     const val CANCEL = "Cancel"
     const val QUIT = "Quit"
