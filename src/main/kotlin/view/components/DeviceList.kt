@@ -42,6 +42,7 @@ fun DeviceList(
             items(items = deviceStatusList, key = { it.context.device.id }) { deviceStatus ->
                 DeviceCard(
                     deviceStatus,
+                    true,
                     startScrcpy,
                     stopScrcpy,
                     goToDetail,

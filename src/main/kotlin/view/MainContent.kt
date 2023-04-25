@@ -19,13 +19,14 @@ import view.navigation.Navigation
 import view.pages.device.DevicePage
 import view.pages.device.DevicePageStateHolder
 import view.pages.devices.DevicesPage
+import view.pages.devices.DevicesPageForMini
 import view.pages.devices.DevicesPageStateHolder
 import view.pages.setting.SettingPage
 import view.pages.setting.SettingPageStateHolder
 import view.resource.MainTheme
 
 @Composable
-fun MainContent(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
+fun MainContent(windowScope: WindowScope, enableMiniMode: Boolean, mainStateHolder: MainContentStateHolder) {
     DisposableEffect(mainStateHolder) {
         mainStateHolder.onStarted()
         onDispose {
@@ -35,12 +36,12 @@ fun MainContent(windowScope: WindowScope, mainStateHolder: MainContentStateHolde
 
     val isDarkMode: Boolean? by mainStateHolder.isDarkMode.collectAsState(null)
     MainTheme(isDarkMode = isDarkMode ?: true) {
-        MainPages(windowScope, mainStateHolder)
+        MainPages(windowScope, enableMiniMode, mainStateHolder)
     }
 }
 
 @Composable
-private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStateHolder) {
+private fun MainPages(windowScope: WindowScope, enableMiniMode: Boolean, mainStateHolder: MainContentStateHolder) {
     val navigation: Navigation by mainStateHolder.navState.collectAsState()
 
     Surface(modifier = Modifier.fillMaxSize()) {
@@ -49,12 +50,21 @@ private fun MainPages(windowScope: WindowScope, mainStateHolder: MainContentStat
             mutableStateOf(stateHolder)
         }
 
-        DevicesPage(
-            windowScope = windowScope,
-            stateHolder = devicesPageStateHolder,
-            onNavigateSetting = { mainStateHolder.selectPage(Navigation.SettingPage) },
-            onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
-        )
+        if (enableMiniMode) {
+            DevicesPageForMini(
+                windowScope = windowScope,
+                stateHolder = devicesPageStateHolder,
+                onNavigateSetting = { mainStateHolder.selectPage(Navigation.SettingPage) },
+                onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
+            )
+        } else {
+            DevicesPage(
+                windowScope = windowScope,
+                stateHolder = devicesPageStateHolder,
+                onNavigateSetting = { mainStateHolder.selectPage(Navigation.SettingPage) },
+                onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
+            )
+        }
 
         val settingPage = navigation as? Navigation.SettingPage
         AnimatedVisibility(

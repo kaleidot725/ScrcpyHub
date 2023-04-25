@@ -29,11 +29,11 @@ fun main() = application {
     }
 
     val trayState = rememberTrayState()
-    val windowState = rememberWindowState(width = 350.dp, height = 550.dp)
     var isOpen by remember { mutableStateOf(true) }
     var showLicense by remember { mutableStateOf(false) }
     var showInfo by remember { mutableStateOf(false) }
     var alwaysOnTop by remember { mutableStateOf(false) }
+    var enableMiniMode by remember { mutableStateOf(false) }
 
     Tray(
         state = trayState, icon = painterResource(Images.TRAY),
@@ -48,6 +48,12 @@ fun main() = application {
                 text = Strings.TRAY_ENABLE_ALWAYS_TOP,
                 checked = alwaysOnTop,
                 onCheckedChange = { alwaysOnTop = it }
+            )
+
+            CheckboxItem(
+                text = Strings.TRAY_ENABLE_MINI_MODE,
+                checked = enableMiniMode,
+                onCheckedChange = { enableMiniMode = it }
             )
 
             Separator()
@@ -77,15 +83,32 @@ fun main() = application {
         val stateHolder by remember { mutableStateOf(GlobalContext.get().get<MainContentStateHolder>()) }
         val isDarkMode: Boolean? by stateHolder.isDarkMode.collectAsState(null)
 
-        MainWindow(
-            onCloseRequest = { isOpen = false },
-            state = windowState,
-            alwaysOnTop = alwaysOnTop
-        ) {
-            MainContent(
-                windowScope = this,
-                mainStateHolder = stateHolder
-            )
+        if (enableMiniMode) {
+            val windowState = rememberWindowState(width = 350.dp, height = 160.dp)
+            MainWindow(
+                onCloseRequest = { isOpen = false },
+                state = windowState,
+                alwaysOnTop = alwaysOnTop
+            ) {
+                MainContent(
+                    windowScope = this,
+                    enableMiniMode = enableMiniMode,
+                    mainStateHolder = stateHolder
+                )
+            }
+        } else {
+            val windowState = rememberWindowState(width = 350.dp, height = 550.dp)
+            MainWindow(
+                onCloseRequest = { isOpen = false },
+                state = windowState,
+                alwaysOnTop = alwaysOnTop
+            ) {
+                MainContent(
+                    windowScope = this,
+                    enableMiniMode = enableMiniMode,
+                    mainStateHolder = stateHolder
+                )
+            }
         }
 
         if (showLicense) {
