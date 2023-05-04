@@ -16,9 +16,14 @@ https://user-images.githubusercontent.com/23740796/227752167-4258bc4e-c7c8-459a-
 - Record movies. 🎥
 - Support for Windows 10/11, Linux and macOS. 🖥️
 - Support light theme and dark themes. 🖼️
+- Support normal and mini window mode. 📟
 - Support tray menu. 📥
   - Display and hide window.
   - Enable always on top.
+  
+| Normal Window | Mini Window |
+| ------------- | ----------- |
+| ![image](https://user-images.githubusercontent.com/23740796/236205730-9711b47c-bd98-40a1-a26a-3dbbace0a295.png) | ![image](https://user-images.githubusercontent.com/23740796/236205790-7e761242-7829-4a28-9ae7-6981f1bf3845.png) |
 
 # ⬇️ Install
 
