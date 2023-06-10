@@ -36,6 +36,7 @@ Install adb and scrcpy, ScrcpyHub.
 3. Open ScrcpyHub Preferences.
 4. Input adb and scrcpy location, save settings.
 
+https://github.com/kaleidot725/ScrcpyHub/assets/23740796/51e555f0-12ab-41f0-822f-ceacdfec884c
 
 #### WARNING: Not recommend Chocolately.
 
