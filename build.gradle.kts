@@ -46,6 +46,10 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
     }
 }
 
+kotlin {
+    jvmToolchain(jdkVersion = 17)
+}
+
 compose.desktop {
     application {
         mainClass = "ScrcpyHubKt"
