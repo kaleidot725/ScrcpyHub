@@ -11,7 +11,7 @@ object Colors {
     val LIGHT_ON_SECONDARY = Color(0xFFffffff)
     val LIGHT_ERROR = Color(0xFFba1b1b)
     val LIGHT_ON_ERROR = Color(0xFFffffff)
-    val LIGHT_BACKGROUND = Color(0xDDDDDD)
+    val LIGHT_BACKGROUND = Color(0xFFE0E0E0)
     val LIGHT_ON_BACKGROUND = Color(0xFF1a1c1e)
     val LIGHT_SURFACE = Color(0xFFEEEEEE)
     val LIGHT_ON_SURFACE = Color(0xFF1a1c1e)
