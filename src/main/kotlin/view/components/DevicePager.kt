@@ -49,13 +49,10 @@ fun DevicePager(
                 .padding(8.dp)
         ) {
             val pageCount = deviceStatusList.count()
-            val pagerState = rememberPagerState()
+            val pagerState = rememberPagerState(pageCount = { pageCount })
             val coroutineScope = rememberCoroutineScope()
 
-            HorizontalPager(
-                pageCount = pageCount,
-                state = pagerState
-            ) { page ->
+            HorizontalPager(state = pagerState) { page ->
                 DeviceCard(
                     deviceStatusList[page],
                     false,
