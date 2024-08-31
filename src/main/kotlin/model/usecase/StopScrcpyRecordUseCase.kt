@@ -7,7 +7,7 @@ import model.repository.ProcessRepository
 
 class StopScrcpyRecordUseCase(
     private val processRepository: ProcessRepository,
-    private val messageRepository: MessageRepository
+    private val messageRepository: MessageRepository,
 ) {
     suspend fun execute(context: Device.Context): Boolean {
         processRepository.delete(context.device.id)

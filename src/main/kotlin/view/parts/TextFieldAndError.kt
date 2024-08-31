@@ -30,7 +30,7 @@ fun TextFieldAndError(
     error: String = "",
     trailingIcon: ImageVector? = null,
     onClickTrailingIcon: () -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
         TextField(
@@ -41,20 +41,22 @@ fun TextFieldAndError(
             label = { Text(label) },
             placeholder = { Text(placeHolder) },
             isError = error.isNotEmpty(),
-            trailingIcon = trailingIcon?.let {
-                {
-                    Image(
-                        imageVector = trailingIcon,
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .indication(MutableInteractionSource(), rememberRipple())
-                            .clickable(onClick = { onClickTrailingIcon() } )
-                            .padding(4.dp)
-                    )
-                }
-            }
+            trailingIcon =
+                trailingIcon?.let {
+                    {
+                        Image(
+                            imageVector = trailingIcon,
+                            colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary),
+                            contentDescription = null,
+                            modifier =
+                                Modifier
+                                    .clip(CircleShape)
+                                    .indication(MutableInteractionSource(), rememberRipple())
+                                    .clickable(onClick = { onClickTrailingIcon() })
+                                    .padding(4.dp),
+                        )
+                    }
+                },
         )
 
         if (error.isNotEmpty()) {
@@ -77,7 +79,7 @@ private fun TextFieldAndError_Preview() {
         placeHolder = "PLACEHOLDER",
         inputText = "INPUT TEXT",
         onUpdateInputText = {},
-        modifier = Modifier
+        modifier = Modifier,
     )
 }
 
@@ -90,6 +92,6 @@ private fun TextFieldAndError_HAS_ERROR_Preview() {
         inputText = "INPUT TEXT",
         error = "ERROR MEASSAGE",
         onUpdateInputText = {},
-        modifier = Modifier
+        modifier = Modifier,
     )
 }

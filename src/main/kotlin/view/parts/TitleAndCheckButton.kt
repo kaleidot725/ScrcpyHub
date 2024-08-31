@@ -25,7 +25,7 @@ fun TitleAndCheckButton(
     subTitle: String,
     value: Boolean,
     onSelect: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(modifier) {
         Row(
@@ -33,10 +33,10 @@ fun TitleAndCheckButton(
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .background(MaterialTheme.colors.onSurface.copy(alpha = 0.12f), shape = RoundedCornerShape(4.dp))
-                .padding(vertical = 8.dp, horizontal = 16.dp)
+                .padding(vertical = 8.dp, horizontal = 16.dp),
         ) {
             Column(
-                modifier = Modifier.weight(1.0f).align(Alignment.CenterVertically)
+                modifier = Modifier.weight(1.0f).align(Alignment.CenterVertically),
             ) {
                 Text(
                     text = title,
@@ -47,14 +47,14 @@ fun TitleAndCheckButton(
 
                 Text(
                     text = subTitle,
-                    fontSize = 12.sp
+                    fontSize = 12.sp,
                 )
             }
 
             Checkbox(
                 checked = value,
                 onCheckedChange = { onSelect(it) },
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
             )
         }
     }

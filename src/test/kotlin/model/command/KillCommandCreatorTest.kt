@@ -17,5 +17,5 @@ class KillCommandCreatorTest : StringSpec(
             val factory = KillCommandCreatorForLinux()
             factory.create(0) shouldBe listOf("kill", "-SIGINT", "0")
         }
-    }
+    },
 )

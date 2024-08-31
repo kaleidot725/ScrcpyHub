@@ -30,5 +30,5 @@ class AdbCommandCreatorTest : StringSpec(
             val factory = AdbCommandCreator()
             factory.createStartServer() shouldBe listOf("adb", "start-server")
         }
-    }
+    },
 )

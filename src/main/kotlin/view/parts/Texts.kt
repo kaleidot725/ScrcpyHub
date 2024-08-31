@@ -10,134 +10,182 @@ import androidx.compose.ui.text.style.TextOverflow
 
 object Texts {
     @Composable
-    fun H1(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun H1(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.h1
+            style = MaterialTheme.typography.h1,
         )
     }
 
     @Composable
-    fun H2(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun H2(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.h2
+            style = MaterialTheme.typography.h2,
         )
     }
 
     @Composable
-    fun H3(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun H3(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.h3
+            style = MaterialTheme.typography.h3,
         )
     }
 
     @Composable
-    fun H4(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun H4(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.h4
+            style = MaterialTheme.typography.h4,
         )
     }
 
     @Composable
-    fun H5(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun H5(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.h5
+            style = MaterialTheme.typography.h5,
         )
     }
 
     @Composable
-    fun H6(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun H6(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.h6
+            style = MaterialTheme.typography.h6,
         )
     }
 
     @Composable
-    fun Subtitle1(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun Subtitle1(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.subtitle1
+            style = MaterialTheme.typography.subtitle1,
         )
     }
 
     @Composable
-    fun Subtitle2(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun Subtitle2(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.subtitle2
+            style = MaterialTheme.typography.subtitle2,
         )
     }
 
     @Composable
-    fun Body1(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun Body1(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.body1
+            style = MaterialTheme.typography.body1,
         )
     }
 
     @Composable
-    fun Body2(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun Body2(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.body2
+            style = MaterialTheme.typography.body2,
         )
     }
 
     @Composable
-    fun Button(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun Button(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.button
+            style = MaterialTheme.typography.button,
         )
     }
 
     @Composable
-    fun Caption(text: String, maxLines: Int = Int.MAX_VALUE, modifier: Modifier = Modifier) {
+    fun Caption(
+        text: String,
+        maxLines: Int = Int.MAX_VALUE,
+        modifier: Modifier = Modifier,
+    ) {
         Text(
             text = text,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.caption
+            style = MaterialTheme.typography.caption,
         )
     }
 }

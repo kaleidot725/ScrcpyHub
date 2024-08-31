@@ -14,7 +14,10 @@ import view.resource.Strings.LICENSE_TITLE
 private const val FILE_NAME = "aboutlibraries.json"
 
 @Composable
-fun LicenseDialog(isDark: Boolean, onClose: () -> Unit) {
+fun LicenseDialog(
+    isDark: Boolean,
+    onClose: () -> Unit,
+) {
     MainTheme(isDarkMode = isDark) {
         Dialog(
             onCloseRequest = onClose,
@@ -23,7 +26,7 @@ fun LicenseDialog(isDark: Boolean, onClose: () -> Unit) {
         ) {
             LibrariesContainer(
                 useResource(FILE_NAME) { it.bufferedReader().readText() },
-                Modifier.fillMaxSize()
+                Modifier.fillMaxSize(),
             )
         }
     }

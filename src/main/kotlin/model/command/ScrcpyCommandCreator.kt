@@ -97,7 +97,10 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
         }
     }
 
-    fun createRecord(context: Device.Context, fileName: String): List<String> {
+    fun createRecord(
+        context: Device.Context,
+        fileName: String,
+    ): List<String> {
         return buildList {
             addAll(create(context))
             add(RECORD_OPTION_NAME)

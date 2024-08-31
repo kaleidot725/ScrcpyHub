@@ -30,7 +30,7 @@ fun DropDownSelector(
     selectedItem: String,
     items: List<String>,
     onSelect: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var expanded by remember { mutableStateOf(false) }
     Box(modifier) {
@@ -40,32 +40,32 @@ fun DropDownSelector(
                 .wrapContentHeight()
                 .background(MaterialTheme.colors.onSurface.copy(alpha = 0.12f), shape = RoundedCornerShape(4.dp))
                 .clickable(onClick = { expanded = true })
-                .padding(vertical = 8.dp, horizontal = 16.dp)
+                .padding(vertical = 8.dp, horizontal = 16.dp),
         ) {
             Text(
                 text = label,
                 fontSize = 14.sp,
-                color = if (expanded) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface.copy(ContentAlpha.disabled)
+                color = if (expanded) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface.copy(ContentAlpha.disabled),
             )
 
             Spacer(Modifier.height(4.dp))
 
             Text(
                 text = selectedItem,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
         }
 
         DropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false }
+            onDismissRequest = { expanded = false },
         ) {
             items.forEachIndexed { index, text ->
                 DropdownMenuItem(
                     onClick = {
                         expanded = false
                         onSelect(text)
-                    }
+                    },
                 ) {
                     Text(text = text)
                 }

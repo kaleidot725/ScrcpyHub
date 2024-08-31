@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter
 class SaveScreenshotUseCase(
     private val deviceRepository: DeviceRepository,
     private val messageRepository: MessageRepository,
-    private val settingRepository: SettingRepository
+    private val settingRepository: SettingRepository,
 ) {
     suspend fun execute(context: Device.Context): Boolean {
         val directory = createScreenshotDirectory()
@@ -24,11 +24,12 @@ class SaveScreenshotUseCase(
 
         val filePath = createScreenshotPath(directory, context)
         return deviceRepository.saveScreenshot(context.device, filePath).apply {
-            val message = if (this) {
-                Message.Notify.SuccessToSaveScreenshot(context, filePath)
-            } else {
-                Message.Notify.FailedToSaveScreenshot(context)
-            }
+            val message =
+                if (this) {
+                    Message.Notify.SuccessToSaveScreenshot(context, filePath)
+                } else {
+                    Message.Notify.FailedToSaveScreenshot(context)
+                }
             messageRepository.notify(message)
         }
     }
@@ -46,10 +47,14 @@ class SaveScreenshotUseCase(
         }
     }
 
-    private fun createScreenshotPath(directory: String, context: Device.Context): String {
-        val date = ZonedDateTime
-            .now(ZoneId.systemDefault())
-            .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
+    private fun createScreenshotPath(
+        directory: String,
+        context: Device.Context,
+    ): String {
+        val date =
+            ZonedDateTime
+                .now(ZoneId.systemDefault())
+                .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
         return "$directory${context.displayName}-$date.png"
     }
 }

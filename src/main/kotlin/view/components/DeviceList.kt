@@ -34,10 +34,11 @@ fun DeviceList(
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             state = lazyColumnState,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 12.dp)
-                .padding(vertical = 8.dp)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 12.dp)
+                    .padding(vertical = 8.dp),
         ) {
             items(items = deviceStatusList, key = { it.context.device.id }) { deviceStatus ->
                 DeviceCard(
@@ -49,14 +50,14 @@ fun DeviceList(
                     takeScreenshot,
                     startRecording,
                     stopRecording,
-                    Modifier.animateItemPlacement()
+                    Modifier.animateItemPlacement(),
                 )
             }
         }
 
         VerticalScrollbar(
             adapter = rememberScrollbarAdapter(lazyColumnState),
-            modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight()
+            modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight(),
         )
     }
 }

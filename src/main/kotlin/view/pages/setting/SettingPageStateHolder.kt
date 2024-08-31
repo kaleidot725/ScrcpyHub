@@ -11,7 +11,7 @@ import view.StateHolder
 
 class SettingPageStateHolder(
     private val fetchSettingUseCase: FetchSettingUseCase,
-    private val updateSettingUseCase: UpdateSettingUseCase
+    private val updateSettingUseCase: UpdateSettingUseCase,
 ) : StateHolder() {
     private val _adbLocation: MutableStateFlow<String> = MutableStateFlow("")
     val adbLocation: StateFlow<String> = _adbLocation
@@ -68,8 +68,8 @@ class SettingPageStateHolder(
                     theme = _theme.value,
                     scrcpyLocation = _scrcpyLocation.value,
                     screenRecordDirectory = _screenRecordDirectory.value,
-                    screenshotDirectory = _screenshotDirectory.value
-                )
+                    screenshotDirectory = _screenshotDirectory.value,
+                ),
             )
             onSaved.invoke()
         }

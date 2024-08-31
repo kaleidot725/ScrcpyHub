@@ -25,36 +25,42 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 
 @Composable
-fun TopPageHeader(windowScope: WindowScope, title: String, onClickOption: () -> Unit) {
+fun TopPageHeader(
+    windowScope: WindowScope,
+    title: String,
+    onClickOption: () -> Unit,
+) {
     windowScope.WindowDraggableArea {
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp)
-                .background(Color(red = 51, blue = 51, green = 51))
-                .padding(8.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .background(Color(red = 51, blue = 51, green = 51))
+                    .padding(8.dp),
         ) {
             Text(
                 text = title,
                 textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .wrapContentHeight()
-                    .align(Alignment.Center),
+                modifier =
+                    Modifier
+                        .wrapContentHeight()
+                        .align(Alignment.Center),
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                color = Color.White
+                color = Color.White,
             )
 
             IconButton(
                 onClick = onClickOption,
-                modifier = Modifier.padding(top = 2.dp).align(Alignment.CenterEnd)
+                modifier = Modifier.padding(top = 2.dp).align(Alignment.CenterEnd),
             ) {
                 Image(
                     imageVector = Icons.Default.Settings,
                     contentDescription = "",
                     contentScale = ContentScale.FillHeight,
-                    colorFilter = ColorFilter.tint(Color.White)
+                    colorFilter = ColorFilter.tint(Color.White),
                 )
             }
         }

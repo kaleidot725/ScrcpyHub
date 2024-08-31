@@ -41,7 +41,7 @@ data class Device(val id: String = "") {
             NONE(null),
             COUNTER_CLOCK_WISE_90(1),
             CLOCK_WISE_180(2),
-            CLOCK_WISE_90(3)
+            CLOCK_WISE_90(3),
         }
     }
 }

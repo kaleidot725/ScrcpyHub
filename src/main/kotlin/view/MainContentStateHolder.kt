@@ -19,7 +19,7 @@ class MainContentStateHolder(
     private val fetchSettingUseCase: FetchSettingUseCase,
     private val checkSetupStatusUseCase: CheckSetupStatusUseCase,
     private val getSystemDarkModeFlowUseCase: GetSystemDarkModeFlowUseCase,
-    private val restartAdbServerUseCase: RestartAdbServerUseCase
+    private val restartAdbServerUseCase: RestartAdbServerUseCase,
 ) : StateHolder() {
     private val _navState: MutableStateFlow<Navigation> = MutableStateFlow(Navigation.DevicesPage)
     val navState: StateFlow<Navigation> = _navState
@@ -27,16 +27,18 @@ class MainContentStateHolder(
     private val _setting: MutableStateFlow<Setting> = MutableStateFlow(Setting())
     val setting: StateFlow<Setting> = _setting
 
-    private val systemDarkMode: StateFlow<Boolean?> = getSystemDarkModeFlowUseCase()
-        .stateIn(coroutineScope, SharingStarted.WhileSubscribed(), null)
-    val isDarkMode: Flow<Boolean?> = _setting.combine(systemDarkMode) { setting, systemDarkMode ->
-        systemDarkMode ?: return@combine null
-        when (setting.theme) {
-            Theme.LIGHT -> false
-            Theme.DARK -> true
-            Theme.SYNC_WITH_OS -> systemDarkMode
+    private val systemDarkMode: StateFlow<Boolean?> =
+        getSystemDarkModeFlowUseCase()
+            .stateIn(coroutineScope, SharingStarted.WhileSubscribed(), null)
+    val isDarkMode: Flow<Boolean?> =
+        _setting.combine(systemDarkMode) { setting, systemDarkMode ->
+            systemDarkMode ?: return@combine null
+            when (setting.theme) {
+                Theme.LIGHT -> false
+                Theme.DARK -> true
+                Theme.SYNC_WITH_OS -> systemDarkMode
+            }
         }
-    }
 
     override fun onStarted() {
         updateSetting()

@@ -14,9 +14,12 @@ import java.time.format.DateTimeFormatter
 class StartScrcpyRecordUseCase(
     private val settingRepository: SettingRepository,
     private val processRepository: ProcessRepository,
-    private val messageRepository: MessageRepository
+    private val messageRepository: MessageRepository,
 ) {
-    suspend fun execute(context: Device.Context, onDestroy: suspend () -> Unit): Boolean {
+    suspend fun execute(
+        context: Device.Context,
+        onDestroy: suspend () -> Unit,
+    ): Boolean {
         val lastState = processRepository.getStatus(context.device.id)
         if (lastState != ProcessStatus.Idle) {
             return false
@@ -54,10 +57,14 @@ class StartScrcpyRecordUseCase(
         }
     }
 
-    private fun createRecordPath(directory: String, context: Device.Context): String {
-        val date = ZonedDateTime
-            .now(ZoneId.systemDefault())
-            .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
+    private fun createRecordPath(
+        directory: String,
+        context: Device.Context,
+    ): String {
+        val date =
+            ZonedDateTime
+                .now(ZoneId.systemDefault())
+                .format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"))
         return "$directory${context.displayName}-$date.mp4"
     }
 }

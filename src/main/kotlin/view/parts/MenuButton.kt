@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextOverflow
 enum class MenuButtonStatus {
     ACTIVE,
     ENABLE,
-    DISABLE
+    DISABLE,
 }
 
 data class MenuButtonColors(
@@ -24,7 +24,7 @@ data class MenuButtonColors(
     val enable: Color,
     val disable: Color,
     val textColor: Color,
-    val textColorOnDisable: Color
+    val textColorOnDisable: Color,
 )
 
 @Composable
@@ -35,7 +35,7 @@ fun MenuButton(
     colors: MenuButtonColors,
     onIdleClick: () -> Unit,
     onActiveClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Surface(modifier) {
         Box(
@@ -46,26 +46,27 @@ fun MenuButton(
                         if (status == MenuButtonStatus.ACTIVE) onActiveClick()
                         if (status == MenuButtonStatus.ENABLE) onIdleClick()
                     },
-                    enabled = (status == MenuButtonStatus.ENABLE) || (status == MenuButtonStatus.ACTIVE)
+                    enabled = (status == MenuButtonStatus.ENABLE) || (status == MenuButtonStatus.ACTIVE),
                 )
                 .background(
                     when (status) {
                         MenuButtonStatus.ACTIVE -> colors.active
                         MenuButtonStatus.ENABLE -> colors.enable
                         MenuButtonStatus.DISABLE -> colors.disable
-                    }
-                )
+                    },
+                ),
         ) {
             Text(
                 text = text,
                 maxLines = 1,
                 style = style,
-                color = when (status) {
-                    MenuButtonStatus.DISABLE -> colors.textColorOnDisable
-                    else -> colors.textColor
-                },
+                color =
+                    when (status) {
+                        MenuButtonStatus.DISABLE -> colors.textColorOnDisable
+                        else -> colors.textColor
+                    },
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.align(Alignment.Center)
+                modifier = Modifier.align(Alignment.Center),
             )
         }
     }

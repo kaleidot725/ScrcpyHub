@@ -27,7 +27,10 @@ import view.resource.Strings
 import view.resource.Strings.INFO_TITLE
 
 @Composable
-fun InfoDialog(isDark: Boolean, onClose: () -> Unit) {
+fun InfoDialog(
+    isDark: Boolean,
+    onClose: () -> Unit,
+) {
     MainTheme(isDarkMode = isDark) {
         Dialog(
             onCloseRequest = onClose,
@@ -49,7 +52,7 @@ private fun InfoContent(modifier: Modifier = Modifier) {
                 Image(
                     bitmap = useResource("icon.png") { loadImageBitmap(it) },
                     contentDescription = "icon",
-                    modifier = Modifier.size(44.dp).align(Alignment.Center)
+                    modifier = Modifier.size(44.dp).align(Alignment.Center),
                 )
             }
 
@@ -60,12 +63,12 @@ private fun InfoContent(modifier: Modifier = Modifier) {
                     Text(
                         text = Strings.APP_NAME,
                         style = MaterialTheme.typography.h4,
-                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
                     )
                     Text(
                         text = "Version ${Strings.VERSION}",
                         style = MaterialTheme.typography.h5,
-                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
                     )
                 }
             }

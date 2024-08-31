@@ -57,11 +57,12 @@ fun DeviceSetting(
     Box {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 12.dp)
-                .padding(vertical = 8.dp)
-                .verticalScroll(scrollState)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 12.dp)
+                    .padding(vertical = 8.dp)
+                    .verticalScroll(scrollState),
         ) {
             Card(elevation = 4.dp) {
                 Column {
@@ -70,7 +71,7 @@ fun DeviceSetting(
                         modifier = Modifier.fillMaxWidth().padding(8.dp),
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.subtitle1
+                        style = MaterialTheme.typography.subtitle1,
                     )
 
                     TextFieldAndError(
@@ -78,7 +79,7 @@ fun DeviceSetting(
                         placeHolder = Strings.DEVICE_PAGE_EDIT_NAME_DETAILS,
                         inputText = state.editName,
                         onUpdateInputText = { action.updateName(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TitleAndCheckButton(
@@ -86,7 +87,7 @@ fun DeviceSetting(
                         subTitle = Strings.DEVICE_PAGE_EDIT_STAY_AWAKE_DETAILS,
                         value = state.enableStayAwake,
                         onSelect = { action.updateEnableStayAwake(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TitleAndCheckButton(
@@ -94,7 +95,7 @@ fun DeviceSetting(
                         subTitle = Strings.DEVICE_PAGE_EDIT_SHOW_TOUCHES_DETAILS,
                         value = state.enableShowTouches,
                         onSelect = { action.updateEnableShowTouches(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TitleAndCheckButton(
@@ -102,7 +103,7 @@ fun DeviceSetting(
                         subTitle = Strings.DEVICE_PAGE_EDIT_POWER_OFF_ON_CLOSE_DETAILS,
                         value = state.enablePowerOffOnClose,
                         onSelect = { action.updateEnablePowerOffOnClose(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TitleAndCheckButton(
@@ -110,7 +111,7 @@ fun DeviceSetting(
                         subTitle = Strings.DEVICE_PAGE_EDIT_POWER_ON_ON_START_DETAILS,
                         value = state.disablePowerOnOnStart,
                         onSelect = { action.updateDisablePowerOnOnStart(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
                 }
             }
@@ -122,7 +123,7 @@ fun DeviceSetting(
                         modifier = Modifier.fillMaxWidth().padding(8.dp),
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.subtitle1
+                        style = MaterialTheme.typography.subtitle1,
                     )
 
                     TextFieldAndError(
@@ -131,7 +132,7 @@ fun DeviceSetting(
                         inputText = state.maxSize,
                         onUpdateInputText = { action.updateMaxSize(it) },
                         error = state.maxSizeError,
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TextFieldAndError(
@@ -140,7 +141,7 @@ fun DeviceSetting(
                         inputText = state.maxFrameRate,
                         onUpdateInputText = { action.updateMaxFrameRate(it) },
                         error = state.maxFrameRateError,
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TextFieldAndError(
@@ -149,7 +150,7 @@ fun DeviceSetting(
                         inputText = state.bitrate,
                         onUpdateInputText = { action.updateBitrate(it) },
                         error = state.bitrateError,
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TextFieldAndError(
@@ -158,7 +159,7 @@ fun DeviceSetting(
                         inputText = state.buffering,
                         onUpdateInputText = { action.updateBuffering(it) },
                         error = state.bufferingError,
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     DropDownSelector(
@@ -166,12 +167,13 @@ fun DeviceSetting(
                         selectedItem = state.lockOrientation.toTitle(),
                         items = state.lockOrientations.map { it.toTitle() },
                         onSelect = { title ->
-                            val item = state.lockOrientations.firstOrNull {
-                                it.toTitle() == title
-                            } ?: return@DropDownSelector
+                            val item =
+                                state.lockOrientations.firstOrNull {
+                                    it.toTitle() == title
+                                } ?: return@DropDownSelector
                             action.updateLockOrientation(item)
                         },
-                        modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp)
+                        modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp),
                     )
                 }
             }
@@ -183,7 +185,7 @@ fun DeviceSetting(
                         modifier = Modifier.fillMaxWidth().padding(8.dp),
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.subtitle1
+                        style = MaterialTheme.typography.subtitle1,
                     )
 
                     TitleAndCheckButton(
@@ -191,7 +193,7 @@ fun DeviceSetting(
                         subTitle = Strings.DEVICE_PAGE_EDIT_AUDIO_NO_AUDIO_DETAILS,
                         value = state.noAudio,
                         onSelect = { action.updateNoAudio(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TextFieldAndError(
@@ -200,7 +202,7 @@ fun DeviceSetting(
                         inputText = state.audioBitrate,
                         onUpdateInputText = { action.updateAudioBitrate(it) },
                         error = state.audioBitrateError,
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TextFieldAndError(
@@ -209,7 +211,7 @@ fun DeviceSetting(
                         inputText = state.audioBuffering,
                         onUpdateInputText = { action.updateAudioBuffering(it) },
                         error = state.audioBufferingError,
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
                 }
             }
@@ -221,7 +223,7 @@ fun DeviceSetting(
                         modifier = Modifier.fillMaxWidth().padding(8.dp),
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.subtitle1
+                        style = MaterialTheme.typography.subtitle1,
                     )
 
                     TitleAndCheckButton(
@@ -229,7 +231,7 @@ fun DeviceSetting(
                         subTitle = DEVICE_PAGE_EDIT_BORDERLESS_DETAILS,
                         value = state.enableBorderless,
                         onSelect = { action.updateBorderless(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TitleAndCheckButton(
@@ -237,7 +239,7 @@ fun DeviceSetting(
                         subTitle = DEVICE_PAGE_EDIT_ALWAYS_ON_TOP_DETAILS,
                         value = state.enableAlwaysOnTop,
                         onSelect = { action.updateAlwaysOnTop(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TitleAndCheckButton(
@@ -245,7 +247,7 @@ fun DeviceSetting(
                         subTitle = DEVICE_PAGE_EDIT_FULLSCREEN_DETAILS,
                         value = state.enableFullScreen,
                         onSelect = { action.updateFullscreen(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     DropDownSelector(
@@ -253,12 +255,13 @@ fun DeviceSetting(
                         selectedItem = state.rotation.toTitle(),
                         items = state.rotations.map { it.toTitle() },
                         onSelect = { title ->
-                            val item = state.rotations.firstOrNull {
-                                it.toTitle() == title
-                            } ?: return@DropDownSelector
+                            val item =
+                                state.rotations.firstOrNull {
+                                    it.toTitle() == title
+                                } ?: return@DropDownSelector
                             action.updateRotation(item)
                         },
-                        modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp)
+                        modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp),
                     )
                 }
             }
@@ -270,7 +273,7 @@ fun DeviceSetting(
                         modifier = Modifier.fillMaxWidth().padding(8.dp),
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.subtitle1
+                        style = MaterialTheme.typography.subtitle1,
                     )
 
                     TitleAndCheckButton(
@@ -278,7 +281,7 @@ fun DeviceSetting(
                         subTitle = Strings.DEVICE_PAGE_EDIT_HID_KEYBOARD_DETAILS,
                         value = state.enableHidKeyboard,
                         onSelect = { action.updateEnableHidKeyboard(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TitleAndCheckButton(
@@ -286,7 +289,7 @@ fun DeviceSetting(
                         subTitle = Strings.DEVICE_PAGE_EDIT_HID_MOUSE_DETAILS,
                         value = state.enableHidMouse,
                         onSelect = { action.updateEnableHidMouse(it) },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
                 }
             }
@@ -294,7 +297,7 @@ fun DeviceSetting(
 
         VerticalScrollbar(
             adapter = rememberScrollbarAdapter(scrollState),
-            modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight()
+            modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight(),
         )
     }
 }
@@ -323,28 +326,48 @@ private fun Device.Context.Rotation.toTitle(): String {
 private fun DeviceSetting_Savable_True_Preview() {
     DeviceSetting(
         state = DevicePageState(savable = true),
-        action = object : DevicePageAction {
-            override fun updateName(name: String) {}
-            override fun updateEnableStayAwake(enable: Boolean) {}
-            override fun updateEnableShowTouches(enable: Boolean) {}
-            override fun updateEnablePowerOffOnClose(enable: Boolean) {}
-            override fun updateDisablePowerOnOnStart(disable: Boolean) {}
-            override fun updateMaxSize(maxSize: String) {}
-            override fun updateMaxFrameRate(maxFrameRate: String) {}
-            override fun updateBitrate(bitrate: String) {}
-            override fun updateBuffering(buffering: String) {}
-            override fun updateNoAudio(noAudio: Boolean) {}
-            override fun updateAudioBitrate(bitrate: String) {}
-            override fun updateAudioBuffering(buffering: String) {}
-            override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
-            override fun updateBorderless(enabled: Boolean) {}
-            override fun updateAlwaysOnTop(enabled: Boolean) {}
-            override fun updateFullscreen(enabled: Boolean) {}
-            override fun updateRotation(rotation: Device.Context.Rotation) {}
-            override fun updateEnableHidKeyboard(enabled: Boolean) {}
-            override fun updateEnableHidMouse(enabled: Boolean) {}
-            override fun save() {}
-        },
+        action =
+            object : DevicePageAction {
+                override fun updateName(name: String) {}
+
+                override fun updateEnableStayAwake(enable: Boolean) {}
+
+                override fun updateEnableShowTouches(enable: Boolean) {}
+
+                override fun updateEnablePowerOffOnClose(enable: Boolean) {}
+
+                override fun updateDisablePowerOnOnStart(disable: Boolean) {}
+
+                override fun updateMaxSize(maxSize: String) {}
+
+                override fun updateMaxFrameRate(maxFrameRate: String) {}
+
+                override fun updateBitrate(bitrate: String) {}
+
+                override fun updateBuffering(buffering: String) {}
+
+                override fun updateNoAudio(noAudio: Boolean) {}
+
+                override fun updateAudioBitrate(bitrate: String) {}
+
+                override fun updateAudioBuffering(buffering: String) {}
+
+                override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
+
+                override fun updateBorderless(enabled: Boolean) {}
+
+                override fun updateAlwaysOnTop(enabled: Boolean) {}
+
+                override fun updateFullscreen(enabled: Boolean) {}
+
+                override fun updateRotation(rotation: Device.Context.Rotation) {}
+
+                override fun updateEnableHidKeyboard(enabled: Boolean) {}
+
+                override fun updateEnableHidMouse(enabled: Boolean) {}
+
+                override fun save() {}
+            },
     )
 }
 
@@ -353,27 +376,47 @@ private fun DeviceSetting_Savable_True_Preview() {
 private fun DeviceSetting_Savable_False_Preview() {
     DeviceSetting(
         state = DevicePageState(savable = false),
-        action = object : DevicePageAction {
-            override fun updateName(name: String) {}
-            override fun updateEnableStayAwake(enable: Boolean) {}
-            override fun updateEnableShowTouches(enable: Boolean) {}
-            override fun updateEnablePowerOffOnClose(enable: Boolean) {}
-            override fun updateDisablePowerOnOnStart(disable: Boolean) {}
-            override fun updateMaxSize(maxSize: String) {}
-            override fun updateMaxFrameRate(maxFrameRate: String) {}
-            override fun updateBitrate(bitrate: String) {}
-            override fun updateBuffering(buffering: String) {}
-            override fun updateNoAudio(noAudio: Boolean) {}
-            override fun updateAudioBitrate(bitrate: String) {}
-            override fun updateAudioBuffering(buffering: String) {}
-            override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
-            override fun updateBorderless(enabled: Boolean) {}
-            override fun updateAlwaysOnTop(enabled: Boolean) {}
-            override fun updateFullscreen(enabled: Boolean) {}
-            override fun updateRotation(rotation: Device.Context.Rotation) {}
-            override fun updateEnableHidKeyboard(enabled: Boolean) {}
-            override fun updateEnableHidMouse(enabled: Boolean) {}
-            override fun save() {}
-        },
+        action =
+            object : DevicePageAction {
+                override fun updateName(name: String) {}
+
+                override fun updateEnableStayAwake(enable: Boolean) {}
+
+                override fun updateEnableShowTouches(enable: Boolean) {}
+
+                override fun updateEnablePowerOffOnClose(enable: Boolean) {}
+
+                override fun updateDisablePowerOnOnStart(disable: Boolean) {}
+
+                override fun updateMaxSize(maxSize: String) {}
+
+                override fun updateMaxFrameRate(maxFrameRate: String) {}
+
+                override fun updateBitrate(bitrate: String) {}
+
+                override fun updateBuffering(buffering: String) {}
+
+                override fun updateNoAudio(noAudio: Boolean) {}
+
+                override fun updateAudioBitrate(bitrate: String) {}
+
+                override fun updateAudioBuffering(buffering: String) {}
+
+                override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
+
+                override fun updateBorderless(enabled: Boolean) {}
+
+                override fun updateAlwaysOnTop(enabled: Boolean) {}
+
+                override fun updateFullscreen(enabled: Boolean) {}
+
+                override fun updateRotation(rotation: Device.Context.Rotation) {}
+
+                override fun updateEnableHidKeyboard(enabled: Boolean) {}
+
+                override fun updateEnableHidMouse(enabled: Boolean) {}
+
+                override fun save() {}
+            },
     )
 }

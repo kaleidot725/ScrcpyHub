@@ -39,129 +39,130 @@ import view.pages.device.DevicePageStateHolder
 import view.pages.devices.DevicesPageStateHolder
 import view.pages.setting.SettingPageStateHolder
 
-val appModule = module {
-    single {
-        MessageRepository()
-    }
+val appModule =
+    module {
+        single {
+            MessageRepository()
+        }
 
-    factory {
-        when (getOSType()) {
-            OSType.MAC_OS -> OSContextForMac()
-            OSType.LINUX -> OSContextForLinux()
-            OSType.WINDOWS -> OSContextForWindows()
+        factory {
+            when (getOSType()) {
+                OSType.MAC_OS -> OSContextForMac()
+                OSType.LINUX -> OSContextForLinux()
+                OSType.WINDOWS -> OSContextForWindows()
+            }
+        }
+
+        factory {
+            KillCommand(
+                when (get<OSContext>().type) {
+                    OSType.MAC_OS -> KillCommandCreatorForMacOS()
+                    OSType.LINUX -> KillCommandCreatorForLinux()
+                    OSType.WINDOWS -> KillCommandCreatorForWindows()
+                },
+            )
+        }
+
+        factory {
+            val setting = runBlocking { get<SettingRepository>().get() }
+            ScrcpyCommand(ScrcpyCommandCreator(setting.scrcpyLocation))
+        }
+
+        factory {
+            ProcessRepository(get())
+        }
+
+        factory {
+            DeviceRepository(get())
+        }
+
+        factory {
+            SettingRepository(get())
+        }
+
+        factory {
+            FetchDevicesUseCase(get())
+        }
+
+        factory {
+            RestartAdbServerUseCase(get())
+        }
+
+        factory {
+            FetchSettingUseCase(get())
+        }
+
+        factory {
+            GetScrcpyStatusUseCase(get())
+        }
+
+        factory {
+            StartScrcpyUseCase(get(), get(), get())
+        }
+
+        factory {
+            SaveScreenshotUseCase(get(), get(), get())
+        }
+
+        factory {
+            StopScrcpyUseCase(get(), get())
+        }
+
+        factory {
+            CheckSetupStatusUseCase(get(), get())
+        }
+
+        factory {
+            UpdateSettingUseCase(get())
+        }
+
+        factory {
+            UpdateDeviceSetting(get())
+        }
+
+        factory {
+            GetNotifyMessageFlowUseCase(get())
+        }
+
+        factory {
+            StartScrcpyRecordUseCase(get(), get(), get())
+        }
+
+        factory {
+            StopScrcpyRecordUseCase(get(), get())
+        }
+
+        factory {
+            GetSystemDarkModeFlowUseCase()
+        }
+
+        factory {
+            GetErrorMessageFlowUseCase(get())
+        }
+
+        factory {
+            DevicesPageStateHolder(
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+            )
+        }
+
+        factory { (context: Device.Context) ->
+            DevicePageStateHolder(context, get())
+        }
+
+        factory {
+            MainContentStateHolder(get(), get(), get(), get())
+        }
+
+        factory {
+            SettingPageStateHolder(get(), get())
         }
     }
-
-    factory {
-        KillCommand(
-            when (get<OSContext>().type) {
-                OSType.MAC_OS -> KillCommandCreatorForMacOS()
-                OSType.LINUX -> KillCommandCreatorForLinux()
-                OSType.WINDOWS -> KillCommandCreatorForWindows()
-            }
-        )
-    }
-
-    factory {
-        val setting = runBlocking { get<SettingRepository>().get() }
-        ScrcpyCommand(ScrcpyCommandCreator(setting.scrcpyLocation))
-    }
-
-    factory {
-        ProcessRepository(get())
-    }
-
-    factory {
-        DeviceRepository(get())
-    }
-
-    factory {
-        SettingRepository(get())
-    }
-
-    factory {
-        FetchDevicesUseCase(get())
-    }
-
-    factory {
-        RestartAdbServerUseCase(get())
-    }
-
-    factory {
-        FetchSettingUseCase(get())
-    }
-
-    factory {
-        GetScrcpyStatusUseCase(get())
-    }
-
-    factory {
-        StartScrcpyUseCase(get(), get(), get())
-    }
-
-    factory {
-        SaveScreenshotUseCase(get(), get(), get())
-    }
-
-    factory {
-        StopScrcpyUseCase(get(), get())
-    }
-
-    factory {
-        CheckSetupStatusUseCase(get(), get())
-    }
-
-    factory {
-        UpdateSettingUseCase(get())
-    }
-
-    factory {
-        UpdateDeviceSetting(get())
-    }
-
-    factory {
-        GetNotifyMessageFlowUseCase(get())
-    }
-
-    factory {
-        StartScrcpyRecordUseCase(get(), get(), get())
-    }
-
-    factory {
-        StopScrcpyRecordUseCase(get(), get())
-    }
-
-    factory {
-        GetSystemDarkModeFlowUseCase()
-    }
-
-    factory {
-        GetErrorMessageFlowUseCase(get())
-    }
-
-    factory {
-        DevicesPageStateHolder(
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get()
-        )
-    }
-
-    factory { (context: Device.Context) ->
-        DevicePageStateHolder(context, get())
-    }
-
-    factory {
-        MainContentStateHolder(get(), get(), get(), get())
-    }
-
-    factory {
-        SettingPageStateHolder(get(), get())
-    }
-}

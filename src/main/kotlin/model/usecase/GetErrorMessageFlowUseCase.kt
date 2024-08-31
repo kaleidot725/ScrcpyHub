@@ -5,7 +5,7 @@ import model.entity.Message
 import model.repository.MessageRepository
 
 class GetErrorMessageFlowUseCase(
-    private val messageRepository: MessageRepository
+    private val messageRepository: MessageRepository,
 ) {
     operator fun invoke(): StateFlow<Set<Message.Error>> {
         return messageRepository.errorMessages

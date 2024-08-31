@@ -11,7 +11,10 @@ class ScrcpyCommand(private val factory: ScrcpyCommandCreator) {
         }.start()
     }
 
-    fun record(context: Device.Context, fileName: String): Process {
+    fun record(
+        context: Device.Context,
+        fileName: String,
+    ): Process {
         val command = factory.createRecord(context, fileName)
         return ProcessBuilder(command).apply {
             setupCommandPath(factory.scrcpyBinaryPath)
@@ -28,10 +31,11 @@ class ScrcpyCommand(private val factory: ScrcpyCommandCreator) {
     }
 
     private fun ProcessBuilder.setupCommandPath(binaryFile: String?) {
-        environment()["PATH"] = if (binaryFile != null) {
-            File(binaryFile).parent + File.pathSeparator + System.getenv("PATH")
-        } else {
-            System.getenv("PATH")
-        }
+        environment()["PATH"] =
+            if (binaryFile != null) {
+                File(binaryFile).parent + File.pathSeparator + System.getenv("PATH")
+            } else {
+                System.getenv("PATH")
+            }
     }
 }

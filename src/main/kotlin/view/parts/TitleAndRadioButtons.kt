@@ -15,7 +15,7 @@ fun TitleAndRadioButtons(
     selectedItem: String,
     items: List<String>,
     onSelect: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Texts.Subtitle1(title)
@@ -23,7 +23,7 @@ fun TitleAndRadioButtons(
             selectedItem = selectedItem,
             items = items,
             onSelect = { onSelect(it) },
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp),
         )
     }
 }
@@ -36,6 +36,6 @@ private fun TitleAndRadioButtons_Preview() {
         "one",
         listOf("one", "two", "three"),
         {},
-        modifier = Modifier.wrapContentSize()
+        modifier = Modifier.wrapContentSize(),
     )
 }

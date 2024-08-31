@@ -42,11 +42,12 @@ fun DevicePager(
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .align(Alignment.Center)
-                .padding(8.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .align(Alignment.Center)
+                    .padding(8.dp),
         ) {
             val pageCount = deviceStatusList.count()
             val pagerState = rememberPagerState(pageCount = { pageCount })
@@ -62,7 +63,7 @@ fun DevicePager(
                     takeScreenshot,
                     startRecording,
                     stopRecording,
-                    modifier = Modifier.wrapContentSize()
+                    modifier = Modifier.wrapContentSize(),
                 )
             }
 
@@ -71,16 +72,17 @@ fun DevicePager(
 
                 Row(
                     Modifier.wrapContentSize().align(Alignment.CenterHorizontally),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     repeat(pageCount) { iteration ->
                         val color = if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
                         Box(
-                            modifier = Modifier
-                                .clip(CircleShape)
-                                .background(color)
-                                .size(12.dp)
-                                .clickable { coroutineScope.launch { pagerState.animateScrollToPage(iteration) } }
+                            modifier =
+                                Modifier
+                                    .clip(CircleShape)
+                                    .background(color)
+                                    .size(12.dp)
+                                    .clickable { coroutineScope.launch { pagerState.animateScrollToPage(iteration) } },
                         )
                     }
                 }

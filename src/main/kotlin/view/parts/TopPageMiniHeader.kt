@@ -17,14 +17,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 
 @Composable
-fun TopPageMiniHeader(windowScope: WindowScope, title: String) {
+fun TopPageMiniHeader(
+    windowScope: WindowScope,
+    title: String,
+) {
     windowScope.WindowDraggableArea {
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .background(Color(red = 51, blue = 51, green = 51))
-                .padding(8.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .background(Color(red = 51, blue = 51, green = 51))
+                    .padding(8.dp),
         ) {
             Text(
                 text = title,

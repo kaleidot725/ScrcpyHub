@@ -4,7 +4,10 @@ import java.util.Date
 import java.util.concurrent.TimeUnit
 
 object ElapsedTimeCalculator {
-    fun calc(startDate: Date, currentDate: Date): String {
+    fun calc(
+        startDate: Date,
+        currentDate: Date,
+    ): String {
         val totalMillis = currentDate.time - startDate.time
         val hour = TimeUnit.MILLISECONDS.toHours(totalMillis)
         val minute = TimeUnit.MILLISECONDS.toMinutes(totalMillis) % 60

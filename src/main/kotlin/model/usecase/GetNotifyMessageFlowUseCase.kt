@@ -5,7 +5,7 @@ import model.entity.Message
 import model.repository.MessageRepository
 
 class GetNotifyMessageFlowUseCase(
-    private val messageRepository: MessageRepository
+    private val messageRepository: MessageRepository,
 ) {
     operator fun invoke(): SharedFlow<Message.Notify> {
         return messageRepository.notifyMessage

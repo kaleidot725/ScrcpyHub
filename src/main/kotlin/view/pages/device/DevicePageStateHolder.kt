@@ -12,7 +12,7 @@ import view.StateHolder
 
 class DevicePageStateHolder(
     private val context: Device.Context,
-    private val updateDeviceSetting: UpdateDeviceSetting
+    private val updateDeviceSetting: UpdateDeviceSetting,
 ) : StateHolder() {
     private val titleName: MutableStateFlow<String> = MutableStateFlow(context.displayName)
     private val editName: MutableStateFlow<String> = MutableStateFlow(context.customName ?: "")
@@ -36,19 +36,21 @@ class DevicePageStateHolder(
     private val audioBuffering: MutableStateFlow<String> = MutableStateFlow(context.audioBuffering?.toString() ?: "")
     private val audioBufferingError: MutableStateFlow<String> = MutableStateFlow("")
 
-    private val lockOrientation: MutableStateFlow<Device.Context.LockOrientation> = MutableStateFlow(
-        Device.Context.LockOrientation.values().firstOrNull { it.value == context.lockOrientation }
-            ?: Device.Context.LockOrientation.NONE
-    )
+    private val lockOrientation: MutableStateFlow<Device.Context.LockOrientation> =
+        MutableStateFlow(
+            Device.Context.LockOrientation.values().firstOrNull { it.value == context.lockOrientation }
+                ?: Device.Context.LockOrientation.NONE,
+        )
     private val enableBorderless: MutableStateFlow<Boolean> = MutableStateFlow(context.enableBorderless)
     private val enableAlwaysOnTop: MutableStateFlow<Boolean> = MutableStateFlow(context.enableAlwaysOnTop)
     private val enableFullscreen: MutableStateFlow<Boolean> = MutableStateFlow(context.enableFullScreen)
     private val enableHidKeyboard: MutableStateFlow<Boolean> = MutableStateFlow(context.enableHidKeyboard)
     private val enableHidMouse: MutableStateFlow<Boolean> = MutableStateFlow(context.enableHidMouse)
-    private val rotation: MutableStateFlow<Device.Context.Rotation> = MutableStateFlow(
-        Device.Context.Rotation.values().firstOrNull { it.value == context.rotation }
-            ?: Device.Context.Rotation.NONE
-    )
+    private val rotation: MutableStateFlow<Device.Context.Rotation> =
+        MutableStateFlow(
+            Device.Context.Rotation.values().firstOrNull { it.value == context.rotation }
+                ?: Device.Context.Rotation.NONE,
+        )
 
     val state: StateFlow<DevicePageState> =
         combine(
@@ -106,154 +108,156 @@ class DevicePageStateHolder(
                 enableShowTouches = it[23] as Boolean,
                 enablePowerOffOnClose = it[24] as Boolean,
                 disablePowerOnOnStart = it[25] as Boolean,
-                savable = isValid()
+                savable = isValid(),
             )
         }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), DevicePageState())
 
-    val viewAction: DevicePageAction = object : DevicePageAction {
-        override fun updateName(name: String) {
-            coroutineScope.launch {
-                editName.emit(name)
+    val viewAction: DevicePageAction =
+        object : DevicePageAction {
+            override fun updateName(name: String) {
+                coroutineScope.launch {
+                    editName.emit(name)
+                }
             }
-        }
 
-        override fun updateEnableStayAwake(enable: Boolean) {
-            coroutineScope.launch {
-                enableStayAwake.emit(enable)
+            override fun updateEnableStayAwake(enable: Boolean) {
+                coroutineScope.launch {
+                    enableStayAwake.emit(enable)
+                }
             }
-        }
 
-        override fun updateEnableShowTouches(enable: Boolean) {
-            coroutineScope.launch {
-                enableShowTouches.emit(enable)
+            override fun updateEnableShowTouches(enable: Boolean) {
+                coroutineScope.launch {
+                    enableShowTouches.emit(enable)
+                }
             }
-        }
 
-        override fun updateEnablePowerOffOnClose(enable: Boolean) {
-            coroutineScope.launch {
-                enablePowerOffOnClose.emit(enable)
+            override fun updateEnablePowerOffOnClose(enable: Boolean) {
+                coroutineScope.launch {
+                    enablePowerOffOnClose.emit(enable)
+                }
             }
-        }
 
-        override fun updateDisablePowerOnOnStart(disable: Boolean) {
-            coroutineScope.launch {
-                disablePowerOnOnStart.emit(disable)
+            override fun updateDisablePowerOnOnStart(disable: Boolean) {
+                coroutineScope.launch {
+                    disablePowerOnOnStart.emit(disable)
+                }
             }
-        }
 
-        override fun updateMaxSize(maxSize: String) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.maxSize.emit(maxSize)
+            override fun updateMaxSize(maxSize: String) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.maxSize.emit(maxSize)
+                }
             }
-        }
 
-        override fun updateMaxFrameRate(maxFrameRate: String) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.maxFrameRate.emit(maxFrameRate)
+            override fun updateMaxFrameRate(maxFrameRate: String) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.maxFrameRate.emit(maxFrameRate)
+                }
             }
-        }
 
-        override fun updateBitrate(bitrate: String) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.bitrate.emit(bitrate)
+            override fun updateBitrate(bitrate: String) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.bitrate.emit(bitrate)
+                }
             }
-        }
 
-        override fun updateBuffering(buffering: String) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.buffering.emit(buffering)
+            override fun updateBuffering(buffering: String) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.buffering.emit(buffering)
+                }
             }
-        }
 
-        override fun updateNoAudio(noAudio: Boolean) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.noAudio.emit(noAudio)
+            override fun updateNoAudio(noAudio: Boolean) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.noAudio.emit(noAudio)
+                }
             }
-        }
 
-        override fun updateAudioBitrate(bitrate: String) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.audioBitrate.emit(bitrate)
+            override fun updateAudioBitrate(bitrate: String) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.audioBitrate.emit(bitrate)
+                }
             }
-        }
 
-        override fun updateAudioBuffering(buffering: String) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.audioBuffering.emit(buffering)
+            override fun updateAudioBuffering(buffering: String) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.audioBuffering.emit(buffering)
+                }
             }
-        }
 
-        override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.lockOrientation.emit(lockOrientation)
+            override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.lockOrientation.emit(lockOrientation)
+                }
             }
-        }
 
-        override fun updateBorderless(enabled: Boolean) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.enableBorderless.emit(enabled)
+            override fun updateBorderless(enabled: Boolean) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.enableBorderless.emit(enabled)
+                }
             }
-        }
 
-        override fun updateAlwaysOnTop(enabled: Boolean) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.enableAlwaysOnTop.emit(enabled)
+            override fun updateAlwaysOnTop(enabled: Boolean) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.enableAlwaysOnTop.emit(enabled)
+                }
             }
-        }
 
-        override fun updateFullscreen(enabled: Boolean) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.enableFullscreen.emit(enabled)
+            override fun updateFullscreen(enabled: Boolean) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.enableFullscreen.emit(enabled)
+                }
             }
-        }
 
-        override fun updateRotation(rotation: Device.Context.Rotation) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.rotation.emit(rotation)
+            override fun updateRotation(rotation: Device.Context.Rotation) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.rotation.emit(rotation)
+                }
             }
-        }
 
-        override fun updateEnableHidKeyboard(enabled: Boolean) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.enableHidKeyboard.emit(enabled)
+            override fun updateEnableHidKeyboard(enabled: Boolean) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.enableHidKeyboard.emit(enabled)
+                }
             }
-        }
 
-        override fun updateEnableHidMouse(enabled: Boolean) {
-            coroutineScope.launch {
-                this@DevicePageStateHolder.enableHidMouse.emit(enabled)
+            override fun updateEnableHidMouse(enabled: Boolean) {
+                coroutineScope.launch {
+                    this@DevicePageStateHolder.enableHidMouse.emit(enabled)
+                }
             }
-        }
 
-        override fun save() {
-            coroutineScope.launch {
-                val newContext = Device.Context(
-                    device = context.device,
-                    customName = editName.value,
-                    maxSize = maxSize.value.toIntOrNull(),
-                    maxFrameRate = maxFrameRate.value.toIntOrNull(),
-                    bitrate = bitrate.value.toIntOrNull(),
-                    buffering = buffering.value.toIntOrNull(),
-                    noAudio = noAudio.value,
-                    audioBitrate = audioBitrate.value.toIntOrNull(),
-                    audioBuffering = audioBuffering.value.toIntOrNull(),
-                    lockOrientation = lockOrientation.value.value,
-                    enableBorderless = enableBorderless.value,
-                    enableAlwaysOnTop = enableAlwaysOnTop.value,
-                    enableFullScreen = enableFullscreen.value,
-                    rotation = rotation.value.value,
-                    enableHidKeyboard = enableHidKeyboard.value,
-                    enableHidMouse = enableHidMouse.value,
-                    enableStayAwake = enableStayAwake.value,
-                    enableShowTouches = enableShowTouches.value,
-                    enablePowerOffOnClose = enablePowerOffOnClose.value,
-                    disablePowerOnOnStart = disablePowerOnOnStart.value,
-                )
-                updateDeviceSetting.execute(newContext)
-                titleName.value = editName.value
+            override fun save() {
+                coroutineScope.launch {
+                    val newContext =
+                        Device.Context(
+                            device = context.device,
+                            customName = editName.value,
+                            maxSize = maxSize.value.toIntOrNull(),
+                            maxFrameRate = maxFrameRate.value.toIntOrNull(),
+                            bitrate = bitrate.value.toIntOrNull(),
+                            buffering = buffering.value.toIntOrNull(),
+                            noAudio = noAudio.value,
+                            audioBitrate = audioBitrate.value.toIntOrNull(),
+                            audioBuffering = audioBuffering.value.toIntOrNull(),
+                            lockOrientation = lockOrientation.value.value,
+                            enableBorderless = enableBorderless.value,
+                            enableAlwaysOnTop = enableAlwaysOnTop.value,
+                            enableFullScreen = enableFullscreen.value,
+                            rotation = rotation.value.value,
+                            enableHidKeyboard = enableHidKeyboard.value,
+                            enableHidMouse = enableHidMouse.value,
+                            enableStayAwake = enableStayAwake.value,
+                            enableShowTouches = enableShowTouches.value,
+                            enablePowerOffOnClose = enablePowerOffOnClose.value,
+                            disablePowerOnOnStart = disablePowerOnOnStart.value,
+                        )
+                    updateDeviceSetting.execute(newContext)
+                    titleName.value = editName.value
+                }
             }
         }
-    }
 
     private suspend fun isValid(): Boolean {
         val maxSizeError = maxSize.value.isNotEmpty() && maxSize.value.toIntOrNull() == null
