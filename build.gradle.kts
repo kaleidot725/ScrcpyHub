@@ -6,6 +6,7 @@ version = "2.1.0"
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("org.jetbrains.compose")
     id("org.jlleitschuh.gradle.ktlint")
     id("com.mikepenz.aboutlibraries.plugin")
@@ -43,6 +44,10 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
     reporters {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
     }
+}
+
+kotlin {
+    jvmToolchain(jdkVersion = 17)
 }
 
 compose.desktop {
