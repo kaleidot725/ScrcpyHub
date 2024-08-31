@@ -24,7 +24,7 @@ fun DevicesPageForMini(
     windowScope: WindowScope,
     stateHolder: DevicesPageStateHolder,
     onNavigateSetting: (() -> Unit)? = null,
-    onNavigateDevice: ((Device.Context) -> Unit)? = null
+    onNavigateDevice: ((Device.Context) -> Unit)? = null,
 ) {
     val state: DevicesPageState by stateHolder.states.collectAsState()
 
@@ -39,7 +39,7 @@ fun DevicesPageForMini(
         header = {
             TopPageMiniHeader(
                 windowScope = windowScope,
-                title = Strings.APP_NAME
+                title = Strings.APP_NAME,
             )
         },
         content = {
@@ -54,7 +54,7 @@ fun DevicesPageForMini(
                     Box(modifier = Modifier.fillMaxSize()) {
                         Texts.Subtitle1(
                             DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
-                            modifier = Modifier.align(Alignment.Center)
+                            modifier = Modifier.align(Alignment.Center),
                         )
                     }
                 }
@@ -77,6 +77,6 @@ fun DevicesPageForMini(
                     }
                 }
             }
-        }
+        },
     )
 }

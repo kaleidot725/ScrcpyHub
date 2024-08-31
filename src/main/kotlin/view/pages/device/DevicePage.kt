@@ -12,7 +12,7 @@ import view.templates.MainLayout
 fun DevicePage(
     windowScope: WindowScope,
     stateHolder: DevicePageStateHolder,
-    onNavigateDevices: (() -> Unit)? = null
+    onNavigateDevices: (() -> Unit)? = null,
 ) {
     val state by stateHolder.state.collectAsState()
 

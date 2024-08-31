@@ -14,21 +14,27 @@ import java.util.Date
 
 private data class ProcessState(
     val value: Process,
-    val status: ProcessStatus
+    val status: ProcessStatus,
 )
 
 sealed class ProcessStatus {
     object Idle : ProcessStatus()
+
     data class Running(val startDate: Date = Date()) : ProcessStatus()
+
     data class Recording(val startDate: Date = Date()) : ProcessStatus()
 }
 
 class ProcessRepository(
-    val killCommand: KillCommand
+    val killCommand: KillCommand,
 ) {
     private val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main + Dispatchers.IO)
 
-    fun addMirroringProcess(context: Device.Context, scrcpyLocation: String, onDestroy: (suspend () -> Unit)? = null) {
+    fun addMirroringProcess(
+        context: Device.Context,
+        scrcpyLocation: String,
+        onDestroy: (suspend () -> Unit)? = null,
+    ) {
         val process = ScrcpyCommand(ScrcpyCommandCreator(scrcpyLocation)).run(context)
         processList[context.device.id] = ProcessState(process, ProcessStatus.Running())
         scope.launch(Dispatchers.IO) {
@@ -44,7 +50,7 @@ class ProcessRepository(
         context: Device.Context,
         fileName: String,
         commandLocation: String,
-        onDestroy: (suspend () -> Unit)? = null
+        onDestroy: (suspend () -> Unit)? = null,
     ) {
         val process = ScrcpyCommand(ScrcpyCommandCreator(commandLocation)).record(context, fileName)
         processList[context.device.id] = ProcessState(process, ProcessStatus.Recording())
@@ -76,7 +82,10 @@ class ProcessRepository(
         }
     }
 
-    private suspend fun Process.monitor(interval: Long, onDestroy: suspend () -> Unit) {
+    private suspend fun Process.monitor(
+        interval: Long,
+        onDestroy: suspend () -> Unit,
+    ) {
         while (this.isAlive) {
             delay(interval)
         }

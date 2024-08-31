@@ -16,7 +16,7 @@ fun SettingPage(
     windowScope: WindowScope,
     stateHolder: SettingPageStateHolder,
     onNavigateDevices: (() -> Unit)? = null,
-    onSaved: (() -> Unit)? = null
+    onSaved: (() -> Unit)? = null,
 ) {
     val theme: Theme by stateHolder.theme.collectAsState()
     val themes: List<Theme> by stateHolder.themes.collectAsState()
@@ -42,7 +42,7 @@ fun SettingPage(
                     stateHolder.save { onSaved?.invoke() }
                     onNavigateDevices?.invoke()
                 },
-                savable = true
+                savable = true,
             )
         },
         content = {
@@ -59,6 +59,6 @@ fun SettingPage(
                 screenshotDirectory = screenshotDirectory,
                 onUpdateScreenRecordDirectory = stateHolder::updateScreenshotDirectory,
             )
-        }
+        },
     )
 }

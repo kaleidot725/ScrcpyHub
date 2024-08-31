@@ -17,12 +17,12 @@ import view.resource.Colors
 fun MainLayout(
     header: @Composable () -> Unit,
     content: @Composable () -> Unit,
-    snackBar: @Composable () -> Unit = {}
+    snackBar: @Composable () -> Unit = {},
 ) {
     Card(
         modifier = Modifier.fillMaxSize(),
         shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp, Colors.WINDOW_BORDER)
+        border = BorderStroke(1.dp, Colors.WINDOW_BORDER),
     ) {
         Surface {
             Box {

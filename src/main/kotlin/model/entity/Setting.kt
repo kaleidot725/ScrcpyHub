@@ -14,5 +14,5 @@ data class Setting(
     @SerialName("screenshotDirectory")
     val screenRecordDirectory: String = "",
     @SerialName("screencaptureDirectory")
-    val screenshotDirectory: String = ""
+    val screenshotDirectory: String = "",
 )

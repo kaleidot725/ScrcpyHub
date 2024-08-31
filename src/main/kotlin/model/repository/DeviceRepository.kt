@@ -32,12 +32,16 @@ class DeviceRepository(private val osContext: OSContext) {
         }
     }
 
-    suspend fun saveScreenshot(device: Device, filePath: String): Boolean {
+    suspend fun saveScreenshot(
+        device: Device,
+        filePath: String,
+    ): Boolean {
         return withContext(Dispatchers.IO) {
-            val image = adb.execute(
-                request = ScreenCaptureRequest(screenshotAdapter),
-                serial = device.id
-            ).toBufferedImage()
+            val image =
+                adb.execute(
+                    request = ScreenCaptureRequest(screenshotAdapter),
+                    serial = device.id,
+                ).toBufferedImage()
             ImageIO.write(image, "png", File(filePath))
         }
     }

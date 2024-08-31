@@ -1,7 +1,7 @@
 package model.command
 
 class AdbCommandCreator(
-    val adbBinaryPath: String? = null
+    val adbBinaryPath: String? = null,
 ) {
     fun create(): List<String> {
         return buildList {

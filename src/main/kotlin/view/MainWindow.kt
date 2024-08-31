@@ -18,7 +18,7 @@ fun MainWindow(
     onCloseRequest: () -> Unit,
     state: WindowState,
     alwaysOnTop: Boolean,
-    content: @Composable FrameWindowScope.() -> Unit
+    content: @Composable FrameWindowScope.() -> Unit,
 ) {
     Window(
         onCloseRequest = onCloseRequest,
@@ -32,7 +32,7 @@ fun MainWindow(
     ) {
         Card(
             shape = RoundedCornerShape(8.dp),
-            border = BorderStroke(1.dp, Colors.WINDOW_BORDER)
+            border = BorderStroke(1.dp, Colors.WINDOW_BORDER),
         ) { content.invoke(this) }
     }
 }

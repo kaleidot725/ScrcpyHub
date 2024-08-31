@@ -12,14 +12,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SmallIcon(filePath: String, description: String, modifier: Modifier = Modifier) {
+fun SmallIcon(
+    filePath: String,
+    description: String,
+    modifier: Modifier = Modifier,
+) {
     Box(modifier = modifier) {
         Image(
             painter = painterResource(filePath),
             contentDescription = description,
             contentScale = ContentScale.Inside,
             colorFilter = ColorFilter.tint(MaterialTheme.colors.onSurface),
-            modifier = Modifier.width(32.dp)
+            modifier = Modifier.width(32.dp),
         )
     }
 }

@@ -45,26 +45,31 @@ fun AppSetting(
 ) {
     Box {
         val scrollState = rememberScrollState()
-        val adbDirectoryLauncher = rememberDirectoryPickerLauncher {  directory ->
-            directory?.let { onUpdateScrcpyLocation(it.path ?: "") }
-        }
-        val scrcpyDirectoryLauncher = rememberDirectoryPickerLauncher { directory ->
-            directory?.let { onUpdateAdbLocation(it.path ?: "") }
-        }
-        val screenshotDirectoryLauncher = rememberDirectoryPickerLauncher { directory ->
-            directory?.let { onUpdateScreenshotDirectory(it.path ?: "") }
-        }
-        val screenRecordDirectoryLauncher = rememberDirectoryPickerLauncher { directory ->
-            directory?.let { onUpdateScreenRecordDirectory(it.path ?: "") }
-        }
+        val adbDirectoryLauncher =
+            rememberDirectoryPickerLauncher { directory ->
+                directory?.let { onUpdateScrcpyLocation(it.path ?: "") }
+            }
+        val scrcpyDirectoryLauncher =
+            rememberDirectoryPickerLauncher { directory ->
+                directory?.let { onUpdateAdbLocation(it.path ?: "") }
+            }
+        val screenshotDirectoryLauncher =
+            rememberDirectoryPickerLauncher { directory ->
+                directory?.let { onUpdateScreenshotDirectory(it.path ?: "") }
+            }
+        val screenRecordDirectoryLauncher =
+            rememberDirectoryPickerLauncher { directory ->
+                directory?.let { onUpdateScreenRecordDirectory(it.path ?: "") }
+            }
 
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 12.dp)
-                .padding(vertical = 8.dp)
-                .verticalScroll(scrollState),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 12.dp)
+                    .padding(vertical = 8.dp)
+                    .verticalScroll(scrollState),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Card(elevation = 4.dp) {
                 TitleAndRadioButtons(
@@ -72,7 +77,7 @@ fun AppSetting(
                     selectedItem = theme.toLabel(),
                     items = themes.map { it.toLabel() },
                     onSelect = { label -> onUpdateTheme(themes.first { it.toLabel() == label }) },
-                    modifier = Modifier.fillMaxWidth().padding(8.dp)
+                    modifier = Modifier.fillMaxWidth().padding(8.dp),
                 )
             }
 
@@ -83,7 +88,7 @@ fun AppSetting(
                         modifier = Modifier.fillMaxWidth().padding(8.dp),
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.subtitle1
+                        style = MaterialTheme.typography.subtitle1,
                     )
 
                     TextFieldAndError(
@@ -93,7 +98,7 @@ fun AppSetting(
                         onUpdateInputText = { onUpdateAdbLocation(it) },
                         trailingIcon = Icons.Default.Folder,
                         onClickTrailingIcon = { adbDirectoryLauncher.launch() },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TextFieldAndError(
@@ -103,7 +108,7 @@ fun AppSetting(
                         onUpdateInputText = { onUpdateScrcpyLocation(it) },
                         trailingIcon = Icons.Default.Folder,
                         onClickTrailingIcon = { scrcpyDirectoryLauncher.launch() },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
                 }
             }
@@ -115,7 +120,7 @@ fun AppSetting(
                         modifier = Modifier.fillMaxWidth().padding(8.dp),
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.subtitle1
+                        style = MaterialTheme.typography.subtitle1,
                     )
 
                     TextFieldAndError(
@@ -125,7 +130,7 @@ fun AppSetting(
                         onUpdateInputText = { onUpdateScreenshotDirectory(it) },
                         trailingIcon = Icons.Default.Folder,
                         onClickTrailingIcon = { screenshotDirectoryLauncher.launch() },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
 
                     TextFieldAndError(
@@ -135,7 +140,7 @@ fun AppSetting(
                         onUpdateInputText = { onUpdateScreenRecordDirectory(it) },
                         trailingIcon = Icons.Default.Folder,
                         onClickTrailingIcon = { screenRecordDirectoryLauncher.launch() },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
                 }
             }
@@ -143,7 +148,7 @@ fun AppSetting(
 
         VerticalScrollbar(
             adapter = rememberScrollbarAdapter(scrollState),
-            modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight()
+            modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight(),
         )
     }
 }

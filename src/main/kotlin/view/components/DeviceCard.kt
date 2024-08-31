@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -30,7 +29,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -53,7 +51,7 @@ fun DeviceCard(
     takeScreenshot: ((Device.Context) -> Unit),
     startRecording: ((Device.Context) -> Unit),
     stopRecording: ((Device.Context) -> Unit),
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val (currentTime, setCurrentTime) = remember { mutableStateOf("") }
     LaunchedEffect(deviceStatus.processStatus) {
@@ -87,7 +85,7 @@ fun DeviceCard(
     Card(elevation = 4.dp, modifier = modifier) {
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.padding(12.dp)
+            modifier = Modifier.padding(12.dp),
         ) {
             Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(
@@ -96,7 +94,7 @@ fun DeviceCard(
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.subtitle1,
-                    modifier = Modifier.weight(1.0f, true).align(Alignment.CenterVertically).height(24.dp)
+                    modifier = Modifier.weight(1.0f, true).align(Alignment.CenterVertically).height(24.dp),
                 )
 
                 Text(
@@ -105,32 +103,34 @@ fun DeviceCard(
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.subtitle1,
-                    modifier = Modifier.wrapContentWidth().align(Alignment.CenterVertically)
+                    modifier = Modifier.wrapContentWidth().align(Alignment.CenterVertically),
                 )
 
                 Icon(
                     imageVector = Icons.Default.PhotoCamera,
                     contentDescription = "Screenshot",
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clip(CircleShape)
-                        .indication(MutableInteractionSource(), rememberRipple())
-                        .clickable { takeScreenshot.invoke(deviceStatus.context) }
-                        .padding(4.dp)
-                        .align(Alignment.CenterVertically)
+                    modifier =
+                        Modifier
+                            .size(30.dp)
+                            .clip(CircleShape)
+                            .indication(MutableInteractionSource(), rememberRipple())
+                            .clickable { takeScreenshot.invoke(deviceStatus.context) }
+                            .padding(4.dp)
+                            .align(Alignment.CenterVertically),
                 )
 
                 if (enableGoToDetail) {
                     Icon(
                         imageVector = Icons.Default.ModeEdit,
                         contentDescription = "ModeEdit",
-                        modifier = Modifier
-                            .size(30.dp)
-                            .clip(CircleShape)
-                            .indication(MutableInteractionSource(), rememberRipple())
-                            .clickable {goToDetail.invoke(deviceStatus.context) }
-                            .padding(4.dp)
-                            .align(Alignment.CenterVertically)
+                        modifier =
+                            Modifier
+                                .size(30.dp)
+                                .clip(CircleShape)
+                                .indication(MutableInteractionSource(), rememberRipple())
+                                .clickable { goToDetail.invoke(deviceStatus.context) }
+                                .padding(4.dp)
+                                .align(Alignment.CenterVertically),
                     )
                 }
             }
@@ -140,7 +140,7 @@ fun DeviceCard(
                 startScrcpy = startScrcpy,
                 stopScrcpy = stopScrcpy,
                 startRecording = startRecording,
-                stopRecording = stopRecording
+                stopRecording = stopRecording,
             )
         }
     }
@@ -165,7 +165,7 @@ private fun DeviceCard_Preview_DARK() {
                 takeScreenshot = {},
                 startRecording = {},
                 stopRecording = {},
-                modifier = Modifier
+                modifier = Modifier,
             )
 
             DeviceCard(
@@ -177,7 +177,7 @@ private fun DeviceCard_Preview_DARK() {
                 takeScreenshot = {},
                 startRecording = {},
                 stopRecording = {},
-                modifier = Modifier
+                modifier = Modifier,
             )
 
             DeviceCard(
@@ -189,7 +189,7 @@ private fun DeviceCard_Preview_DARK() {
                 takeScreenshot = {},
                 startRecording = {},
                 stopRecording = {},
-                modifier = Modifier
+                modifier = Modifier,
             )
         }
     }
@@ -214,7 +214,7 @@ private fun DeviceCard_Preview_Light() {
                 takeScreenshot = {},
                 startRecording = {},
                 stopRecording = {},
-                modifier = Modifier
+                modifier = Modifier,
             )
 
             DeviceCard(
@@ -226,7 +226,7 @@ private fun DeviceCard_Preview_Light() {
                 takeScreenshot = {},
                 startRecording = {},
                 stopRecording = {},
-                modifier = Modifier
+                modifier = Modifier,
             )
 
             DeviceCard(
@@ -238,7 +238,7 @@ private fun DeviceCard_Preview_Light() {
                 takeScreenshot = {},
                 startRecording = {},
                 stopRecording = {},
-                modifier = Modifier
+                modifier = Modifier,
             )
         }
     }

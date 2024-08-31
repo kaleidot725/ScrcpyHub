@@ -5,8 +5,11 @@ import model.repository.ProcessStatus
 
 sealed class DevicesPageState {
     object Loading : DevicesPageState()
+
     object DeviceIsEmpty : DevicesPageState()
+
     data class DeviceExist(val devices: List<DeviceStatus>) : DevicesPageState()
+
     object Error : DevicesPageState()
 }
 

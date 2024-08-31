@@ -10,7 +10,7 @@ import model.repository.SettingRepository
 
 class CheckSetupStatusUseCase(
     private val messageRepository: MessageRepository,
-    private val settingRepository: SettingRepository
+    private val settingRepository: SettingRepository,
 ) {
     suspend operator fun invoke() {
         val setting = settingRepository.get()

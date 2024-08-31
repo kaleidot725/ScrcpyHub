@@ -32,38 +32,45 @@ fun ScrcpyButtons(
     Card {
         Row(modifier = Modifier.height(30.dp).fillMaxWidth()) {
             MenuButton(
-                text = if (deviceStatus.processStatus is ProcessStatus.Recording)
-                    Strings.DEVICES_PAGE_STOP_RECORDING
-                else
-                    Strings.DEVICES_PAGE_START_RECORDING,
+                text =
+                    if (deviceStatus.processStatus is ProcessStatus.Recording) {
+                        Strings.DEVICES_PAGE_STOP_RECORDING
+                    } else {
+                        Strings.DEVICES_PAGE_START_RECORDING
+                    },
                 style = MaterialTheme.typography.subtitle2,
                 status = RecordingButtonStatus(deviceStatus.processStatus),
                 colors = RecordingButtonColors(),
                 onIdleClick = { startRecording.invoke(deviceStatus.context) },
                 onActiveClick = { stopRecording.invoke(deviceStatus.context) },
-                modifier = Modifier
-                    .weight(0.2f)
-                    .fillMaxHeight()
+                modifier =
+                    Modifier
+                        .weight(0.2f)
+                        .fillMaxHeight(),
             )
 
             Box(
-                modifier = Modifier.fillMaxHeight().width(1.dp)
-                    .background(MaterialTheme.colors.onSurface.copy(alpha = 0.12f))
+                modifier =
+                    Modifier.fillMaxHeight().width(1.dp)
+                        .background(MaterialTheme.colors.onSurface.copy(alpha = 0.12f)),
             )
 
             MenuButton(
-                text = if (deviceStatus.processStatus is ProcessStatus.Running)
-                    Strings.DEVICES_PAGE_STOP_MIRRORING
-                else
-                    Strings.DEVICES_PAGE_START_MIRRORING,
+                text =
+                    if (deviceStatus.processStatus is ProcessStatus.Running) {
+                        Strings.DEVICES_PAGE_STOP_MIRRORING
+                    } else {
+                        Strings.DEVICES_PAGE_START_MIRRORING
+                    },
                 style = MaterialTheme.typography.subtitle2,
                 status = StartButtonStatus(deviceStatus.processStatus),
                 colors = StartButtonColors(),
                 onIdleClick = { startScrcpy.invoke(deviceStatus.context) },
                 onActiveClick = { stopScrcpy.invoke(deviceStatus.context) },
-                modifier = Modifier
-                    .weight(0.2f)
-                    .fillMaxHeight()
+                modifier =
+                    Modifier
+                        .weight(0.2f)
+                        .fillMaxHeight(),
             )
         }
     }
@@ -81,7 +88,7 @@ private fun CaptureButtonColors(): MenuButtonColors {
         enable = MaterialTheme.colors.primary,
         disable = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
         textColor = MaterialTheme.colors.onPrimary,
-        textColorOnDisable = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+        textColorOnDisable = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
     )
 }
 
@@ -101,7 +108,7 @@ private fun RecordingButtonColors(): MenuButtonColors {
         enable = MaterialTheme.colors.primary,
         disable = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
         textColor = MaterialTheme.colors.onPrimary,
-        textColorOnDisable = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+        textColorOnDisable = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
     )
 }
 
@@ -121,7 +128,7 @@ private fun StartButtonColors(): MenuButtonColors {
         enable = MaterialTheme.colors.primary,
         disable = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
         textColor = MaterialTheme.colors.onPrimary,
-        textColorOnDisable = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+        textColorOnDisable = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
     )
 }
 
@@ -141,6 +148,6 @@ private fun StopButtonColors(): MenuButtonColors {
         enable = MaterialTheme.colors.primary,
         disable = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
         textColor = MaterialTheme.colors.onPrimary,
-        textColorOnDisable = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+        textColorOnDisable = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
     )
 }

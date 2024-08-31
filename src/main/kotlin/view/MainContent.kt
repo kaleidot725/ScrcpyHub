@@ -26,7 +26,11 @@ import view.pages.setting.SettingPageStateHolder
 import view.resource.MainTheme
 
 @Composable
-fun MainContent(windowScope: WindowScope, enableMiniMode: Boolean, mainStateHolder: MainContentStateHolder) {
+fun MainContent(
+    windowScope: WindowScope,
+    enableMiniMode: Boolean,
+    mainStateHolder: MainContentStateHolder,
+) {
     DisposableEffect(mainStateHolder) {
         mainStateHolder.onStarted()
         onDispose {
@@ -41,7 +45,11 @@ fun MainContent(windowScope: WindowScope, enableMiniMode: Boolean, mainStateHold
 }
 
 @Composable
-private fun MainPages(windowScope: WindowScope, enableMiniMode: Boolean, mainStateHolder: MainContentStateHolder) {
+private fun MainPages(
+    windowScope: WindowScope,
+    enableMiniMode: Boolean,
+    mainStateHolder: MainContentStateHolder,
+) {
     val navigation: Navigation by mainStateHolder.navState.collectAsState()
 
     Surface(modifier = Modifier.fillMaxSize()) {
@@ -55,14 +63,14 @@ private fun MainPages(windowScope: WindowScope, enableMiniMode: Boolean, mainSta
                 windowScope = windowScope,
                 stateHolder = devicesPageStateHolder,
                 onNavigateSetting = { mainStateHolder.selectPage(Navigation.SettingPage) },
-                onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
+                onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) },
             )
         } else {
             DevicesPage(
                 windowScope = windowScope,
                 stateHolder = devicesPageStateHolder,
                 onNavigateSetting = { mainStateHolder.selectPage(Navigation.SettingPage) },
-                onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) }
+                onNavigateDevice = { mainStateHolder.selectPage(Navigation.DevicePage(it)) },
             )
         }
 
@@ -70,7 +78,7 @@ private fun MainPages(windowScope: WindowScope, enableMiniMode: Boolean, mainSta
         AnimatedVisibility(
             visible = settingPage != null,
             enter = slideInVertically(initialOffsetY = { return@slideInVertically windowScope.window.height }),
-            exit = slideOutVertically(targetOffsetY = { return@slideOutVertically windowScope.window.height * 2 })
+            exit = slideOutVertically(targetOffsetY = { return@slideOutVertically windowScope.window.height * 2 }),
         ) {
             val stateHolder by remember {
                 val viewModel by inject<SettingPageStateHolder>(clazz = SettingPageStateHolder::class.java)
@@ -83,7 +91,7 @@ private fun MainPages(windowScope: WindowScope, enableMiniMode: Boolean, mainSta
                 onNavigateDevices = { mainStateHolder.selectPage(Navigation.DevicesPage) },
                 onSaved = {
                     mainStateHolder.onRefresh()
-                }
+                },
             )
         }
 
@@ -91,7 +99,7 @@ private fun MainPages(windowScope: WindowScope, enableMiniMode: Boolean, mainSta
         AnimatedVisibility(
             visible = devicePage != null,
             enter = slideInVertically(initialOffsetY = { return@slideInVertically windowScope.window.height }),
-            exit = slideOutVertically(targetOffsetY = { return@slideOutVertically windowScope.window.height * 2 })
+            exit = slideOutVertically(targetOffsetY = { return@slideOutVertically windowScope.window.height * 2 }),
         ) {
             val devicePageViewModel by remember {
                 val stateHolder by inject<DevicePageStateHolder>(clazz = DevicePageStateHolder::class.java) {
@@ -106,7 +114,7 @@ private fun MainPages(windowScope: WindowScope, enableMiniMode: Boolean, mainSta
                 onNavigateDevices = {
                     mainStateHolder.selectPage(Navigation.DevicesPage)
                     devicesPageStateHolder.onRefresh()
-                }
+                },
             )
         }
     }

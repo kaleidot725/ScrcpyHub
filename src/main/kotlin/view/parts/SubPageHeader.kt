@@ -30,36 +30,38 @@ fun SubPageHeader(
 ) {
     windowScope.WindowDraggableArea {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp)
-                .background(Color(red = 51, blue = 51, green = 51))
-                .padding(8.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .background(Color(red = 51, blue = 51, green = 51))
+                    .padding(8.dp),
         ) {
             TextButton(onClick = onCancel) {
                 Text(
                     text = Strings.CANCEL,
-                    color = Color.White
+                    color = Color.White,
                 )
             }
 
             Text(
                 text = title,
                 textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .wrapContentHeight()
-                    .weight(1.0f)
-                    .align(Alignment.CenterVertically),
+                modifier =
+                    Modifier
+                        .wrapContentHeight()
+                        .weight(1.0f)
+                        .align(Alignment.CenterVertically),
                 maxLines = 1,
                 fontWeight = FontWeight.Bold,
                 overflow = TextOverflow.Ellipsis,
-                color = Color.White
+                color = Color.White,
             )
 
             TextButton(onClick = onSave, enabled = savable) {
                 Text(
                     text = Strings.SAVE,
-                    color = Color.White
+                    color = Color.White,
                 )
             }
         }

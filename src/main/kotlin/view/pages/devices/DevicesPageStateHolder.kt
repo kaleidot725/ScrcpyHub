@@ -31,26 +31,29 @@ class DevicesPageStateHolder(
     private val getScrcpyProcessStatusUseCase: GetScrcpyStatusUseCase,
     private val saveScreenshotToDesktop: SaveScreenshotUseCase,
     private val getNotifyMessageFlowUseCase: GetNotifyMessageFlowUseCase,
-    private val getErrorMessageFlowUseCase: GetErrorMessageFlowUseCase
+    private val getErrorMessageFlowUseCase: GetErrorMessageFlowUseCase,
 ) : StateHolder() {
     private val deviceStatusList: MutableStateFlow<List<DeviceStatus>> = MutableStateFlow(emptyList())
-    val states: StateFlow<DevicesPageState> = deviceStatusList.map { devices ->
-        return@map if (devices.isNotEmpty()) {
-            DevicesPageState.DeviceExist(devices)
-        } else {
-            DevicesPageState.DeviceIsEmpty
-        }
-    }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), DevicesPageState.Loading)
+    val states: StateFlow<DevicesPageState> =
+        deviceStatusList.map { devices ->
+            return@map if (devices.isNotEmpty()) {
+                DevicesPageState.DeviceExist(devices)
+            } else {
+                DevicesPageState.DeviceIsEmpty
+            }
+        }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), DevicesPageState.Loading)
 
     private val notifyMessage: MutableStateFlow<List<Message.Notify>> = MutableStateFlow(emptyList())
-    private val errorMessage: StateFlow<Set<Message.Error>> = getErrorMessageFlowUseCase().stateIn(
-        coroutineScope,
-        SharingStarted.WhileSubscribed(),
-        emptySet()
-    )
-    val messages: StateFlow<List<Message>> = combine(errorMessage, notifyMessage) { error, notify ->
-        notify + error
-    }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), emptyList())
+    private val errorMessage: StateFlow<Set<Message.Error>> =
+        getErrorMessageFlowUseCase().stateIn(
+            coroutineScope,
+            SharingStarted.WhileSubscribed(),
+            emptySet(),
+        )
+    val messages: StateFlow<List<Message>> =
+        combine(errorMessage, notifyMessage) { error, notify ->
+            notify + error
+        }.stateIn(coroutineScope, SharingStarted.WhileSubscribed(), emptyList())
 
     override fun onStarted() {
         observeNotifyMessage()
@@ -102,9 +105,10 @@ class DevicesPageStateHolder(
     }
 
     private fun updateStates(contextList: List<Device.Context>) {
-        deviceStatusList.value = contextList.map { context ->
-            DeviceStatus(context, getScrcpyProcessStatusUseCase.execute(context))
-        }
+        deviceStatusList.value =
+            contextList.map { context ->
+                DeviceStatus(context, getScrcpyProcessStatusUseCase.execute(context))
+            }
     }
 
     private fun observeNotifyMessage() {

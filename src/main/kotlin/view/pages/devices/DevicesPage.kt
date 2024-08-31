@@ -36,7 +36,7 @@ fun DevicesPage(
     windowScope: WindowScope,
     stateHolder: DevicesPageStateHolder,
     onNavigateSetting: (() -> Unit)? = null,
-    onNavigateDevice: ((Device.Context) -> Unit)? = null
+    onNavigateDevice: ((Device.Context) -> Unit)? = null,
 ) {
     val state: DevicesPageState by stateHolder.states.collectAsState()
     val messages: List<Message> by stateHolder.messages.collectAsState()
@@ -53,7 +53,7 @@ fun DevicesPage(
             TopPageHeader(
                 windowScope = windowScope,
                 title = Strings.APP_NAME,
-                onClickOption = { onNavigateSetting?.invoke() }
+                onClickOption = { onNavigateSetting?.invoke() },
             )
         },
         content = {
@@ -68,7 +68,7 @@ fun DevicesPage(
                     Box(modifier = Modifier.fillMaxSize()) {
                         Texts.Subtitle1(
                             DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
-                            modifier = Modifier.align(Alignment.Center)
+                            modifier = Modifier.align(Alignment.Center),
                         )
                     }
                 }
@@ -94,7 +94,7 @@ fun DevicesPage(
         },
         snackBar = {
             EventMessageList(messages)
-        }
+        },
     )
 }
 
@@ -102,25 +102,29 @@ fun DevicesPage(
 private fun EventMessageList(messages: List<Message>) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier.padding(8.dp),
     ) {
         items(messages, key = { it.uuid }) {
-            val backgroundColor = when (it) {
-                is Message.Error,
-                is Message.Notify.FailedMirroring,
-                is Message.Notify.FailedRecordingMovie,
-                is Message.Notify.FailedToSaveScreenshot -> MaterialTheme.colors.error
+            val backgroundColor =
+                when (it) {
+                    is Message.Error,
+                    is Message.Notify.FailedMirroring,
+                    is Message.Notify.FailedRecordingMovie,
+                    is Message.Notify.FailedToSaveScreenshot,
+                    -> MaterialTheme.colors.error
 
-                else -> MaterialTheme.colors.primary
-            }
-            val textColor = when (it) {
-                is Message.Error,
-                is Message.Notify.FailedMirroring,
-                is Message.Notify.FailedRecordingMovie,
-                is Message.Notify.FailedToSaveScreenshot -> MaterialTheme.colors.onError
+                    else -> MaterialTheme.colors.primary
+                }
+            val textColor =
+                when (it) {
+                    is Message.Error,
+                    is Message.Notify.FailedMirroring,
+                    is Message.Notify.FailedRecordingMovie,
+                    is Message.Notify.FailedToSaveScreenshot,
+                    -> MaterialTheme.colors.onError
 
-                else -> MaterialTheme.colors.onPrimary
-            }
+                    else -> MaterialTheme.colors.onPrimary
+                }
             Card(backgroundColor = backgroundColor) {
                 Text(
                     text = it.toUIMessage(),
@@ -128,7 +132,7 @@ private fun EventMessageList(messages: List<Message>) {
                     style = MaterialTheme.typography.body1,
                     textAlign = TextAlign.Center,
                     maxLines = 2,
-                    modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp)
+                    modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(8.dp),
                 )
             }
         }

@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 enum class Theme {
     LIGHT,
     DARK,
-    SYNC_WITH_OS
+    SYNC_WITH_OS,
 }

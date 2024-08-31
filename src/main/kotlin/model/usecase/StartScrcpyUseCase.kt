@@ -10,9 +10,12 @@ import model.repository.SettingRepository
 class StartScrcpyUseCase(
     private val settingRepository: SettingRepository,
     private val processRepository: ProcessRepository,
-    private val messageRepository: MessageRepository
+    private val messageRepository: MessageRepository,
 ) {
-    suspend fun execute(context: Device.Context, onDestroy: suspend () -> Unit): Boolean {
+    suspend fun execute(
+        context: Device.Context,
+        onDestroy: suspend () -> Unit,
+    ): Boolean {
         val lastState = processRepository.getStatus(context.device.id)
         if (lastState != ProcessStatus.Idle) {
             return false
