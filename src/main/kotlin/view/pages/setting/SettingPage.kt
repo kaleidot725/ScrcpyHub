@@ -55,9 +55,9 @@ fun SettingPage(
                 scrcpyLocation = scrcpyLocation,
                 onUpdateScrcpyLocation = stateHolder::updateScrcpyLocation,
                 screenRecordDirectory = screenRecordDirectory,
-                onUpdateScreenRecordDirectory = stateHolder::updateScreenRecordDirectory,
+                onUpdateScreenshotDirectory = stateHolder::updateScreenRecordDirectory,
                 screenshotDirectory = screenshotDirectory,
-                onUpdateScreenshotDirectory = stateHolder::updateScreenshotDirectory,
+                onUpdateScreenRecordDirectory = stateHolder::updateScreenshotDirectory,
             )
         }
     )

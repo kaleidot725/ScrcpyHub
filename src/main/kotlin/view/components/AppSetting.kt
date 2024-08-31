@@ -15,12 +15,15 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Folder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import io.github.vinceglb.filekit.compose.rememberDirectoryPickerLauncher
 import model.entity.Theme
 import view.parts.TextFieldAndError
 import view.parts.TitleAndRadioButtons
@@ -38,10 +41,22 @@ fun AppSetting(
     screenshotDirectory: String,
     onUpdateScreenshotDirectory: (String) -> Unit,
     screenRecordDirectory: String,
-    onUpdateScreenRecordDirectory: (String) -> Unit
+    onUpdateScreenRecordDirectory: (String) -> Unit,
 ) {
     Box {
         val scrollState = rememberScrollState()
+        val adbDirectoryLauncher = rememberDirectoryPickerLauncher {  directory ->
+            directory?.let { onUpdateScrcpyLocation(it.path ?: "") }
+        }
+        val scrcpyDirectoryLauncher = rememberDirectoryPickerLauncher { directory ->
+            directory?.let { onUpdateAdbLocation(it.path ?: "") }
+        }
+        val screenshotDirectoryLauncher = rememberDirectoryPickerLauncher { directory ->
+            directory?.let { onUpdateScreenshotDirectory(it.path ?: "") }
+        }
+        val screenRecordDirectoryLauncher = rememberDirectoryPickerLauncher { directory ->
+            directory?.let { onUpdateScreenRecordDirectory(it.path ?: "") }
+        }
 
         Column(
             modifier = Modifier
@@ -76,6 +91,8 @@ fun AppSetting(
                         placeHolder = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS,
                         inputText = adbLocation,
                         onUpdateInputText = { onUpdateAdbLocation(it) },
+                        trailingIcon = Icons.Default.Folder,
+                        onClickTrailingIcon = { adbDirectoryLauncher.launch() },
                         modifier = Modifier.padding(8.dp)
                     )
 
@@ -84,6 +101,8 @@ fun AppSetting(
                         placeHolder = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS,
                         inputText = scrcpyLocation,
                         onUpdateInputText = { onUpdateScrcpyLocation(it) },
+                        trailingIcon = Icons.Default.Folder,
+                        onClickTrailingIcon = { scrcpyDirectoryLauncher.launch() },
                         modifier = Modifier.padding(8.dp)
                     )
                 }
@@ -103,7 +122,9 @@ fun AppSetting(
                         label = Strings.SETTING_PAGE_EDIT_SCREEN_SHOT_TITLE,
                         placeHolder = Strings.SETTING_PAGE_EDIT_SCREEN_SHOT_DETAILS,
                         inputText = screenRecordDirectory,
-                        onUpdateInputText = { onUpdateScreenRecordDirectory(it) },
+                        onUpdateInputText = { onUpdateScreenshotDirectory(it) },
+                        trailingIcon = Icons.Default.Folder,
+                        onClickTrailingIcon = { screenshotDirectoryLauncher.launch() },
                         modifier = Modifier.padding(8.dp)
                     )
 
@@ -111,7 +132,9 @@ fun AppSetting(
                         label = Strings.SETTING_PAGE_EDIT_SCREEN_RECORD_TITLE,
                         placeHolder = Strings.SETTING_PAGE_EDIT_SCREEN_RECORD_DETAILS,
                         inputText = screenshotDirectory,
-                        onUpdateInputText = { onUpdateScreenshotDirectory(it) },
+                        onUpdateInputText = { onUpdateScreenRecordDirectory(it) },
+                        trailingIcon = Icons.Default.Folder,
+                        onClickTrailingIcon = { screenRecordDirectoryLauncher.launch() },
                         modifier = Modifier.padding(8.dp)
                     )
                 }
@@ -145,8 +168,8 @@ private fun AppSetting_Preview() {
         scrcpyLocation = "CUSTOM SCRCPY LOCATION",
         onUpdateScrcpyLocation = {},
         screenshotDirectory = "CUSTOM SCREENSHOT DIRECTORY",
-        onUpdateScreenshotDirectory = {},
-        screenRecordDirectory = "CUSTOM SCREENRECORD DIRECTORY",
         onUpdateScreenRecordDirectory = {},
+        screenRecordDirectory = "CUSTOM SCREENRECORD DIRECTORY",
+        onUpdateScreenshotDirectory = {},
     )
 }
