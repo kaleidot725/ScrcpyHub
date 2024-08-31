@@ -3,8 +3,11 @@ package view
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Surface
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -12,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.window.WindowScope
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
@@ -23,6 +27,7 @@ import view.pages.devices.DevicesPageForMini
 import view.pages.devices.DevicesPageStateHolder
 import view.pages.setting.SettingPage
 import view.pages.setting.SettingPageStateHolder
+import view.resource.Colors
 import view.resource.MainTheme
 
 @Composable
@@ -52,7 +57,7 @@ private fun MainPages(
 ) {
     val navigation: Navigation by mainStateHolder.navState.collectAsState()
 
-    Surface(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize()) {
         val devicesPageStateHolder by remember {
             val stateHolder by inject<DevicesPageStateHolder>(clazz = DevicesPageStateHolder::class.java)
             mutableStateOf(stateHolder)
