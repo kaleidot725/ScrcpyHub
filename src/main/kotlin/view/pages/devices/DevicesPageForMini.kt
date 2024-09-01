@@ -3,6 +3,7 @@ package view.pages.devices
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -53,7 +54,8 @@ fun DevicesPageForMini(
                 DevicesPageState.Error -> {
                     Box(modifier = Modifier.fillMaxSize()) {
                         Texts.Subtitle1(
-                            DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
+                            text = DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
+                            color = MaterialTheme.colors.onBackground,
                             modifier = Modifier.align(Alignment.Center),
                         )
                     }
@@ -73,7 +75,11 @@ fun DevicesPageForMini(
 
                 DevicesPageState.DeviceIsEmpty -> {
                     Box(modifier = Modifier.fillMaxSize()) {
-                        Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
+                        Texts.Subtitle1(
+                            text = DEVICES_PAGE_NOT_FOUND_DEVICES,
+                            color = MaterialTheme.colors.onBackground,
+                            modifier = Modifier.align(Alignment.Center)
+                        )
                     }
                 }
             }

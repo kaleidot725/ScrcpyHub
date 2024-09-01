@@ -6,17 +6,20 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 
 object Texts {
     @Composable
     fun H1(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
@@ -27,11 +30,13 @@ object Texts {
     @Composable
     fun H2(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
@@ -42,11 +47,13 @@ object Texts {
     @Composable
     fun H3(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
@@ -57,11 +64,13 @@ object Texts {
     @Composable
     fun H4(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
@@ -72,11 +81,13 @@ object Texts {
     @Composable
     fun H5(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
@@ -87,11 +98,13 @@ object Texts {
     @Composable
     fun H6(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
@@ -102,11 +115,13 @@ object Texts {
     @Composable
     fun Subtitle1(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
@@ -117,11 +132,13 @@ object Texts {
     @Composable
     fun Subtitle2(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
@@ -132,11 +149,13 @@ object Texts {
     @Composable
     fun Body1(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
@@ -147,11 +166,13 @@ object Texts {
     @Composable
     fun Body2(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
@@ -162,11 +183,13 @@ object Texts {
     @Composable
     fun Button(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,
@@ -177,11 +200,13 @@ object Texts {
     @Composable
     fun Caption(
         text: String,
+        color: Color = Color.Unspecified,
         maxLines: Int = Int.MAX_VALUE,
         modifier: Modifier = Modifier,
     ) {
         Text(
             text = text,
+            color = color,
             maxLines = maxLines,
             modifier = modifier,
             overflow = TextOverflow.Ellipsis,

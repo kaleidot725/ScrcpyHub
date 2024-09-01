@@ -23,11 +23,11 @@ fun MainLayout(
 ) {
     Box(
         modifier =
-            Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colors.background)
-                .clip(RoundedCornerShape(8.dp))
-                .border(BorderStroke(1.dp, Colors.WINDOW_BORDER)),
+        Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colors.background)
+            .clip(RoundedCornerShape(8.dp))
+            .border(BorderStroke(1.dp, Colors.WINDOW_BORDER)),
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             header()

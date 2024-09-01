@@ -67,7 +67,8 @@ fun DevicesPage(
                 DevicesPageState.Error -> {
                     Box(modifier = Modifier.fillMaxSize()) {
                         Texts.Subtitle1(
-                            DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
+                            text = DEVICES_PAGE_ERROR_STARTING_ADB_SERVER,
+                            color = MaterialTheme.colors.onBackground,
                             modifier = Modifier.align(Alignment.Center),
                         )
                     }
@@ -87,7 +88,11 @@ fun DevicesPage(
 
                 DevicesPageState.DeviceIsEmpty -> {
                     Box(modifier = Modifier.fillMaxSize()) {
-                        Texts.Subtitle1(DEVICES_PAGE_NOT_FOUND_DEVICES, modifier = Modifier.align(Alignment.Center))
+                        Texts.Subtitle1(
+                            text = DEVICES_PAGE_NOT_FOUND_DEVICES,
+                            color = MaterialTheme.colors.onBackground,
+                            modifier = Modifier.align(Alignment.Center)
+                        )
                     }
                 }
             }
