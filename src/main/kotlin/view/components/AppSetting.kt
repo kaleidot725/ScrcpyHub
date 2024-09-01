@@ -16,6 +16,9 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AttachFile
+import androidx.compose.material.icons.filled.FileOpen
+import androidx.compose.material.icons.filled.FilePresent
 import androidx.compose.material.icons.filled.Folder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.github.vinceglb.filekit.compose.rememberDirectoryPickerLauncher
+import io.github.vinceglb.filekit.compose.rememberFilePickerLauncher
 import model.entity.Theme
 import view.parts.TextFieldAndError
 import view.parts.TitleAndRadioButtons
@@ -45,13 +49,13 @@ fun AppSetting(
 ) {
     Box {
         val scrollState = rememberScrollState()
-        val adbDirectoryLauncher =
-            rememberDirectoryPickerLauncher { directory ->
-                directory?.let { onUpdateScrcpyLocation(it.path ?: "") }
+        val adbFileLauncher =
+            rememberFilePickerLauncher { file ->
+                file?.let { onUpdateScrcpyLocation(it.path ?: "") }
             }
-        val scrcpyDirectoryLauncher =
-            rememberDirectoryPickerLauncher { directory ->
-                directory?.let { onUpdateAdbLocation(it.path ?: "") }
+        val scrcpyFileLauncher =
+            rememberFilePickerLauncher { file ->
+                file?.let { onUpdateAdbLocation(it.path ?: "") }
             }
         val screenshotDirectoryLauncher =
             rememberDirectoryPickerLauncher { directory ->
@@ -96,8 +100,8 @@ fun AppSetting(
                         placeHolder = Strings.SETTING_PAGE_EDIT_ADB_LOCATION_DETAILS,
                         inputText = adbLocation,
                         onUpdateInputText = { onUpdateAdbLocation(it) },
-                        trailingIcon = Icons.Default.Folder,
-                        onClickTrailingIcon = { adbDirectoryLauncher.launch() },
+                        trailingIcon = Icons.Default.FilePresent,
+                        onClickTrailingIcon = { adbFileLauncher.launch() },
                         modifier = Modifier.padding(8.dp),
                     )
 
@@ -106,8 +110,8 @@ fun AppSetting(
                         placeHolder = Strings.SETTING_PAGE_EDIT_SCRCPY_LOCATION_DETAILS,
                         inputText = scrcpyLocation,
                         onUpdateInputText = { onUpdateScrcpyLocation(it) },
-                        trailingIcon = Icons.Default.Folder,
-                        onClickTrailingIcon = { scrcpyDirectoryLauncher.launch() },
+                        trailingIcon = Icons.Default.FilePresent,
+                        onClickTrailingIcon = { scrcpyFileLauncher.launch() },
                         modifier = Modifier.padding(8.dp),
                     )
                 }
