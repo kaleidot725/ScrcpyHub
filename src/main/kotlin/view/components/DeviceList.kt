@@ -38,7 +38,7 @@ fun DeviceList(
                 Modifier
                     .fillMaxSize()
                     .padding(horizontal = 12.dp)
-                    .padding(vertical = 8.dp),
+                    .padding(vertical = 12.dp),
         ) {
             items(items = deviceStatusList, key = { it.context.device.id }) { deviceStatus ->
                 DeviceCard(
