@@ -134,7 +134,7 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
         private const val ALWAYS_ON_TOP_OPTION_NAME = "--always-on-top"
         private const val FULLSCREEN_OPTION_NAME = "--fullscreen"
         private const val ROTATION_OPTION_NAME = "--rotation"
-        private const val DISPLAY_BUFFERING_OPTION_NAME = "--display-buffer"
+        private const val DISPLAY_BUFFERING_OPTION_NAME = "--video-buffer"
 
         private const val NO_AUDIO_OPTION = "--no-audio"
         private const val AUDIO_BITRATE_OPTION = "--audio-bit-rate"

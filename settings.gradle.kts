@@ -25,6 +25,7 @@ dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
             library("kotlin-coroutines", "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+            library("napier", "io.github.aakira:napier:2.7.1")
             library("turtle", "com.lordcodes.turtle:turtle:0.10.0")
             library("koin", "io.insert-koin:koin-core:3.5.6")
             library("kotlin-serialization", "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.2")
