@@ -128,7 +128,7 @@ fun AppSetting(
                     TextFieldAndError(
                         label = Strings.SETTING_PAGE_EDIT_SCREEN_SHOT_TITLE,
                         placeHolder = Strings.SETTING_PAGE_EDIT_SCREEN_SHOT_DETAILS,
-                        inputText = screenRecordDirectory,
+                        inputText = screenshotDirectory,
                         onUpdateInputText = { onUpdateScreenshotDirectory(it) },
                         trailingIcon = Icons.Default.Folder,
                         onClickTrailingIcon = { screenshotDirectoryLauncher.launch() },
@@ -138,7 +138,7 @@ fun AppSetting(
                     TextFieldAndError(
                         label = Strings.SETTING_PAGE_EDIT_SCREEN_RECORD_TITLE,
                         placeHolder = Strings.SETTING_PAGE_EDIT_SCREEN_RECORD_DETAILS,
-                        inputText = screenshotDirectory,
+                        inputText = screenRecordDirectory,
                         onUpdateInputText = { onUpdateScreenRecordDirectory(it) },
                         trailingIcon = Icons.Default.Folder,
                         onClickTrailingIcon = { screenRecordDirectoryLauncher.launch() },
