@@ -27,11 +27,14 @@ https://user-images.githubusercontent.com/23740796/227752167-4258bc4e-c7c8-459a-
 
 # ⬇️ Install
 
+> [!CAUTION]
+> ScrcpyHub v2.3.0 supports scrpy v3.0+. If you use ScrcpyHub v2.3.0, please update scrcpy to v3.0+.
+
 Install adb and scrcpy, ScrcpyHub.
 
 ## Windows 10/11
 
-1. Download [here](https://github.com/Genymobile/scrcpy#windows) and install scrcpy (v2.0.0+) somewhere
+1. Download [here](https://github.com/Genymobile/scrcpy#windows) and install scrcpy (v3.0+) somewhere
 2. Download [here](https://github.com/kaleidot725/ScrcpyHub/releases/tag/v2.1.0) and launch ScrcpyHub.
 3. Open ScrcpyHub Preferences.
 4. Input adb and scrcpy location, save settings.
@@ -44,14 +47,14 @@ ScrcpyHub doesn't work mirroring start and stop if you install scrcpy through Ch
 
 ## Linux(Ubuntu)
 
-1. Download [here](https://github.com/Genymobile/scrcpy#windows) and install scrcpy (v2.0.0+) somewhere.
+1. Download [here](https://github.com/Genymobile/scrcpy#windows) and install scrcpy (v3.0+) somewhere.
 2. Build this project and install ScrcpHub.
 3. Launch ScrcpyHub, open Preferences.
 4. Input adb and scrcpy location, save settings.
 
 ## macOS
 
-1. Install android-platform-tools and scrcpy(v2.0.0+).
+1. Install android-platform-tools and scrcpyv(v3.0+).
 
 ```
 brew install android-platform-tools
