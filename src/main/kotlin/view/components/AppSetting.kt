@@ -51,11 +51,11 @@ fun AppSetting(
         val scrollState = rememberScrollState()
         val adbFileLauncher =
             rememberFilePickerLauncher { file ->
-                file?.let { onUpdateScrcpyLocation(it.path ?: "") }
+                file?.let { onUpdateAdbLocation(it.path ?: "") }
             }
         val scrcpyFileLauncher =
             rememberFilePickerLauncher { file ->
-                file?.let { onUpdateAdbLocation(it.path ?: "") }
+                file?.let { onUpdateScrcpyLocation(it.path ?: "") }
             }
         val screenshotDirectoryLauncher =
             rememberDirectoryPickerLauncher { directory ->
