@@ -164,11 +164,11 @@ fun DeviceSetting(
 
                     DropDownSelector(
                         label = DEVICE_PAGE_EDIT_ORIENTATION_TITLE,
-                        selectedItem = state.lockOrientation.toTitle(),
-                        items = state.lockOrientations.map { it.toTitle() },
+                        selectedItem = state.captureOrientation.toTitle(),
+                        items = state.captureOrientations.map { it.toTitle() },
                         onSelect = { title ->
                             val item =
-                                state.lockOrientations.firstOrNull {
+                                state.captureOrientations.firstOrNull {
                                     it.toTitle() == title
                                 } ?: return@DropDownSelector
                             action.updateLockOrientation(item)
@@ -252,11 +252,11 @@ fun DeviceSetting(
 
                     DropDownSelector(
                         label = DEVICE_PAGE_EDIT_ROTATION_TITLE,
-                        selectedItem = state.rotation.toTitle(),
-                        items = state.rotations.map { it.toTitle() },
+                        selectedItem = state.orientation.toTitle(),
+                        items = state.orientations.map { it.toTitle() },
                         onSelect = { title ->
                             val item =
-                                state.rotations.firstOrNull {
+                                state.orientations.firstOrNull {
                                     it.toTitle() == title
                                 } ?: return@DropDownSelector
                             action.updateRotation(item)
@@ -302,22 +302,22 @@ fun DeviceSetting(
     }
 }
 
-private fun Device.Context.LockOrientation.toTitle(): String {
+private fun Device.Context.CaptureOrientation.toTitle(): String {
     return when (this) {
-        Device.Context.LockOrientation.NONE -> DEVICE_PAGE_EDIT_ORIENTATION_NONE
-        Device.Context.LockOrientation.NATURAL -> DEVICE_PAGE_EDIT_ORIENTATION_NATURAL
-        Device.Context.LockOrientation.COUNTER_CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90
-        Device.Context.LockOrientation.CLOCK_WISE_180 -> DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_180
-        Device.Context.LockOrientation.CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_90
+        Device.Context.CaptureOrientation.NONE -> DEVICE_PAGE_EDIT_ORIENTATION_NONE
+        Device.Context.CaptureOrientation.NATURAL -> DEVICE_PAGE_EDIT_ORIENTATION_NATURAL
+        Device.Context.CaptureOrientation.COUNTER_CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90
+        Device.Context.CaptureOrientation.CLOCK_WISE_180 -> DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_180
+        Device.Context.CaptureOrientation.CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ORIENTATION_CLOCK_WISE_90
     }
 }
 
-private fun Device.Context.Rotation.toTitle(): String {
+private fun Device.Context.Orientation.toTitle(): String {
     return when (this) {
-        Device.Context.Rotation.NONE -> DEVICE_PAGE_EDIT_ROTATION_NONE
-        Device.Context.Rotation.COUNTER_CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ROTATION_COUNTER_CLOCK_WISE_90
-        Device.Context.Rotation.CLOCK_WISE_180 -> DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_180
-        Device.Context.Rotation.CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_90
+        Device.Context.Orientation.NONE -> DEVICE_PAGE_EDIT_ROTATION_NONE
+        Device.Context.Orientation.COUNTER_CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ROTATION_COUNTER_CLOCK_WISE_90
+        Device.Context.Orientation.CLOCK_WISE_180 -> DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_180
+        Device.Context.Orientation.CLOCK_WISE_90 -> DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_90
     }
 }
 
@@ -352,7 +352,7 @@ private fun DeviceSetting_Savable_True_Preview() {
 
                 override fun updateAudioBuffering(buffering: String) {}
 
-                override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
+                override fun updateLockOrientation(captureOrientation: Device.Context.CaptureOrientation) {}
 
                 override fun updateBorderless(enabled: Boolean) {}
 
@@ -360,7 +360,7 @@ private fun DeviceSetting_Savable_True_Preview() {
 
                 override fun updateFullscreen(enabled: Boolean) {}
 
-                override fun updateRotation(rotation: Device.Context.Rotation) {}
+                override fun updateRotation(orientation: Device.Context.Orientation) {}
 
                 override fun updateEnableHidKeyboard(enabled: Boolean) {}
 
@@ -402,7 +402,7 @@ private fun DeviceSetting_Savable_False_Preview() {
 
                 override fun updateAudioBuffering(buffering: String) {}
 
-                override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {}
+                override fun updateLockOrientation(captureOrientation: Device.Context.CaptureOrientation) {}
 
                 override fun updateBorderless(enabled: Boolean) {}
 
@@ -410,7 +410,7 @@ private fun DeviceSetting_Savable_False_Preview() {
 
                 override fun updateFullscreen(enabled: Boolean) {}
 
-                override fun updateRotation(rotation: Device.Context.Rotation) {}
+                override fun updateRotation(orientation: Device.Context.Orientation) {}
 
                 override fun updateEnableHidKeyboard(enabled: Boolean) {}
 
