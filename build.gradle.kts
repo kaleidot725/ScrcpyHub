@@ -1,7 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 group = "jp.kaleidot725"
-version = "2.2.0"
+version = "2.3.0"
 
 plugins {
     kotlin("jvm")
@@ -31,6 +31,7 @@ dependencies {
     implementation(libs.jSystemThemeDetector)
     implementation(libs.aboutlibraries.core)
     implementation(libs.aboutlibraries.compose)
+    implementation(libs.napier)
     implementation("io.github.vinceglb:filekit-core:0.8.2")
     implementation("io.github.vinceglb:filekit-compose:0.8.2")
     testImplementation(libs.junit)

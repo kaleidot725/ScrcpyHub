@@ -16,8 +16,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AttachFile
-import androidx.compose.material.icons.filled.FileOpen
 import androidx.compose.material.icons.filled.FilePresent
 import androidx.compose.material.icons.filled.Folder
 import androidx.compose.runtime.Composable
@@ -51,11 +49,11 @@ fun AppSetting(
         val scrollState = rememberScrollState()
         val adbFileLauncher =
             rememberFilePickerLauncher { file ->
-                file?.let { onUpdateScrcpyLocation(it.path ?: "") }
+                file?.let { onUpdateAdbLocation(it.path ?: "") }
             }
         val scrcpyFileLauncher =
             rememberFilePickerLauncher { file ->
-                file?.let { onUpdateAdbLocation(it.path ?: "") }
+                file?.let { onUpdateScrcpyLocation(it.path ?: "") }
             }
         val screenshotDirectoryLauncher =
             rememberDirectoryPickerLauncher { directory ->

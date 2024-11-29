@@ -27,7 +27,7 @@ interface DevicePageAction {
 
     fun updateAudioBitrate(bitrate: String)
 
-    fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation)
+    fun updateLockOrientation(captureOrientation: Device.Context.CaptureOrientation)
 
     fun updateBorderless(enabled: Boolean)
 
@@ -35,7 +35,7 @@ interface DevicePageAction {
 
     fun updateFullscreen(enabled: Boolean)
 
-    fun updateRotation(rotation: Device.Context.Rotation)
+    fun updateRotation(orientation: Device.Context.Orientation)
 
     fun updateEnableHidKeyboard(enabled: Boolean)
 

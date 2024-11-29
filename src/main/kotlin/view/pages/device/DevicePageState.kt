@@ -22,15 +22,15 @@ data class DevicePageState(
     val audioBitrateError: String = "",
     val audioBuffering: String = "",
     val audioBufferingError: String = "",
-    val lockOrientation: Device.Context.LockOrientation = Device.Context.LockOrientation.NONE,
+    val captureOrientation: Device.Context.CaptureOrientation = Device.Context.CaptureOrientation.NONE,
     val enableBorderless: Boolean = false,
     val enableAlwaysOnTop: Boolean = false,
     val enableFullScreen: Boolean = false,
-    val rotation: Device.Context.Rotation = Device.Context.Rotation.NONE,
+    val orientation: Device.Context.Orientation = Device.Context.Orientation.NONE,
     val enableHidKeyboard: Boolean = false,
     val enableHidMouse: Boolean = false,
     val savable: Boolean = false,
 ) {
-    val lockOrientations: List<Device.Context.LockOrientation> = Device.Context.LockOrientation.values().toList()
-    val rotations: List<Device.Context.Rotation> = Device.Context.Rotation.values().toList()
+    val captureOrientations: List<Device.Context.CaptureOrientation> = Device.Context.CaptureOrientation.values().toList()
+    val orientations: List<Device.Context.Orientation> = Device.Context.Orientation.values().toList()
 }

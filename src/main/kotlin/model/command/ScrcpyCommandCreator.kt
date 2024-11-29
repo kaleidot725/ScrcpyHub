@@ -67,7 +67,7 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
 
             val lockOrientation = context.lockOrientation
             if (lockOrientation != null) {
-                add("$LOCK_ORIENTATION_OPTION_NAME$EQUAL$lockOrientation")
+                add("$CAPTURE_ORIENTATION_OPTION_NAME$EQUAL$lockOrientation")
             }
 
             if (context.enableBorderless) {
@@ -84,7 +84,7 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
 
             val rotation = context.rotation
             if (rotation != null) {
-                add("$ROTATION_OPTION_NAME$EQUAL$rotation")
+                add("$ORIENTATION_OPTION_NAME$EQUAL$rotation")
             }
 
             if (context.enableHidKeyboard) {
@@ -129,19 +129,19 @@ class ScrcpyCommandCreator(val scrcpyBinaryPath: String? = null) {
         private const val MAX_FRAME_RATE_OPTION_NAME = "--max-fps"
         private const val BITRATE_OPTION_NAME = "-b"
         private const val WINDOW_TITLE_OPTION_NAME = "--window-title"
-        private const val LOCK_ORIENTATION_OPTION_NAME = "--lock-video-orientation"
+        private const val CAPTURE_ORIENTATION_OPTION_NAME = "--capture-orientation"
         private const val BORDERLESS_OPTION_NAME = "--window-borderless"
         private const val ALWAYS_ON_TOP_OPTION_NAME = "--always-on-top"
         private const val FULLSCREEN_OPTION_NAME = "--fullscreen"
-        private const val ROTATION_OPTION_NAME = "--rotation"
-        private const val DISPLAY_BUFFERING_OPTION_NAME = "--display-buffer"
+        private const val ORIENTATION_OPTION_NAME = "--orientation"
+        private const val DISPLAY_BUFFERING_OPTION_NAME = "--video-buffer"
 
         private const val NO_AUDIO_OPTION = "--no-audio"
         private const val AUDIO_BITRATE_OPTION = "--audio-bit-rate"
         private const val AUDIO_BUFFERING_OPTION = "--audio-buffer"
 
-        private const val HID_KEYBOARD_OPTION = "--hid-keyboard"
-        private const val HID_MOUSE_OPTION = "--hid-mouse"
+        private const val HID_KEYBOARD_OPTION = "--keyboard=uhid"
+        private const val HID_MOUSE_OPTION = "--mouse=uhid"
 
         private const val STAY_AWAKE_OPTION = "--stay-awake"
         private const val SHOW_TOUCHES_OPTION = "--show-touches"

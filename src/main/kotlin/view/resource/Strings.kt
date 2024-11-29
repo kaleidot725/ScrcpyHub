@@ -3,7 +3,7 @@ package view.resource
 object Strings {
     // COMMON
     const val APP_NAME = "ScrcpyHub"
-    const val VERSION = "v2.1.0"
+    const val VERSION = "v2.3.0"
     const val SAVE = "Save"
     const val CANCEL = "Cancel"
     const val QUIT = "Quit"
@@ -55,7 +55,7 @@ object Strings {
     const val DEVICE_PAGE_EDIT_MAX_BITRATE_DETAILS = "To change the video bitrate."
     const val DEVICE_PAGE_EDIT_BUFFERING_TITLE = "Buffering (ms)"
     const val DEVICE_PAGE_EDIT_BUFFERING_DETAILS = "To change the buffering."
-    const val DEVICE_PAGE_EDIT_ORIENTATION_TITLE = "Lock Orientation (Affect Recording)"
+    const val DEVICE_PAGE_EDIT_ORIENTATION_TITLE = "Capture Orientation"
     const val DEVICE_PAGE_EDIT_ORIENTATION_NONE = "None"
     const val DEVICE_PAGE_EDIT_ORIENTATION_NATURAL = "Natural"
     const val DEVICE_PAGE_EDIT_ORIENTATION_COUNTER_CLOCK_WISE_90 = "90° Counter Clock Wise"
@@ -77,7 +77,7 @@ object Strings {
     const val DEVICE_PAGE_EDIT_ALWAYS_ON_TOP_DETAILS = "To keep the scrcpy window always on top"
     const val DEVICE_PAGE_EDIT_FULLSCREEN_TITLE = "Fullscreen"
     const val DEVICE_PAGE_EDIT_FULLSCREEN_DETAILS = "The app may be started directly in fullscreen"
-    const val DEVICE_PAGE_EDIT_ROTATION_TITLE = "Rotation (Don't Affect Recording)"
+    const val DEVICE_PAGE_EDIT_ROTATION_TITLE = "Orientation (Don't Affect Recording)"
     const val DEVICE_PAGE_EDIT_ROTATION_NONE = "None"
     const val DEVICE_PAGE_EDIT_ROTATION_COUNTER_CLOCK_WISE_90 = "90° Counter Clock Wise"
     const val DEVICE_PAGE_EDIT_ROTATION_CLOCK_WISE_180 = "180°"

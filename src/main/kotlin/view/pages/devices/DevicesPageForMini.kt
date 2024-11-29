@@ -78,7 +78,7 @@ fun DevicesPageForMini(
                         Texts.Subtitle1(
                             text = DEVICES_PAGE_NOT_FOUND_DEVICES,
                             color = MaterialTheme.colors.onBackground,
-                            modifier = Modifier.align(Alignment.Center)
+                            modifier = Modifier.align(Alignment.Center),
                         )
                     }
                 }

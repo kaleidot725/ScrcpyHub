@@ -36,20 +36,20 @@ class DevicePageStateHolder(
     private val audioBuffering: MutableStateFlow<String> = MutableStateFlow(context.audioBuffering?.toString() ?: "")
     private val audioBufferingError: MutableStateFlow<String> = MutableStateFlow("")
 
-    private val lockOrientation: MutableStateFlow<Device.Context.LockOrientation> =
+    private val captureOrientation: MutableStateFlow<Device.Context.CaptureOrientation> =
         MutableStateFlow(
-            Device.Context.LockOrientation.values().firstOrNull { it.value == context.lockOrientation }
-                ?: Device.Context.LockOrientation.NONE,
+            Device.Context.CaptureOrientation.values().firstOrNull { it.value == context.lockOrientation }
+                ?: Device.Context.CaptureOrientation.NONE,
         )
     private val enableBorderless: MutableStateFlow<Boolean> = MutableStateFlow(context.enableBorderless)
     private val enableAlwaysOnTop: MutableStateFlow<Boolean> = MutableStateFlow(context.enableAlwaysOnTop)
     private val enableFullscreen: MutableStateFlow<Boolean> = MutableStateFlow(context.enableFullScreen)
     private val enableHidKeyboard: MutableStateFlow<Boolean> = MutableStateFlow(context.enableHidKeyboard)
     private val enableHidMouse: MutableStateFlow<Boolean> = MutableStateFlow(context.enableHidMouse)
-    private val rotation: MutableStateFlow<Device.Context.Rotation> =
+    private val orientation: MutableStateFlow<Device.Context.Orientation> =
         MutableStateFlow(
-            Device.Context.Rotation.values().firstOrNull { it.value == context.rotation }
-                ?: Device.Context.Rotation.NONE,
+            Device.Context.Orientation.values().firstOrNull { it.value == context.rotation }
+                ?: Device.Context.Orientation.NONE,
         )
 
     val state: StateFlow<DevicePageState> =
@@ -69,11 +69,11 @@ class DevicePageStateHolder(
             audioBufferingError,
             audioBitrate,
             audioBitrateError,
-            lockOrientation,
+            captureOrientation,
             enableBorderless,
             enableAlwaysOnTop,
             enableFullscreen,
-            rotation,
+            orientation,
             enableHidKeyboard,
             enableHidMouse,
             enableStayAwake,
@@ -97,11 +97,11 @@ class DevicePageStateHolder(
                 audioBufferingError = it[12] as String,
                 audioBitrate = it[13] as String,
                 audioBitrateError = it[14] as String,
-                lockOrientation = it[15] as Device.Context.LockOrientation,
+                captureOrientation = it[15] as Device.Context.CaptureOrientation,
                 enableBorderless = it[16] as Boolean,
                 enableAlwaysOnTop = it[17] as Boolean,
                 enableFullScreen = it[18] as Boolean,
-                rotation = it[19] as Device.Context.Rotation,
+                orientation = it[19] as Device.Context.Orientation,
                 enableHidKeyboard = it[20] as Boolean,
                 enableHidMouse = it[21] as Boolean,
                 enableStayAwake = it[22] as Boolean,
@@ -186,9 +186,9 @@ class DevicePageStateHolder(
                 }
             }
 
-            override fun updateLockOrientation(lockOrientation: Device.Context.LockOrientation) {
+            override fun updateLockOrientation(captureOrientation: Device.Context.CaptureOrientation) {
                 coroutineScope.launch {
-                    this@DevicePageStateHolder.lockOrientation.emit(lockOrientation)
+                    this@DevicePageStateHolder.captureOrientation.emit(captureOrientation)
                 }
             }
 
@@ -210,9 +210,9 @@ class DevicePageStateHolder(
                 }
             }
 
-            override fun updateRotation(rotation: Device.Context.Rotation) {
+            override fun updateRotation(orientation: Device.Context.Orientation) {
                 coroutineScope.launch {
-                    this@DevicePageStateHolder.rotation.emit(rotation)
+                    this@DevicePageStateHolder.orientation.emit(orientation)
                 }
             }
 
@@ -241,11 +241,11 @@ class DevicePageStateHolder(
                             noAudio = noAudio.value,
                             audioBitrate = audioBitrate.value.toIntOrNull(),
                             audioBuffering = audioBuffering.value.toIntOrNull(),
-                            lockOrientation = lockOrientation.value.value,
+                            lockOrientation = captureOrientation.value.value,
                             enableBorderless = enableBorderless.value,
                             enableAlwaysOnTop = enableAlwaysOnTop.value,
                             enableFullScreen = enableFullscreen.value,
-                            rotation = rotation.value.value,
+                            rotation = orientation.value.value,
                             enableHidKeyboard = enableHidKeyboard.value,
                             enableHidMouse = enableHidMouse.value,
                             enableStayAwake = enableStayAwake.value,

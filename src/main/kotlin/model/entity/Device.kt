@@ -29,19 +29,19 @@ data class Device(val id: String = "") {
     ) {
         val displayName get() = if (customName.isNullOrEmpty()) device.id else customName
 
-        enum class LockOrientation(val value: Int?) {
+        enum class CaptureOrientation(val value: Int?) {
             NONE(null),
             NATURAL(0),
-            COUNTER_CLOCK_WISE_90(1),
-            CLOCK_WISE_180(2),
-            CLOCK_WISE_90(3),
+            COUNTER_CLOCK_WISE_90(270),
+            CLOCK_WISE_180(180),
+            CLOCK_WISE_90(90),
         }
 
-        enum class Rotation(val value: Int?) {
+        enum class Orientation(val value: Int?) {
             NONE(null),
-            COUNTER_CLOCK_WISE_90(1),
-            CLOCK_WISE_180(2),
-            CLOCK_WISE_90(3),
+            COUNTER_CLOCK_WISE_90(270),
+            CLOCK_WISE_180(180),
+            CLOCK_WISE_90(90),
         }
     }
 }
