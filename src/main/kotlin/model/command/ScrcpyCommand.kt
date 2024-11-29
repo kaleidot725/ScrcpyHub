@@ -1,6 +1,5 @@
 package model.command
 
-import io.github.aakira.napier.Napier
 import model.entity.Device
 import java.io.File
 
